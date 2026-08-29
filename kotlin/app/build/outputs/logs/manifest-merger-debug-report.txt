@@ -1,0 +1,377 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:1-26:12
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/595e61b438a4cb60f96bcfc49d7890ba/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ecb2fda947a39e8d33be63d47d998832/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-common:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3e1a56b16861889feebe8f9aa9be244a/transformed/navigation-common-2.8.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/66218e45f553ba21c3625056083db27d/transformed/navigation-runtime-2.8.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e6051cbdf95dc1846dadb58833e29166/transformed/navigation-common-ktx-2.8.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/941101d28bcc9ddf0a9f76f472937dfb/transformed/navigation-runtime-ktx-2.8.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-compose:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9fa21226c4b17b5eb9942d4d18f582cb/transformed/navigation-compose-2.8.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/643dcd93a4dd5b90a9473207693cfc05/transformed/material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.dagger:hilt-android:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/63a0bdc9d80e8b25fb85d1490d04f080/transformed/hilt-android-2.52/AndroidManifest.xml:16:1-19:12
+MERGED from [androidx.fragment:fragment:1.5.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4fc47ce1731688c1db69347dfc314775/transformed/fragment-1.5.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b8a0c58de42c895ee560c4a489b7df0d/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material:material-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/037e4c7852909e2e8d4ac9c5bed46733/transformed/material-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b3ec46debd4c95fe2a3c3c0d4a343f3f/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6a857df4a0a912bac1d1cd19f228e110/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8089eb3cad49c37b8ae1b1bb224bbaec/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c65d8e57fc984ec380adb8e3c780385b/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5ec42d58ced30de6723e9908408e41e0/transformed/animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a0a28fa4256b03c9896ac0d76289e996/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5a18b8b96570c148ca42f5567aa84309/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e11fee63bbe3df19b5acc59b04d653c2/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fe694029ce788bde89459f3633fd4b57/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b6e279f5b75673e861ede4787cb94836/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0e3d9a3f68558f607d94c14f477227da/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/55e6bfc4c5866ee4723b6459c460c9f0/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5482a5ff92e11b405fe75c5434740304/transformed/lifecycle-livedata-core-ktx-2.8.6/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ee0f5bf5bf30501ad772f256e4dac582/transformed/lifecycle-livedata-2.8.6/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/234753d8560e75a0a6de492864792fde/transformed/lifecycle-viewmodel-2.8.6/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/31a400b327bd621cc73cb89a24ed22b6/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a3b777afea3338802dac6939dcdfc81c/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b8153ec3ab6cb5e20180ed065ae13ef0/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e492228e70931a1f0efd4069a13a2307/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/66908271b5e1b2d0d9bd248cbd3484ba/transformed/lifecycle-livedata-core-2.8.6/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/abd9ec6ec218615bc632eb572e6a73b4/transformed/lifecycle-viewmodel-ktx-2.8.6/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fdd4c04cf71202a4050473af10bb4fa/transformed/lifecycle-viewmodel-savedstate-2.8.6/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/22fabb2e5bece5742fa217ba695c145f/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ae0862a08fda843c453dc3a8b733eed5/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17613843eac343180183e86004706bca/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17fe7575fab838877831acb12a5f4119/transformed/material-icons-extended-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/01a5c24d26f955a116e5594e4f246cec/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/82b0931fee6ff91d2b26731c76768fb4/transformed/ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.activity:activity-compose:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e918c327d9007581f748771d69ca3552/transformed/activity-compose-1.9.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-ktx:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7763c9becaf77cb3329e7a6084e2e04c/transformed/activity-ktx-1.9.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/19ca264273da03f1d2de2f4590090383/transformed/activity-1.9.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0dca39600585d63e56f5ad8b51f99bb2/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3e286344bdec6b955552b7cac2c393a2/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e358d01e382b0f207a25d00266823743/transformed/graphics-path-1.0.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/996ed20d89f191461ab1363506db8eba/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ef4659490757c9d6212c22211d783ad2/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2a9aab6f73da8f49caa4f2878c0cf842/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/08750faf0d7f0272bb8ae56ab4201677/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2443ef87ea4ba395fd95fe214d4d8628/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a2dd488d332459ff55ca1c7baab04606/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8a1f98d93e176e50f09b6fd1490dd88d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e1ffa74eadcddcbe4a3bfafd64e2ae74/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6419ea590b39180f195495ebe4241225/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d8f114f767dffc16e038c7db2a93e97c/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2d554780d0a0ac3e42e8c6b684b990f3/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/68ea7759df6073dde5285d92886b3a35/transformed/dagger-lint-aar-2.52/AndroidManifest.xml:16:1-19:12
+	package
+		INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:3:5-67
+	android:name
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:3:22-64
+application
+ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:5:5-24:19
+INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:5:5-24:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8a1f98d93e176e50f09b6fd1490dd88d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8a1f98d93e176e50f09b6fd1490dd88d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6419ea590b39180f195495ebe4241225/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6419ea590b39180f195495ebe4241225/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+	android:extractNativeLibs
+		INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:12:9-35
+	android:label
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:9:9-41
+	android:roundIcon
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:11:9-54
+	android:icon
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:8:9-43
+	android:allowBackup
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:7:9-35
+	android:theme
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:13:9-49
+	android:networkSecurityConfig
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:10:9-69
+	android:name
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:6:9-39
+activity#com.klarfinance.app.MainActivity
+ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:15:9-23:20
+	android:exported
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:17:13-36
+	android:theme
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:18:13-53
+	android:name
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:16:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:19:13-22:29
+action#android.intent.action.MAIN
+ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:20:17-69
+	android:name
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:20:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:21:17-77
+	android:name
+		ADDED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:21:27-74
+uses-sdk
+INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/595e61b438a4cb60f96bcfc49d7890ba/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/595e61b438a4cb60f96bcfc49d7890ba/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ecb2fda947a39e8d33be63d47d998832/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ecb2fda947a39e8d33be63d47d998832/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3e1a56b16861889feebe8f9aa9be244a/transformed/navigation-common-2.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3e1a56b16861889feebe8f9aa9be244a/transformed/navigation-common-2.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/66218e45f553ba21c3625056083db27d/transformed/navigation-runtime-2.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/66218e45f553ba21c3625056083db27d/transformed/navigation-runtime-2.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e6051cbdf95dc1846dadb58833e29166/transformed/navigation-common-ktx-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e6051cbdf95dc1846dadb58833e29166/transformed/navigation-common-ktx-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/941101d28bcc9ddf0a9f76f472937dfb/transformed/navigation-runtime-ktx-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/941101d28bcc9ddf0a9f76f472937dfb/transformed/navigation-runtime-ktx-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9fa21226c4b17b5eb9942d4d18f582cb/transformed/navigation-compose-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9fa21226c4b17b5eb9942d4d18f582cb/transformed/navigation-compose-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/643dcd93a4dd5b90a9473207693cfc05/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/643dcd93a4dd5b90a9473207693cfc05/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [com.google.dagger:hilt-android:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/63a0bdc9d80e8b25fb85d1490d04f080/transformed/hilt-android-2.52/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:hilt-android:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/63a0bdc9d80e8b25fb85d1490d04f080/transformed/hilt-android-2.52/AndroidManifest.xml:18:3-42
+MERGED from [androidx.fragment:fragment:1.5.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4fc47ce1731688c1db69347dfc314775/transformed/fragment-1.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4fc47ce1731688c1db69347dfc314775/transformed/fragment-1.5.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b8a0c58de42c895ee560c4a489b7df0d/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b8a0c58de42c895ee560c4a489b7df0d/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/037e4c7852909e2e8d4ac9c5bed46733/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/037e4c7852909e2e8d4ac9c5bed46733/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b3ec46debd4c95fe2a3c3c0d4a343f3f/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b3ec46debd4c95fe2a3c3c0d4a343f3f/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6a857df4a0a912bac1d1cd19f228e110/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6a857df4a0a912bac1d1cd19f228e110/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8089eb3cad49c37b8ae1b1bb224bbaec/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8089eb3cad49c37b8ae1b1bb224bbaec/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c65d8e57fc984ec380adb8e3c780385b/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c65d8e57fc984ec380adb8e3c780385b/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5ec42d58ced30de6723e9908408e41e0/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5ec42d58ced30de6723e9908408e41e0/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a0a28fa4256b03c9896ac0d76289e996/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a0a28fa4256b03c9896ac0d76289e996/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5a18b8b96570c148ca42f5567aa84309/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5a18b8b96570c148ca42f5567aa84309/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e11fee63bbe3df19b5acc59b04d653c2/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e11fee63bbe3df19b5acc59b04d653c2/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fe694029ce788bde89459f3633fd4b57/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fe694029ce788bde89459f3633fd4b57/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b6e279f5b75673e861ede4787cb94836/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b6e279f5b75673e861ede4787cb94836/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0e3d9a3f68558f607d94c14f477227da/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0e3d9a3f68558f607d94c14f477227da/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/55e6bfc4c5866ee4723b6459c460c9f0/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/55e6bfc4c5866ee4723b6459c460c9f0/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5482a5ff92e11b405fe75c5434740304/transformed/lifecycle-livedata-core-ktx-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5482a5ff92e11b405fe75c5434740304/transformed/lifecycle-livedata-core-ktx-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ee0f5bf5bf30501ad772f256e4dac582/transformed/lifecycle-livedata-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ee0f5bf5bf30501ad772f256e4dac582/transformed/lifecycle-livedata-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/234753d8560e75a0a6de492864792fde/transformed/lifecycle-viewmodel-2.8.6/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/234753d8560e75a0a6de492864792fde/transformed/lifecycle-viewmodel-2.8.6/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/31a400b327bd621cc73cb89a24ed22b6/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/31a400b327bd621cc73cb89a24ed22b6/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a3b777afea3338802dac6939dcdfc81c/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a3b777afea3338802dac6939dcdfc81c/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b8153ec3ab6cb5e20180ed065ae13ef0/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b8153ec3ab6cb5e20180ed065ae13ef0/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e492228e70931a1f0efd4069a13a2307/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e492228e70931a1f0efd4069a13a2307/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/66908271b5e1b2d0d9bd248cbd3484ba/transformed/lifecycle-livedata-core-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/66908271b5e1b2d0d9bd248cbd3484ba/transformed/lifecycle-livedata-core-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/abd9ec6ec218615bc632eb572e6a73b4/transformed/lifecycle-viewmodel-ktx-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/abd9ec6ec218615bc632eb572e6a73b4/transformed/lifecycle-viewmodel-ktx-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fdd4c04cf71202a4050473af10bb4fa/transformed/lifecycle-viewmodel-savedstate-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fdd4c04cf71202a4050473af10bb4fa/transformed/lifecycle-viewmodel-savedstate-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/22fabb2e5bece5742fa217ba695c145f/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/22fabb2e5bece5742fa217ba695c145f/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ae0862a08fda843c453dc3a8b733eed5/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ae0862a08fda843c453dc3a8b733eed5/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17613843eac343180183e86004706bca/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17613843eac343180183e86004706bca/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17fe7575fab838877831acb12a5f4119/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17fe7575fab838877831acb12a5f4119/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/01a5c24d26f955a116e5594e4f246cec/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/01a5c24d26f955a116e5594e4f246cec/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/82b0931fee6ff91d2b26731c76768fb4/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/82b0931fee6ff91d2b26731c76768fb4/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-compose:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e918c327d9007581f748771d69ca3552/transformed/activity-compose-1.9.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e918c327d9007581f748771d69ca3552/transformed/activity-compose-1.9.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7763c9becaf77cb3329e7a6084e2e04c/transformed/activity-ktx-1.9.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7763c9becaf77cb3329e7a6084e2e04c/transformed/activity-ktx-1.9.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/19ca264273da03f1d2de2f4590090383/transformed/activity-1.9.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/19ca264273da03f1d2de2f4590090383/transformed/activity-1.9.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0dca39600585d63e56f5ad8b51f99bb2/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0dca39600585d63e56f5ad8b51f99bb2/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3e286344bdec6b955552b7cac2c393a2/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3e286344bdec6b955552b7cac2c393a2/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e358d01e382b0f207a25d00266823743/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e358d01e382b0f207a25d00266823743/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/996ed20d89f191461ab1363506db8eba/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/996ed20d89f191461ab1363506db8eba/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ef4659490757c9d6212c22211d783ad2/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ef4659490757c9d6212c22211d783ad2/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2a9aab6f73da8f49caa4f2878c0cf842/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2a9aab6f73da8f49caa4f2878c0cf842/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/08750faf0d7f0272bb8ae56ab4201677/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/08750faf0d7f0272bb8ae56ab4201677/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2443ef87ea4ba395fd95fe214d4d8628/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2443ef87ea4ba395fd95fe214d4d8628/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a2dd488d332459ff55ca1c7baab04606/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a2dd488d332459ff55ca1c7baab04606/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8a1f98d93e176e50f09b6fd1490dd88d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8a1f98d93e176e50f09b6fd1490dd88d/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e1ffa74eadcddcbe4a3bfafd64e2ae74/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e1ffa74eadcddcbe4a3bfafd64e2ae74/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6419ea590b39180f195495ebe4241225/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6419ea590b39180f195495ebe4241225/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d8f114f767dffc16e038c7db2a93e97c/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d8f114f767dffc16e038c7db2a93e97c/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2d554780d0a0ac3e42e8c6b684b990f3/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2d554780d0a0ac3e42e8c6b684b990f3/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/68ea7759df6073dde5285d92886b3a35/transformed/dagger-lint-aar-2.52/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/68ea7759df6073dde5285d92886b3a35/transformed/dagger-lint-aar-2.52/AndroidManifest.xml:18:3-42
+	android:targetSdkVersion
+		INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6419ea590b39180f195495ebe4241225/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6419ea590b39180f195495ebe4241225/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:30:17-78
+activity#androidx.activity.ComponentActivity
+ADDED from [androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:24:13-63
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#com.klarfinance.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#com.klarfinance.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
