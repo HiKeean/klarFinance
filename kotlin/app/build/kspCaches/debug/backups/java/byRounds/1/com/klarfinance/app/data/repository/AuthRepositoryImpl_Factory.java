@@ -1,13 +1,14 @@
 package com.klarfinance.app.data.repository;
 
-import com.klarfinance.app.data.remote.AuthApi;
+import com.klarfinance.app.core.network.ApiService;
+import com.klarfinance.app.core.session.SecureTokenStore;
+import com.klarfinance.app.core.session.SessionManager;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
 import javax.inject.Provider;
-import kotlinx.serialization.json.Json;
 
 @ScopeMetadata
 @QualifierMetadata
@@ -25,26 +26,33 @@ import kotlinx.serialization.json.Json;
     "deprecation"
 })
 public final class AuthRepositoryImpl_Factory implements Factory<AuthRepositoryImpl> {
-  private final Provider<AuthApi> apiProvider;
+  private final Provider<ApiService> apiServiceProvider;
 
-  private final Provider<Json> jsonProvider;
+  private final Provider<SessionManager> sessionManagerProvider;
 
-  public AuthRepositoryImpl_Factory(Provider<AuthApi> apiProvider, Provider<Json> jsonProvider) {
-    this.apiProvider = apiProvider;
-    this.jsonProvider = jsonProvider;
+  private final Provider<SecureTokenStore> secureTokenStoreProvider;
+
+  public AuthRepositoryImpl_Factory(Provider<ApiService> apiServiceProvider,
+      Provider<SessionManager> sessionManagerProvider,
+      Provider<SecureTokenStore> secureTokenStoreProvider) {
+    this.apiServiceProvider = apiServiceProvider;
+    this.sessionManagerProvider = sessionManagerProvider;
+    this.secureTokenStoreProvider = secureTokenStoreProvider;
   }
 
   @Override
   public AuthRepositoryImpl get() {
-    return newInstance(apiProvider.get(), jsonProvider.get());
+    return newInstance(apiServiceProvider.get(), sessionManagerProvider.get(), secureTokenStoreProvider.get());
   }
 
-  public static AuthRepositoryImpl_Factory create(Provider<AuthApi> apiProvider,
-      Provider<Json> jsonProvider) {
-    return new AuthRepositoryImpl_Factory(apiProvider, jsonProvider);
+  public static AuthRepositoryImpl_Factory create(Provider<ApiService> apiServiceProvider,
+      Provider<SessionManager> sessionManagerProvider,
+      Provider<SecureTokenStore> secureTokenStoreProvider) {
+    return new AuthRepositoryImpl_Factory(apiServiceProvider, sessionManagerProvider, secureTokenStoreProvider);
   }
 
-  public static AuthRepositoryImpl newInstance(AuthApi api, Json json) {
-    return new AuthRepositoryImpl(api, json);
+  public static AuthRepositoryImpl newInstance(ApiService apiService, SessionManager sessionManager,
+      SecureTokenStore secureTokenStore) {
+    return new AuthRepositoryImpl(apiService, sessionManager, secureTokenStore);
   }
 }

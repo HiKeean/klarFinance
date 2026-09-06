@@ -1,5 +1,7 @@
 package com.klarfinance.app.presentation.login;
 
+import com.klarfinance.app.domain.repository.VerifiedPhoneRepository;
+import com.klarfinance.app.domain.usecase.CheckPhoneRegisteredUseCase;
 import com.klarfinance.app.domain.usecase.RequestOtpUseCase;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -26,21 +28,32 @@ import javax.inject.Provider;
 public final class LoginViewModel_Factory implements Factory<LoginViewModel> {
   private final Provider<RequestOtpUseCase> requestOtpUseCaseProvider;
 
-  public LoginViewModel_Factory(Provider<RequestOtpUseCase> requestOtpUseCaseProvider) {
+  private final Provider<VerifiedPhoneRepository> verifiedPhoneRepositoryProvider;
+
+  private final Provider<CheckPhoneRegisteredUseCase> checkPhoneRegisteredUseCaseProvider;
+
+  public LoginViewModel_Factory(Provider<RequestOtpUseCase> requestOtpUseCaseProvider,
+      Provider<VerifiedPhoneRepository> verifiedPhoneRepositoryProvider,
+      Provider<CheckPhoneRegisteredUseCase> checkPhoneRegisteredUseCaseProvider) {
     this.requestOtpUseCaseProvider = requestOtpUseCaseProvider;
+    this.verifiedPhoneRepositoryProvider = verifiedPhoneRepositoryProvider;
+    this.checkPhoneRegisteredUseCaseProvider = checkPhoneRegisteredUseCaseProvider;
   }
 
   @Override
   public LoginViewModel get() {
-    return newInstance(requestOtpUseCaseProvider.get());
+    return newInstance(requestOtpUseCaseProvider.get(), verifiedPhoneRepositoryProvider.get(), checkPhoneRegisteredUseCaseProvider.get());
   }
 
-  public static LoginViewModel_Factory create(
-      Provider<RequestOtpUseCase> requestOtpUseCaseProvider) {
-    return new LoginViewModel_Factory(requestOtpUseCaseProvider);
+  public static LoginViewModel_Factory create(Provider<RequestOtpUseCase> requestOtpUseCaseProvider,
+      Provider<VerifiedPhoneRepository> verifiedPhoneRepositoryProvider,
+      Provider<CheckPhoneRegisteredUseCase> checkPhoneRegisteredUseCaseProvider) {
+    return new LoginViewModel_Factory(requestOtpUseCaseProvider, verifiedPhoneRepositoryProvider, checkPhoneRegisteredUseCaseProvider);
   }
 
-  public static LoginViewModel newInstance(RequestOtpUseCase requestOtpUseCase) {
-    return new LoginViewModel(requestOtpUseCase);
+  public static LoginViewModel newInstance(RequestOtpUseCase requestOtpUseCase,
+      VerifiedPhoneRepository verifiedPhoneRepository,
+      CheckPhoneRegisteredUseCase checkPhoneRegisteredUseCase) {
+    return new LoginViewModel(requestOtpUseCase, verifiedPhoneRepository, checkPhoneRegisteredUseCase);
   }
 }

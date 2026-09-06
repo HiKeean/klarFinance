@@ -1,0 +1,8 @@
+<div class="search-input">
+  <span class="icon">🔍</span>
+  <input
+    type="text"
+    [placeholder]="placeholder"
+    [ngModel]="value()"
+    (ngModelChange)="onInput($event)" />
+</div>

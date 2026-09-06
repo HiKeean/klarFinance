@@ -2,6 +2,8 @@ package com.klarfinance.app.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.klarfinance.app.domain.repository.VerifiedPhoneRepository
+import com.klarfinance.app.domain.usecase.CheckPhoneRegisteredUseCase
 import com.klarfinance.app.domain.usecase.RequestOtpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,6 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val requestOtpUseCase: RequestOtpUseCase,
+    private val verifiedPhoneRepository: VerifiedPhoneRepository,
+    private val checkPhoneRegisteredUseCase: CheckPhoneRegisteredUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())
@@ -24,6 +28,16 @@ class LoginViewModel @Inject constructor(
 
     private val _otpRequested = MutableSharedFlow<String>()
     val otpRequested: SharedFlow<String> = _otpRequested.asSharedFlow()
+
+    /** Phone already had OTP verified recently (see [VerifiedPhoneRepository]) AND is not
+     * registered yet - skip straight past the OTP screen into registration. */
+    private val _alreadyVerified = MutableSharedFlow<String>()
+    val alreadyVerified: SharedFlow<String> = _alreadyVerified.asSharedFlow()
+
+    /** Phone already had OTP verified recently AND already has an account - go straight to
+     * password entry instead of registration. */
+    private val _needsPasswordLogin = MutableSharedFlow<String>()
+    val needsPasswordLogin: SharedFlow<String> = _needsPasswordLogin.asSharedFlow()
 
     fun onCountryCodeChange(code: String) {
         _uiState.update { it.copy(countryCode = code) }
@@ -40,6 +54,14 @@ class LoginViewModel @Inject constructor(
 
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+
+            if (verifiedPhoneRepository.isRecentlyVerified(fullPhone)) {
+                val registered = checkPhoneRegisteredUseCase(fullPhone).getOrDefault(false)
+                _uiState.update { it.copy(isLoading = false) }
+                if (registered) _needsPasswordLogin.emit(fullPhone) else _alreadyVerified.emit(fullPhone)
+                return@launch
+            }
+
             requestOtpUseCase(fullPhone)
                 .onSuccess {
                     _uiState.update { it.copy(isLoading = false) }

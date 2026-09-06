@@ -9,140 +9,700 @@
 9        android:targetSdkVersion="35" />
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:3:5-67
-11-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:3:22-64
-12
-13    <permission
-13-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
-14        android:name="com.klarfinance.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-14-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
-15        android:protectionLevel="signature" />
-15-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
-16
-17    <uses-permission android:name="com.klarfinance.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-17-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
-17-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
-18
-19    <application
-19-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:5:5-24:19
-20        android:name="com.klarfinance.app.KlarFinanceApp"
-20-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:6:9-39
-21        android:allowBackup="true"
-21-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:7:9-35
-22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-22-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fde8423b74c08a69dde2fb01c96adf8d/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
-23        android:debuggable="true"
-24        android:extractNativeLibs="false"
-25        android:icon="@mipmap/ic_launcher"
-25-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:8:9-43
-26        android:label="@string/app_name"
-26-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:9:9-41
-27        android:networkSecurityConfig="@xml/network_security_config"
-27-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:10:9-69
-28        android:roundIcon="@mipmap/ic_launcher_round"
-28-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:11:9-54
-29        android:supportsRtl="true"
-29-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:12:9-35
-30        android:theme="@style/Theme.KlarFinance" >
-30-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:13:9-49
-31        <activity
-31-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:15:9-23:20
-32            android:name="com.klarfinance.app.MainActivity"
-32-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:16:13-41
-33            android:exported="true"
-33-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:17:13-36
-34            android:theme="@style/Theme.KlarFinance" >
-34-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:18:13-53
-35            <intent-filter>
-35-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:19:13-22:29
-36                <action android:name="android.intent.action.MAIN" />
-36-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:20:17-69
-36-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:20:25-66
-37
-38                <category android:name="android.intent.category.LAUNCHER" />
-38-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:21:17-77
-38-->/Users/hizkiaalb/Documents/kia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:21:27-74
-39            </intent-filter>
-40        </activity>
-41
-42        <provider
-42-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-43            android:name="androidx.startup.InitializationProvider"
-43-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
-44            android:authorities="com.klarfinance.app.androidx-startup"
-44-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
-45            android:exported="false" >
-45-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
-46            <meta-data
-46-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
-47                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-47-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
-48                android:value="androidx.startup" />
-48-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9863cd3ed0c8fdd652efa5b421da7f73/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
-49            <meta-data
-49-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:29:13-31:52
-50                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-50-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:30:17-78
-51                android:value="androidx.startup" />
-51-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9533bb18da7dd411f12e3d62aac53b74/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:31:17-49
-52            <meta-data
-52-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
-53                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-53-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
-54                android:value="androidx.startup" />
-54-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
-55        </provider>
-56
-57        <activity
-57-->[androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:23:9-25:39
-58            android:name="androidx.activity.ComponentActivity"
-58-->[androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:24:13-63
-59            android:exported="true" />
-59-->[androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7fbd68d841b4fd96841fd81f75f36211/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:25:13-36
-60        <activity
-60-->[androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
-61            android:name="androidx.compose.ui.tooling.PreviewActivity"
-61-->[androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
-62            android:exported="true" />
-62-->[androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f6d8c4f1f6a60c0976f158f2eaa38962/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
-63
-64        <receiver
-64-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
-65            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-65-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
-66            android:directBootAware="false"
-66-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
-67            android:enabled="true"
-67-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
-68            android:exported="true"
-68-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
-69            android:permission="android.permission.DUMP" >
-69-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
-70            <intent-filter>
-70-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
-71                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-71-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
-71-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
-72            </intent-filter>
-73            <intent-filter>
-73-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
-74                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-74-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
-74-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
-75            </intent-filter>
-76            <intent-filter>
-76-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
-77                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-77-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
-77-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
-78            </intent-filter>
-79            <intent-filter>
-79-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
-80                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-80-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
-80-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e54b3e0c2068b2e1d5f4d1838b56df83/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
-81            </intent-filter>
-82        </receiver>
-83    </application>
-84
-85</manifest>
+11-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:3:5-67
+11-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:3:22-64
+12    <uses-permission android:name="android.permission.CAMERA" />
+12-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:4:5-65
+12-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:4:22-62
+13
+14    <uses-feature
+14-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:5:5-89
+15        android:name="android.hardware.camera.any"
+15-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:5:19-61
+16        android:required="false" />
+16-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:5:62-86
+17    <!--
+18         Android 13+ (API 33) requires runtime request for this, see MainActivity - manifest
+19         declaration alone doesn't grant it.
+20    -->
+21    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+21-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:8:5-77
+21-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:8:22-74
+22
+23    <!--
+24         Location routine tracking (see core/location/) - strictly opt-in via a consent toggle
+25         in Account, never requested/used unless the nasabah turns it on. ACCESS_BACKGROUND_LOCATION
+26         is what lets LocationCaptureWorker (WorkManager) get a fix while the app isn't open - on
+27         Android 11+ (API 30+) this can't be granted from the same runtime dialog as fine/coarse,
+28         see LocationPermissionHelper.
+29    -->
+30    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+30-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:15:5-79
+30-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:15:22-76
+31    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+31-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:16:5-81
+31-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:16:22-78
+32    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+32-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:17:5-85
+32-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:17:22-82
+33
+34    <!--
+35         Device app scoring (lihat core/scan/InstalledAppsScanner.kt) - Android 11+ (API 30+)
+36         menyembunyikan hasil getPackageInfo untuk package lain kecuali dideklarasikan di sini
+37         (atau lewat QUERY_ALL_PACKAGES, yang sengaja dihindari - kena scrutiny lebih ketat di
+38         Play Store review). Daftar package BEST-EFFORT, belum diverifikasi ke Play Store asli -
+39         lihat komentar di InstalledAppsScanner.kt.
+40    -->
+41    <queries>
+41-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:24:5-42:15
+42        <package android:name="com.kredivo.app" />
+42-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:25:9-51
+42-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:25:18-48
+43        <package android:name="com.akulaku.app" />
+43-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:26:9-51
+43-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:26:18-48
+44        <package android:name="com.adakami.id" />
+44-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:27:9-50
+44-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:27:18-47
+45        <package android:name="com.kredit.pintar" />
+45-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:28:9-53
+45-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:28:18-50
+46        <package android:name="com.julofinance.juloapp" />
+46-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:29:9-59
+46-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:29:18-56
+47        <package android:name="cash.easy.id" />
+47-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:30:9-48
+47-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:30:18-45
+48        <package android:name="com.indodana.app" />
+48-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:31:9-52
+48-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:31:18-49
+49        <package android:name="com.rupiahcepat.app" />
+49-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:32:9-55
+49-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:32:18-52
+50        <package android:name="com.pinjamango.app" />
+50-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:33:9-54
+50-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:33:18-51
+51        <package android:name="com.maucash.app" />
+51-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:34:9-51
+51-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:34:18-48
+52        <package android:name="id.uangme.app" />
+52-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:35:9-49
+52-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:35:18-46
+53        <package android:name="com.bca.mobile" />
+53-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:36:9-50
+53-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:36:18-47
+54        <package android:name="id.co.bri.brimo" />
+54-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:37:9-51
+54-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:37:18-48
+55        <package android:name="id.co.bankmandiri.livin" />
+55-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:38:9-59
+55-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:38:18-56
+56        <package android:name="src.com.bni" />
+56-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:39:9-47
+56-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:39:18-44
+57        <package android:name="com.btpn.dc" />
+57-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:40:9-47
+57-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:40:18-44
+58        <package android:name="com.bankpermata.mobile" />
+58-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:41:9-58
+58-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:41:18-55
+59    </queries>
+60
+61    <uses-permission android:name="android.permission.USE_BIOMETRIC" /> <!-- suppress DeprecatedClassUsageInspection -->
+61-->[androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2242e9b0470ee319ccaa7c5b0638d253/transformed/biometric-1.1.0/AndroidManifest.xml:24:5-72
+61-->[androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2242e9b0470ee319ccaa7c5b0638d253/transformed/biometric-1.1.0/AndroidManifest.xml:24:22-69
+62    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+62-->[androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2242e9b0470ee319ccaa7c5b0638d253/transformed/biometric-1.1.0/AndroidManifest.xml:27:5-74
+62-->[androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2242e9b0470ee319ccaa7c5b0638d253/transformed/biometric-1.1.0/AndroidManifest.xml:27:22-71
+63    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+63-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:22:5-79
+63-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:22:22-76
+64    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+64-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:24:5-68
+64-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:24:22-65
+65    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+65-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:26:5-82
+65-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:26:22-79
+66    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+66-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:25:5-81
+66-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:25:22-78
+67    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+67-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:26:5-77
+67-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:26:22-74
+68
+69    <permission
+69-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2835865cfe78296800e9df3314cb82ca/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+70        android:name="com.klarfinance.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+70-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2835865cfe78296800e9df3314cb82ca/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+71        android:protectionLevel="signature" />
+71-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2835865cfe78296800e9df3314cb82ca/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+72
+73    <uses-permission android:name="com.klarfinance.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+73-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2835865cfe78296800e9df3314cb82ca/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+73-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2835865cfe78296800e9df3314cb82ca/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+74
+75    <application
+75-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:44:5-82:19
+76        android:name="com.klarfinance.app.KlarFinanceApp"
+76-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:45:9-39
+77        android:allowBackup="true"
+77-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:46:9-35
+78        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+78-->[androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2835865cfe78296800e9df3314cb82ca/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+79        android:debuggable="true"
+80        android:extractNativeLibs="false"
+81        android:icon="@mipmap/ic_launcher"
+81-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:47:9-43
+82        android:label="@string/app_name"
+82-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:48:9-41
+83        android:networkSecurityConfig="@xml/network_security_config"
+83-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:49:9-69
+84        android:roundIcon="@mipmap/ic_launcher_round"
+84-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:50:9-54
+85        android:supportsRtl="true"
+85-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:51:9-35
+86        android:theme="@style/Theme.KlarFinance" >
+86-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:52:9-49
+87        <activity
+87-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:54:9-62:20
+88            android:name="com.klarfinance.app.MainActivity"
+88-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:55:13-41
+89            android:exported="true"
+89-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:56:13-36
+90            android:theme="@style/Theme.KlarFinance" >
+90-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:57:13-53
+91            <intent-filter>
+91-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:58:13-61:29
+92                <action android:name="android.intent.action.MAIN" />
+92-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:59:17-69
+92-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:59:25-66
+93
+94                <category android:name="android.intent.category.LAUNCHER" />
+94-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:60:17-77
+94-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:60:27-74
+95            </intent-filter>
+96        </activity>
+97
+98        <service
+98-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:64:9-70:19
+99            android:name="com.klarfinance.app.core.notification.KlarFirebaseMessagingService"
+99-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:65:13-75
+100            android:exported="false" >
+100-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:66:13-37
+101            <intent-filter>
+101-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:67:13-69:29
+102                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+102-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:68:17-78
+102-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:68:25-75
+103            </intent-filter>
+104        </service>
+105
+106        <meta-data
+106-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:72:9-74:72
+107            android:name="com.google.firebase.messaging.default_notification_channel_id"
+107-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:73:13-89
+108            android:value="@string/approval_notification_channel_id" />
+108-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:74:13-69
+109
+110        <!--
+111             ML Kit Barcode Scanning (fitur Bayar QRIS, lihat presentation/qris/scan/) - triggers
+112             model download saat install dari Play Store, bukan wajib tapi menghindari delay
+113             download-on-first-use.
+114        -->
+115        <meta-data
+115-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:79:9-81:39
+116            android:name="com.google.mlkit.vision.DEPENDENCIES"
+116-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:80:13-64
+117            android:value="barcode" />
+117-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:81:13-36
+118
+119        <service
+119-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a7c684bd7fba6e789f6b569a40333428/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:9:9-15:19
+120            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+120-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a7c684bd7fba6e789f6b569a40333428/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:10:13-91
+121            android:directBootAware="true"
+121-->[com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0ca2e9924a5e6b32c57e2096d132f70/transformed/common-18.11.0/AndroidManifest.xml:17:13-43
+122            android:exported="false" >
+122-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a7c684bd7fba6e789f6b569a40333428/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:11:13-37
+123            <meta-data
+123-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a7c684bd7fba6e789f6b569a40333428/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:12:13-14:85
+124                android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar"
+124-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a7c684bd7fba6e789f6b569a40333428/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:13:17-120
+125                android:value="com.google.firebase.components.ComponentRegistrar" />
+125-->[com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a7c684bd7fba6e789f6b569a40333428/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:14:17-82
+126            <meta-data
+126-->[com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e9ef5ef48d595e4ab9dbfe47c04a335e/transformed/vision-common-17.3.0/AndroidManifest.xml:12:13-14:85
+127                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+127-->[com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e9ef5ef48d595e4ab9dbfe47c04a335e/transformed/vision-common-17.3.0/AndroidManifest.xml:13:17-124
+128                android:value="com.google.firebase.components.ComponentRegistrar" />
+128-->[com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e9ef5ef48d595e4ab9dbfe47c04a335e/transformed/vision-common-17.3.0/AndroidManifest.xml:14:17-82
+129            <meta-data
+129-->[com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0ca2e9924a5e6b32c57e2096d132f70/transformed/common-18.11.0/AndroidManifest.xml:20:13-22:85
+130                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+130-->[com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0ca2e9924a5e6b32c57e2096d132f70/transformed/common-18.11.0/AndroidManifest.xml:21:17-120
+131                android:value="com.google.firebase.components.ComponentRegistrar" />
+131-->[com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0ca2e9924a5e6b32c57e2096d132f70/transformed/common-18.11.0/AndroidManifest.xml:22:17-82
+132        </service>
+133
+134        <provider
+134-->[com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0ca2e9924a5e6b32c57e2096d132f70/transformed/common-18.11.0/AndroidManifest.xml:9:9-13:38
+135            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+135-->[com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0ca2e9924a5e6b32c57e2096d132f70/transformed/common-18.11.0/AndroidManifest.xml:10:13-78
+136            android:authorities="com.klarfinance.app.mlkitinitprovider"
+136-->[com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0ca2e9924a5e6b32c57e2096d132f70/transformed/common-18.11.0/AndroidManifest.xml:11:13-69
+137            android:exported="false"
+137-->[com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0ca2e9924a5e6b32c57e2096d132f70/transformed/common-18.11.0/AndroidManifest.xml:12:13-37
+138            android:initOrder="99" />
+138-->[com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0ca2e9924a5e6b32c57e2096d132f70/transformed/common-18.11.0/AndroidManifest.xml:13:13-35
+139
+140        <service
+140-->[com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0a15c0690653e3b8c90f6df5967825b/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:23:9-29:19
+141            android:name="com.google.firebase.components.ComponentDiscoveryService"
+141-->[com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0a15c0690653e3b8c90f6df5967825b/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:24:13-84
+142            android:directBootAware="true"
+142-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:32:13-43
+143            android:exported="false" >
+143-->[com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0a15c0690653e3b8c90f6df5967825b/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:25:13-37
+144            <meta-data
+144-->[com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0a15c0690653e3b8c90f6df5967825b/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:26:13-28:85
+145                android:name="com.google.firebase.components:com.google.firebase.messaging.ktx.FirebaseMessagingLegacyRegistrar"
+145-->[com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0a15c0690653e3b8c90f6df5967825b/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:27:17-129
+146                android:value="com.google.firebase.components.ComponentRegistrar" />
+146-->[com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b0a15c0690653e3b8c90f6df5967825b/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:28:17-82
+147            <meta-data
+147-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:57:13-59:85
+148                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar"
+148-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:58:17-122
+149                android:value="com.google.firebase.components.ComponentRegistrar" />
+149-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:59:17-82
+150            <meta-data
+150-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:60:13-62:85
+151                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+151-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:61:17-119
+152                android:value="com.google.firebase.components.ComponentRegistrar" />
+152-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:62:17-82
+153            <meta-data
+153-->[com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b2f68a47421eec63c932bc16f6327096/transformed/firebase-installations-18.0.0/AndroidManifest.xml:15:13-17:85
+154                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+154-->[com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b2f68a47421eec63c932bc16f6327096/transformed/firebase-installations-18.0.0/AndroidManifest.xml:16:17-130
+155                android:value="com.google.firebase.components.ComponentRegistrar" />
+155-->[com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b2f68a47421eec63c932bc16f6327096/transformed/firebase-installations-18.0.0/AndroidManifest.xml:17:17-82
+156            <meta-data
+156-->[com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b2f68a47421eec63c932bc16f6327096/transformed/firebase-installations-18.0.0/AndroidManifest.xml:18:13-20:85
+157                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+157-->[com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b2f68a47421eec63c932bc16f6327096/transformed/firebase-installations-18.0.0/AndroidManifest.xml:19:17-127
+158                android:value="com.google.firebase.components.ComponentRegistrar" />
+158-->[com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b2f68a47421eec63c932bc16f6327096/transformed/firebase-installations-18.0.0/AndroidManifest.xml:20:17-82
+159            <meta-data
+159-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/28790e55ca2cb6f8a46ee0d0ca2a7179/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:12:13-14:85
+160                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+160-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/28790e55ca2cb6f8a46ee0d0ca2a7179/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:13:17-116
+161                android:value="com.google.firebase.components.ComponentRegistrar" />
+161-->[com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/28790e55ca2cb6f8a46ee0d0ca2a7179/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:14:17-82
+162            <meta-data
+162-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:35:13-37:85
+163                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+163-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:36:17-109
+164                android:value="com.google.firebase.components.ComponentRegistrar" />
+164-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:37:17-82
+165            <meta-data
+165-->[com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ba1917839ab42fc29b88fd72c37716d7/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:25:13-27:85
+166                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+166-->[com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ba1917839ab42fc29b88fd72c37716d7/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:26:17-115
+167                android:value="com.google.firebase.components.ComponentRegistrar" />
+167-->[com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ba1917839ab42fc29b88fd72c37716d7/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:27:17-82
+168        </service>
+169
+170        <receiver
+170-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:29:9-40:20
+171            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+171-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:30:13-78
+172            android:exported="true"
+172-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:31:13-36
+173            android:permission="com.google.android.c2dm.permission.SEND" >
+173-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:32:13-73
+174            <intent-filter>
+174-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:33:13-35:29
+175                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+175-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:34:17-81
+175-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:34:25-78
+176            </intent-filter>
+177
+178            <meta-data
+178-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:37:13-39:40
+179                android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED"
+179-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:38:17-92
+180                android:value="true" />
+180-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:39:17-37
+181        </receiver>
+182        <!--
+183             FirebaseMessagingService performs security checks at runtime,
+184             but set to not exported to explicitly avoid allowing another app to call it.
+185        -->
+186        <service
+186-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:46:9-53:19
+187            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+187-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:47:13-82
+188            android:directBootAware="true"
+188-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:48:13-43
+189            android:exported="false" >
+189-->[com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b124ee643c8ee2e22fca09886a1f51ff/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:49:13-37
+190            <intent-filter android:priority="-500" >
+190-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:67:13-69:29
+191                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+191-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:68:17-78
+191-->/Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:68:25-75
+192            </intent-filter>
+193        </service>
+194
+195        <activity
+195-->[com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/116e641d70b4e0bc1d93b6ef87949b1f/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+196            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+196-->[com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/116e641d70b4e0bc1d93b6ef87949b1f/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+197            android:exported="false"
+197-->[com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/116e641d70b4e0bc1d93b6ef87949b1f/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+198            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+198-->[com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/116e641d70b4e0bc1d93b6ef87949b1f/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+199
+200        <provider
+200-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:23:9-28:39
+201            android:name="com.google.firebase.provider.FirebaseInitProvider"
+201-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:24:13-77
+202            android:authorities="com.klarfinance.app.firebaseinitprovider"
+202-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:25:13-72
+203            android:directBootAware="true"
+203-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:26:13-43
+204            android:exported="false"
+204-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:27:13-37
+205            android:initOrder="100" />
+205-->[com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f20616ca2201fadb1cf52293b883784d/transformed/firebase-common-21.0.0/AndroidManifest.xml:28:13-36
+206
+207        <service
+207-->[androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e406bf66517e153ea0c28e2fbdfed7dc/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+208            android:name="androidx.room.MultiInstanceInvalidationService"
+208-->[androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e406bf66517e153ea0c28e2fbdfed7dc/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+209            android:directBootAware="true"
+209-->[androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e406bf66517e153ea0c28e2fbdfed7dc/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+210            android:exported="false" />
+210-->[androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e406bf66517e153ea0c28e2fbdfed7dc/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+211
+212        <provider
+212-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:29:9-37:20
+213            android:name="androidx.startup.InitializationProvider"
+213-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:30:13-67
+214            android:authorities="com.klarfinance.app.androidx-startup"
+214-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:31:13-68
+215            android:exported="false" >
+215-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:32:13-37
+216            <meta-data
+216-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:34:13-36:52
+217                android:name="androidx.work.WorkManagerInitializer"
+217-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:35:17-68
+218                android:value="androidx.startup" />
+218-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:36:17-49
+219            <meta-data
+219-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6a16c6003fe1703486c8d2e456d9c950/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+220                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+220-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6a16c6003fe1703486c8d2e456d9c950/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+221                android:value="androidx.startup" />
+221-->[androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6a16c6003fe1703486c8d2e456d9c950/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+222            <meta-data
+222-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b3a9e4727fa78147e1a79c04c25404f6/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:29:13-31:52
+223                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+223-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b3a9e4727fa78147e1a79c04c25404f6/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:30:17-78
+224                android:value="androidx.startup" />
+224-->[androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b3a9e4727fa78147e1a79c04c25404f6/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:31:17-49
+225            <meta-data
+225-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+226                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+226-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+227                android:value="androidx.startup" />
+227-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+228        </provider>
+229
+230        <service
+230-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:39:9-45:35
+231            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+231-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:40:13-88
+232            android:directBootAware="false"
+232-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:41:13-44
+233            android:enabled="@bool/enable_system_alarm_service_default"
+233-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:42:13-72
+234            android:exported="false" />
+234-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:43:13-37
+235        <service
+235-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:46:9-52:35
+236            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+236-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:47:13-84
+237            android:directBootAware="false"
+237-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:48:13-44
+238            android:enabled="@bool/enable_system_job_service_default"
+238-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:49:13-70
+239            android:exported="true"
+239-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:50:13-36
+240            android:permission="android.permission.BIND_JOB_SERVICE" />
+240-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:51:13-69
+241        <service
+241-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:53:9-59:35
+242            android:name="androidx.work.impl.foreground.SystemForegroundService"
+242-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:54:13-81
+243            android:directBootAware="false"
+243-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:55:13-44
+244            android:enabled="@bool/enable_system_foreground_service_default"
+244-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:56:13-77
+245            android:exported="false" />
+245-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:57:13-37
+246
+247        <receiver
+247-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:61:9-66:35
+248            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+248-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:62:13-88
+249            android:directBootAware="false"
+249-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:63:13-44
+250            android:enabled="true"
+250-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:64:13-35
+251            android:exported="false" />
+251-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:65:13-37
+252        <receiver
+252-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:67:9-77:20
+253            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+253-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:68:13-106
+254            android:directBootAware="false"
+254-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:69:13-44
+255            android:enabled="false"
+255-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:70:13-36
+256            android:exported="false" >
+256-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:71:13-37
+257            <intent-filter>
+257-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:73:13-76:29
+258                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+258-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:74:17-87
+258-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:74:25-84
+259                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+259-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:75:17-90
+259-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:75:25-87
+260            </intent-filter>
+261        </receiver>
+262        <receiver
+262-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:78:9-88:20
+263            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+263-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:79:13-104
+264            android:directBootAware="false"
+264-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:80:13-44
+265            android:enabled="false"
+265-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:81:13-36
+266            android:exported="false" >
+266-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:82:13-37
+267            <intent-filter>
+267-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:84:13-87:29
+268                <action android:name="android.intent.action.BATTERY_OKAY" />
+268-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:85:17-77
+268-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:85:25-74
+269                <action android:name="android.intent.action.BATTERY_LOW" />
+269-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:86:17-76
+269-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:86:25-73
+270            </intent-filter>
+271        </receiver>
+272        <receiver
+272-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:89:9-99:20
+273            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+273-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:90:13-104
+274            android:directBootAware="false"
+274-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:91:13-44
+275            android:enabled="false"
+275-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:92:13-36
+276            android:exported="false" >
+276-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:93:13-37
+277            <intent-filter>
+277-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:95:13-98:29
+278                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+278-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:96:17-83
+278-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:96:25-80
+279                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+279-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:97:17-82
+279-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:97:25-79
+280            </intent-filter>
+281        </receiver>
+282        <receiver
+282-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:100:9-109:20
+283            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+283-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:101:13-103
+284            android:directBootAware="false"
+284-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:102:13-44
+285            android:enabled="false"
+285-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:103:13-36
+286            android:exported="false" >
+286-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:104:13-37
+287            <intent-filter>
+287-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:106:13-108:29
+288                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+288-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:107:17-79
+288-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:107:25-76
+289            </intent-filter>
+290        </receiver>
+291        <receiver
+291-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:110:9-121:20
+292            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+292-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:111:13-88
+293            android:directBootAware="false"
+293-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:112:13-44
+294            android:enabled="false"
+294-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:113:13-36
+295            android:exported="false" >
+295-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:114:13-37
+296            <intent-filter>
+296-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:116:13-120:29
+297                <action android:name="android.intent.action.BOOT_COMPLETED" />
+297-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:117:17-79
+297-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:117:25-76
+298                <action android:name="android.intent.action.TIME_SET" />
+298-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:118:17-73
+298-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:118:25-70
+299                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+299-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:119:17-81
+299-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:119:25-78
+300            </intent-filter>
+301        </receiver>
+302        <receiver
+302-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:122:9-131:20
+303            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+303-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:123:13-99
+304            android:directBootAware="false"
+304-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:124:13-44
+305            android:enabled="@bool/enable_system_alarm_service_default"
+305-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:125:13-72
+306            android:exported="false" >
+306-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:126:13-37
+307            <intent-filter>
+307-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:128:13-130:29
+308                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+308-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:129:17-98
+308-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:129:25-95
+309            </intent-filter>
+310        </receiver>
+311        <receiver
+311-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:132:9-142:20
+312            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+312-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:133:13-78
+313            android:directBootAware="false"
+313-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:134:13-44
+314            android:enabled="true"
+314-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:135:13-35
+315            android:exported="true"
+315-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:136:13-36
+316            android:permission="android.permission.DUMP" >
+316-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:137:13-57
+317            <intent-filter>
+317-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:139:13-141:29
+318                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+318-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:140:17-88
+318-->[androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3bdfa46848e147cbb048225040fcb5c6/transformed/work-runtime-2.9.1/AndroidManifest.xml:140:25-85
+319            </intent-filter>
+320        </receiver>
+321
+322        <service
+322-->[androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/672145af31adf6c511658a990fbe61cf/transformed/camera-camera2-1.4.0/AndroidManifest.xml:24:9-33:19
+323            android:name="androidx.camera.core.impl.MetadataHolderService"
+323-->[androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/672145af31adf6c511658a990fbe61cf/transformed/camera-camera2-1.4.0/AndroidManifest.xml:25:13-75
+324            android:enabled="false"
+324-->[androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/672145af31adf6c511658a990fbe61cf/transformed/camera-camera2-1.4.0/AndroidManifest.xml:26:13-36
+325            android:exported="false" >
+325-->[androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/672145af31adf6c511658a990fbe61cf/transformed/camera-camera2-1.4.0/AndroidManifest.xml:27:13-37
+326            <meta-data
+326-->[androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/672145af31adf6c511658a990fbe61cf/transformed/camera-camera2-1.4.0/AndroidManifest.xml:30:13-32:89
+327                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+327-->[androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/672145af31adf6c511658a990fbe61cf/transformed/camera-camera2-1.4.0/AndroidManifest.xml:31:17-103
+328                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+328-->[androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/672145af31adf6c511658a990fbe61cf/transformed/camera-camera2-1.4.0/AndroidManifest.xml:32:17-86
+329        </service>
+330
+331        <activity
+331-->[androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ed57126d36cb51f1c6e84077d6395bf6/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+332            android:name="androidx.compose.ui.tooling.PreviewActivity"
+332-->[androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ed57126d36cb51f1c6e84077d6395bf6/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+333            android:exported="true" />
+333-->[androidx.compose.ui:ui-tooling-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ed57126d36cb51f1c6e84077d6395bf6/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+334        <activity
+334-->[androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c0cc2b3152739600f56b812ca4f7e08a/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:23:9-25:39
+335            android:name="androidx.activity.ComponentActivity"
+335-->[androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c0cc2b3152739600f56b812ca4f7e08a/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:24:13-63
+336            android:exported="true" />
+336-->[androidx.compose.ui:ui-test-manifest:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c0cc2b3152739600f56b812ca4f7e08a/transformed/ui-test-manifest-1.7.5/AndroidManifest.xml:25:13-36
+337
+338        <meta-data
+338-->[com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0b3267e03010e92e6f40462ab6660629/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+339            android:name="com.google.android.gms.version"
+339-->[com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0b3267e03010e92e6f40462ab6660629/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+340            android:value="@integer/google_play_services_version" />
+340-->[com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0b3267e03010e92e6f40462ab6660629/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+341
+342        <receiver
+342-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+343            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+343-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+344            android:directBootAware="false"
+344-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+345            android:enabled="true"
+345-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+346            android:exported="true"
+346-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+347            android:permission="android.permission.DUMP" >
+347-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+348            <intent-filter>
+348-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+349                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+349-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+349-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+350            </intent-filter>
+351            <intent-filter>
+351-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+352                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+352-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+352-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+353            </intent-filter>
+354            <intent-filter>
+354-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+355                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+355-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+355-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+356            </intent-filter>
+357            <intent-filter>
+357-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+358                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+358-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+358-->[androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5116027dda3792ff226b29bd3f2a37e7/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+359            </intent-filter>
+360        </receiver>
+361
+362        <service
+362-->[com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e7276f2bd9c24382526a053a6aa16d4f/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:28:9-34:19
+363            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+363-->[com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e7276f2bd9c24382526a053a6aa16d4f/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:29:13-103
+364            android:exported="false" >
+364-->[com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e7276f2bd9c24382526a053a6aa16d4f/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:30:13-37
+365            <meta-data
+365-->[com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e7276f2bd9c24382526a053a6aa16d4f/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:31:13-33:39
+366                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+366-->[com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e7276f2bd9c24382526a053a6aa16d4f/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:32:17-94
+367                android:value="cct" />
+367-->[com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e7276f2bd9c24382526a053a6aa16d4f/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:33:17-36
+368        </service>
+369        <service
+369-->[com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/33a1d1102f1a8f3ecc060c7dc6aff430/transformed/transport-runtime-3.1.9/AndroidManifest.xml:26:9-30:19
+370            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+370-->[com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/33a1d1102f1a8f3ecc060c7dc6aff430/transformed/transport-runtime-3.1.9/AndroidManifest.xml:27:13-117
+371            android:exported="false"
+371-->[com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/33a1d1102f1a8f3ecc060c7dc6aff430/transformed/transport-runtime-3.1.9/AndroidManifest.xml:28:13-37
+372            android:permission="android.permission.BIND_JOB_SERVICE" >
+372-->[com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/33a1d1102f1a8f3ecc060c7dc6aff430/transformed/transport-runtime-3.1.9/AndroidManifest.xml:29:13-69
+373        </service>
+374
+375        <receiver
+375-->[com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/33a1d1102f1a8f3ecc060c7dc6aff430/transformed/transport-runtime-3.1.9/AndroidManifest.xml:32:9-34:40
+376            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+376-->[com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/33a1d1102f1a8f3ecc060c7dc6aff430/transformed/transport-runtime-3.1.9/AndroidManifest.xml:33:13-132
+377            android:exported="false" />
+377-->[com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/33a1d1102f1a8f3ecc060c7dc6aff430/transformed/transport-runtime-3.1.9/AndroidManifest.xml:34:13-37
+378    </application>
+379
+380</manifest>

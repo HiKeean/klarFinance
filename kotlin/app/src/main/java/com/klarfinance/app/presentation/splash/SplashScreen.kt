@@ -13,19 +13,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.fragment.app.FragmentActivity
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.klarfinance.app.core.theme.KlarBackground
-import kotlinx.coroutines.delay
-
-private const val SPLASH_DELAY_MS = 1500L
+import com.klarfinance.app.domain.model.AccountState
 
 @Composable
-fun SplashScreen(onTimeout: () -> Unit) {
+fun SplashScreen(onTimeout: (AccountState) -> Unit, viewModel: SplashViewModel = hiltViewModel()) {
+    val context = LocalContext.current
+
     LaunchedEffect(Unit) {
-        delay(SPLASH_DELAY_MS)
-        onTimeout()
+        viewModel.resolved.collect { accountState -> onTimeout(accountState) }
+    }
+    LaunchedEffect(Unit) {
+        val activity = context as? FragmentActivity
+        if (activity != null) {
+            viewModel.resolveSession(activity)
+        } else {
+            // Should never happen - MainActivity is a FragmentActivity - but fail safe to
+            // GUEST rather than stranding the splash screen if the cast is ever wrong.
+            onTimeout(AccountState.GUEST)
+        }
     }
 
     Box(

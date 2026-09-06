@@ -1,0 +1,45 @@
+package com.klarfinance.app.domain.usecase;
+
+import com.klarfinance.app.domain.repository.AuthRepository;
+import dagger.internal.DaggerGenerated;
+import dagger.internal.Factory;
+import dagger.internal.QualifierMetadata;
+import dagger.internal.ScopeMetadata;
+import javax.annotation.processing.Generated;
+import javax.inject.Provider;
+
+@ScopeMetadata
+@QualifierMetadata
+@DaggerGenerated
+@Generated(
+    value = "dagger.internal.codegen.ComponentProcessor",
+    comments = "https://dagger.dev"
+)
+@SuppressWarnings({
+    "unchecked",
+    "rawtypes",
+    "KotlinInternal",
+    "KotlinInternalInJava",
+    "cast",
+    "deprecation"
+})
+public final class GetProfileUseCase_Factory implements Factory<GetProfileUseCase> {
+  private final Provider<AuthRepository> repositoryProvider;
+
+  public GetProfileUseCase_Factory(Provider<AuthRepository> repositoryProvider) {
+    this.repositoryProvider = repositoryProvider;
+  }
+
+  @Override
+  public GetProfileUseCase get() {
+    return newInstance(repositoryProvider.get());
+  }
+
+  public static GetProfileUseCase_Factory create(Provider<AuthRepository> repositoryProvider) {
+    return new GetProfileUseCase_Factory(repositoryProvider);
+  }
+
+  public static GetProfileUseCase newInstance(AuthRepository repository) {
+    return new GetProfileUseCase(repository);
+  }
+}

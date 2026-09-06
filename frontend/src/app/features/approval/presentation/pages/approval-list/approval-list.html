@@ -1,0 +1,86 @@
+<main class="approval-page">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">Approval{{ isBm() ? ' (BM)' : '' }}</h1>
+      <p class="page-subtitle">
+        {{ isBm() ? 'Pengajuan yang sudah direview Checker, menunggu keputusan final Anda.' : 'Aplikasi otomatis di-assign ke Anda saat halaman ini terbuka. Batas waktu review: 2 jam.' }}
+      </p>
+    </div>
+    @if (!isBm()) {
+      <button type="button" class="break-button" [disabled]="breaking()" (click)="takeBreak()">
+        {{ breaking() ? 'Memproses…' : 'Istirahat' }}
+      </button>
+    }
+  </div>
+
+  @if (realtimeNotice()) {
+    <p class="realtime-notice">{{ realtimeNotice() }}</p>
+  }
+
+  @if (loading()) {
+    <p class="state-message">Memuat antrean…</p>
+  } @else if (errorMessage()) {
+    <p class="state-message error">{{ errorMessage() }}</p>
+  } @else if (!items().length) {
+    <p class="state-message">{{ isBm() ? 'Tidak ada pengajuan yang menunggu review.' : 'Belum ada pengajuan yang di-assign ke Anda. Menunggu aplikasi baru…' }}</p>
+  } @else if (!isBm()) {
+    <p class="state-message">Mengarahkan ke aplikasi yang di-assign…</p>
+  } @else {
+    <table class="approval-table">
+      <thead>
+        <tr>
+          <th>Nasabah</th>
+          <th>Income / Jumlah Pinjaman</th>
+          <th>Saran Engine / Utilisasi</th>
+          <th>Plafond Checker</th>
+          <th>KOL</th>
+          <th>Status</th>
+          <th>Diajukan</th>
+          <th class="col-actions">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of items(); track item.id) {
+          <tr>
+            <td>
+              <span class="type-badge" [class.type-loan-review]="item.type === 'LOAN_REVIEW'">
+                {{ item.type === 'LOAN_REVIEW' ? 'Pinjaman >30%' : 'Plafond Baru' }}
+              </span>
+              <span class="customer-name">{{ item.customerName || '-' }}</span>
+              <span class="customer-identity">{{ item.customerIdentity }}</span>
+            </td>
+            @if (item.type === 'LOAN_REVIEW') {
+              <td>{{ item.requestedAmount != null ? ('Rp ' + item.requestedAmount.toLocaleString('id-ID')) : '-' }}</td>
+              <td>{{ item.utilizationPercent != null ? (item.utilizationPercent + '%') : '-' }}</td>
+              <td>-</td>
+            } @else {
+              <td>{{ item.incomeAmount != null ? ('Rp ' + item.incomeAmount.toLocaleString('id-ID')) : '-' }}</td>
+              <td>{{ item.engineSuggestionLimit != null ? ('Rp ' + item.engineSuggestionLimit.toLocaleString('id-ID')) : '-' }}</td>
+              <td>{{ item.checkerPurposeLimit != null ? ('Rp ' + item.checkerPurposeLimit.toLocaleString('id-ID')) : '-' }}</td>
+            }
+            <td>{{ item.pefindoColStatus != null ? 'KOL ' + item.pefindoColStatus : '-' }}</td>
+            <td>
+              @if (!item.lockedByIdentity) {
+                <span class="lock-badge available">Tersedia</span>
+              } @else if (item.lockedByMe) {
+                <span class="lock-badge mine">Sedang Anda review</span>
+              } @else {
+                <span class="lock-badge locked">🔒 {{ item.lockedByName || item.lockedByIdentity }}</span>
+              }
+            </td>
+            <td>{{ item.createdAt | date: 'd MMM y, HH:mm' }}</td>
+            <td class="col-actions">
+              <button
+                type="button"
+                class="review-button"
+                [disabled]="!!item.lockedByIdentity && !item.lockedByMe"
+                (click)="openDetail(item)">
+                {{ item.lockedByMe ? 'Lanjutkan Review' : 'Review' }}
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</main>

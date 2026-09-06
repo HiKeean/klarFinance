@@ -1,0 +1,19 @@
+<header class="topbar">
+  <a class="brand-card" routerLink="/dashboard">
+    <span class="brand-mark">K</span>
+    <div class="brand-text"><strong>KlarFinance</strong><small>Checker &amp; BM</small></div>
+  </a>
+
+  <div class="profile-area">
+    @if (userProfile$ | async; as profile) {
+      <div class="greeting">
+        <span>Halo <strong>{{ profile.name || profile.identity }}</strong>,</span>
+        <span>{{ profile.identity }}</span>
+      </div>
+    }
+    <button type="button" class="logout-button" (click)="logout()">
+      <mat-icon>lock</mat-icon>
+      <span>Logout</span>
+    </button>
+  </div>
+</header>

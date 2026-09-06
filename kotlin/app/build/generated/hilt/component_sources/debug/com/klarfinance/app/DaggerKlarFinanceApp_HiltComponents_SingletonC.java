@@ -2,23 +2,86 @@ package com.klarfinance.app;
 
 import android.app.Activity;
 import android.app.Service;
+import android.content.Context;
 import android.view.View;
 import androidx.fragment.app.Fragment;
+import androidx.hilt.work.HiltWorkerFactory;
+import androidx.hilt.work.WorkerAssistedFactory;
+import androidx.hilt.work.WorkerFactoryModule_ProvideFactoryFactory;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
-import com.klarfinance.app.data.remote.AuthApi;
+import androidx.work.ListenableWorker;
+import androidx.work.WorkerParameters;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import com.klarfinance.app.core.location.LocationCaptureWorker;
+import com.klarfinance.app.core.location.LocationCaptureWorker_AssistedFactory;
+import com.klarfinance.app.core.location.LocationScheduler;
+import com.klarfinance.app.core.network.ApiService;
+import com.klarfinance.app.core.network.AuthInterceptor;
+import com.klarfinance.app.core.network.HmacInterceptor;
+import com.klarfinance.app.core.notification.FcmEventBus;
+import com.klarfinance.app.core.notification.KlarFirebaseMessagingService;
+import com.klarfinance.app.core.notification.KlarFirebaseMessagingService_MembersInjector;
+import com.klarfinance.app.core.session.SecureTokenStore;
+import com.klarfinance.app.core.session.SessionManager;
+import com.klarfinance.app.data.local.KlarFinanceDatabase;
+import com.klarfinance.app.data.local.VerifiedPhoneDao;
 import com.klarfinance.app.data.repository.AuthRepositoryImpl;
-import com.klarfinance.app.di.NetworkModule_ProvideAuthApiFactory;
+import com.klarfinance.app.data.repository.LoanRepositoryImpl;
+import com.klarfinance.app.data.repository.LocationRepositoryImpl;
+import com.klarfinance.app.data.repository.LocationTrackingRepositoryImpl;
+import com.klarfinance.app.data.repository.QrisRepositoryImpl;
+import com.klarfinance.app.data.repository.ReferralRepositoryImpl;
+import com.klarfinance.app.data.repository.VerifiedPhoneRepositoryImpl;
+import com.klarfinance.app.di.DatabaseModule_ProvideDatabaseFactory;
+import com.klarfinance.app.di.DatabaseModule_ProvideVerifiedPhoneDaoFactory;
 import com.klarfinance.app.di.NetworkModule_ProvideJsonFactory;
 import com.klarfinance.app.di.NetworkModule_ProvideOkHttpClientFactory;
-import com.klarfinance.app.di.NetworkModule_ProvideRetrofitFactory;
 import com.klarfinance.app.domain.repository.AuthRepository;
+import com.klarfinance.app.domain.repository.LoanRepository;
+import com.klarfinance.app.domain.repository.LocationRepository;
+import com.klarfinance.app.domain.repository.LocationTrackingRepository;
+import com.klarfinance.app.domain.repository.QrisRepository;
+import com.klarfinance.app.domain.repository.ReferralRepository;
+import com.klarfinance.app.domain.repository.VerifiedPhoneRepository;
+import com.klarfinance.app.domain.usecase.ChangePasswordUseCase;
+import com.klarfinance.app.domain.usecase.CheckPhoneRegisteredUseCase;
+import com.klarfinance.app.domain.usecase.ConfirmQrisUseCase;
+import com.klarfinance.app.domain.usecase.GetLimitSummaryUseCase;
+import com.klarfinance.app.domain.usecase.GetLocationConsentUseCase;
+import com.klarfinance.app.domain.usecase.GetProfileUseCase;
+import com.klarfinance.app.domain.usecase.GetReferralSummaryUseCase;
+import com.klarfinance.app.domain.usecase.LogLocationFailureUseCase;
+import com.klarfinance.app.domain.usecase.LoginUseCase;
+import com.klarfinance.app.domain.usecase.LogoutUseCase;
+import com.klarfinance.app.domain.usecase.RefreshSessionUseCase;
+import com.klarfinance.app.domain.usecase.RegisterUseCase;
+import com.klarfinance.app.domain.usecase.RequestLoanUseCase;
 import com.klarfinance.app.domain.usecase.RequestOtpUseCase;
+import com.klarfinance.app.domain.usecase.ScanQrisUseCase;
+import com.klarfinance.app.domain.usecase.SetLocationConsentUseCase;
+import com.klarfinance.app.domain.usecase.SubmitLocationPingUseCase;
 import com.klarfinance.app.domain.usecase.VerifyOtpUseCase;
+import com.klarfinance.app.presentation.account.AccountViewModel;
+import com.klarfinance.app.presentation.account.AccountViewModel_HiltModules;
+import com.klarfinance.app.presentation.home.HomeViewModel;
+import com.klarfinance.app.presentation.home.HomeViewModel_HiltModules;
+import com.klarfinance.app.presentation.loan.RequestLoanViewModel;
+import com.klarfinance.app.presentation.loan.RequestLoanViewModel_HiltModules;
 import com.klarfinance.app.presentation.login.LoginViewModel;
 import com.klarfinance.app.presentation.login.LoginViewModel_HiltModules;
 import com.klarfinance.app.presentation.otp.OtpViewModel;
 import com.klarfinance.app.presentation.otp.OtpViewModel_HiltModules;
+import com.klarfinance.app.presentation.passwordlogin.PasswordLoginViewModel;
+import com.klarfinance.app.presentation.passwordlogin.PasswordLoginViewModel_HiltModules;
+import com.klarfinance.app.presentation.qris.amount.QrisViewModel;
+import com.klarfinance.app.presentation.qris.amount.QrisViewModel_HiltModules;
+import com.klarfinance.app.presentation.referral.ReferralViewModel;
+import com.klarfinance.app.presentation.referral.ReferralViewModel_HiltModules;
+import com.klarfinance.app.presentation.register.RegisterViewModel;
+import com.klarfinance.app.presentation.register.RegisterViewModel_HiltModules;
+import com.klarfinance.app.presentation.splash.SplashViewModel;
+import com.klarfinance.app.presentation.splash.SplashViewModel_HiltModules;
 import dagger.hilt.android.ActivityRetainedLifecycle;
 import dagger.hilt.android.ViewModelLifecycle;
 import dagger.hilt.android.internal.builders.ActivityComponentBuilder;
@@ -33,6 +96,7 @@ import dagger.hilt.android.internal.lifecycle.DefaultViewModelFactories_Internal
 import dagger.hilt.android.internal.managers.ActivityRetainedComponentManager_LifecycleModule_ProvideActivityRetainedLifecycleFactory;
 import dagger.hilt.android.internal.managers.SavedStateHandleHolder;
 import dagger.hilt.android.internal.modules.ApplicationContextModule;
+import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideContextFactory;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
 import dagger.internal.IdentifierNameString;
@@ -41,13 +105,13 @@ import dagger.internal.LazyClassKeyMap;
 import dagger.internal.MapBuilder;
 import dagger.internal.Preconditions;
 import dagger.internal.Provider;
+import dagger.internal.SingleCheck;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.processing.Generated;
 import kotlinx.serialization.json.Json;
 import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
 
 @DaggerGenerated
 @Generated(
@@ -70,25 +134,20 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
     return new Builder();
   }
 
-  public static KlarFinanceApp_HiltComponents.SingletonC create() {
-    return new Builder().build();
-  }
-
   public static final class Builder {
+    private ApplicationContextModule applicationContextModule;
+
     private Builder() {
     }
 
-    /**
-     * @deprecated This module is declared, but an instance is not used in the component. This method is a no-op. For more, see https://dagger.dev/unused-modules.
-     */
-    @Deprecated
     public Builder applicationContextModule(ApplicationContextModule applicationContextModule) {
-      Preconditions.checkNotNull(applicationContextModule);
+      this.applicationContextModule = Preconditions.checkNotNull(applicationContextModule);
       return this;
     }
 
     public KlarFinanceApp_HiltComponents.SingletonC build() {
-      return new SingletonCImpl();
+      Preconditions.checkBuilderRequirement(applicationContextModule, ApplicationContextModule.class);
+      return new SingletonCImpl(applicationContextModule);
     }
   }
 
@@ -377,7 +436,7 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectMainActivity(MainActivity arg0) {
+    public void injectMainActivity(MainActivity mainActivity) {
     }
 
     @Override
@@ -387,7 +446,7 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
 
     @Override
     public Map<Class<?>, Boolean> getViewModelKeys() {
-      return LazyClassKeyMap.<Boolean>of(MapBuilder.<String, Boolean>newMapBuilder(2).put(LazyClassKeyProvider.com_klarfinance_app_presentation_login_LoginViewModel, LoginViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_otp_OtpViewModel, OtpViewModel_HiltModules.KeyModule.provide()).build());
+      return LazyClassKeyMap.<Boolean>of(MapBuilder.<String, Boolean>newMapBuilder(10).put(LazyClassKeyProvider.com_klarfinance_app_presentation_account_AccountViewModel, AccountViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_home_HomeViewModel, HomeViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_login_LoginViewModel, LoginViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_otp_OtpViewModel, OtpViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel, PasswordLoginViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_qris_amount_QrisViewModel, QrisViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_referral_ReferralViewModel, ReferralViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_register_RegisterViewModel, RegisterViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_loan_RequestLoanViewModel, RequestLoanViewModel_HiltModules.KeyModule.provide()).put(LazyClassKeyProvider.com_klarfinance_app_presentation_splash_SplashViewModel, SplashViewModel_HiltModules.KeyModule.provide()).build());
     }
 
     @Override
@@ -407,15 +466,55 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
+      static String com_klarfinance_app_presentation_home_HomeViewModel = "com.klarfinance.app.presentation.home.HomeViewModel";
+
+      static String com_klarfinance_app_presentation_qris_amount_QrisViewModel = "com.klarfinance.app.presentation.qris.amount.QrisViewModel";
+
+      static String com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel = "com.klarfinance.app.presentation.passwordlogin.PasswordLoginViewModel";
+
+      static String com_klarfinance_app_presentation_referral_ReferralViewModel = "com.klarfinance.app.presentation.referral.ReferralViewModel";
+
       static String com_klarfinance_app_presentation_login_LoginViewModel = "com.klarfinance.app.presentation.login.LoginViewModel";
 
       static String com_klarfinance_app_presentation_otp_OtpViewModel = "com.klarfinance.app.presentation.otp.OtpViewModel";
+
+      static String com_klarfinance_app_presentation_register_RegisterViewModel = "com.klarfinance.app.presentation.register.RegisterViewModel";
+
+      static String com_klarfinance_app_presentation_account_AccountViewModel = "com.klarfinance.app.presentation.account.AccountViewModel";
+
+      static String com_klarfinance_app_presentation_loan_RequestLoanViewModel = "com.klarfinance.app.presentation.loan.RequestLoanViewModel";
+
+      static String com_klarfinance_app_presentation_splash_SplashViewModel = "com.klarfinance.app.presentation.splash.SplashViewModel";
+
+      @KeepFieldType
+      HomeViewModel com_klarfinance_app_presentation_home_HomeViewModel2;
+
+      @KeepFieldType
+      QrisViewModel com_klarfinance_app_presentation_qris_amount_QrisViewModel2;
+
+      @KeepFieldType
+      PasswordLoginViewModel com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel2;
+
+      @KeepFieldType
+      ReferralViewModel com_klarfinance_app_presentation_referral_ReferralViewModel2;
 
       @KeepFieldType
       LoginViewModel com_klarfinance_app_presentation_login_LoginViewModel2;
 
       @KeepFieldType
       OtpViewModel com_klarfinance_app_presentation_otp_OtpViewModel2;
+
+      @KeepFieldType
+      RegisterViewModel com_klarfinance_app_presentation_register_RegisterViewModel2;
+
+      @KeepFieldType
+      AccountViewModel com_klarfinance_app_presentation_account_AccountViewModel2;
+
+      @KeepFieldType
+      RequestLoanViewModel com_klarfinance_app_presentation_loan_RequestLoanViewModel2;
+
+      @KeepFieldType
+      SplashViewModel com_klarfinance_app_presentation_splash_SplashViewModel2;
     }
   }
 
@@ -428,9 +527,25 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
 
     private final ViewModelCImpl viewModelCImpl = this;
 
+    private Provider<AccountViewModel> accountViewModelProvider;
+
+    private Provider<HomeViewModel> homeViewModelProvider;
+
     private Provider<LoginViewModel> loginViewModelProvider;
 
     private Provider<OtpViewModel> otpViewModelProvider;
+
+    private Provider<PasswordLoginViewModel> passwordLoginViewModelProvider;
+
+    private Provider<QrisViewModel> qrisViewModelProvider;
+
+    private Provider<ReferralViewModel> referralViewModelProvider;
+
+    private Provider<RegisterViewModel> registerViewModelProvider;
+
+    private Provider<RequestLoanViewModel> requestLoanViewModelProvider;
+
+    private Provider<SplashViewModel> splashViewModelProvider;
 
     private ViewModelCImpl(SingletonCImpl singletonCImpl,
         ActivityRetainedCImpl activityRetainedCImpl, SavedStateHandle savedStateHandleParam,
@@ -442,24 +557,88 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
 
     }
 
+    private GetProfileUseCase getProfileUseCase() {
+      return new GetProfileUseCase(singletonCImpl.bindAuthRepositoryProvider.get());
+    }
+
+    private ChangePasswordUseCase changePasswordUseCase() {
+      return new ChangePasswordUseCase(singletonCImpl.bindAuthRepositoryProvider.get());
+    }
+
+    private LogoutUseCase logoutUseCase() {
+      return new LogoutUseCase(singletonCImpl.bindAuthRepositoryProvider.get());
+    }
+
+    private GetLocationConsentUseCase getLocationConsentUseCase() {
+      return new GetLocationConsentUseCase(singletonCImpl.bindLocationTrackingRepositoryProvider.get());
+    }
+
+    private SetLocationConsentUseCase setLocationConsentUseCase() {
+      return new SetLocationConsentUseCase(singletonCImpl.bindLocationTrackingRepositoryProvider.get());
+    }
+
+    private GetLimitSummaryUseCase getLimitSummaryUseCase() {
+      return new GetLimitSummaryUseCase(singletonCImpl.bindLoanRepositoryProvider.get());
+    }
+
     private RequestOtpUseCase requestOtpUseCase() {
       return new RequestOtpUseCase(singletonCImpl.bindAuthRepositoryProvider.get());
+    }
+
+    private CheckPhoneRegisteredUseCase checkPhoneRegisteredUseCase() {
+      return new CheckPhoneRegisteredUseCase(singletonCImpl.bindAuthRepositoryProvider.get());
     }
 
     private VerifyOtpUseCase verifyOtpUseCase() {
       return new VerifyOtpUseCase(singletonCImpl.bindAuthRepositoryProvider.get());
     }
 
+    private LoginUseCase loginUseCase() {
+      return new LoginUseCase(singletonCImpl.bindAuthRepositoryProvider.get());
+    }
+
+    private ScanQrisUseCase scanQrisUseCase() {
+      return new ScanQrisUseCase(singletonCImpl.bindQrisRepositoryProvider.get());
+    }
+
+    private ConfirmQrisUseCase confirmQrisUseCase() {
+      return new ConfirmQrisUseCase(singletonCImpl.bindQrisRepositoryProvider.get());
+    }
+
+    private GetReferralSummaryUseCase getReferralSummaryUseCase() {
+      return new GetReferralSummaryUseCase(singletonCImpl.bindReferralRepositoryProvider.get());
+    }
+
+    private RegisterUseCase registerUseCase() {
+      return new RegisterUseCase(singletonCImpl.bindAuthRepositoryProvider.get());
+    }
+
+    private RequestLoanUseCase requestLoanUseCase() {
+      return new RequestLoanUseCase(singletonCImpl.bindLoanRepositoryProvider.get());
+    }
+
+    private RefreshSessionUseCase refreshSessionUseCase() {
+      return new RefreshSessionUseCase(singletonCImpl.bindAuthRepositoryProvider.get());
+    }
+
     @SuppressWarnings("unchecked")
     private void initialize(final SavedStateHandle savedStateHandleParam,
         final ViewModelLifecycle viewModelLifecycleParam) {
-      this.loginViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
-      this.otpViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
+      this.accountViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
+      this.homeViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 1);
+      this.loginViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 2);
+      this.otpViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 3);
+      this.passwordLoginViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 4);
+      this.qrisViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 5);
+      this.referralViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 6);
+      this.registerViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 7);
+      this.requestLoanViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 8);
+      this.splashViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 9);
     }
 
     @Override
     public Map<Class<?>, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
-      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(2).put(LazyClassKeyProvider.com_klarfinance_app_presentation_login_LoginViewModel, ((Provider) loginViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_otp_OtpViewModel, ((Provider) otpViewModelProvider)).build());
+      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(MapBuilder.<String, javax.inject.Provider<ViewModel>>newMapBuilder(10).put(LazyClassKeyProvider.com_klarfinance_app_presentation_account_AccountViewModel, ((Provider) accountViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_home_HomeViewModel, ((Provider) homeViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_login_LoginViewModel, ((Provider) loginViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_otp_OtpViewModel, ((Provider) otpViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel, ((Provider) passwordLoginViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_qris_amount_QrisViewModel, ((Provider) qrisViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_referral_ReferralViewModel, ((Provider) referralViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_register_RegisterViewModel, ((Provider) registerViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_loan_RequestLoanViewModel, ((Provider) requestLoanViewModelProvider)).put(LazyClassKeyProvider.com_klarfinance_app_presentation_splash_SplashViewModel, ((Provider) splashViewModelProvider)).build());
     }
 
     @Override
@@ -469,15 +648,55 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_klarfinance_app_presentation_login_LoginViewModel = "com.klarfinance.app.presentation.login.LoginViewModel";
+      static String com_klarfinance_app_presentation_referral_ReferralViewModel = "com.klarfinance.app.presentation.referral.ReferralViewModel";
 
       static String com_klarfinance_app_presentation_otp_OtpViewModel = "com.klarfinance.app.presentation.otp.OtpViewModel";
+
+      static String com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel = "com.klarfinance.app.presentation.passwordlogin.PasswordLoginViewModel";
+
+      static String com_klarfinance_app_presentation_account_AccountViewModel = "com.klarfinance.app.presentation.account.AccountViewModel";
+
+      static String com_klarfinance_app_presentation_loan_RequestLoanViewModel = "com.klarfinance.app.presentation.loan.RequestLoanViewModel";
+
+      static String com_klarfinance_app_presentation_splash_SplashViewModel = "com.klarfinance.app.presentation.splash.SplashViewModel";
+
+      static String com_klarfinance_app_presentation_login_LoginViewModel = "com.klarfinance.app.presentation.login.LoginViewModel";
+
+      static String com_klarfinance_app_presentation_qris_amount_QrisViewModel = "com.klarfinance.app.presentation.qris.amount.QrisViewModel";
+
+      static String com_klarfinance_app_presentation_home_HomeViewModel = "com.klarfinance.app.presentation.home.HomeViewModel";
+
+      static String com_klarfinance_app_presentation_register_RegisterViewModel = "com.klarfinance.app.presentation.register.RegisterViewModel";
+
+      @KeepFieldType
+      ReferralViewModel com_klarfinance_app_presentation_referral_ReferralViewModel2;
+
+      @KeepFieldType
+      OtpViewModel com_klarfinance_app_presentation_otp_OtpViewModel2;
+
+      @KeepFieldType
+      PasswordLoginViewModel com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel2;
+
+      @KeepFieldType
+      AccountViewModel com_klarfinance_app_presentation_account_AccountViewModel2;
+
+      @KeepFieldType
+      RequestLoanViewModel com_klarfinance_app_presentation_loan_RequestLoanViewModel2;
+
+      @KeepFieldType
+      SplashViewModel com_klarfinance_app_presentation_splash_SplashViewModel2;
 
       @KeepFieldType
       LoginViewModel com_klarfinance_app_presentation_login_LoginViewModel2;
 
       @KeepFieldType
-      OtpViewModel com_klarfinance_app_presentation_otp_OtpViewModel2;
+      QrisViewModel com_klarfinance_app_presentation_qris_amount_QrisViewModel2;
+
+      @KeepFieldType
+      HomeViewModel com_klarfinance_app_presentation_home_HomeViewModel2;
+
+      @KeepFieldType
+      RegisterViewModel com_klarfinance_app_presentation_register_RegisterViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -501,11 +720,35 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
       @Override
       public T get() {
         switch (id) {
-          case 0: // com.klarfinance.app.presentation.login.LoginViewModel 
-          return (T) new LoginViewModel(viewModelCImpl.requestOtpUseCase());
+          case 0: // com.klarfinance.app.presentation.account.AccountViewModel 
+          return (T) new AccountViewModel(viewModelCImpl.getProfileUseCase(), viewModelCImpl.changePasswordUseCase(), viewModelCImpl.logoutUseCase(), singletonCImpl.sessionManagerProvider.get(), singletonCImpl.secureTokenStoreProvider.get(), viewModelCImpl.getLocationConsentUseCase(), viewModelCImpl.setLocationConsentUseCase(), singletonCImpl.logLocationFailureUseCase(), singletonCImpl.locationSchedulerProvider.get());
 
-          case 1: // com.klarfinance.app.presentation.otp.OtpViewModel 
-          return (T) new OtpViewModel(viewModelCImpl.verifyOtpUseCase(), viewModelCImpl.requestOtpUseCase(), viewModelCImpl.savedStateHandle);
+          case 1: // com.klarfinance.app.presentation.home.HomeViewModel 
+          return (T) new HomeViewModel(viewModelCImpl.getProfileUseCase(), viewModelCImpl.getLimitSummaryUseCase(), singletonCImpl.fcmEventBusProvider.get(), viewModelCImpl.savedStateHandle);
+
+          case 2: // com.klarfinance.app.presentation.login.LoginViewModel 
+          return (T) new LoginViewModel(viewModelCImpl.requestOtpUseCase(), singletonCImpl.bindVerifiedPhoneRepositoryProvider.get(), viewModelCImpl.checkPhoneRegisteredUseCase());
+
+          case 3: // com.klarfinance.app.presentation.otp.OtpViewModel 
+          return (T) new OtpViewModel(viewModelCImpl.verifyOtpUseCase(), viewModelCImpl.requestOtpUseCase(), singletonCImpl.bindVerifiedPhoneRepositoryProvider.get(), viewModelCImpl.checkPhoneRegisteredUseCase(), viewModelCImpl.savedStateHandle);
+
+          case 4: // com.klarfinance.app.presentation.passwordlogin.PasswordLoginViewModel 
+          return (T) new PasswordLoginViewModel(viewModelCImpl.loginUseCase(), viewModelCImpl.savedStateHandle);
+
+          case 5: // com.klarfinance.app.presentation.qris.amount.QrisViewModel 
+          return (T) new QrisViewModel(viewModelCImpl.scanQrisUseCase(), viewModelCImpl.confirmQrisUseCase(), viewModelCImpl.getLimitSummaryUseCase(), viewModelCImpl.savedStateHandle);
+
+          case 6: // com.klarfinance.app.presentation.referral.ReferralViewModel 
+          return (T) new ReferralViewModel(viewModelCImpl.getReferralSummaryUseCase());
+
+          case 7: // com.klarfinance.app.presentation.register.RegisterViewModel 
+          return (T) new RegisterViewModel(singletonCImpl.bindLocationRepositoryProvider.get(), viewModelCImpl.registerUseCase(), viewModelCImpl.loginUseCase(), ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule), viewModelCImpl.savedStateHandle);
+
+          case 8: // com.klarfinance.app.presentation.loan.RequestLoanViewModel 
+          return (T) new RequestLoanViewModel(viewModelCImpl.getLimitSummaryUseCase(), viewModelCImpl.requestLoanUseCase(), ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 9: // com.klarfinance.app.presentation.splash.SplashViewModel 
+          return (T) new SplashViewModel(singletonCImpl.secureTokenStoreProvider.get(), viewModelCImpl.refreshSessionUseCase());
 
           default: throw new AssertionError(id);
         }
@@ -580,41 +823,135 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
 
 
     }
+
+    @Override
+    public void injectKlarFirebaseMessagingService(
+        KlarFirebaseMessagingService klarFirebaseMessagingService) {
+      injectKlarFirebaseMessagingService2(klarFirebaseMessagingService);
+    }
+
+    @CanIgnoreReturnValue
+    private KlarFirebaseMessagingService injectKlarFirebaseMessagingService2(
+        KlarFirebaseMessagingService instance) {
+      KlarFirebaseMessagingService_MembersInjector.injectAuthRepository(instance, singletonCImpl.bindAuthRepositoryProvider.get());
+      KlarFirebaseMessagingService_MembersInjector.injectSessionManager(instance, singletonCImpl.sessionManagerProvider.get());
+      KlarFirebaseMessagingService_MembersInjector.injectFcmEventBus(instance, singletonCImpl.fcmEventBusProvider.get());
+      return instance;
+    }
   }
 
   private static final class SingletonCImpl extends KlarFinanceApp_HiltComponents.SingletonC {
+    private final ApplicationContextModule applicationContextModule;
+
     private final SingletonCImpl singletonCImpl = this;
+
+    private Provider<SessionManager> sessionManagerProvider;
 
     private Provider<OkHttpClient> provideOkHttpClientProvider;
 
     private Provider<Json> provideJsonProvider;
 
-    private Provider<Retrofit> provideRetrofitProvider;
+    private Provider<ApiService> apiServiceProvider;
 
-    private Provider<AuthApi> provideAuthApiProvider;
+    private Provider<LocationTrackingRepositoryImpl> locationTrackingRepositoryImplProvider;
+
+    private Provider<LocationTrackingRepository> bindLocationTrackingRepositoryProvider;
+
+    private Provider<LocationScheduler> locationSchedulerProvider;
+
+    private Provider<LocationCaptureWorker_AssistedFactory> locationCaptureWorker_AssistedFactoryProvider;
+
+    private Provider<SecureTokenStore> secureTokenStoreProvider;
 
     private Provider<AuthRepositoryImpl> authRepositoryImplProvider;
 
     private Provider<AuthRepository> bindAuthRepositoryProvider;
 
-    private SingletonCImpl() {
+    private Provider<LoanRepositoryImpl> loanRepositoryImplProvider;
 
-      initialize();
+    private Provider<LoanRepository> bindLoanRepositoryProvider;
 
+    private Provider<FcmEventBus> fcmEventBusProvider;
+
+    private Provider<KlarFinanceDatabase> provideDatabaseProvider;
+
+    private Provider<VerifiedPhoneRepositoryImpl> verifiedPhoneRepositoryImplProvider;
+
+    private Provider<VerifiedPhoneRepository> bindVerifiedPhoneRepositoryProvider;
+
+    private Provider<QrisRepositoryImpl> qrisRepositoryImplProvider;
+
+    private Provider<QrisRepository> bindQrisRepositoryProvider;
+
+    private Provider<ReferralRepositoryImpl> referralRepositoryImplProvider;
+
+    private Provider<ReferralRepository> bindReferralRepositoryProvider;
+
+    private Provider<LocationRepositoryImpl> locationRepositoryImplProvider;
+
+    private Provider<LocationRepository> bindLocationRepositoryProvider;
+
+    private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
+      this.applicationContextModule = applicationContextModuleParam;
+      initialize(applicationContextModuleParam);
+
+    }
+
+    private AuthInterceptor authInterceptor() {
+      return new AuthInterceptor(sessionManagerProvider.get());
+    }
+
+    private SubmitLocationPingUseCase submitLocationPingUseCase() {
+      return new SubmitLocationPingUseCase(bindLocationTrackingRepositoryProvider.get());
+    }
+
+    private LogLocationFailureUseCase logLocationFailureUseCase() {
+      return new LogLocationFailureUseCase(bindLocationTrackingRepositoryProvider.get());
+    }
+
+    private Map<String, javax.inject.Provider<WorkerAssistedFactory<? extends ListenableWorker>>> mapOfStringAndProviderOfWorkerAssistedFactoryOf(
+        ) {
+      return Collections.<String, javax.inject.Provider<WorkerAssistedFactory<? extends ListenableWorker>>>singletonMap("com.klarfinance.app.core.location.LocationCaptureWorker", ((Provider) locationCaptureWorker_AssistedFactoryProvider));
+    }
+
+    private HiltWorkerFactory hiltWorkerFactory() {
+      return WorkerFactoryModule_ProvideFactoryFactory.provideFactory(mapOfStringAndProviderOfWorkerAssistedFactoryOf());
+    }
+
+    private VerifiedPhoneDao verifiedPhoneDao() {
+      return DatabaseModule_ProvideVerifiedPhoneDaoFactory.provideVerifiedPhoneDao(provideDatabaseProvider.get());
     }
 
     @SuppressWarnings("unchecked")
-    private void initialize() {
+    private void initialize(final ApplicationContextModule applicationContextModuleParam) {
+      this.sessionManagerProvider = DoubleCheck.provider(new SwitchingProvider<SessionManager>(singletonCImpl, 4));
       this.provideOkHttpClientProvider = DoubleCheck.provider(new SwitchingProvider<OkHttpClient>(singletonCImpl, 3));
-      this.provideJsonProvider = DoubleCheck.provider(new SwitchingProvider<Json>(singletonCImpl, 4));
-      this.provideRetrofitProvider = DoubleCheck.provider(new SwitchingProvider<Retrofit>(singletonCImpl, 2));
-      this.provideAuthApiProvider = DoubleCheck.provider(new SwitchingProvider<AuthApi>(singletonCImpl, 1));
-      this.authRepositoryImplProvider = new SwitchingProvider<>(singletonCImpl, 0);
+      this.provideJsonProvider = DoubleCheck.provider(new SwitchingProvider<Json>(singletonCImpl, 5));
+      this.apiServiceProvider = DoubleCheck.provider(new SwitchingProvider<ApiService>(singletonCImpl, 2));
+      this.locationTrackingRepositoryImplProvider = new SwitchingProvider<>(singletonCImpl, 1);
+      this.bindLocationTrackingRepositoryProvider = DoubleCheck.provider((Provider) locationTrackingRepositoryImplProvider);
+      this.locationSchedulerProvider = DoubleCheck.provider(new SwitchingProvider<LocationScheduler>(singletonCImpl, 6));
+      this.locationCaptureWorker_AssistedFactoryProvider = SingleCheck.provider(new SwitchingProvider<LocationCaptureWorker_AssistedFactory>(singletonCImpl, 0));
+      this.secureTokenStoreProvider = DoubleCheck.provider(new SwitchingProvider<SecureTokenStore>(singletonCImpl, 8));
+      this.authRepositoryImplProvider = new SwitchingProvider<>(singletonCImpl, 7);
       this.bindAuthRepositoryProvider = DoubleCheck.provider((Provider) authRepositoryImplProvider);
+      this.loanRepositoryImplProvider = new SwitchingProvider<>(singletonCImpl, 9);
+      this.bindLoanRepositoryProvider = DoubleCheck.provider((Provider) loanRepositoryImplProvider);
+      this.fcmEventBusProvider = DoubleCheck.provider(new SwitchingProvider<FcmEventBus>(singletonCImpl, 10));
+      this.provideDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<KlarFinanceDatabase>(singletonCImpl, 12));
+      this.verifiedPhoneRepositoryImplProvider = new SwitchingProvider<>(singletonCImpl, 11);
+      this.bindVerifiedPhoneRepositoryProvider = DoubleCheck.provider((Provider) verifiedPhoneRepositoryImplProvider);
+      this.qrisRepositoryImplProvider = new SwitchingProvider<>(singletonCImpl, 13);
+      this.bindQrisRepositoryProvider = DoubleCheck.provider((Provider) qrisRepositoryImplProvider);
+      this.referralRepositoryImplProvider = new SwitchingProvider<>(singletonCImpl, 14);
+      this.bindReferralRepositoryProvider = DoubleCheck.provider((Provider) referralRepositoryImplProvider);
+      this.locationRepositoryImplProvider = new SwitchingProvider<>(singletonCImpl, 15);
+      this.bindLocationRepositoryProvider = DoubleCheck.provider((Provider) locationRepositoryImplProvider);
     }
 
     @Override
-    public void injectKlarFinanceApp(KlarFinanceApp arg0) {
+    public void injectKlarFinanceApp(KlarFinanceApp klarFinanceApp) {
+      injectKlarFinanceApp2(klarFinanceApp);
     }
 
     @Override
@@ -632,6 +969,12 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
       return new ServiceCBuilder(singletonCImpl);
     }
 
+    @CanIgnoreReturnValue
+    private KlarFinanceApp injectKlarFinanceApp2(KlarFinanceApp instance) {
+      KlarFinanceApp_MembersInjector.injectWorkerFactory(instance, hiltWorkerFactory());
+      return instance;
+    }
+
     private static final class SwitchingProvider<T> implements Provider<T> {
       private final SingletonCImpl singletonCImpl;
 
@@ -646,20 +989,58 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
       @Override
       public T get() {
         switch (id) {
-          case 0: // com.klarfinance.app.data.repository.AuthRepositoryImpl 
-          return (T) new AuthRepositoryImpl(singletonCImpl.provideAuthApiProvider.get(), singletonCImpl.provideJsonProvider.get());
+          case 0: // com.klarfinance.app.core.location.LocationCaptureWorker_AssistedFactory 
+          return (T) new LocationCaptureWorker_AssistedFactory() {
+            @Override
+            public LocationCaptureWorker create(Context context, WorkerParameters params) {
+              return new LocationCaptureWorker(context, params, singletonCImpl.submitLocationPingUseCase(), singletonCImpl.logLocationFailureUseCase(), singletonCImpl.locationSchedulerProvider.get());
+            }
+          };
 
-          case 1: // com.klarfinance.app.data.remote.AuthApi 
-          return (T) NetworkModule_ProvideAuthApiFactory.provideAuthApi(singletonCImpl.provideRetrofitProvider.get());
+          case 1: // com.klarfinance.app.data.repository.LocationTrackingRepositoryImpl 
+          return (T) new LocationTrackingRepositoryImpl(singletonCImpl.apiServiceProvider.get());
 
-          case 2: // retrofit2.Retrofit 
-          return (T) NetworkModule_ProvideRetrofitFactory.provideRetrofit(singletonCImpl.provideOkHttpClientProvider.get(), singletonCImpl.provideJsonProvider.get());
+          case 2: // com.klarfinance.app.core.network.ApiService 
+          return (T) new ApiService(singletonCImpl.provideOkHttpClientProvider.get(), singletonCImpl.provideJsonProvider.get());
 
           case 3: // okhttp3.OkHttpClient 
-          return (T) NetworkModule_ProvideOkHttpClientFactory.provideOkHttpClient();
+          return (T) NetworkModule_ProvideOkHttpClientFactory.provideOkHttpClient(new HmacInterceptor(), singletonCImpl.authInterceptor());
 
-          case 4: // kotlinx.serialization.json.Json 
+          case 4: // com.klarfinance.app.core.session.SessionManager 
+          return (T) new SessionManager();
+
+          case 5: // kotlinx.serialization.json.Json 
           return (T) NetworkModule_ProvideJsonFactory.provideJson();
+
+          case 6: // com.klarfinance.app.core.location.LocationScheduler 
+          return (T) new LocationScheduler(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 7: // com.klarfinance.app.data.repository.AuthRepositoryImpl 
+          return (T) new AuthRepositoryImpl(singletonCImpl.apiServiceProvider.get(), singletonCImpl.sessionManagerProvider.get(), singletonCImpl.secureTokenStoreProvider.get());
+
+          case 8: // com.klarfinance.app.core.session.SecureTokenStore 
+          return (T) new SecureTokenStore(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 9: // com.klarfinance.app.data.repository.LoanRepositoryImpl 
+          return (T) new LoanRepositoryImpl(singletonCImpl.apiServiceProvider.get());
+
+          case 10: // com.klarfinance.app.core.notification.FcmEventBus 
+          return (T) new FcmEventBus();
+
+          case 11: // com.klarfinance.app.data.repository.VerifiedPhoneRepositoryImpl 
+          return (T) new VerifiedPhoneRepositoryImpl(singletonCImpl.verifiedPhoneDao());
+
+          case 12: // com.klarfinance.app.data.local.KlarFinanceDatabase 
+          return (T) DatabaseModule_ProvideDatabaseFactory.provideDatabase(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 13: // com.klarfinance.app.data.repository.QrisRepositoryImpl 
+          return (T) new QrisRepositoryImpl(singletonCImpl.apiServiceProvider.get());
+
+          case 14: // com.klarfinance.app.data.repository.ReferralRepositoryImpl 
+          return (T) new ReferralRepositoryImpl(singletonCImpl.apiServiceProvider.get());
+
+          case 15: // com.klarfinance.app.data.repository.LocationRepositoryImpl 
+          return (T) new LocationRepositoryImpl(singletonCImpl.apiServiceProvider.get());
 
           default: throw new AssertionError(id);
         }

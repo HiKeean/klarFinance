@@ -1,0 +1,223 @@
+<main class="detail-page">
+  @if (loading()) {
+    <p class="state-message">Memuat detail…</p>
+  } @else if (errorMessage()) {
+    <p class="state-message error">{{ errorMessage() }}</p>
+  } @else if (detail(); as d) {
+    <div class="page-head">
+      <button type="button" class="back-button" (click)="goBack()">← Approval{{ isBm() ? ' (BM)' : '' }}</button>
+      @if (d.applicationCode) { <span class="app-code-tag">App ID: {{ d.applicationCode }}</span> }
+    </div>
+    <p class="breadcrumb">Dashboard &gt; Approval{{ isBm() ? ' (BM)' : '' }} &gt; Detail</p>
+
+    <nav class="tabs">
+      <span class="tab active">Summary</span>
+    </nav>
+
+    <section class="card">
+      <h2 class="card-title">Informasi Konsumen</h2>
+      <div class="info-grid">
+        <div><span class="label">Konsumen</span><span class="value">{{ d.customerName || '-' }}</span></div>
+        <div><span class="label">Cabang</span><span class="value">{{ d.branchName || '-' }}</span></div>
+        <div><span class="label">Alamat</span><span class="value">{{ d.customerAddress || '-' }}</span></div>
+        <div><span class="label">Province</span><span class="value">{{ d.provinceName || '-' }}</span></div>
+        <div><span class="label">Regency</span><span class="value">{{ d.regencyName || '-' }}</span></div>
+        <div><span class="label">District</span><span class="value">{{ d.districtName || '-' }}</span></div>
+        <div><span class="label">Village</span><span class="value">{{ d.villageName || '-' }}</span></div>
+      </div>
+
+      @if (photoError()) {
+        <p class="state-message error">{{ photoError() }}</p>
+      }
+      <div class="photo-grid">
+        <div class="photo-item">
+          <span class="label">Foto KTP</span>
+          @if (!d.hasFotoKtp) {
+            <span class="value muted">Belum diupload</span>
+          } @else if (ktpPhotoUrl(); as url) {
+            <img class="customer-photo" [src]="url" alt="Foto KTP nasabah" />
+          } @else {
+            <span class="value muted">Memuat foto…</span>
+          }
+        </div>
+        <div class="photo-item">
+          <span class="label">Foto Selfie (KYC)</span>
+          @if (!d.hasFotoKyc) {
+            <span class="value muted">Belum diupload</span>
+          } @else if (kycPhotoUrl(); as url) {
+            <img class="customer-photo" [src]="url" alt="Foto selfie nasabah" />
+          } @else {
+            <span class="value muted">Memuat foto…</span>
+          }
+        </div>
+      </div>
+    </section>
+
+    <div class="two-col">
+      <div class="col-main">
+        <section class="card">
+          <h2 class="card-title">Vida Result</h2>
+          @if (d.vida; as vida) {
+            <div class="detail-list">
+              <div><span class="label">KYC Status</span><span class="badge" [class.badge-good]="vida.kycStatus === 'APPROVED'" [class.badge-bad]="vida.kycStatus === 'REJECTED'">{{ vida.kycStatus || '-' }}</span></div>
+              <div><span class="label">KYC Face Score</span><span class="value">{{ vida.kycFaceScore || '-' }}</span></div>
+              <div><span class="label">KYC Vendor Trx ID</span><span class="value muted">{{ vida.kycVendorTrxId || '-' }}</span></div>
+              <div><span class="label">Income Verif Status</span><span class="value">{{ vida.incomeVerificationStatus || '-' }}</span></div>
+              <div><span class="label">Income Verif Source</span><span class="value">{{ vida.incomeVerificationSource || '-' }}</span></div>
+              <div><span class="label">Income Is Employed</span><span class="value">{{ vida.incomeIsEmployed || '-' }}</span></div>
+              <div><span class="label">Income Verified Monthly</span><span class="value">{{ vida.incomeVerifiedMonthly ? ('Rp ' + (+vida.incomeVerifiedMonthly).toLocaleString('id-ID')) : '-' }}</span></div>
+              <div><span class="label">Created At</span><span class="value">{{ vida.createdAt | date: 'd MMM y, HH:mm' }}</span></div>
+            </div>
+          } @else {
+            <p class="state-message">Data Vida belum tersedia.</p>
+          }
+        </section>
+
+        <section class="card" [class.theme-negative]="isNegative()" [class.theme-positive]="!isNegative()">
+          <h2 class="card-title">Engine Scoring</h2>
+          <div class="engine-scoring">
+            <div class="score-circle">
+              <span class="score-number">{{ d.engineScore ?? '-' }}</span>
+              <span class="score-label">SCORE</span>
+            </div>
+            <div class="engine-facts">
+              <div class="fact-row">
+                <div><span class="label">Risk Category</span><span class="value strong">{{ d.engineRiskCategory || '-' }}</span></div>
+                <div><span class="label">Recommendation</span><span class="value strong">{{ d.engineRecommendation || '-' }}</span></div>
+              </div>
+              <div class="key-factors">
+                <span class="label">Key Factors</span>
+                <div class="chips">
+                  @for (factor of d.engineKeyFactors; track factor) {
+                    <span class="chip">{{ factor }}</span>
+                  }
+                </div>
+              </div>
+              <div>
+                <span class="label">Plafond Recommendation</span>
+                <span class="value strong">Rp. {{ (d.engineSuggestionLimit || 0).toLocaleString('id-ID') }}</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-side">
+        <section class="card">
+          <h3 class="card-title small">Pefindo Inquiry</h3>
+          @if (d.pefindo; as pefindo) {
+            <p class="label">Score</p>
+            <div class="pefindo-score">
+              <span class="score-number small">{{ pefindo.score || '-' }}</span>
+              <span class="risk-tag">{{ pefindo.riskLabel }}</span>
+            </div>
+            <div class="detail-list compact">
+              <div><span class="label">Created At</span><span class="value">{{ pefindo.createdAt | date: 'd MMM y' }}</span></div>
+            </div>
+          } @else {
+            <p class="state-message">Belum ada inquiry Pefindo.</p>
+          }
+        </section>
+
+        <section class="card">
+          <h3 class="card-title small"><span class="icon">📊</span> Analisa Aplikasi</h3>
+          <div class="stat-grid">
+            <div class="stat-tile positive">
+              <span class="stat-number">{{ d.positiveAppsCount }}</span>
+              <span class="stat-label">Positive Apps</span>
+            </div>
+            <div class="stat-tile negative">
+              <span class="stat-number">{{ d.pinjolAppsCount }}</span>
+              <span class="stat-label">Pinjol Apps</span>
+            </div>
+            <div class="stat-tile neutral">
+              <span class="stat-number">{{ d.judolAppsCount }}</span>
+              <span class="stat-label">Judol Apps</span>
+            </div>
+            <div class="stat-tile info">
+              <span class="stat-number">{{ d.bankingAppsCount }}</span>
+              <span class="stat-label">Banking Apps</span>
+            </div>
+          </div>
+        </section>
+
+        @if (canDecideStatus()) {
+          @if (isBm() && d.canReview === false) {
+            <section class="card locked-card">
+              <h3 class="card-title small">🔒 Sedang Dikunci</h3>
+              <p class="state-message">
+                Aplikasi ini sedang direview oleh <strong>{{ d.lockedByName || d.lockedByIdentity }}</strong>.
+                Anda belum bisa memproses aplikasi ini sekarang.
+              </p>
+            </section>
+          } @else if (!formOpen()) {
+            <div class="decision-buttons">
+              <button type="button" class="approve-button" (click)="openForm('APPROVE')">Proses Approval</button>
+              <button type="button" class="reject-button" (click)="openForm('REJECT')">Reject</button>
+            </div>
+          } @else {
+            <section class="card">
+              <h3 class="card-title small">{{ actionType() === 'APPROVE' ? (isBm() ? 'Plafond Final' : 'Plafond Approval') : 'Alasan Reject' }}</h3>
+
+              @if (actionType() === 'APPROVE') {
+                <label class="field-label">Plafond Adjustment</label>
+                <p class="slider-value">Rp {{ limitInput().toLocaleString('id-ID') }}</p>
+                <input
+                  type="range"
+                  [min]="isBm() ? 0 : (d.checkerLimitMin || 0)"
+                  [max]="isBm() ? bmMaxLimit() : (d.checkerLimitMax || (d.engineSuggestionLimit || 0))"
+                  step="10000"
+                  [ngModel]="limitInput()"
+                  (ngModelChange)="limitInput.set($event)" />
+                <div class="slider-range">
+                  <span>Rp {{ (isBm() ? 0 : (d.checkerLimitMin || 0)).toLocaleString('id-ID') }}</span>
+                  <span>Rp {{ (isBm() ? bmMaxLimit() : (d.checkerLimitMax || d.engineSuggestionLimit || 0)).toLocaleString('id-ID') }}</span>
+                </div>
+                @if (isBm()) {
+                  <p class="action-hint">Maks. Rp {{ bmMaxLimit().toLocaleString('id-ID') }} (plafond Checker + Rp 2.000.000). Turun bebas.</p>
+                }
+              }
+
+              <label class="field-label">Catatan {{ actionType() === 'REJECT' ? '(wajib)' : (isBm() ? '(wajib kalau beda dari plafond Checker)' : 'Approval') }}</label>
+              <textarea rows="3" placeholder="Masukkan alasan atau catatan…" [ngModel]="reasonInput()" (ngModelChange)="reasonInput.set($event)"></textarea>
+
+              @if (actionError()) { <p class="action-error">{{ actionError() }}</p> }
+
+              <div class="decision-buttons">
+                <button type="button" class="approve-button" [disabled]="submitting()" (click)="confirm()">
+                  {{ submitting() ? 'Menyimpan…' : (actionType() === 'APPROVE' ? 'Approve' : 'Reject') }}
+                </button>
+                <button type="button" class="cancel-button" [disabled]="submitting()" (click)="cancelForm()">Batal</button>
+              </div>
+            </section>
+          }
+        } @else {
+          <section class="card" [class.theme-negative]="d.status === 'REJECTED'" [class.theme-positive]="d.status === 'APPROVED'">
+            <h3 class="card-title small">Keputusan</h3>
+            <div class="detail-list compact">
+              <div>
+                <span class="label">Status</span>
+                <span class="badge" [class.badge-good]="d.status === 'APPROVED'" [class.badge-bad]="d.status === 'REJECTED'">{{ d.status === 'APPROVED' ? 'DISETUJUI' : (d.status === 'REJECTED' ? 'DITOLAK' : d.status) }}</span>
+              </div>
+              @if (d.status === 'APPROVED') {
+                <div><span class="label">Plafond Final</span><span class="value strong">Rp {{ (d.finalApprovedLimit || 0).toLocaleString('id-ID') }}</span></div>
+              }
+              @if (d.bmReason) {
+                <div><span class="label">Alasan BM</span><span class="value">{{ d.bmReason }}</span></div>
+              }
+              @if (d.checkerRecommendation) {
+                <div><span class="label">Rekomendasi Checker</span><span class="value">{{ d.checkerRecommendation === 'APPROVE' ? 'Approve' : 'Reject' }} @if (d.checkerReason) { — {{ d.checkerReason }} }</span></div>
+              }
+              @if (d.checkerPurposeLimit != null) {
+                <div><span class="label">Plafond Usulan Checker</span><span class="value strong">Rp {{ d.checkerPurposeLimit.toLocaleString('id-ID') }}</span></div>
+              }
+              @if (d.engineSuggestionLimit != null) {
+                <div><span class="label">Plafond Rekomendasi Engine</span><span class="value">Rp {{ d.engineSuggestionLimit.toLocaleString('id-ID') }}</span></div>
+              }
+            </div>
+          </section>
+        }
+      </div>
+    </div>
+  }
+</main>

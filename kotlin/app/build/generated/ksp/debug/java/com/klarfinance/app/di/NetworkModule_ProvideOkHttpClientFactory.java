@@ -1,11 +1,14 @@
 package com.klarfinance.app.di;
 
+import com.klarfinance.app.core.network.AuthInterceptor;
+import com.klarfinance.app.core.network.HmacInterceptor;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
+import javax.inject.Provider;
 import okhttp3.OkHttpClient;
 
 @ScopeMetadata("javax.inject.Singleton")
@@ -24,20 +27,29 @@ import okhttp3.OkHttpClient;
     "deprecation"
 })
 public final class NetworkModule_ProvideOkHttpClientFactory implements Factory<OkHttpClient> {
+  private final Provider<HmacInterceptor> hmacInterceptorProvider;
+
+  private final Provider<AuthInterceptor> authInterceptorProvider;
+
+  public NetworkModule_ProvideOkHttpClientFactory(Provider<HmacInterceptor> hmacInterceptorProvider,
+      Provider<AuthInterceptor> authInterceptorProvider) {
+    this.hmacInterceptorProvider = hmacInterceptorProvider;
+    this.authInterceptorProvider = authInterceptorProvider;
+  }
+
   @Override
   public OkHttpClient get() {
-    return provideOkHttpClient();
+    return provideOkHttpClient(hmacInterceptorProvider.get(), authInterceptorProvider.get());
   }
 
-  public static NetworkModule_ProvideOkHttpClientFactory create() {
-    return InstanceHolder.INSTANCE;
+  public static NetworkModule_ProvideOkHttpClientFactory create(
+      Provider<HmacInterceptor> hmacInterceptorProvider,
+      Provider<AuthInterceptor> authInterceptorProvider) {
+    return new NetworkModule_ProvideOkHttpClientFactory(hmacInterceptorProvider, authInterceptorProvider);
   }
 
-  public static OkHttpClient provideOkHttpClient() {
-    return Preconditions.checkNotNullFromProvides(NetworkModule.INSTANCE.provideOkHttpClient());
-  }
-
-  private static final class InstanceHolder {
-    private static final NetworkModule_ProvideOkHttpClientFactory INSTANCE = new NetworkModule_ProvideOkHttpClientFactory();
+  public static OkHttpClient provideOkHttpClient(HmacInterceptor hmacInterceptor,
+      AuthInterceptor authInterceptor) {
+    return Preconditions.checkNotNullFromProvides(NetworkModule.INSTANCE.provideOkHttpClient(hmacInterceptor, authInterceptor));
   }
 }
