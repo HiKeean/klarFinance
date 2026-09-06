@@ -1,0 +1,118 @@
+<main class="detail-page">
+  @if (loading()) {
+    <p class="state-message">Memuat detail pengajuan…</p>
+  } @else if (errorMessage()) {
+    <p class="state-message error">{{ errorMessage() }}</p>
+  } @else if (detail(); as d) {
+    <div class="page-head">
+      <button type="button" class="back-button" (click)="goBack()">‹ Kembali</button>
+      <span class="type-tag">Pinjaman &gt;30% Plafond</span>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title">Informasi Nasabah</h2>
+      <div class="info-grid">
+        <div><span class="label">Nama</span><span class="value strong">{{ d.customerName || '-' }}</span></div>
+        <div><span class="label">Identitas</span><span class="value">{{ d.customerIdentity }}</span></div>
+        <div><span class="label">Alamat</span><span class="value">{{ d.customerAddress || '-' }}</span></div>
+        <div><span class="label">Wilayah</span><span class="value">{{ d.regencyName || '-' }}, {{ d.provinceName || '-' }}</span></div>
+        <div><span class="label">Diajukan</span><span class="value">{{ d.createdAt | date: 'd MMM y, HH:mm' }}</span></div>
+        <div><span class="label">Status</span><span class="badge">{{ d.status }}</span></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="card">
+          <h2 class="card-title">Pengajuan Pinjaman</h2>
+          <div class="detail-list">
+            <div><span class="label">Nominal Diajukan</span><span class="value strong">Rp {{ d.requestedAmount.toLocaleString('id-ID') }}</span></div>
+            <div><span class="label">Tenor</span><span class="value">{{ d.tenorMonths }} bulan</span></div>
+            <div><span class="label">Rekening Tujuan</span><span class="value">{{ d.bankCode || '-' }} - {{ d.bankAccountNumber || '-' }}</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Utilisasi Plafond</h2>
+          <div class="stat-grid">
+            <div class="stat-tile neutral">
+              <span class="stat-number">Rp {{ d.usedLimitSnapshot.toLocaleString('id-ID') }}</span>
+              <span class="stat-label">Pinjaman Berjalan</span>
+            </div>
+            <div class="stat-tile info">
+              <span class="stat-number">Rp {{ d.totalLimitSnapshot.toLocaleString('id-ID') }}</span>
+              <span class="stat-label">Total Plafond</span>
+            </div>
+          </div>
+          <p class="utilization-note">
+            Setelah pengajuan ini cair, utilisasi plafond nasabah menjadi
+            <strong>{{ d.utilizationPercent }}%</strong> - melebihi ambang 30% sehingga wajib direview ulang BM.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2 class="card-title">Review Ulang Risiko</h2>
+          <div class="pefindo-score">
+            <span class="value strong">Score {{ d.pefindoScore || '-' }}</span>
+            <span class="risk-tag">{{ d.pefindoRiskLabel || '-' }}</span>
+          </div>
+          <div class="detail-list compact">
+            <div><span class="label">KOL Terbaru</span><span class="value">{{ d.pefindoColStatus != null ? 'KOL ' + d.pefindoColStatus : '-' }}</span></div>
+            <div><span class="label">Aplikasi Pinjol Terdeteksi</span><span class="value">{{ d.pinjolAppsCount }} aplikasi (hasil scan ulang saat pengajuan)</span></div>
+            <div><span class="label">Aplikasi Bank Terdeteksi</span><span class="value">{{ d.bankingAppsCount }} aplikasi</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        @if (d.lockedByIdentity && !d.canReview) {
+          <div class="card locked-card">
+            <h2 class="card-title">🔒 Sedang Dikunci</h2>
+            <p class="value">Pengajuan ini sedang direview oleh <strong>{{ d.lockedByName || d.lockedByIdentity }}</strong>.</p>
+          </div>
+        } @else if (canDecide()) {
+          <div class="card">
+            <h2 class="card-title small">Keputusan BM</h2>
+            @if (!formOpen()) {
+              <div class="decision-buttons">
+                <button type="button" class="approve-button" (click)="openForm('APPROVE')">Setujui Pengajuan</button>
+                <button type="button" class="reject-button" (click)="openForm('REJECT')">Tolak Pengajuan</button>
+              </div>
+            } @else {
+              <p class="value">
+                {{ actionType() === 'APPROVE'
+                  ? 'Pengajuan akan disetujui persis sesuai nominal Rp ' + d.requestedAmount.toLocaleString('id-ID') + '.'
+                  : 'Pengajuan akan ditolak.' }}
+              </p>
+              <label class="field-label" for="reason">Alasan {{ actionType() === 'REJECT' ? '(wajib)' : '(opsional)' }}</label>
+              <textarea id="reason" rows="3" [ngModel]="reasonInput()" (ngModelChange)="reasonInput.set($event)"></textarea>
+              @if (actionError()) {
+                <p class="action-error">{{ actionError() }}</p>
+              }
+              <div class="decision-buttons">
+                @if (actionType() === 'APPROVE') {
+                  <button type="button" class="approve-button" [disabled]="submitting()" (click)="confirm()">
+                    {{ submitting() ? 'Memproses…' : 'Konfirmasi Setujui' }}
+                  </button>
+                } @else {
+                  <button type="button" class="reject-button" [disabled]="submitting()" (click)="confirm()">
+                    {{ submitting() ? 'Memproses…' : 'Konfirmasi Tolak' }}
+                  </button>
+                }
+                <button type="button" class="cancel-button" [disabled]="submitting()" (click)="cancelForm()">Batal</button>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="card">
+            <h2 class="card-title small">Status</h2>
+            <p class="value">Pengajuan ini sudah diputuskan ({{ d.status }}).</p>
+            @if (d.bmReason) {
+              <p class="value muted">Alasan: {{ d.bmReason }}</p>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+</main>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generator QRIS KlarFinance</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f6f8fc;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #18344a;
+      padding: 20px;
+    }
+    .card {
+      width: 100%;
+      max-width: 380px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(24, 52, 74, 0.08);
+      padding: 28px 26px;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0 0 4px;
+      color: #2f6d64;
+    }
+    p.subtitle {
+      margin: 0 0 24px;
+      font-size: 13px;
+      color: #7b8b99;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #53636a;
+      margin-bottom: 6px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #dce4e7;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      margin-bottom: 16px;
+    }
+    input[type="text"]:focus { border-color: #2f6d64; }
+    details {
+      margin-bottom: 16px;
+    }
+    details summary {
+      font-size: 12px;
+      color: #8b979c;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 999px;
+      background: #2f6d64;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:disabled { background: #b7c2c6; cursor: wait; }
+    #error {
+      margin-top: 12px;
+      color: #c64444;
+      font-size: 13px;
+      display: none;
+    }
+    #result {
+      margin-top: 24px;
+      text-align: center;
+      display: none;
+    }
+    #qrcode {
+      display: inline-block;
+      padding: 14px;
+      background: #fff;
+      border: 1px solid #eef1f4;
+      border-radius: 12px;
+    }
+    .merchant-name {
+      margin: 14px 0 4px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .merchant-code {
+      font-family: ui-monospace, monospace;
+      font-size: 16px;
+      letter-spacing: 2px;
+      color: #087f85;
+      background: #eaf7f7;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 8px;
+    }
+    .hint {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #8b979c;
+    }
+    .new-button {
+      margin-top: 18px;
+      background: #eef1f4;
+      color: #53636a;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Generator QRIS</h1>
+    <p class="subtitle">Buat QR code pembayaran untuk toko Anda — tunjukkan/cetak QR ini di kasir.</p>
+
+    <form id="generateForm">
+      <label for="storeName">Nama Toko</label>
+      <input type="text" id="storeName" placeholder="mis. Warung Bu Sari" required />
+
+      <details>
+        <summary>Pengaturan lanjutan</summary>
+        <label for="backendUrl">Backend URL</label>
+        <input type="text" id="backendUrl" placeholder="http://localhost:8080" />
+      </details>
+
+      <button type="submit" id="submitButton">Generate QRIS</button>
+      <p id="error"></p>
+    </form>
+
+    <div id="result">
+      <div id="qrcode"></div>
+      <p class="merchant-name" id="resultName"></p>
+      <p><span class="merchant-code" id="resultCode"></span></p>
+      <p class="hint">Kalau QR sulit dipindai, kode di atas bisa dipakai sebagai cadangan.</p>
+      <button type="button" class="new-button" id="newButton">Buat QR Lain</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const BACKEND_URL_KEY = 'klarfinance_qris_backend_url';
+    const DEFAULT_BACKEND_URL = 'http://localhost:8080';
+
+    const backendUrlInput = document.getElementById('backendUrl');
+    backendUrlInput.value = localStorage.getItem(BACKEND_URL_KEY) || DEFAULT_BACKEND_URL;
+
+    const form = document.getElementById('generateForm');
+    const submitButton = document.getElementById('submitButton');
+    const errorEl = document.getElementById('error');
+    const resultEl = document.getElementById('result');
+    const qrcodeEl = document.getElementById('qrcode');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      errorEl.style.display = 'none';
+
+      const storeName = document.getElementById('storeName').value.trim();
+      const backendUrl = (backendUrlInput.value.trim() || DEFAULT_BACKEND_URL).replace(/\/$/, '');
+      localStorage.setItem(BACKEND_URL_KEY, backendUrl);
+
+      if (!storeName) return;
+
+      submitButton.disabled = true;
+      submitButton.textContent = 'Memproses…';
+
+      try {
+        const response = await fetch(`${backendUrl}/api/v1/qris/merchants`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: storeName }),
+        });
+        const body = await response.json();
+        if (!response.ok || !body.success) {
+          throw new Error(body.message || 'Gagal membuat QRIS');
+        }
+
+        renderResult(body.data.name, body.data.merchantCode);
+      } catch (err) {
+        errorEl.textContent = err.message || 'Gagal terhubung ke server. Cek Backend URL di Pengaturan lanjutan.';
+        errorEl.style.display = 'block';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Generate QRIS';
+      }
+    });
+
+    function renderResult(name, merchantCode) {
+      form.style.display = 'none';
+      resultEl.style.display = 'block';
+      document.getElementById('resultName').textContent = name;
+      document.getElementById('resultCode').textContent = merchantCode;
+
+      qrcodeEl.innerHTML = '';
+      // eslint-disable-next-line no-undef
+      new QRCode(qrcodeEl, {
+        text: merchantCode,
+        width: 220,
+        height: 220,
+        colorDark: '#18344a',
+        colorLight: '#ffffff',
+      });
+    }
+
+    document.getElementById('newButton').addEventListener('click', () => {
+      resultEl.style.display = 'none';
+      form.style.display = 'block';
+      document.getElementById('storeName').value = '';
+    });
+  </script>
+</body>
+</html>

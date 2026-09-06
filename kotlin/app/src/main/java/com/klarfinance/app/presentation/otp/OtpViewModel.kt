@@ -4,13 +4,18 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.klarfinance.app.core.navigation.Screen
+import com.klarfinance.app.domain.repository.VerifiedPhoneRepository
+import com.klarfinance.app.domain.usecase.CheckPhoneRegisteredUseCase
 import com.klarfinance.app.domain.usecase.RequestOtpUseCase
 import com.klarfinance.app.domain.usecase.VerifyOtpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -22,6 +27,8 @@ private const val RESEND_COOLDOWN_SECONDS = 60
 class OtpViewModel @Inject constructor(
     private val verifyOtpUseCase: VerifyOtpUseCase,
     private val requestOtpUseCase: RequestOtpUseCase,
+    private val verifiedPhoneRepository: VerifiedPhoneRepository,
+    private val checkPhoneRegisteredUseCase: CheckPhoneRegisteredUseCase,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -29,6 +36,14 @@ class OtpViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(OtpUiState(phone = phone))
     val uiState: StateFlow<OtpUiState> = _uiState.asStateFlow()
+
+    /** Phone verified AND not registered yet - go to registration. */
+    private val _otpVerified = MutableSharedFlow<String>()
+    val otpVerified: SharedFlow<String> = _otpVerified.asSharedFlow()
+
+    /** Phone verified AND already has an account - go straight to password entry. */
+    private val _needsPasswordLogin = MutableSharedFlow<String>()
+    val needsPasswordLogin: SharedFlow<String> = _needsPasswordLogin.asSharedFlow()
 
     private var countdownJob: Job? = null
 
@@ -48,7 +63,10 @@ class OtpViewModel @Inject constructor(
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
             verifyOtpUseCase(state.phone, state.otp)
                 .onSuccess {
+                    verifiedPhoneRepository.markVerified(state.phone)
                     _uiState.update { it.copy(isLoading = false, isVerified = true) }
+                    val registered = checkPhoneRegisteredUseCase(state.phone).getOrDefault(false)
+                    if (registered) _needsPasswordLogin.emit(state.phone) else _otpVerified.emit(state.phone)
                 }
                 .onFailure { throwable ->
                     _uiState.update {

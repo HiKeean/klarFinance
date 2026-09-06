@@ -1,0 +1,66 @@
+<main class="dashboard">
+  <section class="tile-row">
+    @for (item of (menuList$ | async) ?? []; track item.url) {
+      <a class="tile" [routerLink]="item.url">
+        <span class="tile-icon"><mat-icon>{{ item.logo }}</mat-icon></span>
+        <span class="tile-label">{{ item.name }}</span>
+      </a>
+    }
+  </section>
+
+  @if (isBm()) {
+    <h2 class="section-title">Dashboard Overview</h2>
+
+    <section class="stat-grid">
+      <div class="stat-card">
+        <p class="stat-label">Pinjaman di Wilayah Anda</p>
+        <p class="stat-value accent">{{ loansInRegion() ?? '…' }}</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Peminjam Aktif</p>
+        <p class="stat-value">{{ activeBorrowers() ?? '…' }}</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Peminjam Menunggak</p>
+        <p class="stat-value warn">{{ delinquentBorrowers() ?? '…' }}</p>
+      </div>
+      <div class="stat-card danger">
+        <p class="stat-label">Needs to Review</p>
+        <p class="stat-value">{{ needsToReview() ?? '…' }}</p>
+      </div>
+    </section>
+
+    <section class="npl-card">
+      <div class="npl-info">
+        <p class="stat-label">NPL Wilayah Anda</p>
+        <p class="stat-value">{{ nplPercent() ?? '…' }}%</p>
+        <p class="npl-penalty">Total denda keterlambatan: {{ totalOutstandingPenalty() ?? '…' }}</p>
+      </div>
+      @if (nplSeverityLabel()) {
+        <span [class]="nplSeverityClass()">{{ nplSeverityLabel() }}</span>
+      }
+    </section>
+
+    <section class="chart-card">
+      <div class="chart-legend">
+        <h3>Loan Status Distribution</h3>
+        @if (loanStatus().length) {
+          <ul>
+            @for (slice of loanStatus(); track slice.label) {
+              <li>
+                <span class="dot" [style.background]="sliceColor(slice.label)"></span>
+                <span class="legend-label">{{ slice.label }}</span>
+                <span class="legend-percent">{{ slice.percent }}%</span>
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="empty-distribution">Belum ada pinjaman aktif di wilayah Anda.</p>
+        }
+      </div>
+      <div class="donut" [style.background]="donutBackground()">
+        <div class="donut-hole"><strong>{{ loanStatus().length ? '100%' : '—' }}</strong><span>Total</span></div>
+      </div>
+    </section>
+  }
+</main>

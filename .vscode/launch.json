@@ -1,0 +1,54 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open login.html",
+            "file": "/Users/hizkiaalb/Documents/kia/klarFinance/webadmin/src/app/features/auth/pages/login/login.html"
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Launch KlarFinance Backend",
+            "mainClass": "com.api.authssohmac.KlarFinanceApplication",
+            "projectName": "klarfinance",
+            "envFile": "${workspaceFolder}/backend/klarfinance/.env.dev"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch WebAdmin (ng serve)",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "start"
+            ],
+            "cwd": "${workspaceFolder}/webadmin",
+            "console": "integratedTerminal",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open WebAdmin in Chrome",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/webadmin"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-KlarFinanceApplication<api-auth-hizkia>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.api.authssohmac.KlarFinanceApplication",
+            "projectName": "api-auth-hizkia",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

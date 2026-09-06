@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -22,6 +23,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,9 +37,18 @@ import com.klarfinance.app.presentation.components.OtpInputField
 @Composable
 fun OtpVerificationScreen(
     onBackClick: () -> Unit,
+    onVerified: (phone: String) -> Unit,
+    onNeedsPasswordLogin: (phone: String) -> Unit,
     viewModel: OtpViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.otpVerified.collect { phone -> onVerified(phone) }
+    }
+    LaunchedEffect(Unit) {
+        viewModel.needsPasswordLogin.collect { phone -> onNeedsPasswordLogin(phone) }
+    }
 
     OtpVerificationContent(
         uiState = uiState,
@@ -63,6 +74,7 @@ private fun OtpVerificationContent(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .statusBarsPadding()
                     .padding(horizontal = 4.dp, vertical = 4.dp),
             ) {
                 IconButton(onClick = onBackClick) {

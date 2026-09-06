@@ -1,0 +1,37 @@
+<main class="inquiry-page">
+  <h1 class="page-title">Inquiry</h1>
+  <p class="page-subtitle">Cari aplikasi berdasarkan App ID, nama, atau nomor HP nasabah.</p>
+
+  <app-search-input placeholder="Cari App ID / nama / no. HP…" (search)="onSearch($event)" />
+
+  @if (loading()) {
+    <p class="state-message">Mencari…</p>
+  } @else if (errorMessage()) {
+    <p class="state-message error">{{ errorMessage() }}</p>
+  } @else if (!hasSearched()) {
+    <p class="state-message">Ketik untuk mulai mencari.</p>
+  } @else if (!results().length) {
+    <p class="state-message">Gak ada aplikasi yang cocok.</p>
+  } @else {
+    <table class="inquiry-table">
+      <thead>
+        <tr>
+          <th>App ID</th>
+          <th>Nama</th>
+          <th>No. HP</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of results(); track item.id) {
+          <tr (click)="openDetail(item)">
+            <td class="app-code">{{ item.applicationCode || '-' }}</td>
+            <td>{{ item.customerName || '-' }}</td>
+            <td>{{ item.customerIdentity }}</td>
+            <td><span class="status-badge" [attr.data-status]="item.status">{{ statusLabel(item.status) }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</main>

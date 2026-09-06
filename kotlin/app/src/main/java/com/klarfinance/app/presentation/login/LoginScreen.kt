@@ -47,12 +47,20 @@ private val availableCountryCodes = listOf("+62", "+65", "+60", "+1")
 @Composable
 fun LoginScreen(
     onOtpRequested: (phone: String) -> Unit,
+    onAlreadyVerified: (phone: String) -> Unit,
+    onNeedsPasswordLogin: (phone: String) -> Unit,
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.otpRequested.collect { phone -> onOtpRequested(phone) }
+    }
+    LaunchedEffect(Unit) {
+        viewModel.alreadyVerified.collect { phone -> onAlreadyVerified(phone) }
+    }
+    LaunchedEffect(Unit) {
+        viewModel.needsPasswordLogin.collect { phone -> onNeedsPasswordLogin(phone) }
     }
 
     LoginContent(

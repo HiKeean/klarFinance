@@ -1,6 +1,45 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.any" android:required="false" />
+    <!-- Android 13+ (API 33) requires runtime request for this, see MainActivity - manifest
+         declaration alone doesn't grant it. -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Location routine tracking (see core/location/) - strictly opt-in via a consent toggle
+         in Account, never requested/used unless the nasabah turns it on. ACCESS_BACKGROUND_LOCATION
+         is what lets LocationCaptureWorker (WorkManager) get a fix while the app isn't open - on
+         Android 11+ (API 30+) this can't be granted from the same runtime dialog as fine/coarse,
+         see LocationPermissionHelper. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
+    <!-- Device app scoring (lihat core/scan/InstalledAppsScanner.kt) - Android 11+ (API 30+)
+         menyembunyikan hasil getPackageInfo untuk package lain kecuali dideklarasikan di sini
+         (atau lewat QUERY_ALL_PACKAGES, yang sengaja dihindari - kena scrutiny lebih ketat di
+         Play Store review). Daftar package BEST-EFFORT, belum diverifikasi ke Play Store asli -
+         lihat komentar di InstalledAppsScanner.kt. -->
+    <queries>
+        <package android:name="com.kredivo.app" />
+        <package android:name="com.akulaku.app" />
+        <package android:name="com.adakami.id" />
+        <package android:name="com.kredit.pintar" />
+        <package android:name="com.julofinance.juloapp" />
+        <package android:name="cash.easy.id" />
+        <package android:name="com.indodana.app" />
+        <package android:name="com.rupiahcepat.app" />
+        <package android:name="com.pinjamango.app" />
+        <package android:name="com.maucash.app" />
+        <package android:name="id.uangme.app" />
+        <package android:name="com.bca.mobile" />
+        <package android:name="id.co.bri.brimo" />
+        <package android:name="id.co.bankmandiri.livin" />
+        <package android:name="src.com.bni" />
+        <package android:name="com.btpn.dc" />
+        <package android:name="com.bankpermata.mobile" />
+    </queries>
 
     <application
         android:name=".KlarFinanceApp"
@@ -21,6 +60,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".core.notification.KlarFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/approval_notification_channel_id" />
+
+        <!-- ML Kit Barcode Scanning (fitur Bayar QRIS, lihat presentation/qris/scan/) - triggers
+             model download saat install dari Play Store, bukan wajib tapi menghindari delay
+             download-on-first-use. -->
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="barcode" />
     </application>
 
 </manifest>

@@ -1,0 +1,36 @@
+<main class="login-page">
+  <section class="login-visual" aria-label="Klar Finance">
+    <div class="brand-mark">K</div><div><span class="brand-name">KlarFinance</span><span class="brand-caption">Checker &amp; BM</span></div>
+    <div class="visual-copy"><p class="kicker">Finance made clear</p><h1>Review dan approval<br />pinjaman lebih cepat.</h1><p class="visual-description">Satu ruang kerja untuk Checker dan Branch Manager memproses antrean pengajuan pinjaman.</p></div>
+  </section>
+  <section class="login-panel"><div class="login-card"><div class="mobile-brand"><span class="brand-mark">K</span><span>KlarFinance</span></div><p class="kicker">Selamat datang kembali</p>
+    <h2>Masuk ke akun kamu</h2>
+    <p class="subtitle">Gunakan identity dan password untuk melanjutkan ke dashboard.</p>
+    <form (ngSubmit)="submit()" #loginForm="ngForm">
+      <label for="identity">Identity</label>
+      <input id="identity" name="identity" type="text" [ngModel]="identity" (ngModelChange)="onIdentityChange($event)" placeholder="Identity : 20260101" required autocomplete="username" />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" [(ngModel)]="password" placeholder="Masukkan password" required autocomplete="current-password" />
+
+      @if (errorMessage()) { <p class="error-message" role="alert">{{ errorMessage() }}</p> }<button type="submit" [disabled]="loginForm.invalid || loading()">{{ loading() ? 'Memproses...' : 'Masuk' }}</button>
+      @if (showResetOffer() && !showResetForm()) {
+        <button type="button" class="secondary-button" (click)="openResetForm()">Lupa Password?</button>
+      }
+    </form>
+    @if (showResetForm()) {
+      <div class="reset-password-box">
+        <p class="reset-title">Reset Password</p>
+        <p class="reset-description">Masukkan identity kamu. Permintaan akan diteruskan ke admin untuk disetujui, lalu password baru dikirim lewat WhatsApp.</p>
+        <label for="resetIdentity">Identity</label>
+        <input id="resetIdentity" name="resetIdentity" type="text" [(ngModel)]="resetIdentity" placeholder="Identity : 20260101" />
+        @if (resetSuccessMessage()) { <p class="success-message">{{ resetSuccessMessage() }}</p> }
+        @if (resetErrorMessage()) { <p class="error-message" role="alert">{{ resetErrorMessage() }}</p> }
+        <div class="reset-actions">
+          <button type="button" (click)="submitResetRequest()" [disabled]="resetSubmitting() || !resetIdentity">{{ resetSubmitting() ? 'Mengirim...' : 'Kirim Permintaan' }}</button>
+          <button type="button" class="secondary-button" (click)="closeResetForm()">Batal</button>
+        </div>
+      </div>
+    }
+  </div><span class="copyright">© 2026 KlarFinance</span></section>
+</main>

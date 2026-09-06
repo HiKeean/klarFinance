@@ -1,0 +1,3 @@
+:host { display: block; min-height: 100vh; }
+.app-shell { min-height: 100vh; background: #f5f8fb; color: #18344a; }
+.page-content { min-height: calc(100vh - 76px); }
