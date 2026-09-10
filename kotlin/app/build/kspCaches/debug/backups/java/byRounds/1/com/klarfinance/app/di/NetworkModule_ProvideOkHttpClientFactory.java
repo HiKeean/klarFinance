@@ -1,5 +1,6 @@
 package com.klarfinance.app.di;
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor;
 import com.klarfinance.app.core.network.AuthInterceptor;
 import com.klarfinance.app.core.network.HmacInterceptor;
 import dagger.internal.DaggerGenerated;
@@ -31,25 +32,30 @@ public final class NetworkModule_ProvideOkHttpClientFactory implements Factory<O
 
   private final Provider<AuthInterceptor> authInterceptorProvider;
 
+  private final Provider<ChuckerInterceptor> chuckerInterceptorProvider;
+
   public NetworkModule_ProvideOkHttpClientFactory(Provider<HmacInterceptor> hmacInterceptorProvider,
-      Provider<AuthInterceptor> authInterceptorProvider) {
+      Provider<AuthInterceptor> authInterceptorProvider,
+      Provider<ChuckerInterceptor> chuckerInterceptorProvider) {
     this.hmacInterceptorProvider = hmacInterceptorProvider;
     this.authInterceptorProvider = authInterceptorProvider;
+    this.chuckerInterceptorProvider = chuckerInterceptorProvider;
   }
 
   @Override
   public OkHttpClient get() {
-    return provideOkHttpClient(hmacInterceptorProvider.get(), authInterceptorProvider.get());
+    return provideOkHttpClient(hmacInterceptorProvider.get(), authInterceptorProvider.get(), chuckerInterceptorProvider.get());
   }
 
   public static NetworkModule_ProvideOkHttpClientFactory create(
       Provider<HmacInterceptor> hmacInterceptorProvider,
-      Provider<AuthInterceptor> authInterceptorProvider) {
-    return new NetworkModule_ProvideOkHttpClientFactory(hmacInterceptorProvider, authInterceptorProvider);
+      Provider<AuthInterceptor> authInterceptorProvider,
+      Provider<ChuckerInterceptor> chuckerInterceptorProvider) {
+    return new NetworkModule_ProvideOkHttpClientFactory(hmacInterceptorProvider, authInterceptorProvider, chuckerInterceptorProvider);
   }
 
   public static OkHttpClient provideOkHttpClient(HmacInterceptor hmacInterceptor,
-      AuthInterceptor authInterceptor) {
-    return Preconditions.checkNotNullFromProvides(NetworkModule.INSTANCE.provideOkHttpClient(hmacInterceptor, authInterceptor));
+      AuthInterceptor authInterceptor, ChuckerInterceptor chuckerInterceptor) {
+    return Preconditions.checkNotNullFromProvides(NetworkModule.INSTANCE.provideOkHttpClient(hmacInterceptor, authInterceptor, chuckerInterceptor));
   }
 }

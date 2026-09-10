@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.klarfinance.app-mergeDebugResources-84:/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "com.klarfinance.app-mergeDebugResources-94:/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/hizkiaalb/.gradle/caches/8.9/transforms/2a5ebf6d5286d6bbe6d04d10a44badd6/transformed/appcompat-1.6.1/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "source": "/Users/hizkiaalb/.gradle/caches/8.9/transforms/652a411bff3f4567f75a6ebb8b8640e1/transformed/appcompat-1.6.1/res/values-h720dp-v13/values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

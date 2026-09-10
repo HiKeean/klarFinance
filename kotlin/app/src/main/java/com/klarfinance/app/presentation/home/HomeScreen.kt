@@ -23,11 +23,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Bolt
-import androidx.compose.material.icons.filled.CallSplit
-import androidx.compose.material.icons.filled.CardGiftcard
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.ConfirmationNumber
 import androidx.compose.material.icons.filled.Diamond
@@ -40,12 +37,9 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocalMovies
 import androidx.compose.material.icons.filled.Loyalty
 import androidx.compose.material.icons.filled.MoreHoriz
-import androidx.compose.material.icons.filled.Payment
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Public
 import androidx.compose.material.icons.filled.QrCode2
 import androidx.compose.material.icons.filled.ReceiptLong
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.ShoppingBag
 import androidx.compose.material.icons.filled.SimCard
 import androidx.compose.material3.AlertDialog
@@ -100,8 +94,10 @@ import kotlinx.coroutines.launch
 fun HomeScreen(
     onLoginRequested: () -> Unit,
     onAccountClick: () -> Unit,
+    onHistoryClick: () -> Unit = {},
     onRequestLoanClick: () -> Unit = {},
     onPayClick: () -> Unit = {},
+    onTransjakartaClick: () -> Unit = {},
     accountState: AccountState = AccountState.GUEST,
     limitSummary: LimitSummary? = null,
 ) {
@@ -128,6 +124,13 @@ fun HomeScreen(
             limitSummary?.isQrisEligible != true -> showQrisIneligibleDialog = true
             else -> onPayClick()
         }
+    }
+
+    // "Transjakarta" (promo card + explore feature) is the other tile with a real screen
+    // behind it (a placeholder one for now) - same gate as everything else (ACTIVE only),
+    // no extra eligibility check unlike onPayTap since there's no logic behind it yet.
+    val onTransjakartaTap: () -> Unit = {
+        if (accountState != AccountState.ACTIVE) onLockedFeatureClick() else onTransjakartaClick()
     }
 
     // Account info + change password work regardless of loan-approval status - unlike
@@ -161,6 +164,7 @@ fun HomeScreen(
                 onHomeClick = {},
                 onAccountClick = onAccountClick,
                 onLockedTabClick = onLockedFeatureClick,
+                onHistoryClick = onHistoryClick,
             )
         },
     ) { padding ->
@@ -203,10 +207,14 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(28.dp))
             SectionHeader(title = "Spesial cuma buat kamu", onClick = onLockedFeatureClick)
             Spacer(modifier = Modifier.height(12.dp))
-            PromoCarousel(onClick = onLockedFeatureClick)
+            PromoCarousel(onClick = onLockedFeatureClick, onTransjakartaClick = onTransjakartaTap)
 
             Spacer(modifier = Modifier.height(24.dp))
-            ExploreFeaturesCard(accountState = accountState, onClick = onLockedFeatureClick)
+            ExploreFeaturesCard(
+                accountState = accountState,
+                onClick = onLockedFeatureClick,
+                onTransjakartaClick = onTransjakartaTap,
+            )
             Spacer(modifier = Modifier.height(20.dp))
         }
     }
@@ -408,13 +416,17 @@ private fun ActiveLoanCardContent(limitSummary: LimitSummary, onRequestLoanClick
     }
     Spacer(modifier = Modifier.height(8.dp))
     Text(
-        text = formatRupiah(limitSummary.totalLimit),
+        // Bug ditemukan (konfirmasi user): sebelumnya nampilin totalLimit (plafond, konstan) di
+        // bawah label "AVAILABLE LOAN" - jadi kelihatan gak pernah berkurang walau usedLimit naik.
+        // Yang benar adalah availableLimit (totalLimit - usedLimit), yang genuinely turun tiap
+        // ada pinjaman baru (lihat LoanService.createLoan di backend).
+        text = formatRupiah(limitSummary.availableLimit),
         style = MaterialTheme.typography.headlineSmall,
         color = MaterialTheme.colorScheme.onBackground,
     )
     Spacer(modifier = Modifier.height(2.dp))
     Text(
-        text = "Used from ${formatRupiah(limitSummary.totalLimit).removePrefix("Rp ")}",
+        text = "of ${formatRupiah(limitSummary.totalLimit)} total limit",
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
@@ -462,8 +474,21 @@ private fun ActiveLoanCardContent(limitSummary: LimitSummary, onRequestLoanClick
         }
     }
     Spacer(modifier = Modifier.height(16.dp))
+    // Tarik tunai dikunci selama masih ada LoanReviewRequest PENDING_BM (pinjaman >30% plafond,
+    // konfirmasi user 2026-09-07) - QRIS TIDAK ikut terkunci (lihat quick action "Pay" di
+    // QuickActionsRow, tidak dipengaruhi flag ini sama sekali) karena aturan ini cuma berlaku
+    // untuk tarik tunai.
+    if (limitSummary.hasPendingLoanReview) {
+        Text(
+            text = "Pengajuan pinjaman tunai Anda sedang direview Branch Manager. QRIS tetap bisa dipakai.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(bottom = 8.dp),
+        )
+    }
     Button(
         onClick = onRequestLoanClick,
+        enabled = !limitSummary.hasPendingLoanReview,
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
@@ -472,7 +497,10 @@ private fun ActiveLoanCardContent(limitSummary: LimitSummary, onRequestLoanClick
     ) {
         Icon(Icons.Default.Add, contentDescription = null, tint = Color.White, modifier = Modifier.size(18.dp))
         Spacer(modifier = Modifier.width(6.dp))
-        Text("Ajukan Pinjaman", style = MaterialTheme.typography.labelLarge)
+        Text(
+            if (limitSummary.hasPendingLoanReview) "Menunggu Review BM" else "Ajukan Pinjaman",
+            style = MaterialTheme.typography.labelLarge,
+        )
     }
 }
 
@@ -484,8 +512,7 @@ private fun formatRupiah(amount: Long): String {
 private data class QuickAction(val label: String, val icon: ImageVector)
 
 private val quickActions = listOf(
-    QuickAction("Pay", Icons.Default.Payment),
-    QuickAction("Top Up", Icons.Default.AccountBalance),
+    QuickAction("QRIS", Icons.Default.QrCode2),
     QuickAction("Bills", Icons.Default.ReceiptLong),
     QuickAction("More", Icons.Default.MoreHoriz),
 )
@@ -497,7 +524,7 @@ private fun QuickActionsRow(onClick: () -> Unit, onPayClick: () -> Unit) {
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         quickActions.forEach { action ->
-            val actionClick = if (action.label == "Pay") onPayClick else onClick
+            val actionClick = if (action.label == "QRIS") onPayClick else onClick
             LockedIconAction(label = action.label, icon = action.icon, onClick = actionClick)
         }
     }
@@ -591,12 +618,15 @@ private val promos = listOf(
 )
 
 @Composable
-private fun PromoCarousel(onClick: () -> Unit) {
+private fun PromoCarousel(onClick: () -> Unit, onTransjakartaClick: () -> Unit) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         contentPadding = PaddingValues(end = 20.dp),
     ) {
-        items(promos) { promo -> PromoCard(promo = promo, onClick = onClick) }
+        items(promos) { promo ->
+            val promoClick = if (promo.title == "Transjakarta") onTransjakartaClick else onClick
+            PromoCard(promo = promo, onClick = promoClick)
+        }
     }
 }
 
@@ -629,19 +659,10 @@ private fun PromoCard(promo: Promo, onClick: () -> Unit) {
 private data class ExploreFeature(val label: String, val icon: ImageVector, val badge: String? = null)
 private data class FeatureCategory(val title: String, val features: List<ExploreFeature>)
 
-// Only the first category (TRANSFER & TERIMA) is shown while GUEST/PENDING_APPLICATION,
-// as a teaser - the rest unlock once accountState is ACTIVE. None of these route anywhere
-// real yet.
+// Only the first category (PEMBAYARAN) is shown while GUEST/PENDING_APPLICATION, as a
+// teaser - the rest unlock once accountState is ACTIVE. None of these route anywhere real
+// yet except Transjakarta (see onTransjakartaClick in HomeScreen).
 private val featureCategories = listOf(
-    FeatureCategory(
-        title = "TRANSFER & TERIMA",
-        features = listOf(
-            ExploreFeature("Transfer gratis", Icons.Default.Send, badge = "FREE"),
-            ExploreFeature("Transfer luar negeri", Icons.Default.Public),
-            ExploreFeature("Split bill", Icons.Default.CallSplit),
-            ExploreFeature("Hadiah", Icons.Default.CardGiftcard),
-        ),
-    ),
     FeatureCategory(
         title = "PEMBAYARAN",
         features = listOf(
@@ -672,7 +693,7 @@ private val featureCategories = listOf(
 )
 
 @Composable
-private fun ExploreFeaturesCard(accountState: AccountState, onClick: () -> Unit) {
+private fun ExploreFeaturesCard(accountState: AccountState, onClick: () -> Unit, onTransjakartaClick: () -> Unit) {
     // GUEST gets a teaser (1 category); PENDING_APPLICATION and ACTIVE both see all 4 - the
     // tiles themselves are already styled/locked the same way regardless of state, tapping
     // one just routes to a different response (Login / "still under review" dialog / "coming
@@ -697,7 +718,8 @@ private fun ExploreFeaturesCard(accountState: AccountState, onClick: () -> Unit)
             Spacer(modifier = Modifier.height(16.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 category.features.forEach { feature ->
-                    LockedIconAction(label = feature.label, icon = feature.icon, onClick = onClick, badge = feature.badge)
+                    val featureClick = if (feature.label == "Transjakarta") onTransjakartaClick else onClick
+                    LockedIconAction(label = feature.label, icon = feature.icon, onClick = featureClick, badge = feature.badge)
                 }
             }
         }

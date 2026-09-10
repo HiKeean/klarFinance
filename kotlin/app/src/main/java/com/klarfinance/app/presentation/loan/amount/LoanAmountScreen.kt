@@ -3,6 +3,7 @@ package com.klarfinance.app.presentation.loan.amount
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,6 +41,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -185,12 +187,14 @@ private fun LoanCalculationSummary(uiState: RequestLoanUiState) {
         SummaryRow("Nominal Pinjaman", formatRupiah(uiState.amountValue()))
         Spacer(modifier = Modifier.height(8.dp))
         SummaryRow("Biaya Admin (1%)", "-${formatRupiah(uiState.adminFee)}")
-        Spacer(modifier = Modifier.height(8.dp))
-        SummaryRow("Bunga (${uiState.tenorMonths} bulan)", formatRupiah(uiState.totalInterest))
         Spacer(modifier = Modifier.height(12.dp))
         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         Spacer(modifier = Modifier.height(12.dp))
         SummaryRow("Nominal Diterima", formatRupiah(uiState.netAmountReceived), emphasize = true)
+        Spacer(modifier = Modifier.height(16.dp))
+        SummaryRow("Bunga (${uiState.tenorMonths} bulan) ${uiState.monthlyRatePercentLabel}", formatRupiah(uiState.totalInterest))
+        Spacer(modifier = Modifier.height(8.dp))
+        SummaryRow("Cicilan per Bulan", formatRupiah(uiState.installmentAmount), emphasize = true)
     }
 }
 
@@ -227,6 +231,7 @@ private fun AmountField(uiState: RequestLoanUiState, onAmountChange: (String) ->
             prefix = { Text("Rp ", style = TextStyle(fontSize = 28.sp, fontWeight = FontWeight.Bold)) },
             placeholder = { Text("0", style = TextStyle(fontSize = 28.sp, fontWeight = FontWeight.Bold)) },
             singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,

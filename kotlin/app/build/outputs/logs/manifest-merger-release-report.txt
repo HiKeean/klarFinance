@@ -1,0 +1,1207 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:1-84:12
+INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:1-84:12
+INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:1-84:12
+INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:1-84:12
+MERGED from [androidx.hilt:hilt-work:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/654125665bcecb38f43d38540287cf32/transformed/hilt-work-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/caeb5c0a6dd9871172e293b52973fc7f/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/485322010056d79e22b3e212cbd45a1b/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.dagger:hilt-android:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4f8f6525505d2a06c430b2a19a887adc/transformed/hilt-android-2.52/AndroidManifest.xml:16:1-19:12
+MERGED from [androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f0aadc707cf41a8bc0af452a007aec05/transformed/biometric-1.1.0/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.mlkit:barcode-scanning:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/80bd8e14b930f9adb6ce71105c79773f/transformed/barcode-scanning-17.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.mlkit:text-recognition:16.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5424dbe3495d36978194624be35b3ded/transformed/text-recognition-16.0.1/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/cf841aa5b5f6efc198eb8a7fe0ddcb5a/transformed/play-services-location-21.3.0/AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.mlkit:barcode-scanning-common:17.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/20e7fc665480cbb1d40e01576a0511a9/transformed/barcode-scanning-common-17.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.mlkit:text-recognition-bundled-common:17.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3dcc6392510f9b99593cd575362c808b/transformed/text-recognition-bundled-common-17.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition:19.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b2754ef349dcea212f1117b73e265e48/transformed/play-services-mlkit-text-recognition-19.0.1/AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:2:1-26:12
+MERGED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:17:1-32:12
+MERGED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:17:1-66:12
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8024b12da41b59d5974a39a614ed6027/transformed/play-services-base-18.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.mlkit:vision-interfaces:16.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0b507657732cfd727156d38a87080149/transformed/vision-interfaces-16.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:2:1-24:12
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:15:1-41:12
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9bd1eddace584a2db356a36f7a5a4d1d/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:2:1-13:12
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.work:work-runtime-ktx:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4551219cf71f717839a9419bdabbe3ef/transformed/work-runtime-ktx-2.9.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:17:1-145:12
+MERGED from [androidx.room:room-ktx:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/682491436e05b3aa53bfb873a75bf464/transformed/room-ktx-2.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.camera:camera-video:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5cbe2792469cf37ca4d5eba180ab2477/transformed/camera-video-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.camera:camera-view:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/adc7d41a37351e79611fed119f0ec338/transformed/camera-view-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.camera:camera-lifecycle:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/019c1f719de90e971958b2d7b263b658/transformed/camera-lifecycle-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:17:1-36:12
+MERGED from [androidx.camera:camera-core:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/eb6256a5d7e3bbbae8cbd70510ac8b0c/transformed/camera-core-1.4.0/AndroidManifest.xml:17:1-36:12
+MERGED from [androidx.navigation:navigation-common:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a9503d598d94e74fce53ab0b400f868/transformed/navigation-common-2.8.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/06d01d68a112c6471f7d0b657e254725/transformed/navigation-runtime-2.8.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/629fd96b953faf3b46243f9c3ca69e82/transformed/navigation-common-ktx-2.8.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c822d086321f29f1fc32d4723acfdc54/transformed/navigation-runtime-ktx-2.8.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-compose:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2aa8d5f186efb3dbe727473a74f57195/transformed/navigation-compose-2.8.2/AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt:coil-compose:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6135e176669db9c1fa3e1f67a97c50bf/transformed/coil-compose-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt:coil-compose-base:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2c48cb24d9d3c394b554bc4ded37b0e6/transformed/coil-compose-base-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt:coil:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b5a5f5fca1c7d9644ad78019a7b05f83/transformed/coil-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [io.coil-kt:coil-base:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/85198f586a522f8090b7d69da58f3e6b/transformed/coil-base-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d0f1682eae535ce646a202b71966c627/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat:1.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/06b6448d78dbcb6f0055f0b12add6346/transformed/appcompat-1.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/04ae70d0a10b0492ae3799c71f3819c5/transformed/activity-1.9.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c2b06aad15691859dc2e5167dd749b0/transformed/material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-compose:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9649707238874795b27e1104b3ff6bb8/transformed/activity-compose-1.9.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ea395644c3328c8d824ec2476efaab56/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/025d7cfd71300f5d6bb245bbeb086b91/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17643c1988295d2512af06390a2c2381/transformed/animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/175cb0c7fe8e9e5c70a6bc1c71a50b3d/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bca1214a228c9efffa0a67e70dd61d4e/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/76266402303bc5c46ffeffb0f746afc3/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7740e4e9735e3f38bbfbd7b4930dc835/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3aba7bda728fea258e2b0428b53ff600/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/19867c1d6c7f22b841f94368b0c910ce/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ee5a733f96f213ecd8c102607b4e8e6b/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5a7a3e97ad4ebb5355b2d2ee739bc63e/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.32.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/90d9e27a6cdf763debf968e1ec958912/transformed/accompanist-drawablepainter-0.32.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/627e7fdcb9150fda4f4c975fb58dbb59/transformed/material-icons-extended-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/51b7d99113dbf47f227fa8e01b3fee97/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5dabe7248482f406e4658a52a944568d/transformed/ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-ktx:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6b5e31fb52a302780cb9952a20b5a895/transformed/activity-ktx-1.9.2/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6c7a402de5fcfd5f93bd552e14aba739/transformed/play-services-stats-17.0.2/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bb9b1bfd6fb039c789543f618f811cdc/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/34179e6b09bad7e03c1a237d3064bcba/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2f486d214dfae1a1f781093d1d78c21/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/688764b0249fa453172fe3b975e8ecc9/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f71c7c54c29aa0a5b943944f85b52e12/transformed/graphics-path-1.0.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/904b2e08e6e96b5198a71e8a4b7055de/transformed/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4f264f61e4e55fe4756147ca964c70d9/transformed/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9af002f34864c8ee7900e2fa4c4d1654/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7cb675c7404967653bf532df81892bfa/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/99f6da8771f282f6f5a5ed38f9447c42/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/68d8dd880e587993e2717e16889264c3/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/541aa06836540c57fc943e9f44b9e8e6/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b79d614c8245e21b32530db2ea3a776c/transformed/lifecycle-viewmodel-2.8.6/AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3cfe4bd5102487b7872e1e707f0740d4/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bb67311f42ebb745bc830650618d1f48/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/adb94085457793572df5063e9676f79b/transformed/lifecycle-service-2.8.6/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/70a7d1ae6eeb3e1272a4fd63406adbf6/transformed/lifecycle-viewmodel-savedstate-2.8.6/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2795c2d722cce378e9c6d7bf4d442bff/transformed/lifecycle-viewmodel-ktx-2.8.6/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/554803f02fc1af75ef15768dbd056926/transformed/lifecycle-livedata-core-ktx-2.8.6/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7aaa6f3dc5b8d3f914c83c2926832252/transformed/lifecycle-livedata-core-2.8.6/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/dc2abcec1092e11462f4bd6548d17f15/transformed/lifecycle-livedata-2.8.6/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8d96ba6bd948612c2d1914f91f40e00d/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a8a154eaa7092ed680c32fcad72ba31b/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/169e648054300ddb7692c109f274b798/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/351c4bd4e251995b867c6231301e404b/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8b362e3a68147cd96fca795c33df6de8/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9a59c3a7b8cfba05c1a130a3f98e141e/transformed/firebase-installations-interop-17.1.1/AndroidManifest.xml:15:1-19:12
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d13eb22c219570d879a954fb3433c003/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c48a326d666ce0ca8d8c8036afb6e957/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/811c8692e059b1daa59609b6b352e7f1/transformed/play-services-basement-18.4.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.fragment:fragment:1.8.4] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8842bdacacde0d98fb45f310dfebe2b8/transformed/fragment-1.8.4/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.fragment:fragment-ktx:1.8.4] /Users/hizkiaalb/.gradle/caches/8.9/transforms/27e725e4c8983854b9fbcc008fb929da/transformed/fragment-ktx-1.8.4/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a50035ed69ed3977a67981d0bc586802/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/819a607a142fa4c58ed2f1f5574178c9/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [com.github.chuckerteam.chucker:library-no-op:4.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0e8a72240c2d2884cde2b83800cac8dc/transformed/library-no-op-4.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/94934309a64ba0a3a62dcbf668a3fa50/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/34cda022fcd8d16b9bdb45cd37000713/transformed/sqlite-2.4.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/accc81b78316e8babb49bd129ba7dae5/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/de90a80b023c98b52b77572e9f6c0c8c/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/be1d9535cd250a8e18acf529ee40d4d0/transformed/tracing-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing-ktx:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6316dee3bea2ba1266af440017dce09/transformed/tracing-ktx-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.security:security-crypto:1.1.0-alpha06] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e8d3f0639db3fe915ed60e3830f5b7f2/transformed/security-crypto-1.1.0-alpha06/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fe07a11a8e796a7a7f5ab67c1f7ee828/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/519feaafe72975daec668d9df1fd12b9/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf0f222cee86c2d719d044e0e22de65e/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:15:1-31:12
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:15:1-37:12
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/164797cc40337250279a98c3871f1581/transformed/firebase-encoders-json-18.0.0/AndroidManifest.xml:15:1-23:12
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:15:1-41:12
+MERGED from [com.google.firebase:firebase-components:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17dd334a43a69a7c0b96f9b2f903a971/transformed/firebase-components-18.0.0/AndroidManifest.xml:15:1-20:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b7b95216e12f34a190f0ba1c3975cc5c/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /Users/hizkiaalb/.gradle/caches/8.9/transforms/012e0c0b812cb0f2c12adcbfb7274907/transformed/exifinterface-1.3.7/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.datatransport:transport-api:3.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bad402108c04e6c7ebb8182b7f3b3000/transformed/transport-api-3.1.0/AndroidManifest.xml:15:1-20:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2498bc635ceb357e54f6b0cf5e08e160/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0294b031ab777efb55504068bc5cdf33/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/da73df1ebb39724b1e6daab45a7e42b3/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d5d1271bfb28204fc789a03e36bb2b38/transformed/dagger-lint-aar-2.52/AndroidManifest.xml:16:1-19:12
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7e7a90181a92860487a03d762ff19f33/transformed/image-1.0.0-beta1/AndroidManifest.xml:2:1-9:12
+	package
+		INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:3:5-67
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:25:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:25:5-67
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:3:22-64
+uses-permission#android.permission.CAMERA
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:4:5-65
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:4:22-62
+uses-feature#android.hardware.camera.any
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:5:5-89
+	android:required
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:5:62-86
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:5:19-61
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:8:5-77
+MERGED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:23:5-77
+MERGED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:23:5-77
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:8:22-74
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:15:5-79
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:15:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:16:5-81
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:16:22-78
+uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:17:5-85
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:17:22-82
+queries
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:24:5-42:15
+package#com.kredivo.app
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:25:9-51
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:25:18-48
+package#com.akulaku.app
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:26:9-51
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:26:18-48
+package#com.adakami.id
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:27:9-50
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:27:18-47
+package#com.kredit.pintar
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:28:9-53
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:28:18-50
+package#com.julofinance.juloapp
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:29:9-59
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:29:18-56
+package#cash.easy.id
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:30:9-48
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:30:18-45
+package#com.indodana.app
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:31:9-52
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:31:18-49
+package#com.rupiahcepat.app
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:32:9-55
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:32:18-52
+package#com.pinjamango.app
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:33:9-54
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:33:18-51
+package#com.maucash.app
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:34:9-51
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:34:18-48
+package#id.uangme.app
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:35:9-49
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:35:18-46
+package#com.bca.mobile
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:36:9-50
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:36:18-47
+package#id.co.bri.brimo
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:37:9-51
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:37:18-48
+package#id.co.bankmandiri.livin
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:38:9-59
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:38:18-56
+package#src.com.bni
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:39:9-47
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:39:18-44
+package#com.btpn.dc
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:40:9-47
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:40:18-44
+package#com.bankpermata.mobile
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:41:9-58
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:41:18-55
+application
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:44:5-82:19
+INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:44:5-82:19
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/cf841aa5b5f6efc198eb8a7fe0ddcb5a/transformed/play-services-location-21.3.0/AndroidManifest.xml:6:5-20
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/cf841aa5b5f6efc198eb8a7fe0ddcb5a/transformed/play-services-location-21.3.0/AndroidManifest.xml:6:5-20
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:8:5-24:19
+MERGED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:8:5-24:19
+MERGED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:22:5-30:19
+MERGED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:22:5-30:19
+MERGED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:28:5-64:19
+MERGED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:28:5-64:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8024b12da41b59d5974a39a614ed6027/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8024b12da41b59d5974a39a614ed6027/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:11:5-22:19
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:11:5-22:19
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:22:5-39:19
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:22:5-39:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9bd1eddace584a2db356a36f7a5a4d1d/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9bd1eddace584a2db356a36f7a5a4d1d/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:28:5-143:19
+MERGED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:28:5-143:19
+MERGED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.camera:camera-core:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/eb6256a5d7e3bbbae8cbd70510ac8b0c/transformed/camera-core-1.4.0/AndroidManifest.xml:23:5-34:19
+MERGED from [androidx.camera:camera-core:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/eb6256a5d7e3bbbae8cbd70510ac8b0c/transformed/camera-core-1.4.0/AndroidManifest.xml:23:5-34:19
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6c7a402de5fcfd5f93bd552e14aba739/transformed/play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6c7a402de5fcfd5f93bd552e14aba739/transformed/play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:23:5-33:19
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d13eb22c219570d879a954fb3433c003/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d13eb22c219570d879a954fb3433c003/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c48a326d666ce0ca8d8c8036afb6e957/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c48a326d666ce0ca8d8c8036afb6e957/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/811c8692e059b1daa59609b6b352e7f1/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/811c8692e059b1daa59609b6b352e7f1/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/de90a80b023c98b52b77572e9f6c0c8c/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/de90a80b023c98b52b77572e9f6c0c8c/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fe07a11a8e796a7a7f5ab67c1f7ee828/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fe07a11a8e796a7a7f5ab67c1f7ee828/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:21:5-29:19
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:21:5-29:19
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:27:5-35:19
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:27:5-35:19
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:25:5-39:19
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:25:5-39:19
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7e7a90181a92860487a03d762ff19f33/transformed/image-1.0.0-beta1/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7e7a90181a92860487a03d762ff19f33/transformed/image-1.0.0-beta1/AndroidManifest.xml:7:5-20
+	android:extractNativeLibs
+		INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:51:9-35
+	android:label
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:48:9-41
+	android:roundIcon
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:50:9-54
+	android:icon
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:47:9-43
+	android:allowBackup
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:46:9-35
+	android:theme
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:52:9-49
+	android:networkSecurityConfig
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:49:9-69
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:45:9-39
+activity#com.klarfinance.app.MainActivity
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:54:9-62:20
+	android:exported
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:56:13-36
+	android:theme
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:57:13-53
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:55:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:58:13-61:29
+action#android.intent.action.MAIN
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:59:17-69
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:59:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:60:17-77
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:60:27-74
+service#com.klarfinance.app.core.notification.KlarFirebaseMessagingService
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:64:9-70:19
+	android:exported
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:66:13-37
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:65:13-75
+intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:67:13-69:29
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:68:17-78
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:68:25-75
+meta-data#com.google.firebase.messaging.default_notification_channel_id
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:72:9-74:72
+	android:value
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:74:13-69
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:73:13-89
+meta-data#com.google.mlkit.vision.DEPENDENCIES
+ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:79:9-81:39
+	android:value
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:81:13-36
+	android:name
+		ADDED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml:80:13-64
+uses-sdk
+INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+MERGED from [androidx.hilt:hilt-work:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/654125665bcecb38f43d38540287cf32/transformed/hilt-work-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.hilt:hilt-work:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/654125665bcecb38f43d38540287cf32/transformed/hilt-work-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/caeb5c0a6dd9871172e293b52973fc7f/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/caeb5c0a6dd9871172e293b52973fc7f/transformed/hilt-navigation-compose-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/485322010056d79e22b3e212cbd45a1b/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.hilt:hilt-navigation:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/485322010056d79e22b3e212cbd45a1b/transformed/hilt-navigation-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.dagger:hilt-android:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4f8f6525505d2a06c430b2a19a887adc/transformed/hilt-android-2.52/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:hilt-android:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4f8f6525505d2a06c430b2a19a887adc/transformed/hilt-android-2.52/AndroidManifest.xml:18:3-42
+MERGED from [androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f0aadc707cf41a8bc0af452a007aec05/transformed/biometric-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f0aadc707cf41a8bc0af452a007aec05/transformed/biometric-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.mlkit:barcode-scanning:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/80bd8e14b930f9adb6ce71105c79773f/transformed/barcode-scanning-17.3.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:barcode-scanning:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/80bd8e14b930f9adb6ce71105c79773f/transformed/barcode-scanning-17.3.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:text-recognition:16.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5424dbe3495d36978194624be35b3ded/transformed/text-recognition-16.0.1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:text-recognition:16.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5424dbe3495d36978194624be35b3ded/transformed/text-recognition-16.0.1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/cf841aa5b5f6efc198eb8a7fe0ddcb5a/transformed/play-services-location-21.3.0/AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-location:21.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/cf841aa5b5f6efc198eb8a7fe0ddcb5a/transformed/play-services-location-21.3.0/AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:6:5-44
+MERGED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:barcode-scanning-common:17.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/20e7fc665480cbb1d40e01576a0511a9/transformed/barcode-scanning-common-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:barcode-scanning-common:17.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/20e7fc665480cbb1d40e01576a0511a9/transformed/barcode-scanning-common-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:text-recognition-bundled-common:17.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3dcc6392510f9b99593cd575362c808b/transformed/text-recognition-bundled-common-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:text-recognition-bundled-common:17.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3dcc6392510f9b99593cd575362c808b/transformed/text-recognition-bundled-common-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition:19.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b2754ef349dcea212f1117b73e265e48/transformed/play-services-mlkit-text-recognition-19.0.1/AndroidManifest.xml:6:5-44
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition:19.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b2754ef349dcea212f1117b73e265e48/transformed/play-services-mlkit-text-recognition-19.0.1/AndroidManifest.xml:6:5-44
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:6:5-44
+MERGED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8024b12da41b59d5974a39a614ed6027/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8024b12da41b59d5974a39a614ed6027/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.mlkit:vision-interfaces:16.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0b507657732cfd727156d38a87080149/transformed/vision-interfaces-16.3.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.mlkit:vision-interfaces:16.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0b507657732cfd727156d38a87080149/transformed/vision-interfaces-16.3.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:19:5-44
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:19:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9bd1eddace584a2db356a36f7a5a4d1d/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9bd1eddace584a2db356a36f7a5a4d1d/transformed/firebase-iid-interop-17.1.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.work:work-runtime-ktx:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4551219cf71f717839a9419bdabbe3ef/transformed/work-runtime-ktx-2.9.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.work:work-runtime-ktx:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4551219cf71f717839a9419bdabbe3ef/transformed/work-runtime-ktx-2.9.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-ktx:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/682491436e05b3aa53bfb873a75bf464/transformed/room-ktx-2.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-ktx:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/682491436e05b3aa53bfb873a75bf464/transformed/room-ktx-2.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.camera:camera-video:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5cbe2792469cf37ca4d5eba180ab2477/transformed/camera-video-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-video:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5cbe2792469cf37ca4d5eba180ab2477/transformed/camera-video-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-view:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/adc7d41a37351e79611fed119f0ec338/transformed/camera-view-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-view:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/adc7d41a37351e79611fed119f0ec338/transformed/camera-view-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-lifecycle:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/019c1f719de90e971958b2d7b263b658/transformed/camera-lifecycle-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-lifecycle:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/019c1f719de90e971958b2d7b263b658/transformed/camera-lifecycle-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-core:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/eb6256a5d7e3bbbae8cbd70510ac8b0c/transformed/camera-core-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.camera:camera-core:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/eb6256a5d7e3bbbae8cbd70510ac8b0c/transformed/camera-core-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a9503d598d94e74fce53ab0b400f868/transformed/navigation-common-2.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a9503d598d94e74fce53ab0b400f868/transformed/navigation-common-2.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/06d01d68a112c6471f7d0b657e254725/transformed/navigation-runtime-2.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/06d01d68a112c6471f7d0b657e254725/transformed/navigation-runtime-2.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/629fd96b953faf3b46243f9c3ca69e82/transformed/navigation-common-ktx-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/629fd96b953faf3b46243f9c3ca69e82/transformed/navigation-common-ktx-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c822d086321f29f1fc32d4723acfdc54/transformed/navigation-runtime-ktx-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c822d086321f29f1fc32d4723acfdc54/transformed/navigation-runtime-ktx-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2aa8d5f186efb3dbe727473a74f57195/transformed/navigation-compose-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.8.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2aa8d5f186efb3dbe727473a74f57195/transformed/navigation-compose-2.8.2/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-compose:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6135e176669db9c1fa3e1f67a97c50bf/transformed/coil-compose-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-compose:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6135e176669db9c1fa3e1f67a97c50bf/transformed/coil-compose-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-compose-base:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2c48cb24d9d3c394b554bc4ded37b0e6/transformed/coil-compose-base-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-compose-base:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2c48cb24d9d3c394b554bc4ded37b0e6/transformed/coil-compose-base-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b5a5f5fca1c7d9644ad78019a7b05f83/transformed/coil-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b5a5f5fca1c7d9644ad78019a7b05f83/transformed/coil-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-base:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/85198f586a522f8090b7d69da58f3e6b/transformed/coil-base-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [io.coil-kt:coil-base:2.7.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/85198f586a522f8090b7d69da58f3e6b/transformed/coil-base-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d0f1682eae535ce646a202b71966c627/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d0f1682eae535ce646a202b71966c627/transformed/appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/06b6448d78dbcb6f0055f0b12add6346/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/06b6448d78dbcb6f0055f0b12add6346/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/04ae70d0a10b0492ae3799c71f3819c5/transformed/activity-1.9.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/04ae70d0a10b0492ae3799c71f3819c5/transformed/activity-1.9.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c2b06aad15691859dc2e5167dd749b0/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c2b06aad15691859dc2e5167dd749b0/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-compose:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9649707238874795b27e1104b3ff6bb8/transformed/activity-compose-1.9.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9649707238874795b27e1104b3ff6bb8/transformed/activity-compose-1.9.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ea395644c3328c8d824ec2476efaab56/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ea395644c3328c8d824ec2476efaab56/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/025d7cfd71300f5d6bb245bbeb086b91/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/025d7cfd71300f5d6bb245bbeb086b91/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17643c1988295d2512af06390a2c2381/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17643c1988295d2512af06390a2c2381/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/175cb0c7fe8e9e5c70a6bc1c71a50b3d/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/175cb0c7fe8e9e5c70a6bc1c71a50b3d/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bca1214a228c9efffa0a67e70dd61d4e/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bca1214a228c9efffa0a67e70dd61d4e/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/76266402303bc5c46ffeffb0f746afc3/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/76266402303bc5c46ffeffb0f746afc3/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7740e4e9735e3f38bbfbd7b4930dc835/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7740e4e9735e3f38bbfbd7b4930dc835/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3aba7bda728fea258e2b0428b53ff600/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3aba7bda728fea258e2b0428b53ff600/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/19867c1d6c7f22b841f94368b0c910ce/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/19867c1d6c7f22b841f94368b0c910ce/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ee5a733f96f213ecd8c102607b4e8e6b/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/ee5a733f96f213ecd8c102607b4e8e6b/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5a7a3e97ad4ebb5355b2d2ee739bc63e/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5a7a3e97ad4ebb5355b2d2ee739bc63e/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.32.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/90d9e27a6cdf763debf968e1ec958912/transformed/accompanist-drawablepainter-0.32.0/AndroidManifest.xml:21:5-44
+MERGED from [com.google.accompanist:accompanist-drawablepainter:0.32.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/90d9e27a6cdf763debf968e1ec958912/transformed/accompanist-drawablepainter-0.32.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/627e7fdcb9150fda4f4c975fb58dbb59/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/627e7fdcb9150fda4f4c975fb58dbb59/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/51b7d99113dbf47f227fa8e01b3fee97/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/51b7d99113dbf47f227fa8e01b3fee97/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5dabe7248482f406e4658a52a944568d/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/5dabe7248482f406e4658a52a944568d/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6b5e31fb52a302780cb9952a20b5a895/transformed/activity-ktx-1.9.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6b5e31fb52a302780cb9952a20b5a895/transformed/activity-ktx-1.9.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6c7a402de5fcfd5f93bd552e14aba739/transformed/play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/hizkiaalb/.gradle/caches/8.9/transforms/6c7a402de5fcfd5f93bd552e14aba739/transformed/play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bb9b1bfd6fb039c789543f618f811cdc/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bb9b1bfd6fb039c789543f618f811cdc/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/34179e6b09bad7e03c1a237d3064bcba/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/34179e6b09bad7e03c1a237d3064bcba/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2f486d214dfae1a1f781093d1d78c21/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2f486d214dfae1a1f781093d1d78c21/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/688764b0249fa453172fe3b975e8ecc9/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/688764b0249fa453172fe3b975e8ecc9/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f71c7c54c29aa0a5b943944f85b52e12/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f71c7c54c29aa0a5b943944f85b52e12/transformed/graphics-path-1.0.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/904b2e08e6e96b5198a71e8a4b7055de/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/904b2e08e6e96b5198a71e8a4b7055de/transformed/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4f264f61e4e55fe4756147ca964c70d9/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/4f264f61e4e55fe4756147ca964c70d9/transformed/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9af002f34864c8ee7900e2fa4c4d1654/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9af002f34864c8ee7900e2fa4c4d1654/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7cb675c7404967653bf532df81892bfa/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7cb675c7404967653bf532df81892bfa/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/99f6da8771f282f6f5a5ed38f9447c42/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/99f6da8771f282f6f5a5ed38f9447c42/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/68d8dd880e587993e2717e16889264c3/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/68d8dd880e587993e2717e16889264c3/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/541aa06836540c57fc943e9f44b9e8e6/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/541aa06836540c57fc943e9f44b9e8e6/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b79d614c8245e21b32530db2ea3a776c/transformed/lifecycle-viewmodel-2.8.6/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b79d614c8245e21b32530db2ea3a776c/transformed/lifecycle-viewmodel-2.8.6/AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3cfe4bd5102487b7872e1e707f0740d4/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/3cfe4bd5102487b7872e1e707f0740d4/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bb67311f42ebb745bc830650618d1f48/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bb67311f42ebb745bc830650618d1f48/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/adb94085457793572df5063e9676f79b/transformed/lifecycle-service-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/adb94085457793572df5063e9676f79b/transformed/lifecycle-service-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/70a7d1ae6eeb3e1272a4fd63406adbf6/transformed/lifecycle-viewmodel-savedstate-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/70a7d1ae6eeb3e1272a4fd63406adbf6/transformed/lifecycle-viewmodel-savedstate-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2795c2d722cce378e9c6d7bf4d442bff/transformed/lifecycle-viewmodel-ktx-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2795c2d722cce378e9c6d7bf4d442bff/transformed/lifecycle-viewmodel-ktx-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/554803f02fc1af75ef15768dbd056926/transformed/lifecycle-livedata-core-ktx-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/554803f02fc1af75ef15768dbd056926/transformed/lifecycle-livedata-core-ktx-2.8.6/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7aaa6f3dc5b8d3f914c83c2926832252/transformed/lifecycle-livedata-core-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7aaa6f3dc5b8d3f914c83c2926832252/transformed/lifecycle-livedata-core-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/dc2abcec1092e11462f4bd6548d17f15/transformed/lifecycle-livedata-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/dc2abcec1092e11462f4bd6548d17f15/transformed/lifecycle-livedata-2.8.6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8d96ba6bd948612c2d1914f91f40e00d/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8d96ba6bd948612c2d1914f91f40e00d/transformed/lifecycle-runtime-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a8a154eaa7092ed680c32fcad72ba31b/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a8a154eaa7092ed680c32fcad72ba31b/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/169e648054300ddb7692c109f274b798/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/169e648054300ddb7692c109f274b798/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/351c4bd4e251995b867c6231301e404b/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/351c4bd4e251995b867c6231301e404b/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8b362e3a68147cd96fca795c33df6de8/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.7.5] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8b362e3a68147cd96fca795c33df6de8/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9a59c3a7b8cfba05c1a130a3f98e141e/transformed/firebase-installations-interop-17.1.1/AndroidManifest.xml:17:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9a59c3a7b8cfba05c1a130a3f98e141e/transformed/firebase-installations-interop-17.1.1/AndroidManifest.xml:17:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d13eb22c219570d879a954fb3433c003/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d13eb22c219570d879a954fb3433c003/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c48a326d666ce0ca8d8c8036afb6e957/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c48a326d666ce0ca8d8c8036afb6e957/transformed/firebase-measurement-connector-19.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/811c8692e059b1daa59609b6b352e7f1/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/811c8692e059b1daa59609b6b352e7f1/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
+MERGED from [androidx.fragment:fragment:1.8.4] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8842bdacacde0d98fb45f310dfebe2b8/transformed/fragment-1.8.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment:1.8.4] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8842bdacacde0d98fb45f310dfebe2b8/transformed/fragment-1.8.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment-ktx:1.8.4] /Users/hizkiaalb/.gradle/caches/8.9/transforms/27e725e4c8983854b9fbcc008fb929da/transformed/fragment-ktx-1.8.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment-ktx:1.8.4] /Users/hizkiaalb/.gradle/caches/8.9/transforms/27e725e4c8983854b9fbcc008fb929da/transformed/fragment-ktx-1.8.4/AndroidManifest.xml:5:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a50035ed69ed3977a67981d0bc586802/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a50035ed69ed3977a67981d0bc586802/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/819a607a142fa4c58ed2f1f5574178c9/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/819a607a142fa4c58ed2f1f5574178c9/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [com.github.chuckerteam.chucker:library-no-op:4.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0e8a72240c2d2884cde2b83800cac8dc/transformed/library-no-op-4.1.0/AndroidManifest.xml:5:5-44
+MERGED from [com.github.chuckerteam.chucker:library-no-op:4.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0e8a72240c2d2884cde2b83800cac8dc/transformed/library-no-op-4.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/94934309a64ba0a3a62dcbf668a3fa50/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/94934309a64ba0a3a62dcbf668a3fa50/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/34cda022fcd8d16b9bdb45cd37000713/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/34cda022fcd8d16b9bdb45cd37000713/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/accc81b78316e8babb49bd129ba7dae5/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/accc81b78316e8babb49bd129ba7dae5/transformed/annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/de90a80b023c98b52b77572e9f6c0c8c/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/de90a80b023c98b52b77572e9f6c0c8c/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/be1d9535cd250a8e18acf529ee40d4d0/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/be1d9535cd250a8e18acf529ee40d4d0/transformed/tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing-ktx:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6316dee3bea2ba1266af440017dce09/transformed/tracing-ktx-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing-ktx:1.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6316dee3bea2ba1266af440017dce09/transformed/tracing-ktx-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.security:security-crypto:1.1.0-alpha06] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e8d3f0639db3fe915ed60e3830f5b7f2/transformed/security-crypto-1.1.0-alpha06/AndroidManifest.xml:20:5-44
+MERGED from [androidx.security:security-crypto:1.1.0-alpha06] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e8d3f0639db3fe915ed60e3830f5b7f2/transformed/security-crypto-1.1.0-alpha06/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fe07a11a8e796a7a7f5ab67c1f7ee828/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/fe07a11a8e796a7a7f5ab67c1f7ee828/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/519feaafe72975daec668d9df1fd12b9/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/519feaafe72975daec668d9df1fd12b9/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf0f222cee86c2d719d044e0e22de65e/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf0f222cee86c2d719d044e0e22de65e/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/164797cc40337250279a98c3871f1581/transformed/firebase-encoders-json-18.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/164797cc40337250279a98c3871f1581/transformed/firebase-encoders-json-18.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-components:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17dd334a43a69a7c0b96f9b2f903a971/transformed/firebase-components-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-components:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/17dd334a43a69a7c0b96f9b2f903a971/transformed/firebase-components-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b7b95216e12f34a190f0ba1c3975cc5c/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b7b95216e12f34a190f0ba1c3975cc5c/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /Users/hizkiaalb/.gradle/caches/8.9/transforms/012e0c0b812cb0f2c12adcbfb7274907/transformed/exifinterface-1.3.7/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.7] /Users/hizkiaalb/.gradle/caches/8.9/transforms/012e0c0b812cb0f2c12adcbfb7274907/transformed/exifinterface-1.3.7/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.datatransport:transport-api:3.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bad402108c04e6c7ebb8182b7f3b3000/transformed/transport-api-3.1.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.android.datatransport:transport-api:3.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bad402108c04e6c7ebb8182b7f3b3000/transformed/transport-api-3.1.0/AndroidManifest.xml:18:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2498bc635ceb357e54f6b0cf5e08e160/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2498bc635ceb357e54f6b0cf5e08e160/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0294b031ab777efb55504068bc5cdf33/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0294b031ab777efb55504068bc5cdf33/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/da73df1ebb39724b1e6daab45a7e42b3/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/da73df1ebb39724b1e6daab45a7e42b3/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d5d1271bfb28204fc789a03e36bb2b38/transformed/dagger-lint-aar-2.52/AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] /Users/hizkiaalb/.gradle/caches/8.9/transforms/d5d1271bfb28204fc789a03e36bb2b38/transformed/dagger-lint-aar-2.52/AndroidManifest.xml:18:3-42
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7e7a90181a92860487a03d762ff19f33/transformed/image-1.0.0-beta1/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.odml:image:1.0.0-beta1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/7e7a90181a92860487a03d762ff19f33/transformed/image-1.0.0-beta1/AndroidManifest.xml:5:5-44
+	android:targetSdkVersion
+		INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Volumes/hizkia/klarFinance/kotlin/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.USE_BIOMETRIC
+ADDED from [androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f0aadc707cf41a8bc0af452a007aec05/transformed/biometric-1.1.0/AndroidManifest.xml:24:5-72
+	android:name
+		ADDED from [androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f0aadc707cf41a8bc0af452a007aec05/transformed/biometric-1.1.0/AndroidManifest.xml:24:22-69
+uses-permission#android.permission.USE_FINGERPRINT
+ADDED from [androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f0aadc707cf41a8bc0af452a007aec05/transformed/biometric-1.1.0/AndroidManifest.xml:27:5-74
+	android:name
+		ADDED from [androidx.biometric:biometric:1.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f0aadc707cf41a8bc0af452a007aec05/transformed/biometric-1.1.0/AndroidManifest.xml:27:22-71
+service#com.google.mlkit.common.internal.MlKitComponentDiscoveryService
+ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:15:9-23:19
+MERGED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:15:9-23:19
+	android:exported
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:11:13-37
+	tools:targetApi
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:19:13-32
+	android:directBootAware
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:17:13-43
+	android:name
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:10:13-91
+meta-data#com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar
+ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-mlkit-barcode-scanning:18.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2cf11d9183833061b63a84773b0f286d/transformed/play-services-mlkit-barcode-scanning-18.3.1/AndroidManifest.xml:13:17-120
+meta-data#com.google.firebase.components:com.google.mlkit.vision.text.internal.TextRegistrar
+ADDED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-mlkit-text-recognition-common:19.1.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/579e4c779033d724e9d1d3d141ea4d40/transformed/play-services-mlkit-text-recognition-common-19.1.0/AndroidManifest.xml:13:17-114
+meta-data#com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar
+ADDED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.mlkit:vision-common:17.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a9d2f4a379e5469d14c61b1ab2a6c601/transformed/vision-common-17.3.0/AndroidManifest.xml:13:17-124
+provider#com.google.mlkit.common.internal.MlKitInitProvider
+ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:9:9-13:38
+	android:authorities
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:11:13-69
+	android:exported
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:12:13-37
+	android:initOrder
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:13:13-35
+	android:name
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:10:13-78
+meta-data#com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar
+ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:20:13-22:85
+	android:value
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:22:17-82
+	android:name
+		ADDED from [com.google.mlkit:common:18.11.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/b64221b83546aacdca4dd129e681c918/transformed/common-18.11.0/AndroidManifest.xml:21:17-120
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:23:9-29:19
+MERGED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:54:9-63:19
+MERGED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:54:9-63:19
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:12:9-21:19
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:12:9-21:19
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:30:9-38:19
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:30:9-38:19
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:22:9-28:19
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:22:9-28:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:25:13-37
+	tools:targetApi
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:34:13-32
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:32:13-43
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:24:13-84
+meta-data#com.google.firebase.components:com.google.firebase.messaging.ktx.FirebaseMessagingLegacyRegistrar
+ADDED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:26:13-28:85
+	android:value
+		ADDED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:28:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging-ktx:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/2690f647adac77ecd509829c06879ce2/transformed/firebase-messaging-ktx-24.0.3/AndroidManifest.xml:27:17-129
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:7:5-79
+MERGED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:24:5-79
+MERGED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:22:5-79
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:22:22-76
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:9:5-68
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:9:5-68
+MERGED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:23:5-68
+MERGED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:23:5-68
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:24:22-65
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:26:5-82
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:11:5-82
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/efb8bea4bfbac6358de5329e9247eeb9/transformed/play-services-cloud-messaging-17.2.0/AndroidManifest.xml:11:5-82
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:26:22-79
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:29:9-40:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:31:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:32:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:30:13-78
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:33:13-35:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:34:17-81
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:34:25-78
+meta-data#com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:37:13-39:40
+	android:value
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:39:17-37
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:38:17-92
+service#com.google.firebase.messaging.FirebaseMessagingService
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:46:9-53:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:49:13-37
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:48:13-43
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:47:13-82
+meta-data#com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:57:13-59:85
+	android:value
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:59:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:58:17-122
+meta-data#com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar
+ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:60:13-62:85
+	android:value
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:62:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.0.3] /Users/hizkiaalb/.gradle/caches/8.9/transforms/f5d97038ea44b9f7351f4472ded39027/transformed/firebase-messaging-24.0.3/AndroidManifest.xml:61:17-119
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8024b12da41b59d5974a39a614ed6027/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8024b12da41b59d5974a39a614ed6027/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8024b12da41b59d5974a39a614ed6027/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/8024b12da41b59d5974a39a614ed6027/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar
+ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:15:13-17:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:17:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:16:17-130
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
+ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:18:13-20:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:20:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/0a2bb9a5f251b32a944b43fa8ea73a94/transformed/firebase-installations-18.0.0/AndroidManifest.xml:19:17-127
+meta-data#com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar
+ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1c13f22331e8bd193c1c9f941ead42fd/transformed/firebase-common-ktx-21.0.0/AndroidManifest.xml:13:17-116
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:23:9-28:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:25:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:27:13-37
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:26:13-43
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:28:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:24:13-77
+meta-data#com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar
+ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:35:13-37:85
+	android:value
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:37:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/38e151ec82edbe369530a0b5781eec94/transformed/firebase-common-21.0.0/AndroidManifest.xml:36:17-109
+service#androidx.room.MultiInstanceInvalidationService
+ADDED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+	android:exported
+		ADDED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:28:13-60
+	android:directBootAware
+		ADDED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+	android:name
+		ADDED from [androidx.room:room-runtime:2.6.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/891b5ca77541b785e6d4246cbf3d8180/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:25:5-81
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:25:22-78
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:26:5-77
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:26:22-74
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:29:9-37:20
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/de90a80b023c98b52b77572e9f6c0c8c/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/de90a80b023c98b52b77572e9f6c0c8c/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:33:13-31
+	android:authorities
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:31:13-68
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:30:13-67
+meta-data#androidx.work.WorkManagerInitializer
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:34:13-36:52
+	android:value
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:36:17-49
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:35:17-68
+service#androidx.work.impl.background.systemalarm.SystemAlarmService
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:39:9-45:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:42:13-72
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:43:13-37
+	tools:ignore
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:44:13-60
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:45:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:41:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:40:13-88
+service#androidx.work.impl.background.systemjob.SystemJobService
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:46:9-52:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:49:13-70
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:50:13-36
+	android:permission
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:51:13-69
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:52:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:48:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:47:13-84
+service#androidx.work.impl.foreground.SystemForegroundService
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:53:9-59:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:56:13-77
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:57:13-37
+	tools:ignore
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:58:13-60
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:59:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:55:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:54:13-81
+receiver#androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:61:9-66:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:64:13-35
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:65:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:66:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:63:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:62:13-88
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:67:9-77:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:70:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:71:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:72:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:69:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:68:13-106
+intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:73:13-76:29
+action#android.intent.action.ACTION_POWER_CONNECTED
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:74:17-87
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:74:25-84
+action#android.intent.action.ACTION_POWER_DISCONNECTED
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:75:17-90
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:75:25-87
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:78:9-88:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:81:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:82:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:83:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:80:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:79:13-104
+intent-filter#action:name:android.intent.action.BATTERY_LOW+action:name:android.intent.action.BATTERY_OKAY
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:84:13-87:29
+action#android.intent.action.BATTERY_OKAY
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:85:17-77
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:85:25-74
+action#android.intent.action.BATTERY_LOW
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:86:17-76
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:86:25-73
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:89:9-99:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:92:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:93:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:94:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:91:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:90:13-104
+intent-filter#action:name:android.intent.action.DEVICE_STORAGE_LOW+action:name:android.intent.action.DEVICE_STORAGE_OK
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:95:13-98:29
+action#android.intent.action.DEVICE_STORAGE_LOW
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:96:17-83
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:96:25-80
+action#android.intent.action.DEVICE_STORAGE_OK
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:97:17-82
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:97:25-79
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:100:9-109:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:103:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:104:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:105:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:102:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:101:13-103
+intent-filter#action:name:android.net.conn.CONNECTIVITY_CHANGE
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:106:13-108:29
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:107:17-79
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:107:25-76
+receiver#androidx.work.impl.background.systemalarm.RescheduleReceiver
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:110:9-121:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:113:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:114:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:115:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:112:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:111:13-88
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.TIMEZONE_CHANGED+action:name:android.intent.action.TIME_SET
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:116:13-120:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:117:17-79
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:117:25-76
+action#android.intent.action.TIME_SET
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:118:17-73
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:118:25-70
+action#android.intent.action.TIMEZONE_CHANGED
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:119:17-81
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:119:25-78
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:122:9-131:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:125:13-72
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:126:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:127:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:124:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:123:13-99
+intent-filter#action:name:androidx.work.impl.background.systemalarm.UpdateProxies
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:128:13-130:29
+action#androidx.work.impl.background.systemalarm.UpdateProxies
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:129:17-98
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:129:25-95
+receiver#androidx.work.impl.diagnostics.DiagnosticsReceiver
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:132:9-142:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:135:13-35
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:136:13-36
+	android:permission
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:137:13-57
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:138:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:134:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:133:13-78
+intent-filter#action:name:androidx.work.diagnostics.REQUEST_DIAGNOSTICS
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:139:13-141:29
+action#androidx.work.diagnostics.REQUEST_DIAGNOSTICS
+ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:140:17-88
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/bf19843606303d4546258b70cbae8ba2/transformed/work-runtime-2.9.1/AndroidManifest.xml:140:25-85
+service#androidx.camera.core.impl.MetadataHolderService
+ADDED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:24:9-33:19
+MERGED from [androidx.camera:camera-core:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/eb6256a5d7e3bbbae8cbd70510ac8b0c/transformed/camera-core-1.4.0/AndroidManifest.xml:29:9-33:78
+MERGED from [androidx.camera:camera-core:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/eb6256a5d7e3bbbae8cbd70510ac8b0c/transformed/camera-core-1.4.0/AndroidManifest.xml:29:9-33:78
+	tools:node
+		ADDED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:29:13-31
+	android:enabled
+		ADDED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:26:13-36
+	android:exported
+		ADDED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:28:13-75
+	android:name
+		ADDED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:25:13-75
+meta-data#androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER
+ADDED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:30:13-32:89
+	android:value
+		ADDED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:32:17-86
+	android:name
+		ADDED from [androidx.camera:camera-camera2:1.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a61b94ff60fedbe52285775cc217cc0c/transformed/camera-camera2-1.4.0/AndroidManifest.xml:31:17-103
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/c798ac901e27fe90d0756f9bc7d3fd32/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#com.klarfinance.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#com.klarfinance.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/e2006b0b48772ed8fd3a46aef234757a/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.6] /Users/hizkiaalb/.gradle/caches/8.9/transforms/343d4707c4d088761971fa1d536e25a9/transformed/lifecycle-process-2.8.6/AndroidManifest.xml:30:17-78
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/811c8692e059b1daa59609b6b352e7f1/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/811c8692e059b1daa59609b6b352e7f1/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/811c8692e059b1daa59609b6b352e7f1/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/hizkiaalb/.gradle/caches/8.9/transforms/a6154b61aebc56a98cb17423b0206fd8/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+meta-data#com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar
+ADDED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:25:13-27:85
+	android:value
+		ADDED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:27:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/hizkiaalb/.gradle/caches/8.9/transforms/9b2794ed812363367cbc2ca35ae2426f/transformed/firebase-datatransport-18.2.0/AndroidManifest.xml:26:17-115
+service#com.google.android.datatransport.runtime.backends.TransportBackendDiscovery
+ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:28:9-34:19
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:36:9-38:40
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:36:9-38:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:29:13-103
+meta-data#backend:com.google.android.datatransport.cct.CctBackendFactory
+ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:31:13-33:39
+	android:value
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:33:17-36
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/58bcfdbb196f013182c1e4867e06b474/transformed/transport-backend-cct-3.1.9/AndroidManifest.xml:32:17-94
+service#com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService
+ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:26:9-30:19
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:28:13-37
+	android:permission
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:29:13-69
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:27:13-117
+receiver#com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver
+ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:32:9-34:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:34:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/hizkiaalb/.gradle/caches/8.9/transforms/1a9fba45facd8f40800bb8f39589e48e/transformed/transport-runtime-3.1.9/AndroidManifest.xml:33:13-132

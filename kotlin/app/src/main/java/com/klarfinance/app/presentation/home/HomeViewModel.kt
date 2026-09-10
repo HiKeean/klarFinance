@@ -19,6 +19,12 @@ import javax.inject.Inject
 
 private const val LOAN_APPROVAL_EVENT_TYPE = "LOAN_APPROVAL"
 
+/** BM approve/reject pengajuan tarik tunai >30% plafond (LoanReviewService.bmDecide di backend) -
+ * beda dari LOAN_APPROVAL (approval plafond awal), event ini tidak mengubah AccountState, cuma
+ * availableLimit/usedLimit/hasPendingLoanReview nasabah - jadi cukup refresh limit summary,
+ * tidak perlu refreshAccountState. */
+private const val LOAN_REVIEW_DECISION_EVENT_TYPE = "LOAN_REVIEW_DECISION"
+
 /**
  * Owns [accountState] as live, observable state instead of Home only ever reading it once from
  * a nav arg (which is how the FCM-approval bug this fixes happened - see kotlin-nasabah-app
@@ -62,9 +68,24 @@ class HomeViewModel @Inject constructor(
         if (initialAccountState != AccountState.GUEST) {
             viewModelScope.launch {
                 fcmEventBus.events.collect { event ->
-                    if (event.type == LOAN_APPROVAL_EVENT_TYPE) refreshAccountState()
+                    when (event.type) {
+                        LOAN_APPROVAL_EVENT_TYPE -> refreshAccountState()
+                        LOAN_REVIEW_DECISION_EVENT_TYPE -> refreshLimitSummary()
+                    }
                 }
             }
+        }
+    }
+
+    /** Dipanggil dari LifecycleEventEffect(ON_RESUME) di KlarNavHost - instance Home yang sama
+     * tetap hidup di backstack selama alur Ajukan Pinjaman (RequestLoanGraph) atau QRIS
+     * (di-push, bukan popUpTo Home), jadi begitu balik ke Home setelah transaksi SELESAI SAAT ITU
+     * JUGA (pinjaman auto-cair di bawah ambang review, atau QRIS berhasil), kotak plafond perlu
+     * di-refresh manual di sini - tidak ada FCM push buat kasus sinkron ini (beda dari kasus BM
+     * approve/reject yang asinkron lewat LOAN_APPROVAL/LOAN_REVIEW_DECISION di atas). */
+    fun onResume() {
+        if (_accountState.value == AccountState.ACTIVE) {
+            viewModelScope.launch { refreshLimitSummary() }
         }
     }
 

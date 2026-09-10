@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.klarfinance.app-mergeDebugResources-84:/values-v30/values-v30.xml",
+            "outputFile": "com.klarfinance.app-mergeDebugResources-94:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "/Users/hizkiaalb/.gradle/caches/8.9/transforms/ed3c316fe3bbfc119d8e788fba79d4f6/transformed/material3-release/res/values-v30/values-v30.xml",
+                    "source": "/Users/hizkiaalb/.gradle/caches/8.9/transforms/c4b3cd009907d2b698c20e49dbb0fecc/transformed/material3-release/res/values-v30/values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

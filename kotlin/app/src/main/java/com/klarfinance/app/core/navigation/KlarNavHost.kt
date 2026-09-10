@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -16,6 +18,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.klarfinance.app.domain.model.AccountState
 import com.klarfinance.app.presentation.account.AccountScreen
+import com.klarfinance.app.presentation.history.HistoryScreen
+import com.klarfinance.app.presentation.history.HistoryViewModel
+import com.klarfinance.app.presentation.history.PaymentScreen
 import com.klarfinance.app.presentation.home.HomeScreen
 import com.klarfinance.app.presentation.home.HomeViewModel
 import com.klarfinance.app.presentation.loan.RequestLoanViewModel
@@ -34,6 +39,9 @@ import com.klarfinance.app.presentation.register.selfie.SelfieCaptureScreen
 import com.klarfinance.app.presentation.register.success.RegisterSuccessScreen
 import com.klarfinance.app.presentation.register.verify.VerifyIdentityScreen
 import com.klarfinance.app.presentation.splash.SplashScreen
+import com.klarfinance.app.presentation.transjakarta.TransjakartaPurchaseViewModel
+import com.klarfinance.app.presentation.transjakarta.confirm.TransjakartaConfirmScreen
+import com.klarfinance.app.presentation.transjakarta.home.TransjakartaHomeScreen
 
 @Composable
 fun KlarNavHost(navController: NavHostController = rememberNavController()) {
@@ -60,19 +68,29 @@ fun KlarNavHost(navController: NavHostController = rememberNavController()) {
             val viewModel = hiltViewModel<HomeViewModel>()
             val accountState by viewModel.accountState.collectAsStateWithLifecycle()
             val limitSummary by viewModel.limitSummary.collectAsStateWithLifecycle()
+            // Home instance ini tetap hidup di backstack selama alur Ajukan Pinjaman/QRIS (push,
+            // bukan popUpTo Home) - refresh kotak plafond tiap balik ke Home (termasuk begitu
+            // pinjaman auto-cair atau QRIS selesai), lihat HomeViewModel.onResume().
+            LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { viewModel.onResume() }
             HomeScreen(
                 onLoginRequested = { navController.navigate(Screen.Login.route) },
                 onAccountClick = { navController.navigate(Screen.Account.route) },
+                onHistoryClick = { navController.navigate(Screen.HistoryGraph.route) },
                 onRequestLoanClick = { navController.navigate(Screen.RequestLoanGraph.route) },
                 onPayClick = { navController.navigate(Screen.QrisScan.route) },
+                onTransjakartaClick = { navController.navigate(Screen.TransjakartaGraph.route) },
                 accountState = accountState,
                 limitSummary = limitSummary,
             )
         }
 
+        historyGraph(navController)
+
         composable(Screen.Referral.route) {
             ReferralScreen(onBackClick = { navController.popBackStack() })
         }
+
+        transjakartaGraph(navController)
 
         composable(Screen.QrisScan.route) {
             QrisScanScreen(
@@ -103,6 +121,11 @@ fun KlarNavHost(navController: NavHostController = rememberNavController()) {
             AccountScreen(
                 onHomeClick = { navController.popBackStack() },
                 onReferralClick = { navController.navigate(Screen.Referral.route) },
+                onHistoryClick = {
+                    navController.navigate(Screen.HistoryGraph.route) {
+                        popUpTo(Screen.Home.route) { inclusive = false }
+                    }
+                },
                 onLoggedOut = {
                     // Same pattern as RegisterSuccess/PasswordLogin - drop the old (signed-in)
                     // Home plus Account itself, leaving a fresh GUEST Home as the sole entry.
@@ -248,6 +271,51 @@ private fun NavBackStackEntry.registerViewModel(navController: NavHostController
     return hiltViewModel(parentEntry)
 }
 
+/** History (jadwal cicilan) dan Payment (halaman Bayar) berbagi satu [HistoryViewModel] - sama
+ * pola dengan [requestLoanGraph] - supaya Payment gak perlu network call baru buat data cicilan
+ * yang sudah kebawa dari GET /loan/history saat History dimuat. */
+private fun NavGraphBuilder.historyGraph(navController: NavHostController) {
+    navigation(startDestination = Screen.History.route, route = Screen.HistoryGraph.route) {
+        composable(Screen.History.route) { backStackEntry ->
+            val viewModel = backStackEntry.historyViewModel(navController)
+            HistoryScreen(
+                // History selalu dipush langsung di atas Home (dari tab Home ATAU Account,
+                // lihat wiring di bawah), sama pola dengan onHomeClick punya AccountScreen -
+                // satu pop cukup buat balik ke Home.
+                onHomeClick = { navController.popBackStack(Screen.Home.route, inclusive = false) },
+                onAccountClick = {
+                    navController.navigate(Screen.Account.route) {
+                        popUpTo(Screen.Home.route) { inclusive = false }
+                    }
+                },
+                onBayarClick = { item -> navController.navigate(Screen.Payment.createRoute(item.loanId)) },
+                viewModel = viewModel,
+            )
+        }
+
+        composable(
+            route = Screen.Payment.route,
+            arguments = listOf(navArgument(Screen.Payment.ARG_LOAN_ID) { type = NavType.IntType }),
+        ) { backStackEntry ->
+            val viewModel = backStackEntry.historyViewModel(navController)
+            val loanId = backStackEntry.arguments?.getInt(Screen.Payment.ARG_LOAN_ID) ?: 0
+            PaymentScreen(
+                loanId = loanId,
+                onBackClick = { navController.popBackStack() },
+                viewModel = viewModel,
+            )
+        }
+    }
+}
+
+/** Sama pola dengan [requestLoanViewModel]/[registerViewModel] - History dan Payment berbagi satu
+ * instance supaya jadwal cicilan yang sudah dimuat di History masih ada pas Payment dibuka. */
+@Composable
+private fun NavBackStackEntry.historyViewModel(navController: NavHostController): HistoryViewModel {
+    val parentEntry = remember(this) { navController.getBackStackEntry(Screen.HistoryGraph.route) }
+    return hiltViewModel(parentEntry)
+}
+
 private fun NavGraphBuilder.requestLoanGraph(navController: NavHostController) {
     navigation(startDestination = Screen.LoanAmount.route, route = Screen.RequestLoanGraph.route) {
         composable(Screen.LoanAmount.route) { backStackEntry ->
@@ -278,5 +346,41 @@ private fun NavGraphBuilder.requestLoanGraph(navController: NavHostController) {
 @Composable
 private fun NavBackStackEntry.requestLoanViewModel(navController: NavHostController): RequestLoanViewModel {
     val parentEntry = remember(this) { navController.getBackStackEntry(Screen.RequestLoanGraph.route) }
+    return hiltViewModel(parentEntry)
+}
+
+private fun NavGraphBuilder.transjakartaGraph(navController: NavHostController) {
+    navigation(startDestination = Screen.TransjakartaHome.route, route = Screen.TransjakartaGraph.route) {
+        composable(Screen.TransjakartaHome.route) { backStackEntry ->
+            val viewModel = backStackEntry.transjakartaPurchaseViewModel(navController)
+            TransjakartaHomeScreen(
+                onBackClick = { navController.popBackStack() },
+                onBuyClick = { navController.navigate(Screen.TransjakartaConfirm.route) },
+                viewModel = viewModel,
+            )
+        }
+
+        composable(Screen.TransjakartaConfirm.route) { backStackEntry ->
+            val viewModel = backStackEntry.transjakartaPurchaseViewModel(navController)
+            TransjakartaConfirmScreen(
+                onBackClick = { navController.popBackStack() },
+                // Balik ke Home (bukan halaman tiket terpisah - QR ditampilin inline di riwayat
+                // Home, konfirmasi user) - popBackStack polos cukup karena Home masih di
+                // backstack (start destination graph ini, cuma di-push sekali).
+                onPurchased = {
+                    viewModel.consumePurchasedTickets()
+                    navController.popBackStack()
+                },
+                viewModel = viewModel,
+            )
+        }
+    }
+}
+
+/** Sama pola dengan [requestLoanViewModel] - TransjakartaHomeScreen dan TransjakartaConfirmScreen
+ * berbagi satu instance supaya qty yang dipilih di Home masih ada pas submit di Confirm. */
+@Composable
+private fun NavBackStackEntry.transjakartaPurchaseViewModel(navController: NavHostController): TransjakartaPurchaseViewModel {
+    val parentEntry = remember(this) { navController.getBackStackEntry(Screen.TransjakartaGraph.route) }
     return hiltViewModel(parentEntry)
 }

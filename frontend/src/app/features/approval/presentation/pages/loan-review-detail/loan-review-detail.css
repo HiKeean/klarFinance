@@ -55,10 +55,11 @@
 
 .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; background: #eef1f4; color: #53636a; }
 
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .stat-tile { border-radius: 8px; padding: 12px; text-align: center; background: #f4f6f8; }
 .stat-tile.neutral { background: #f4f6f8; color: #53636a; }
 .stat-tile.info { background: #eaf1fb; color: #2d5fa8; }
+.stat-tile.warn { background: #fdf1e6; color: #a85f2d; }
 .stat-number { display: block; font-size: 18px; font-weight: 800; }
 .stat-label { font-size: 11px; font-weight: 600; }
 .utilization-note { margin: 12px 0 0; color: #53636a; font-size: 12px; }

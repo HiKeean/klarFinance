@@ -144,6 +144,10 @@ dependencies {
 
     implementation(libs.okhttp.core)
     implementation(libs.okhttp.logging.interceptor)
+    // Real Chucker cuma di debug build - release pakai library-no-op (API sama, no-op) supaya
+    // gak perlu ngondisikan pemasangan ChuckerInterceptor di NetworkModule secara manual.
+    debugImplementation(libs.chucker)
+    releaseImplementation(libs.chucker.no.op)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines.android)
 
@@ -156,7 +160,11 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
     implementation(libs.mlkit.barcode.scanning)
+    implementation(libs.mlkit.text.recognition)
     implementation(libs.coil.compose)
+    // Generate QR mockup buat tiket Transjakarta (beda dari mlkit.barcode.scanning di atas -
+    // itu buat DECODE/scan QRIS, ini buat bikin/render QR-nya, gak butuh izin kamera).
+    implementation(libs.zxing.core)
 
     implementation(libs.androidx.biometric)
     implementation(libs.androidx.security.crypto)

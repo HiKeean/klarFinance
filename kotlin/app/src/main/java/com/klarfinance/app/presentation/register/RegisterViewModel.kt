@@ -6,6 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.klarfinance.app.core.navigation.Screen
+import com.klarfinance.app.core.ocr.KtpTextRecognizer
 import com.klarfinance.app.core.scan.InstalledAppsScanner
 import com.klarfinance.app.core.util.compressImageForUpload
 import com.klarfinance.app.domain.model.LocationOption
@@ -51,8 +52,21 @@ class RegisterViewModel @Inject constructor(
         loadProvinces()
     }
 
+    /** Auto-fill NIK/Nama dari foto KTP (konfirmasi user 2026-09-06, OCR on-device - lihat
+     * KtpTextRecognizer) - best-effort, field tetap bisa dikoreksi manual di CompleteProfileScreen.
+     * Aman dijalankan tiap kali KTP di-(re)capture karena user selalu lewat langkah ini SEBELUM
+     * CompleteProfileScreen (lihat KlarNavHost), jadi tidak akan menimpa input manual. */
     fun onKtpCaptured(uri: Uri) {
         _uiState.update { it.copy(ktpPhotoUri = uri) }
+        viewModelScope.launch {
+            val result = KtpTextRecognizer.recognize(appContext, uri)
+            _uiState.update {
+                it.copy(
+                    fullName = result.name ?: it.fullName,
+                    nik = result.nik ?: it.nik,
+                )
+            }
+        }
     }
 
     fun onKycCaptured(uri: Uri) {

@@ -14,7 +14,7 @@
             "type": "java",
             "request": "launch",
             "name": "Launch KlarFinance Backend",
-            "mainClass": "com.api.authssohmac.KlarFinanceApplication",
+            "mainClass": "com.api.klarfinance.KlarFinanceApplication",
             "projectName": "klarfinance",
             "envFile": "${workspaceFolder}/backend/klarfinance/.env.dev"
         },
@@ -45,8 +45,8 @@
             "name": "Spring Boot-KlarFinanceApplication<api-auth-hizkia>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.api.authssohmac.KlarFinanceApplication",
-            "projectName": "api-auth-hizkia",
+            "mainClass": "com.api.klarfinance.KlarFinanceApplication",
+            "projectName": "klarfinance",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

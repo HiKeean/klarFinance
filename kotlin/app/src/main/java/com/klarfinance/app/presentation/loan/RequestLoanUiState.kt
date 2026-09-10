@@ -1,6 +1,7 @@
 package com.klarfinance.app.presentation.loan
 
 import com.klarfinance.app.domain.model.LimitSummary
+import com.klarfinance.app.domain.model.SavedBankAccount
 import kotlin.math.roundToLong
 
 /** Bank tujuan pencairan - belum ada master data bank di backend (lihat LoanRequest.bankCode di
@@ -47,11 +48,29 @@ data class RequestLoanUiState(
 
     val amountInput: String = "",
     val tenorMonths: Int = TENOR_OPTIONS.first(),
+
+    /** Rekening tujuan pencairan (konfirmasi user 2026-09-07 - "simpan di db"): kalau nasabah
+     * SUDAH punya rekening tersimpan dari pengajuan sebelumnya (savedBankAccounts non-kosong),
+     * pilih salah satu lewat dropdown (selectedSavedBankAccountId) - TIDAK perlu ketik manual
+     * lagi. Kalau belum pernah ada (list kosong), field manual di bawah ini yang dipakai, sama
+     * seperti sebelumnya. Lihat [isBankStepValid]/[resolvedBankAccount]. */
+    val savedBankAccounts: List<SavedBankAccount> = emptyList(),
+    val isLoadingSavedBankAccounts: Boolean = true,
+    val selectedSavedBankAccountId: Int? = null,
     val bankAccountNumber: String = "",
     val bankCode: String = BANK_OPTIONS.first().code,
 
     val isSubmitting: Boolean = false,
     val submitErrorMessage: String? = null,
+
+    /** Step-up auth (konfirmasi user 2026-09-07): true begitu tombol submit ditekan TAPI
+     * fingerprint nasabah gak aktif - munculin TransactionPasswordDialog, submit sebenarnya baru
+     * jalan setelah passwordInput ini lolos VerifyPasswordUseCase. Kalau fingerprint aktif, alur
+     * ini gak pernah dipakai (langsung BiometricPrompt, lihat RequestLoanViewModel.onSubmitClick). */
+    val requiresPasswordConfirm: Boolean = false,
+    val passwordInput: String = "",
+    val isVerifyingPassword: Boolean = false,
+    val passwordError: String? = null,
 ) {
     private val amount: Long get() = amountInput.filter(Char::isDigit).toLongOrNull() ?: 0L
 
@@ -59,9 +78,28 @@ data class RequestLoanUiState(
     val isAmountStepValid: Boolean
         get() = amount > 0 && limitSummary?.let { amount <= it.availableLimit } != false
 
-    /** Langkah 2 (rekening tujuan) - dipanggil pas mau submit beneran. */
+    /** Langkah 2 (rekening tujuan) - dipanggil pas mau submit beneran. Kalau punya rekening
+     * tersimpan, valid begitu salah satu dipilih dari dropdown; kalau belum punya sama sekali,
+     * valid begitu field manual terisi (perilaku lama). */
     val isBankStepValid: Boolean
-        get() = bankAccountNumber.isNotBlank()
+        get() {
+            if (isLoadingSavedBankAccounts) return false
+            return if (savedBankAccounts.isNotEmpty()) {
+                selectedSavedBankAccountId != null
+            } else {
+                bankAccountNumber.isNotBlank()
+            }
+        }
+
+    /** Rekening yang beneran dipakai buat submit - dari dropdown kalau ada yang tersimpan/dipilih,
+     * dari field manual kalau enggak. Null kalau [isBankStepValid] false, caller (ViewModel) harus
+     * cek itu duluan sebelum submit. */
+    val resolvedBankAccount: Pair<String, String>?
+        get() = if (savedBankAccounts.isNotEmpty()) {
+            savedBankAccounts.find { it.id == selectedSavedBankAccountId }?.let { it.bankCode to it.bankAccountNumber }
+        } else {
+            bankAccountNumber.takeIf { it.isNotBlank() }?.let { bankCode to it }
+        }
 
     /** 3 pilihan cepat nominal, DIHITUNG dari plafond TERSEDIA nasabah masing-masing (bukan
      * angka universal seperti di referensi desain) - 25%/50%/100% dari availableLimit,
@@ -115,6 +153,15 @@ data class RequestLoanUiState(
     val netAmountReceived: Long
         get() = amount - adminFee
 
+    /** Rate bunga per bulan untuk tenor yang dipilih (konfirmasi user 2026-09-07 - dipakai buat
+     * label "Bunga (X bulan) Y%"), mirror LoanInterestPolicy.MONTHLY_RATE_PERCENT_BY_TENOR di
+     * backend. Diformat tanpa ".0" kalau bilangan bulat (3%, bukan 3.0%). */
+    val monthlyRatePercentLabel: String
+        get() {
+            val rate = MONTHLY_RATE_PERCENT_BY_TENOR[tenorMonths] ?: return "-"
+            return if (rate == rate.toInt().toDouble()) "${rate.toInt()}%" else "$rate%"
+        }
+
     /** Total bunga flat selama tenor yang dipilih - mirror LoanService.createLoan di backend
      * (amount * rate% * tenorMonths), dihitung dari nominal pinjaman PENUH, bukan nominal yang
      * diterima. */
@@ -123,6 +170,18 @@ data class RequestLoanUiState(
             val monthlyRate = MONTHLY_RATE_PERCENT_BY_TENOR[tenorMonths] ?: return 0L
             return (amount * monthlyRate / 100.0 * tenorMonths).roundToLong()
         }
+
+    /** Total tagihan (pokok + bunga) - mirror LoanService.createLoan (backend) totalAmountDue,
+     * SEBELUM potongan diskon referral (backend yang tau eligibility reward itu, bukan klien). */
+    val totalAmountDue: Long
+        get() = amount + totalInterest
+
+    /** Cicilan per bulan (konfirmasi user 2026-09-07, preview "yang akan dibayar per bulannya") -
+     * mirror LoanService.generateInstallments (totalAmountDue / tenorMonths, rata tiap bulan) -
+     * backend nyerap sisa pembulatan ke cicilan TERAKHIR, di sini cukup dibulatkan biasa buat
+     * preview, bukan sumber kebenaran jadwal cicilan sebenarnya. */
+    val installmentAmount: Long
+        get() = if (tenorMonths > 0) (totalAmountDue.toDouble() / tenorMonths).roundToLong() else 0L
 
     fun amountValue(): Long = amount
 }

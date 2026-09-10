@@ -13,6 +13,7 @@ import com.klarfinance.app.data.dto.RefreshTokenRequestDto
 import com.klarfinance.app.data.dto.RegisterResponseDataDto
 import com.klarfinance.app.data.dto.RequestOtpRequestDto
 import com.klarfinance.app.data.dto.VerifyOtpRequestDto
+import com.klarfinance.app.data.dto.VerifyPasswordRequestDto
 import com.klarfinance.app.domain.model.AccountProfile
 import com.klarfinance.app.domain.model.AccountState
 import com.klarfinance.app.domain.model.LoginResult
@@ -101,6 +102,14 @@ class AuthRepositoryImpl @Inject constructor(
         apiService.patch<Unit, ChangePasswordRequestDto>(
             "api/v1/internal/auth/change-password",
             ChangePasswordRequestDto(oldPassword, newPassword),
+        )
+        Unit
+    }
+
+    override suspend fun verifyPassword(password: String): Result<Unit> = runCatching {
+        apiService.post<Unit, VerifyPasswordRequestDto>(
+            "api/v1/internal/auth/verify-password",
+            VerifyPasswordRequestDto(password),
         )
         Unit
     }

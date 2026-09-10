@@ -6,6 +6,7 @@ import com.klarfinance.app.data.repository.LocationRepositoryImpl
 import com.klarfinance.app.data.repository.LocationTrackingRepositoryImpl
 import com.klarfinance.app.data.repository.QrisRepositoryImpl
 import com.klarfinance.app.data.repository.ReferralRepositoryImpl
+import com.klarfinance.app.data.repository.TransjakartaRepositoryImpl
 import com.klarfinance.app.data.repository.VerifiedPhoneRepositoryImpl
 import com.klarfinance.app.domain.repository.AuthRepository
 import com.klarfinance.app.domain.repository.LoanRepository
@@ -13,6 +14,7 @@ import com.klarfinance.app.domain.repository.LocationRepository
 import com.klarfinance.app.domain.repository.LocationTrackingRepository
 import com.klarfinance.app.domain.repository.QrisRepository
 import com.klarfinance.app.domain.repository.ReferralRepository
+import com.klarfinance.app.domain.repository.TransjakartaRepository
 import com.klarfinance.app.domain.repository.VerifiedPhoneRepository
 import dagger.Binds
 import dagger.Module
@@ -51,4 +53,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindQrisRepository(impl: QrisRepositoryImpl): QrisRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTransjakartaRepository(impl: TransjakartaRepositoryImpl): TransjakartaRepository
 }

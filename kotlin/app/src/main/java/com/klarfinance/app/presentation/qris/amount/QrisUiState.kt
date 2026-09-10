@@ -17,6 +17,13 @@ data class QrisUiState(
     val amountInput: String = "",
     val isSubmitting: Boolean = false,
     val submitErrorMessage: String? = null,
+
+    /** Step-up auth (konfirmasi user 2026-09-07) - lihat RequestLoanUiState field yang sama
+     * persis alasannya (fingerprint kalau aktif, TransactionPasswordDialog kalau enggak). */
+    val requiresPasswordConfirm: Boolean = false,
+    val passwordInput: String = "",
+    val isVerifyingPassword: Boolean = false,
+    val passwordError: String? = null,
 ) {
     private val amount: Long get() = amountInput.filter(Char::isDigit).toLongOrNull() ?: 0L
 

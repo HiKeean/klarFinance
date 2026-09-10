@@ -1,8 +1,8 @@
 /**
  * Item antrean approval BM/Checker - unified (backend: ApprovalQueueItemResponse). `type`
  * membedakan pengajuan limit baru vs pengajuan pinjaman >30% yang butuh review ulang BM (lihat
- * bm-approval-lock.md / knowledge "loan-review-30-percent"). Field yang tidak relevan untuk
- * salah satu type null.
+ * bm-approval-lock.md / knowledge "loan-review-30-percent").
+ * Field yang tidak relevan untuk salah satu type null.
  */
 export interface LimitApplicationSummary {
   type: 'LIMIT_APPLICATION' | 'LOAN_REVIEW';
@@ -65,11 +65,14 @@ export interface LoanReviewDetail {
   usedLimitSnapshot: number;
   totalLimitSnapshot: number;
   utilizationPercent: number;
+  projectedTotalDebt: number;
   pefindoScore: string | null;
   pefindoColStatus: number | null;
   pefindoRiskLabel: string | null;
   pinjolAppsCount: number;
   bankingAppsCount: number;
+  pinjolApps: string[];
+  bankApps: string[];
   bmReason: string | null;
   createdAt: string;
   lockedByIdentity: string | null;

@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.klarfinance.app-release-82:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.klarfinance.app-main-83:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.klarfinance.app-release-82:/xml_network_security_config.xml.flat",
+        "source": "com.klarfinance.app-res-76:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "com.klarfinance.app-release-82:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.klarfinance.app-main-83:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.klarfinance.app-release-82:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.klarfinance.app-main-83:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.klarfinance.app-release-82:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.klarfinance.app-main-83:/drawable/ic_launcher_background.xml"
+    }
+]

@@ -7,6 +7,7 @@ import com.klarfinance.app.di.DatabaseModule;
 import com.klarfinance.app.di.NetworkModule;
 import com.klarfinance.app.di.RepositoryModule;
 import com.klarfinance.app.presentation.account.AccountViewModel_HiltModules;
+import com.klarfinance.app.presentation.history.HistoryViewModel_HiltModules;
 import com.klarfinance.app.presentation.home.HomeViewModel_HiltModules;
 import com.klarfinance.app.presentation.loan.RequestLoanViewModel_HiltModules;
 import com.klarfinance.app.presentation.login.LoginViewModel_HiltModules;
@@ -16,6 +17,7 @@ import com.klarfinance.app.presentation.qris.amount.QrisViewModel_HiltModules;
 import com.klarfinance.app.presentation.referral.ReferralViewModel_HiltModules;
 import com.klarfinance.app.presentation.register.RegisterViewModel_HiltModules;
 import com.klarfinance.app.presentation.splash.SplashViewModel_HiltModules;
+import com.klarfinance.app.presentation.transjakarta.TransjakartaPurchaseViewModel_HiltModules;
 import dagger.Binds;
 import dagger.Component;
 import dagger.Module;
@@ -175,6 +177,7 @@ public final class KlarFinanceApp_HiltComponents {
           AccountViewModel_HiltModules.KeyModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
           HiltWrapper_SavedStateHandleModule.class,
+          HistoryViewModel_HiltModules.KeyModule.class,
           HomeViewModel_HiltModules.KeyModule.class,
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class,
@@ -185,7 +188,8 @@ public final class KlarFinanceApp_HiltComponents {
           ReferralViewModel_HiltModules.KeyModule.class,
           RegisterViewModel_HiltModules.KeyModule.class,
           RequestLoanViewModel_HiltModules.KeyModule.class,
-          SplashViewModel_HiltModules.KeyModule.class
+          SplashViewModel_HiltModules.KeyModule.class,
+          TransjakartaPurchaseViewModel_HiltModules.KeyModule.class
       }
   )
   @ActivityRetainedScoped
@@ -223,6 +227,7 @@ public final class KlarFinanceApp_HiltComponents {
       modules = {
           AccountViewModel_HiltModules.BindsModule.class,
           HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
+          HistoryViewModel_HiltModules.BindsModule.class,
           HomeViewModel_HiltModules.BindsModule.class,
           LoginViewModel_HiltModules.BindsModule.class,
           OtpViewModel_HiltModules.BindsModule.class,
@@ -231,7 +236,8 @@ public final class KlarFinanceApp_HiltComponents {
           ReferralViewModel_HiltModules.BindsModule.class,
           RegisterViewModel_HiltModules.BindsModule.class,
           RequestLoanViewModel_HiltModules.BindsModule.class,
-          SplashViewModel_HiltModules.BindsModule.class
+          SplashViewModel_HiltModules.BindsModule.class,
+          TransjakartaPurchaseViewModel_HiltModules.BindsModule.class
       }
   )
   @ViewModelScoped
