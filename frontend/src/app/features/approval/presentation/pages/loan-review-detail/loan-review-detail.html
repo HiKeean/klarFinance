@@ -37,7 +37,11 @@
           <div class="stat-grid">
             <div class="stat-tile neutral">
               <span class="stat-number">Rp {{ d.usedLimitSnapshot.toLocaleString('id-ID') }}</span>
-              <span class="stat-label">Pinjaman Berjalan</span>
+              <span class="stat-label">Pokok Utang Berjalan (Saat Ini)</span>
+            </div>
+            <div class="stat-tile warn">
+              <span class="stat-number">Rp {{ d.projectedTotalDebt.toLocaleString('id-ID') }}</span>
+              <span class="stat-label">Jika Disetujui, Total Utang Jadi</span>
             </div>
             <div class="stat-tile info">
               <span class="stat-number">Rp {{ d.totalLimitSnapshot.toLocaleString('id-ID') }}</span>
@@ -58,8 +62,14 @@
           </div>
           <div class="detail-list compact">
             <div><span class="label">KOL Terbaru</span><span class="value">{{ d.pefindoColStatus != null ? 'KOL ' + d.pefindoColStatus : '-' }}</span></div>
-            <div><span class="label">Aplikasi Pinjol Terdeteksi</span><span class="value">{{ d.pinjolAppsCount }} aplikasi (hasil scan ulang saat pengajuan)</span></div>
-            <div><span class="label">Aplikasi Bank Terdeteksi</span><span class="value">{{ d.bankingAppsCount }} aplikasi</span></div>
+            <div>
+              <span class="label">Aplikasi Pinjol Terdeteksi</span>
+              <span class="value">{{ d.pinjolAppsCount }} aplikasi{{ d.pinjolApps.length ? ': ' + d.pinjolApps.join(', ') : '' }}</span>
+            </div>
+            <div>
+              <span class="label">Aplikasi Bank Terdeteksi</span>
+              <span class="value">{{ d.bankingAppsCount }} aplikasi{{ d.bankApps.length ? ': ' + d.bankApps.join(', ') : '' }}</span>
+            </div>
           </div>
         </div>
       </div>

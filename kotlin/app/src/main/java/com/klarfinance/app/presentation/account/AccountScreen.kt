@@ -96,6 +96,7 @@ import kotlinx.coroutines.launch
 fun AccountScreen(
     onHomeClick: () -> Unit,
     onReferralClick: () -> Unit,
+    onHistoryClick: () -> Unit,
     onLoggedOut: () -> Unit,
     viewModel: AccountViewModel = hiltViewModel(),
 ) {
@@ -163,6 +164,7 @@ fun AccountScreen(
         snackbarHostState = snackbarHostState,
         onHomeClick = onHomeClick,
         onReferralClick = onReferralClick,
+        onHistoryClick = onHistoryClick,
         onRetryClick = viewModel::loadProfile,
         onToggleSecurityChecklist = viewModel::onToggleSecurityChecklist,
         onEnableFingerprintClick = { activity?.let(viewModel::onEnableFingerprintClick) },
@@ -183,6 +185,7 @@ private fun AccountContent(
     snackbarHostState: SnackbarHostState,
     onHomeClick: () -> Unit,
     onReferralClick: () -> Unit,
+    onHistoryClick: () -> Unit,
     onRetryClick: () -> Unit,
     onToggleSecurityChecklist: () -> Unit,
     onEnableFingerprintClick: () -> Unit,
@@ -223,6 +226,7 @@ private fun AccountContent(
                 onHomeClick = onHomeClick,
                 onAccountClick = {},
                 onLockedTabClick = onComingSoonClick,
+                onHistoryClick = onHistoryClick,
             )
         },
     ) { padding ->

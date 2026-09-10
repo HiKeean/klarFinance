@@ -12,6 +12,11 @@ data class LimitSummary(
      * nasabah belum eligible (plafond < Rp2jt). */
     val qrisQuota: Long? = null,
     val qrisUsedAmount: Long? = null,
+    /** true kalau nasabah punya pengajuan tarik tunai yang masih PENDING_BM (LoanReviewRequest,
+     * pinjaman >30% plafond) - selama true, tombol "Ajukan Pinjaman" (tarik tunai) dikunci di
+     * Home. TIDAK memengaruhi QRIS (konfirmasi user: aturan >30% cuma berlaku untuk tarik tunai,
+     * QRIS tetap bisa dipakai selama review berjalan). */
+    val hasPendingLoanReview: Boolean = false,
 ) {
     val isQrisEligible: Boolean get() = qrisQuota != null
 }

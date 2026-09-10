@@ -22,14 +22,26 @@ class SecureTokenStore @Inject constructor(
         val masterKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
             .build()
-        EncryptedSharedPreferences.create(
-            context,
-            "klarfinance_secure_prefs",
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
-        )
+        try {
+            createPrefs(context, masterKey)
+        } catch (e: Exception) {
+            // The keystore-backed master key can become unusable while the encrypted prefs
+            // file on disk survives (lock screen change, device restore, reinstall without
+            // clearing data) - decryption then fails with AEADBadTagException and crashes
+            // the app on every launch. The file only ever holds a refresh token, so it's safe
+            // to drop and start clean; the user just re-authenticates.
+            context.deleteSharedPreferences(PREFS_NAME)
+            createPrefs(context, masterKey)
+        }
     }
+
+    private fun createPrefs(context: Context, masterKey: MasterKey) = EncryptedSharedPreferences.create(
+        context,
+        PREFS_NAME,
+        masterKey,
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
+    )
 
     fun saveRefreshToken(token: String) {
         prefs.edit().putString(KEY_REFRESH_TOKEN, token).apply()
@@ -44,6 +56,7 @@ class SecureTokenStore @Inject constructor(
     }
 
     companion object {
+        private const val PREFS_NAME = "klarfinance_secure_prefs"
         private const val KEY_REFRESH_TOKEN = "refresh_token"
     }
 }

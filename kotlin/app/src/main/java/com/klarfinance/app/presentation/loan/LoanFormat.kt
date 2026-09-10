@@ -1,11 +1,13 @@
 package com.klarfinance.app.presentation.loan
 
+/** Thousand-separator grouping tanpa prefix "Rp" - dipakai formatRupiah di bawah DAN buat live-
+ * format field input nominal (LoanAmountScreen/QrisAmountScreen) selagi user ngetik, konfirmasi
+ * user 2026-09-07 ("angka nominalnya jadiin Rupiah Format, jadi 10.000 atau 100.000"). */
+fun groupThousands(digits: String): String = digits.reversed().chunked(3).joinToString(".").reversed()
+
 /** Same grouping approach as HomeScreen.formatRupiah - kept as a small local duplicate rather
  * than a shared core util, consistent with how this codebase treats trivial one-off formatters. */
-fun formatRupiah(amount: Long): String {
-    val grouped = amount.toString().reversed().chunked(3).joinToString(".").reversed()
-    return "Rp $grouped"
-}
+fun formatRupiah(amount: Long): String = "Rp ${groupThousands(amount.toString())}"
 
 /** Kompak buat kartu preset kecil (referensi desain: "Rp16.0k") - >=1jt dibulatkan 1 desimal
  * jutaan ("Rp1.5jt"), sisanya ribuan ("Rp250rb"). */

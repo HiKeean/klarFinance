@@ -40,11 +40,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.klarfinance.app.core.theme.KlarTeal
 import com.klarfinance.app.domain.model.LoanRequestResult
+import com.klarfinance.app.domain.model.SavedBankAccount
+import com.klarfinance.app.presentation.components.TransactionPasswordDialog
 import com.klarfinance.app.presentation.loan.BANK_OPTIONS
 import com.klarfinance.app.presentation.loan.RequestLoanViewModel
 import com.klarfinance.app.presentation.loan.formatRupiah
@@ -64,6 +69,7 @@ fun LoanBankAccountScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var result by remember { mutableStateOf<LoanRequestResult?>(null) }
+    val activity = LocalContext.current as? FragmentActivity
 
     LaunchedEffect(Unit) {
         viewModel.submitted.collectLatest { result = it }
@@ -75,6 +81,17 @@ fun LoanBankAccountScreen(
         } else {
             SuccessDialog(result = submitted, onDismiss = onDone)
         }
+    }
+
+    if (uiState.requiresPasswordConfirm) {
+        TransactionPasswordDialog(
+            password = uiState.passwordInput,
+            onPasswordChange = viewModel::onPasswordInputChange,
+            onConfirm = viewModel::onPasswordConfirm,
+            onDismiss = viewModel::onPasswordConfirmDismiss,
+            isVerifying = uiState.isVerifyingPassword,
+            errorMessage = uiState.passwordError,
+        )
     }
 
     Scaffold(
@@ -91,7 +108,7 @@ fun LoanBankAccountScreen(
         bottomBar = {
             Box(modifier = Modifier.padding(20.dp)) {
                 Button(
-                    onClick = viewModel::onSubmitClick,
+                    onClick = { activity?.let(viewModel::onSubmitClick) },
                     enabled = uiState.isBankStepValid && !uiState.isSubmitting,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -116,18 +133,45 @@ fun LoanBankAccountScreen(
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                "Cicilan per bulan: ${formatRupiah(uiState.installmentAmount)}",
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
             Spacer(modifier = Modifier.height(20.dp))
 
-            OutlinedTextField(
-                value = uiState.bankAccountNumber,
-                onValueChange = viewModel::onBankAccountNumberChange,
-                label = { Text("Nomor Rekening Tujuan") },
-                modifier = Modifier.fillMaxWidth(),
-                singleLine = true,
-            )
+            // Rekening tujuan pencairan (konfirmasi user 2026-09-07 - "simpan di db"): kalau
+            // nasabah sudah pernah pakai rekening sebelumnya, tinggal pilih dari dropdown -
+            // TIDAK perlu ketik ulang. Kalau belum pernah ada sama sekali, jatuh balik ke input
+            // manual seperti sebelumnya (lihat RequestLoanUiState.isBankStepValid). Ditahan
+            // sampai isLoadingSavedBankAccounts selesai biar gak "lompat" dari form manual ke
+            // dropdown di tengah nasabah lagi ngetik kalau responsnya lambat.
+            if (uiState.isLoadingSavedBankAccounts) {
+                Text(
+                    "Memuat rekening tersimpan…",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            } else if (uiState.savedBankAccounts.isNotEmpty()) {
+                SavedBankAccountDropdown(
+                    accounts = uiState.savedBankAccounts,
+                    selectedId = uiState.selectedSavedBankAccountId,
+                    onSelected = viewModel::onSavedBankAccountSelected,
+                )
+            } else {
+                OutlinedTextField(
+                    value = uiState.bankAccountNumber,
+                    onValueChange = viewModel::onBankAccountNumberChange,
+                    label = { Text("Nomor Rekening Tujuan") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                )
 
-            Spacer(modifier = Modifier.height(16.dp))
-            BankDropdown(selectedCode = uiState.bankCode, onSelected = viewModel::onBankCodeSelected)
+                Spacer(modifier = Modifier.height(16.dp))
+                BankDropdown(selectedCode = uiState.bankCode, onSelected = viewModel::onBankCodeSelected)
+            }
 
             if (uiState.submitErrorMessage != null) {
                 Spacer(modifier = Modifier.height(16.dp))
@@ -182,6 +226,63 @@ private fun BankDropdown(selectedCode: String, onSelected: (String) -> Unit) {
             }
         }
     }
+}
+
+/**
+ * Dropdown rekening tujuan yang pernah dipakai (konfirmasi user 2026-09-07 - "simpan di db") -
+ * pola sama persis dengan [BankDropdown] di bawah, cuma isinya dari
+ * RequestLoanUiState.savedBankAccounts (backend), bukan daftar bank statis.
+ */
+@Composable
+private fun SavedBankAccountDropdown(
+    accounts: List<SavedBankAccount>,
+    selectedId: Int?,
+    onSelected: (Int) -> Unit,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val selected = accounts.firstOrNull { it.id == selectedId }
+    val selectedLabel = selected?.let { accountLabel(it) } ?: "Pilih rekening tujuan"
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Text("Rekening Tujuan", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Spacer(modifier = Modifier.height(6.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(
+                    width = if (expanded) 1.5.dp else 1.dp,
+                    color = if (expanded) KlarTeal else MaterialTheme.colorScheme.outline,
+                    shape = RoundedCornerShape(14.dp),
+                )
+                .clickable { expanded = true }
+                .padding(horizontal = 16.dp, vertical = 16.dp),
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(selectedLabel, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onBackground)
+                Icon(Icons.Default.ArrowDropDown, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                accounts.forEach { account ->
+                    DropdownMenuItem(
+                        text = { Text(accountLabel(account)) },
+                        onClick = {
+                            onSelected(account.id)
+                            expanded = false
+                        },
+                    )
+                }
+            }
+        }
+    }
+}
+
+private fun accountLabel(account: SavedBankAccount): String {
+    val bankLabel = BANK_OPTIONS.firstOrNull { it.code == account.bankCode }?.label ?: account.bankCode
+    return "$bankLabel - ${account.bankAccountNumber}"
 }
 
 @Composable

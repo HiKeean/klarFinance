@@ -13,6 +13,11 @@ interface AuthRepository {
     suspend fun login(identity: String, password: String): Result<LoginResult>
     suspend fun getProfile(): Result<AccountProfile>
     suspend fun changePassword(oldPassword: String, newPassword: String): Result<Unit>
+
+    /** Step-up auth generik sebelum konfirmasi transaksi (pinjaman tunai/QRIS) kalau nasabah
+     * belum aktifkan fingerprint (konfirmasi user 2026-09-07) - lihat VerifyPasswordUseCase. */
+    suspend fun verifyPassword(password: String): Result<Unit>
+
     suspend fun logout(): Result<Unit>
 
     /** Redeems a stored refresh token for a fresh session - used by the fingerprint-gated

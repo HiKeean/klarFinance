@@ -1,6 +1,7 @@
 package com.klarfinance.app.presentation.qris.amount
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -37,11 +38,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.klarfinance.app.core.theme.KlarTeal
 import com.klarfinance.app.domain.model.QrisConfirmResult
+import com.klarfinance.app.presentation.components.TransactionPasswordDialog
 import com.klarfinance.app.presentation.loan.formatRupiah
 import kotlinx.coroutines.flow.collectLatest
 
@@ -60,12 +65,24 @@ fun QrisAmountScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var result by remember { mutableStateOf<QrisConfirmResult?>(null) }
+    val activity = LocalContext.current as? FragmentActivity
 
     LaunchedEffect(Unit) {
         viewModel.submitted.collectLatest { result = it }
     }
 
     result?.let { SuccessDialog(result = it, onDismiss = onDone) }
+
+    if (uiState.requiresPasswordConfirm) {
+        TransactionPasswordDialog(
+            password = uiState.passwordInput,
+            onPasswordChange = viewModel::onPasswordInputChange,
+            onConfirm = viewModel::onPasswordConfirm,
+            onDismiss = viewModel::onPasswordConfirmDismiss,
+            isVerifying = uiState.isVerifyingPassword,
+            errorMessage = uiState.passwordError,
+        )
+    }
 
     Scaffold(
         topBar = {
@@ -82,7 +99,7 @@ fun QrisAmountScreen(
             if (!uiState.isScanning && uiState.scanErrorMessage == null) {
                 Column(modifier = Modifier.padding(20.dp)) {
                     Button(
-                        onClick = viewModel::onSubmitClick,
+                        onClick = { activity?.let(viewModel::onSubmitClick) },
                         enabled = uiState.isFormValid && !uiState.isSubmitting,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -141,6 +158,7 @@ fun QrisAmountScreen(
                     prefix = { Text("Rp ") },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 )
 
                 if (uiState.amountValue() > 0) {

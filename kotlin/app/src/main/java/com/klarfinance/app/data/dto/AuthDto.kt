@@ -75,3 +75,10 @@ data class RefreshTokenRequestDto(
 data class FcmTokenRequestDto(
     val fcmToken: String,
 )
+
+/** Step-up auth generik sebelum konfirmasi transaksi (pinjaman/QRIS) kalau nasabah belum
+ * aktifkan fingerprint - lihat domain.usecase.VerifyPasswordUseCase. */
+@Serializable
+data class VerifyPasswordRequestDto(
+    val password: String,
+)
