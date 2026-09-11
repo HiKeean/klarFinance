@@ -12,7 +12,7 @@ public final class BuildConfig {
   // Field from default config.
   public static final String API_KEY = "5338096e064795e6a11ae3758a6ed2786b613a5d";
   // Field from default config.
-  public static final String BASE_URL = "http://10.10.14.85:8080/";
+  public static final String BASE_URL = "http://10.10.14.80:8080/";
   // Field from default config.
   public static final String CLIENT_TYPE = "ANDROID";
   // Field from default config.

@@ -481,38 +481,32 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_klarfinance_app_presentation_referral_ReferralViewModel = "com.klarfinance.app.presentation.referral.ReferralViewModel";
-
-      static String com_klarfinance_app_presentation_login_LoginViewModel = "com.klarfinance.app.presentation.login.LoginViewModel";
-
-      static String com_klarfinance_app_presentation_otp_OtpViewModel = "com.klarfinance.app.presentation.otp.OtpViewModel";
+      static String com_klarfinance_app_presentation_home_HomeViewModel = "com.klarfinance.app.presentation.home.HomeViewModel";
 
       static String com_klarfinance_app_presentation_splash_SplashViewModel = "com.klarfinance.app.presentation.splash.SplashViewModel";
 
       static String com_klarfinance_app_presentation_history_HistoryViewModel = "com.klarfinance.app.presentation.history.HistoryViewModel";
 
-      static String com_klarfinance_app_presentation_home_HomeViewModel = "com.klarfinance.app.presentation.home.HomeViewModel";
-
-      static String com_klarfinance_app_presentation_qris_amount_QrisViewModel = "com.klarfinance.app.presentation.qris.amount.QrisViewModel";
-
       static String com_klarfinance_app_presentation_account_AccountViewModel = "com.klarfinance.app.presentation.account.AccountViewModel";
 
-      static String com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel = "com.klarfinance.app.presentation.passwordlogin.PasswordLoginViewModel";
+      static String com_klarfinance_app_presentation_otp_OtpViewModel = "com.klarfinance.app.presentation.otp.OtpViewModel";
+
+      static String com_klarfinance_app_presentation_login_LoginViewModel = "com.klarfinance.app.presentation.login.LoginViewModel";
 
       static String com_klarfinance_app_presentation_register_RegisterViewModel = "com.klarfinance.app.presentation.register.RegisterViewModel";
 
-      static String com_klarfinance_app_presentation_loan_RequestLoanViewModel = "com.klarfinance.app.presentation.loan.RequestLoanViewModel";
-
       static String com_klarfinance_app_presentation_transjakarta_TransjakartaPurchaseViewModel = "com.klarfinance.app.presentation.transjakarta.TransjakartaPurchaseViewModel";
 
-      @KeepFieldType
-      ReferralViewModel com_klarfinance_app_presentation_referral_ReferralViewModel2;
+      static String com_klarfinance_app_presentation_qris_amount_QrisViewModel = "com.klarfinance.app.presentation.qris.amount.QrisViewModel";
+
+      static String com_klarfinance_app_presentation_loan_RequestLoanViewModel = "com.klarfinance.app.presentation.loan.RequestLoanViewModel";
+
+      static String com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel = "com.klarfinance.app.presentation.passwordlogin.PasswordLoginViewModel";
+
+      static String com_klarfinance_app_presentation_referral_ReferralViewModel = "com.klarfinance.app.presentation.referral.ReferralViewModel";
 
       @KeepFieldType
-      LoginViewModel com_klarfinance_app_presentation_login_LoginViewModel2;
-
-      @KeepFieldType
-      OtpViewModel com_klarfinance_app_presentation_otp_OtpViewModel2;
+      HomeViewModel com_klarfinance_app_presentation_home_HomeViewModel2;
 
       @KeepFieldType
       SplashViewModel com_klarfinance_app_presentation_splash_SplashViewModel2;
@@ -521,25 +515,31 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
       HistoryViewModel com_klarfinance_app_presentation_history_HistoryViewModel2;
 
       @KeepFieldType
-      HomeViewModel com_klarfinance_app_presentation_home_HomeViewModel2;
-
-      @KeepFieldType
-      QrisViewModel com_klarfinance_app_presentation_qris_amount_QrisViewModel2;
-
-      @KeepFieldType
       AccountViewModel com_klarfinance_app_presentation_account_AccountViewModel2;
 
       @KeepFieldType
-      PasswordLoginViewModel com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel2;
+      OtpViewModel com_klarfinance_app_presentation_otp_OtpViewModel2;
+
+      @KeepFieldType
+      LoginViewModel com_klarfinance_app_presentation_login_LoginViewModel2;
 
       @KeepFieldType
       RegisterViewModel com_klarfinance_app_presentation_register_RegisterViewModel2;
 
       @KeepFieldType
+      TransjakartaPurchaseViewModel com_klarfinance_app_presentation_transjakarta_TransjakartaPurchaseViewModel2;
+
+      @KeepFieldType
+      QrisViewModel com_klarfinance_app_presentation_qris_amount_QrisViewModel2;
+
+      @KeepFieldType
       RequestLoanViewModel com_klarfinance_app_presentation_loan_RequestLoanViewModel2;
 
       @KeepFieldType
-      TransjakartaPurchaseViewModel com_klarfinance_app_presentation_transjakarta_TransjakartaPurchaseViewModel2;
+      PasswordLoginViewModel com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel2;
+
+      @KeepFieldType
+      ReferralViewModel com_klarfinance_app_presentation_referral_ReferralViewModel2;
     }
   }
 
@@ -707,65 +707,65 @@ public final class DaggerKlarFinanceApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
-      static String com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel = "com.klarfinance.app.presentation.passwordlogin.PasswordLoginViewModel";
-
-      static String com_klarfinance_app_presentation_login_LoginViewModel = "com.klarfinance.app.presentation.login.LoginViewModel";
-
-      static String com_klarfinance_app_presentation_referral_ReferralViewModel = "com.klarfinance.app.presentation.referral.ReferralViewModel";
-
-      static String com_klarfinance_app_presentation_splash_SplashViewModel = "com.klarfinance.app.presentation.splash.SplashViewModel";
-
       static String com_klarfinance_app_presentation_history_HistoryViewModel = "com.klarfinance.app.presentation.history.HistoryViewModel";
-
-      static String com_klarfinance_app_presentation_home_HomeViewModel = "com.klarfinance.app.presentation.home.HomeViewModel";
-
-      static String com_klarfinance_app_presentation_transjakarta_TransjakartaPurchaseViewModel = "com.klarfinance.app.presentation.transjakarta.TransjakartaPurchaseViewModel";
 
       static String com_klarfinance_app_presentation_qris_amount_QrisViewModel = "com.klarfinance.app.presentation.qris.amount.QrisViewModel";
 
-      static String com_klarfinance_app_presentation_register_RegisterViewModel = "com.klarfinance.app.presentation.register.RegisterViewModel";
+      static String com_klarfinance_app_presentation_splash_SplashViewModel = "com.klarfinance.app.presentation.splash.SplashViewModel";
 
-      static String com_klarfinance_app_presentation_account_AccountViewModel = "com.klarfinance.app.presentation.account.AccountViewModel";
+      static String com_klarfinance_app_presentation_transjakarta_TransjakartaPurchaseViewModel = "com.klarfinance.app.presentation.transjakarta.TransjakartaPurchaseViewModel";
 
       static String com_klarfinance_app_presentation_otp_OtpViewModel = "com.klarfinance.app.presentation.otp.OtpViewModel";
 
+      static String com_klarfinance_app_presentation_register_RegisterViewModel = "com.klarfinance.app.presentation.register.RegisterViewModel";
+
+      static String com_klarfinance_app_presentation_referral_ReferralViewModel = "com.klarfinance.app.presentation.referral.ReferralViewModel";
+
       static String com_klarfinance_app_presentation_loan_RequestLoanViewModel = "com.klarfinance.app.presentation.loan.RequestLoanViewModel";
 
-      @KeepFieldType
-      PasswordLoginViewModel com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel2;
+      static String com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel = "com.klarfinance.app.presentation.passwordlogin.PasswordLoginViewModel";
 
-      @KeepFieldType
-      LoginViewModel com_klarfinance_app_presentation_login_LoginViewModel2;
+      static String com_klarfinance_app_presentation_home_HomeViewModel = "com.klarfinance.app.presentation.home.HomeViewModel";
 
-      @KeepFieldType
-      ReferralViewModel com_klarfinance_app_presentation_referral_ReferralViewModel2;
+      static String com_klarfinance_app_presentation_account_AccountViewModel = "com.klarfinance.app.presentation.account.AccountViewModel";
 
-      @KeepFieldType
-      SplashViewModel com_klarfinance_app_presentation_splash_SplashViewModel2;
+      static String com_klarfinance_app_presentation_login_LoginViewModel = "com.klarfinance.app.presentation.login.LoginViewModel";
 
       @KeepFieldType
       HistoryViewModel com_klarfinance_app_presentation_history_HistoryViewModel2;
 
       @KeepFieldType
-      HomeViewModel com_klarfinance_app_presentation_home_HomeViewModel2;
+      QrisViewModel com_klarfinance_app_presentation_qris_amount_QrisViewModel2;
+
+      @KeepFieldType
+      SplashViewModel com_klarfinance_app_presentation_splash_SplashViewModel2;
 
       @KeepFieldType
       TransjakartaPurchaseViewModel com_klarfinance_app_presentation_transjakarta_TransjakartaPurchaseViewModel2;
 
       @KeepFieldType
-      QrisViewModel com_klarfinance_app_presentation_qris_amount_QrisViewModel2;
+      OtpViewModel com_klarfinance_app_presentation_otp_OtpViewModel2;
 
       @KeepFieldType
       RegisterViewModel com_klarfinance_app_presentation_register_RegisterViewModel2;
 
       @KeepFieldType
-      AccountViewModel com_klarfinance_app_presentation_account_AccountViewModel2;
-
-      @KeepFieldType
-      OtpViewModel com_klarfinance_app_presentation_otp_OtpViewModel2;
+      ReferralViewModel com_klarfinance_app_presentation_referral_ReferralViewModel2;
 
       @KeepFieldType
       RequestLoanViewModel com_klarfinance_app_presentation_loan_RequestLoanViewModel2;
+
+      @KeepFieldType
+      PasswordLoginViewModel com_klarfinance_app_presentation_passwordlogin_PasswordLoginViewModel2;
+
+      @KeepFieldType
+      HomeViewModel com_klarfinance_app_presentation_home_HomeViewModel2;
+
+      @KeepFieldType
+      AccountViewModel com_klarfinance_app_presentation_account_AccountViewModel2;
+
+      @KeepFieldType
+      LoginViewModel com_klarfinance_app_presentation_login_LoginViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {

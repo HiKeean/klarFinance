@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KlarFinance</string>
+    <string name="approval_notification_channel_id" translatable="false">approval_status</string>
+    <string name="gcm_defaultSenderId" translatable="false">763253278408</string>
+    <string name="google_api_key" translatable="false">AIzaSyBKBRhfSX6b5aKn7u50mu1Ddde4Ns7MT9k</string>
+    <string name="google_app_id" translatable="false">1:763253278408:android:6769876b5086e09a14c7fd</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBKBRhfSX6b5aKn7u50mu1Ddde4Ns7MT9k</string>
+    <string name="google_storage_bucket" translatable="false">klarfinance-22dbf.firebasestorage.app</string>
+    <string name="project_id" translatable="false">klarfinance-22dbf</string>
+    <style name="Theme.KlarFinance" parent="android:Theme.Material.Light.NoActionBar"/>
+</resources>
