@@ -108,7 +108,31 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
           script: |
+            set -euo pipefail
             cd ~/klarfinance-backend
+
+            # .env di-generate tiap deploy dari GitHub Secrets - source of truth ada di GitHub,
+            # bukan lagi di file lokal server. Update secret di GitHub, deploy berikutnya otomatis sinkron.
+            cat > .env <<EOF
+            DB_URL=${{ secrets.DB_URL }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            REDIS_HOST=${{ secrets.REDIS_HOST }}
+            REDIS_PORT=${{ secrets.REDIS_PORT }}
+            REDIS_SSL_ENABLED=${{ secrets.REDIS_SSL_ENABLED }}
+            REDIS_USERNAME=${{ secrets.REDIS_USERNAME }}
+            REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}
+            REDIS_TIMEOUT=${{ secrets.REDIS_TIMEOUT }}
+            REDIS_KEY_PREFIX=${{ secrets.REDIS_KEY_PREFIX }}
+            LOCATION_FAILURE_LOG_REDIS_URL=${{ secrets.LOCATION_FAILURE_LOG_REDIS_URL }}
+            KIRIMI_URL=${{ secrets.KIRIMI_URL }}
+            KIRIMI_USER_CODE=${{ secrets.KIRIMI_USER_CODE }}
+            KIRIMI_SECRET=${{ secrets.KIRIMI_SECRET }}
+            KIRIMI_DEVICE_ID=${{ secrets.KIRIMI_DEVICE_ID }}
+            KIRIMI_ENABLED=${{ secrets.KIRIMI_ENABLED }}
+            EOF
+            chmod 600 .env
+
             # Only needed while the ghcr.io package is private - skip this login step
             # once you've made ghcr.io/hikeean/klarfinance-backend public.
             if [ -n "${{ secrets.GHCR_PAT }}" ]; then

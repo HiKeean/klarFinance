@@ -98,20 +98,20 @@ public class HmacSignatureFilter extends OncePerRequestFilter {
 
         String stringToSign = request.getMethod() + request.getRequestURI() + timestamp + requestBody + apiKey;
 
-        // log.info("========== DEBUG HMAC START ==========");
-        // log.info("1. Method        : [{}]", request.getMethod());
-        // log.info("2. URI           : [{}]", request.getRequestURI());
-        // log.info("3. Timestamp     : [{}]", timestamp);
-        // log.info("4. Body Request  : [{}]", requestBody);
-        // log.info("5. Client Type   : [{}]", clientType);
-        // log.info("6. API Key (DB)  : [{}]", apiKey);
-        // log.info("7. STRING TO SIGN: [{}]", stringToSign);
+        log.info("========== DEBUG HMAC START ==========");
+        log.info("1. Method        : [{}]", request.getMethod());
+        log.info("2. URI           : [{}]", request.getRequestURI());
+        log.info("3. Timestamp     : [{}]", timestamp);
+        log.info("4. Body Request  : [{}]", requestBody);
+        log.info("5. Client Type   : [{}]", clientType);
+        log.info("6. API Key (DB)  : [{}]", apiKey);
+        log.info("7. STRING TO SIGN: [{}]", stringToSign);
 
         String serverSignature = hmacService.calculateSignature(stringToSign);
 
-        // log.info("8. Client Signature (Postman): {}", clientSignature);
-        // log.info("9. Server Signature (Java)   : {}", serverSignature);
-        // log.info("=========== DEBUG HMAC END ===========");
+        log.info("8. Client Signature (Postman): {}", clientSignature);
+        log.info("9. Server Signature (Java)   : {}", serverSignature);
+        log.info("=========== DEBUG HMAC END ===========");
 
         if (!serverSignature.equals(clientSignature)) {
             log.error("Invalid HMAC Signature");
