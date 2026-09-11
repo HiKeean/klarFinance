@@ -18,6 +18,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.klarfinance.app.domain.model.AccountState
 import com.klarfinance.app.presentation.account.AccountScreen
+import com.klarfinance.app.presentation.allfeatures.AllFeaturesScreen
 import com.klarfinance.app.presentation.history.HistoryScreen
 import com.klarfinance.app.presentation.history.HistoryViewModel
 import com.klarfinance.app.presentation.history.PaymentScreen
@@ -79,8 +80,29 @@ fun KlarNavHost(navController: NavHostController = rememberNavController()) {
                 onRequestLoanClick = { navController.navigate(Screen.RequestLoanGraph.route) },
                 onPayClick = { navController.navigate(Screen.QrisScan.route) },
                 onTransjakartaClick = { navController.navigate(Screen.TransjakartaGraph.route) },
+                onMoreClick = { navController.navigate(Screen.AllFeatures.createRoute(accountState)) },
                 accountState = accountState,
                 limitSummary = limitSummary,
+            )
+        }
+
+        composable(
+            route = Screen.AllFeatures.route,
+            arguments = listOf(
+                navArgument(Screen.AllFeatures.ARG_ACCOUNT_STATE) {
+                    type = NavType.StringType
+                    defaultValue = AccountState.PENDING_APPLICATION.name
+                },
+            ),
+        ) { backStackEntry ->
+            val accountState = AccountState.valueOf(
+                backStackEntry.arguments?.getString(Screen.AllFeatures.ARG_ACCOUNT_STATE)
+                    ?: AccountState.PENDING_APPLICATION.name,
+            )
+            AllFeaturesScreen(
+                accountState = accountState,
+                onBackClick = { navController.popBackStack() },
+                onTransjakartaClick = { navController.navigate(Screen.TransjakartaGraph.route) },
             )
         }
 

@@ -77,10 +77,9 @@ import kotlinx.coroutines.launch
 
 /**
  * Public homepage (PRD "Fitur Penelusuran Awal - Masuk Homepage Tanpa Login"): the app's
- * default landing screen, browsable without an account. There is no session/token store
- * yet (see kotlin-nasabah-app knowledge), so [accountState] only reflects reality for the
- * live register->dashboard handoff within a single app session - cold start always starts
- * back at [AccountState.GUEST] until a real session store exists to persist/re-derive it.
+ * default landing screen, browsable without an account. [accountState] is re-derived from a
+ * persisted session on cold start (see SplashViewModel/SecureTokenStore) for any previously
+ * logged-in device, not just live within a single app session.
  *
  * Three states, three different behaviors for the exact same locked-looking UI:
  * - [AccountState.GUEST]: no account yet - every locked tap routes to Login.
@@ -98,6 +97,7 @@ fun HomeScreen(
     onRequestLoanClick: () -> Unit = {},
     onPayClick: () -> Unit = {},
     onTransjakartaClick: () -> Unit = {},
+    onMoreClick: () -> Unit = {},
     accountState: AccountState = AccountState.GUEST,
     limitSummary: LimitSummary? = null,
 ) {
@@ -131,6 +131,20 @@ fun HomeScreen(
     // no extra eligibility check unlike onPayTap since there's no logic behind it yet.
     val onTransjakartaTap: () -> Unit = {
         if (accountState != AccountState.ACTIVE) onLockedFeatureClick() else onTransjakartaClick()
+    }
+
+    // "Bills" -> History, same gate as the bottom-nav History tab (AppBottomBar): GUEST -> Login,
+    // PENDING_APPLICATION and ACTIVE both get in directly (History itself doesn't depend on
+    // approval status, unlike most locked tiles).
+    val onBillsTap: () -> Unit = {
+        if (accountState == AccountState.GUEST) onLoginRequested() else onHistoryClick()
+    }
+
+    // "More" -> AllFeaturesScreen (full catalog + search). Same non-GUEST gate as Bills/History -
+    // the catalog itself still routes individual taps through PENDING/ACTIVE-specific behavior
+    // internally (see AllFeaturesScreen), this gate is only about reaching the catalog at all.
+    val onMoreTap: () -> Unit = {
+        if (accountState == AccountState.GUEST) onLoginRequested() else onMoreClick()
     }
 
     // Account info + change password work regardless of loan-approval status - unlike
@@ -202,7 +216,7 @@ fun HomeScreen(
             }
 
             Spacer(modifier = Modifier.height(24.dp))
-            QuickActionsRow(onClick = onLockedFeatureClick, onPayClick = onPayTap)
+            QuickActionsRow(onPayClick = onPayTap, onBillsClick = onBillsTap, onMoreClick = onMoreTap)
 
             Spacer(modifier = Modifier.height(28.dp))
             SectionHeader(title = "Spesial cuma buat kamu", onClick = onLockedFeatureClick)
@@ -518,13 +532,17 @@ private val quickActions = listOf(
 )
 
 @Composable
-private fun QuickActionsRow(onClick: () -> Unit, onPayClick: () -> Unit) {
+private fun QuickActionsRow(onPayClick: () -> Unit, onBillsClick: () -> Unit, onMoreClick: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         quickActions.forEach { action ->
-            val actionClick = if (action.label == "QRIS") onPayClick else onClick
+            val actionClick = when (action.label) {
+                "QRIS" -> onPayClick
+                "Bills" -> onBillsClick
+                else -> onMoreClick
+            }
             LockedIconAction(label = action.label, icon = action.icon, onClick = actionClick)
         }
     }

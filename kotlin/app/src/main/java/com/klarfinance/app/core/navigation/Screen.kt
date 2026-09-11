@@ -12,6 +12,14 @@ sealed class Screen(val route: String) {
     data object Account : Screen("account")
     data object Referral : Screen("referral")
 
+    /** "More" quick action dari Home - katalog lengkap semua fitur (bukan cuma versi ringkas
+     * di ExploreFeaturesCard), dengan search. Selalu diakses dalam keadaan non-GUEST (gated di
+     * Home), jadi accountState di sini cuma pernah PENDING_APPLICATION atau ACTIVE. */
+    data object AllFeatures : Screen("all-features?accountState={accountState}") {
+        const val ARG_ACCOUNT_STATE = "accountState"
+        fun createRoute(accountState: AccountState) = "all-features?accountState=${accountState.name}"
+    }
+
     /** Nested graph root - History list dan Payment berbagi satu HistoryViewModel (mirror
      * RequestLoanGraph), supaya Payment gak perlu network call baru buat data cicilan yang
      * sudah kebawa dari GET /loan/history. */

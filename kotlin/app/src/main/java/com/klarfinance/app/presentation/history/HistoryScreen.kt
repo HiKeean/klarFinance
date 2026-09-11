@@ -59,6 +59,7 @@ import com.klarfinance.app.domain.model.LoanHistoryType
 import com.klarfinance.app.domain.model.LoanInstallment
 import com.klarfinance.app.presentation.components.AppBottomBar
 import com.klarfinance.app.presentation.components.OfflineBanner
+import com.klarfinance.app.presentation.components.SearchField
 import com.klarfinance.app.presentation.loan.formatRupiah
 
 /**
@@ -80,6 +81,11 @@ fun HistoryScreen(
     // sudah lengkap dari GET /loan/history sekalian (termasuk seluruh installments), jadi tap
     // sebuah baris gak perlu network call baru, cukup buka dialog dengan data yang sudah ada.
     var selectedItem by remember { mutableStateOf<LoanHistoryItem?>(null) }
+    // Filter lokal murni (bukan query ulang ke backend) - GET /loan/history gak punya param
+    // search, dan seluruh riwayat sudah kebawa sekali fetch, jadi cukup filter list yang udah
+    // ada. Cocok kalau displayTitle-nya (sama teks yang ditampilkan di baris) mengandung query.
+    var searchQuery by remember { mutableStateOf("") }
+    val filteredItems = uiState.items.filter { it.historyDisplayTitle().contains(searchQuery.trim(), ignoreCase = true) }
 
     // pendingPaymentMessage adalah StateFlow (bukan event sekali-pakai biasa) supaya nilainya
     // masih ada begitu halaman Bayar pop back kesini dan effect ini mulai collect lagi - lihat
@@ -136,19 +142,39 @@ fun HistoryScreen(
                 )
                 uiState.items.isEmpty() -> EmptyState()
                 else -> Column(modifier = Modifier.fillMaxSize()) {
-                    if (uiState.isOffline) {
-                        OfflineBanner(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp))
-                    }
-                    HistoryList(
-                        items = uiState.items,
-                        onItemClick = { selectedItem = it },
-                        onBayarClick = onBayarClick,
+                    SearchField(
+                        query = searchQuery,
+                        onQueryChange = { searchQuery = it },
+                        placeholder = "Cari transaksi...",
+                        modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp),
                     )
+                    if (uiState.isOffline) {
+                        OfflineBanner(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp))
+                    }
+                    if (filteredItems.isEmpty()) {
+                        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            Text(
+                                text = "Transaksi tidak ditemukan",
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                    } else {
+                        HistoryList(
+                            items = filteredItems,
+                            onItemClick = { selectedItem = it },
+                            onBayarClick = onBayarClick,
+                        )
+                    }
                 }
             }
         }
     }
 }
+
+/** Sama teks yang ditampilkan di baris History (lihat HistoryItemCard) - dipakai buat filter
+ * search di sini juga, biar konsisten sama apa yang user LIHAT di layar. */
+private fun LoanHistoryItem.historyDisplayTitle(): String =
+    if (type == LoanHistoryType.QRIS_PAYMENT) "Bayar QRIS${merchantName?.let { " - $it" } ?: ""}" else "Pinjaman Tunai"
 
 @Composable
 private fun LoadingState() {
