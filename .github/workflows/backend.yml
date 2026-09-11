@@ -33,6 +33,18 @@ jobs:
 
       - name: mvn test
         run: ./mvnw -B test
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          REDIS_SSL_ENABLED: ${{ secrets.REDIS_SSL_ENABLED }}
+          REDIS_USERNAME: ${{ secrets.REDIS_USERNAME }}
+          REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+          REDIS_TIMEOUT: ${{ secrets.REDIS_TIMEOUT }}
+          REDIS_KEY_PREFIX: ${{ secrets.REDIS_KEY_PREFIX }}
+          LOCATION_FAILURE_LOG_REDIS_URL: ${{ secrets.LOCATION_FAILURE_LOG_REDIS_URL }}
 
   build-and-push:
     needs: test
