@@ -8,11 +8,14 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Persists the refresh token ONLY when the user opts into fingerprint (see
- * kotlin-nasabah-app knowledge, "Sidik Jari" security-checklist item) - this is the one piece
- * of session state that survives an app restart, and only for devices that unlocked it with a
- * successful [com.klarfinance.app.core.security.BiometricAuthHelper] prompt. Everything else
- * ([SessionManager]) stays in-memory only.
+ * Persists the refresh token for every logged-in session (written unconditionally from
+ * [com.klarfinance.app.data.repository.AuthRepositoryImpl.login]) - this is what lets the app
+ * restore a session after a restart for ALL users, not just ones who opted into fingerprint.
+ * [isAppLockEnabled] is a separate opt-in flag ("Sidik Jari" security-checklist item on
+ * Account) that gates whether [com.klarfinance.app.presentation.splash.SplashViewModel] must
+ * clear a [com.klarfinance.app.core.security.BiometricAuthHelper] prompt before redeeming the
+ * stored token on cold start, or can redeem it silently. Everything else ([SessionManager])
+ * stays in-memory only.
  */
 @Singleton
 class SecureTokenStore @Inject constructor(
@@ -51,12 +54,22 @@ class SecureTokenStore @Inject constructor(
 
     fun hasRefreshToken(): Boolean = getRefreshToken() != null
 
+    fun setAppLockEnabled(enabled: Boolean) {
+        prefs.edit().putBoolean(KEY_APP_LOCK_ENABLED, enabled).apply()
+    }
+
+    fun isAppLockEnabled(): Boolean = prefs.getBoolean(KEY_APP_LOCK_ENABLED, false)
+
     fun clear() {
+        // App-lock preference intentionally NOT cleared here - it's a device/user preference,
+        // not session state, and should survive logout so the next login on this device keeps
+        // requiring biometric if the user had it on.
         prefs.edit().remove(KEY_REFRESH_TOKEN).apply()
     }
 
     companion object {
         private const val PREFS_NAME = "klarfinance_secure_prefs"
         private const val KEY_REFRESH_TOKEN = "refresh_token"
+        private const val KEY_APP_LOCK_ENABLED = "app_lock_enabled"
     }
 }

@@ -42,7 +42,11 @@ class TransjakartaPurchaseViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoadingTickets = true, ticketsErrorMessage = null) }
             getMyTicketsUseCase()
-                .onSuccess { tickets -> _uiState.update { it.copy(isLoadingTickets = false, tickets = tickets) } }
+                .onSuccess { cached ->
+                    _uiState.update {
+                        it.copy(isLoadingTickets = false, tickets = cached.value, isOffline = cached.isFromCache)
+                    }
+                }
                 .onFailure { throwable ->
                     _uiState.update {
                         it.copy(isLoadingTickets = false, ticketsErrorMessage = throwable.message ?: "Gagal memuat riwayat tiket")
@@ -60,7 +64,7 @@ class TransjakartaPurchaseViewModel @Inject constructor(
     fun onSubmitClick(activity: FragmentActivity) {
         if (_uiState.value.isSubmitting) return
 
-        if (secureTokenStore.hasRefreshToken()) {
+        if (secureTokenStore.isAppLockEnabled()) {
             viewModelScope.launch {
                 BiometricAuthHelper.authenticate(
                     activity = activity,

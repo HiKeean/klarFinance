@@ -110,7 +110,7 @@ describe('MenuPage', () => {
       component.editMenuName.set('User Management');
       component.saveEdit();
 
-      expect(menuServices.updateMenu).toHaveBeenCalledWith(1, 'User Management');
+      expect(menuServices.updateMenu).toHaveBeenCalledWith(1, 'User Management', '/dashboard/user', 'person');
       expect(component.menus().find((m) => m.id === 1)?.name).toBe('User Management');
       expect(component.editMenuModalOpen).toBeFalse();
     });

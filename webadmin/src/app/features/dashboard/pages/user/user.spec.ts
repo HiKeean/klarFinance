@@ -67,7 +67,7 @@ describe('User (dashboard employee registration page)', () => {
     fixture.detectChanges();
 
     expect(component).toBeTruthy();
-    expect(userServices.getData).toHaveBeenCalledWith(0, 10, '');
+    expect(userServices.getData).toHaveBeenCalledWith(0, 10, '', '');
     expect(component.users()).toEqual([sampleUser]);
     expect(component.totalElements()).toBe(1);
     expect(component.isLoading()).toBeFalse();
@@ -97,7 +97,7 @@ describe('User (dashboard employee registration page)', () => {
       expect(userServices.getData).not.toHaveBeenCalled();
 
       await new Promise((resolve) => setTimeout(resolve, 300));
-      expect(userServices.getData).toHaveBeenCalledWith(0, 10, 'budi');
+      expect(userServices.getData).toHaveBeenCalledWith(0, 10, 'budi', '');
     });
   });
 
@@ -220,7 +220,7 @@ describe('User (dashboard employee registration page)', () => {
       component.goToPage(1);
 
       expect(component.pageIndex()).toBe(1);
-      expect(userServices.getData).toHaveBeenCalledWith(1, 10, '');
+      expect(userServices.getData).toHaveBeenCalledWith(1, 10, '', '');
     });
   });
 });

@@ -92,7 +92,7 @@ class ApiService @Inject constructor(
                     response.body?.string().orEmpty() to response.isSuccessful
                 }
             } catch (e: IOException) {
-                throw IllegalStateException("Unable to reach KlarFinance. Check your connection and try again.", e)
+                throw NetworkUnavailableException("Unable to reach KlarFinance. Check your connection and try again.", e)
             }
         }
 
@@ -107,3 +107,9 @@ class ApiService @Inject constructor(
         val EMPTY_BODY: RequestBody = "".toRequestBody(null)
     }
 }
+
+/** Thrown instead of a generic exception specifically when the request never reached the
+ * server (device offline, DNS failure, timeout, etc.) - repositories that support an offline
+ * cache fallback (see [com.klarfinance.app.domain.model.Cached]) catch this type specifically,
+ * as opposed to a real server-side rejection (4xx/5xx), which should still surface as an error. */
+class NetworkUnavailableException(message: String, cause: Throwable? = null) : IOException(message, cause)

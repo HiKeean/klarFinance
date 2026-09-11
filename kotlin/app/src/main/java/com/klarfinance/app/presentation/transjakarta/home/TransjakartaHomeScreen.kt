@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.klarfinance.app.core.theme.KlarTeal
 import com.klarfinance.app.domain.model.TransjakartaTicket
+import com.klarfinance.app.presentation.components.OfflineBanner
 import com.klarfinance.app.presentation.components.PrimaryButton
 import com.klarfinance.app.presentation.components.QrCodeImage
 import com.klarfinance.app.presentation.history.formatDate
@@ -115,6 +116,13 @@ private fun TransjakartaHomeContent(
                     color = MaterialTheme.colorScheme.onBackground,
                 )
                 Spacer(modifier = Modifier.height(12.dp))
+            }
+
+            if (uiState.isOffline && uiState.tickets.isNotEmpty()) {
+                item {
+                    OfflineBanner()
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
             }
 
             when {

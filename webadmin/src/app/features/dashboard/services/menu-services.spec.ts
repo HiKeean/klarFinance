@@ -35,12 +35,16 @@ describe('MenuServices', () => {
       expect(api.post).toHaveBeenCalledWith(SUPERADMIN_URL.auth.saveMenu, { name: 'Approval (BM)', url: '/bm/approval', logo: 'fact_check' });
     });
 
-    it('updateMenu PUTs the new name to the menu-specific URL', () => {
+    it('updateMenu PUTs the new name/url/logo to the menu-specific URL', () => {
       api.put.and.returnValue(of({ success: true, statusCode: 200, message: 'OK', data: null }));
 
-      service.updateMenu(7, 'Inquiry (BM)').subscribe();
+      service.updateMenu(7, 'Inquiry (BM)', '/bm/inquiry', 'manage_search').subscribe();
 
-      expect(api.put).toHaveBeenCalledWith(SUPERADMIN_URL.auth.updateMenu(7), { menu: 'Inquiry (BM)' });
+      expect(api.put).toHaveBeenCalledWith(SUPERADMIN_URL.auth.updateMenu(7), {
+        name: 'Inquiry (BM)',
+        url: '/bm/inquiry',
+        logo: 'manage_search',
+      });
     });
 
     it('deleteMenu calls the menu-specific delete URL', () => {

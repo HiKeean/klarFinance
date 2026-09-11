@@ -2,10 +2,10 @@ package com.klarfinance.app.domain.model
 
 /**
  * Where the current device stands relative to an account, driving Home's locked/unlocked
- * behavior. There is no session/token store yet (see kotlin-nasabah-app knowledge), so this
- * is currently threaded through only for the live register->dashboard handoff - it does NOT
- * survive an app restart. Cold start always lands on [GUEST] until a real session store
- * exists to persist and re-derive this.
+ * behavior. Persisted refresh token (see [com.klarfinance.app.core.session.SecureTokenStore])
+ * lets [com.klarfinance.app.presentation.splash.SplashViewModel] re-derive this on cold start
+ * for any previously logged-in device - falls back to [GUEST] only when there's no stored
+ * token, or redeeming it fails (revoked/expired/offline with no cached fallback).
  */
 enum class AccountState {
     /** No account on this device yet - every locked tap routes to Login. */

@@ -6,6 +6,9 @@ data class AccountUiState(
     val isLoading: Boolean = true,
     val profile: AccountProfile? = null,
     val loadErrorMessage: String? = null,
+    /** True when [profile] is the last cached value (Room), shown because the network was
+     * unreachable - see [com.klarfinance.app.domain.model.Cached]. */
+    val isOffline: Boolean = false,
 
     val isChangePasswordExpanded: Boolean = false,
     val oldPassword: String = "",

@@ -107,7 +107,7 @@ class RequestLoanViewModel @Inject constructor(
     fun onBankCodeSelected(bankCode: String) = _uiState.update { it.copy(bankCode = bankCode) }
 
     /** Step-up auth dulu (konfirmasi user 2026-09-07) sebelum benar-benar submit - fingerprint
-     * kalau nasabah sudah aktifkan (SecureTokenStore.hasRefreshToken(), sama sinyal yang dipakai
+     * kalau nasabah sudah aktifkan (SecureTokenStore.isAppLockEnabled(), sama sinyal yang dipakai
      * AccountScreen "Sidik Jari"), kalau enggak munculin TransactionPasswordDialog dulu (lihat
      * onPasswordConfirm). [activity] cuma dipakai transient di sini (BiometricPrompt butuh
      * FragmentActivity) - TIDAK disimpan sebagai field ViewModel, sama pola dengan
@@ -116,7 +116,7 @@ class RequestLoanViewModel @Inject constructor(
         val state = _uiState.value
         if (!state.isAmountStepValid || !state.isBankStepValid || state.isSubmitting) return
 
-        if (secureTokenStore.hasRefreshToken()) {
+        if (secureTokenStore.isAppLockEnabled()) {
             viewModelScope.launch {
                 BiometricAuthHelper.authenticate(
                     activity = activity,

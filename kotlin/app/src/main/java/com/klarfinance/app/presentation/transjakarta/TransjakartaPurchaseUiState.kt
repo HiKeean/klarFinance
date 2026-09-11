@@ -23,6 +23,10 @@ data class TransjakartaPurchaseUiState(
     val tickets: List<TransjakartaTicket> = emptyList(),
     val isLoadingTickets: Boolean = true,
     val ticketsErrorMessage: String? = null,
+    /** True when [tickets] is the last cached list (Room), shown because the network was
+     * unreachable - see [com.klarfinance.app.domain.model.Cached]. QR still renders fine
+     * offline (QrCodeImage generates purely from ticketCode, no network call). */
+    val isOffline: Boolean = false,
 
     // Konfirmasi bayar
     val isSubmitting: Boolean = false,

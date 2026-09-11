@@ -49,6 +49,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.klarfinance.app.core.theme.KlarTeal
 import com.klarfinance.app.core.theme.KlarTealDark
 import com.klarfinance.app.domain.model.ReferralSummary
+import com.klarfinance.app.presentation.components.OfflineBanner
 
 /**
  * "Ajak Teman" - kode referral: 1 orang diundang berhasil pinjam >= Rp1jt -> referrer (bukan yang
@@ -151,6 +152,10 @@ private fun ReferralContent(
                     .padding(horizontal = 20.dp),
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
+                if (uiState.isOffline) {
+                    OfflineBanner()
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
                 ReferralHeroCard(summary = uiState.summary)
                 Spacer(modifier = Modifier.height(20.dp))
                 ReferralCodeCard(

@@ -93,12 +93,12 @@ class HomeViewModel @Inject constructor(
         // Re-fetch from the backend rather than trusting the push payload's `status` directly -
         // the push is just a "something changed, go check" signal; GET /profile stays the single
         // source of truth for what AccountState actually is right now (see AccountProfile.accountState).
-        getProfileUseCase().onSuccess { profile ->
-            _accountState.value = profile.accountState
+        getProfileUseCase().onSuccess { cached ->
+            _accountState.value = cached.value.accountState
             // A BM approval push is exactly the moment PENDING_APPLICATION -> ACTIVE happens,
             // i.e. the moment an ActiveLimit (and therefore a fetchable limit summary) starts
             // existing - fetch it now instead of waiting for the next cold Home.
-            if (profile.accountState == AccountState.ACTIVE) refreshLimitSummary()
+            if (cached.value.accountState == AccountState.ACTIVE) refreshLimitSummary()
         }
     }
 

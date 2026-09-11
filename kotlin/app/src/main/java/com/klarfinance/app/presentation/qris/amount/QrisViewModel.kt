@@ -88,7 +88,7 @@ class QrisViewModel @Inject constructor(
         val state = _uiState.value
         if (state.token == null || !state.isFormValid || state.isSubmitting) return
 
-        if (secureTokenStore.hasRefreshToken()) {
+        if (secureTokenStore.isAppLockEnabled()) {
             viewModelScope.launch {
                 BiometricAuthHelper.authenticate(
                     activity = activity,

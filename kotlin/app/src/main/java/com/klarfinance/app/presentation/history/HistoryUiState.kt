@@ -6,6 +6,9 @@ data class HistoryUiState(
     val isLoading: Boolean = true,
     val items: List<LoanHistoryItem> = emptyList(),
     val loadErrorMessage: String? = null,
+    /** True when [items] is the last cached list (Room), shown because the network was
+     * unreachable - see [com.klarfinance.app.domain.model.Cached]. */
+    val isOffline: Boolean = false,
 
     /** Cicilan (belum lunas) yang dicentang user di halaman Bayar - nominal total di atas
      * halaman itu adalah jumlah [LoanInstallment.amount] dari nomor-nomor ini. Direset tiap

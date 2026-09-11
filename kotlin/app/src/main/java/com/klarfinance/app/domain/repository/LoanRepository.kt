@@ -1,5 +1,6 @@
 package com.klarfinance.app.domain.repository
 
+import com.klarfinance.app.domain.model.Cached
 import com.klarfinance.app.domain.model.LimitSummary
 import com.klarfinance.app.domain.model.LoanHistoryItem
 import com.klarfinance.app.domain.model.LoanRequestResult
@@ -27,8 +28,10 @@ interface LoanRepository {
     ): Result<LoanRequestResult>
 
     /** GET api/v1/nasabah/loan/history - "History" page: semua Loan nasabah ini, tarik tunai
-     * maupun bayar QRIS, terbaru duluan. Kosong (bukan failure) kalau belum pernah pinjam. */
-    suspend fun getLoanHistory(): Result<List<LoanHistoryItem>>
+     * maupun bayar QRIS, terbaru duluan. Kosong (bukan failure) kalau belum pernah pinjam.
+     * Network-first, falls back to the last cached list (Room) if the device is offline - see
+     * [Cached.isFromCache]. */
+    suspend fun getLoanHistory(): Result<Cached<List<LoanHistoryItem>>>
 
     /** POST api/v1/nasabah/loan/{loanId}/repayment - fitur "Bayar". Minimum nominal ditentukan
      * backend (lihat LoanService#repay): kalau cicilan terdekat sudah jatuh tempo, minimum =

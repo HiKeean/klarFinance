@@ -37,7 +37,7 @@ class AccountViewModel @Inject constructor(
     private val locationScheduler: LocationScheduler,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(AccountUiState(isFingerprintEnabled = secureTokenStore.hasRefreshToken()))
+    private val _uiState = MutableStateFlow(AccountUiState(isFingerprintEnabled = secureTokenStore.isAppLockEnabled()))
     val uiState: StateFlow<AccountUiState> = _uiState.asStateFlow()
 
     private val _loggedOut = MutableSharedFlow<Unit>()
@@ -111,16 +111,16 @@ class AccountViewModel @Inject constructor(
         }
     }
 
-    /** "Sidik Jari" checklist item - stores the CURRENT session's refresh token (in
-     * [SessionManager] since login/register) into [SecureTokenStore] behind a biometric
-     * prompt, so a later cold start can redeem it via fingerprint instead of asking for the
-     * password again (see [com.klarfinance.app.presentation.splash.SplashViewModel]). */
+    /** "Sidik Jari" checklist item - the refresh token itself is ALWAYS persisted (since login,
+     * see AuthRepositoryImpl) regardless of this setting; this only flips the app-lock flag in
+     * [SecureTokenStore] that decides whether [com.klarfinance.app.presentation.splash.SplashViewModel]
+     * must clear a biometric prompt before redeeming it on cold start. The prompt here is just to
+     * prove the sensor actually works before relying on it later. */
     fun onEnableFingerprintClick(activity: FragmentActivity) {
         val state = _uiState.value
         if (state.isFingerprintEnabled || state.isEnablingFingerprint) return
 
-        val refreshToken = sessionManager.refreshToken
-        if (refreshToken == null) {
+        if (sessionManager.refreshToken == null) {
             viewModelScope.launch { _snackbarMessage.emit("Sesi login tidak lengkap - coba login ulang dulu") }
             return
         }
@@ -136,7 +136,7 @@ class AccountViewModel @Inject constructor(
                 title = "Aktifkan Sidik Jari",
                 subtitle = "Verifikasi sidik jari untuk menyimpan sesi login kamu",
             ).onSuccess {
-                secureTokenStore.saveRefreshToken(refreshToken)
+                secureTokenStore.setAppLockEnabled(true)
                 _uiState.update { it.copy(isEnablingFingerprint = false, isFingerprintEnabled = true) }
             }.onFailure { throwable ->
                 _uiState.update { it.copy(isEnablingFingerprint = false) }
@@ -160,7 +160,9 @@ class AccountViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, loadErrorMessage = null) }
             getProfileUseCase()
-                .onSuccess { profile -> _uiState.update { it.copy(isLoading = false, profile = profile) } }
+                .onSuccess { cached ->
+                    _uiState.update { it.copy(isLoading = false, profile = cached.value, isOffline = cached.isFromCache) }
+                }
                 .onFailure { throwable ->
                     _uiState.update {
                         it.copy(isLoading = false, loadErrorMessage = throwable.message ?: "Gagal memuat akun")

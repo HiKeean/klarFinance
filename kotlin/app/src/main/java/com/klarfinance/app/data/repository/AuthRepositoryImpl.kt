@@ -2,6 +2,7 @@ package com.klarfinance.app.data.repository
 
 import com.google.firebase.messaging.FirebaseMessaging
 import com.klarfinance.app.core.network.ApiService
+import com.klarfinance.app.core.network.NetworkUnavailableException
 import com.klarfinance.app.core.session.SecureTokenStore
 import com.klarfinance.app.core.session.SessionManager
 import com.klarfinance.app.data.dto.ChangePasswordRequestDto
@@ -14,8 +15,14 @@ import com.klarfinance.app.data.dto.RegisterResponseDataDto
 import com.klarfinance.app.data.dto.RequestOtpRequestDto
 import com.klarfinance.app.data.dto.VerifyOtpRequestDto
 import com.klarfinance.app.data.dto.VerifyPasswordRequestDto
+import com.klarfinance.app.data.local.LoanHistoryDao
+import com.klarfinance.app.data.local.ProfileDao
+import com.klarfinance.app.data.local.ProfileEntity
+import com.klarfinance.app.data.local.ReferralSummaryDao
+import com.klarfinance.app.data.local.TransjakartaTicketDao
 import com.klarfinance.app.domain.model.AccountProfile
 import com.klarfinance.app.domain.model.AccountState
+import com.klarfinance.app.domain.model.Cached
 import com.klarfinance.app.domain.model.LoginResult
 import com.klarfinance.app.domain.model.RegisterResult
 import com.klarfinance.app.domain.repository.AuthRepository
@@ -30,6 +37,10 @@ class AuthRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val sessionManager: SessionManager,
     private val secureTokenStore: SecureTokenStore,
+    private val profileDao: ProfileDao,
+    private val loanHistoryDao: LoanHistoryDao,
+    private val transjakartaTicketDao: TransjakartaTicketDao,
+    private val referralSummaryDao: ReferralSummaryDao,
 ) : AuthRepository {
 
     override suspend fun requestOtp(phone: String): Result<Unit> = runCatching {
@@ -55,6 +66,11 @@ class AuthRepositoryImpl @Inject constructor(
         )
         val data = response.data ?: throw IllegalStateException("Unexpected response from server")
         data.accessToken?.let { access -> sessionManager.save(access, data.refreshToken) }
+        // Persisted unconditionally (not just when "Sidik Jari" is enabled) so EVERY logged-in
+        // user survives an app restart - SecureTokenStore.isAppLockEnabled() is what decides
+        // whether SplashViewModel gates the redemption behind a biometric prompt, not whether
+        // the token is stored at all.
+        data.refreshToken?.let { refresh -> secureTokenStore.saveRefreshToken(refresh) }
         syncFcmToken()
         LoginResult(
             identity = data.userProfile?.identity,
@@ -84,18 +100,57 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getProfile(): Result<AccountProfile> = runCatching {
-        val response = apiService.get<ProfileResponseDto>("api/v1/internal/auth/profile")
-        val data = response.data ?: throw IllegalStateException("Unexpected response from server")
-        AccountProfile(
-            name = data.name,
-            phone = data.noHp,
-            role = data.role,
-            dob = data.dob,
-            email = data.email,
-            emailVerified = data.emailVerified,
-            accountState = AccountState.fromBackend(data.accountStatus),
-        )
+    override suspend fun getProfile(): Result<Cached<AccountProfile>> {
+        val networkResult = runCatching {
+            val response = apiService.get<ProfileResponseDto>("api/v1/internal/auth/profile")
+            val data = response.data ?: throw IllegalStateException("Unexpected response from server")
+            AccountProfile(
+                name = data.name,
+                phone = data.noHp,
+                role = data.role,
+                dob = data.dob,
+                email = data.email,
+                emailVerified = data.emailVerified,
+                accountState = AccountState.fromBackend(data.accountStatus),
+            )
+        }
+        networkResult.onSuccess { profile ->
+            profileDao.upsert(
+                ProfileEntity(
+                    name = profile.name,
+                    phone = profile.phone,
+                    role = profile.role,
+                    dob = profile.dob,
+                    email = profile.email,
+                    emailVerified = profile.emailVerified,
+                    accountState = profile.accountState.name,
+                    cachedAtMillis = System.currentTimeMillis(),
+                ),
+            )
+            return Result.success(Cached(profile, isFromCache = false))
+        }
+
+        val error = networkResult.exceptionOrNull()
+        if (error is NetworkUnavailableException) {
+            profileDao.get()?.let { cached ->
+                return Result.success(
+                    Cached(
+                        AccountProfile(
+                            name = cached.name,
+                            phone = cached.phone,
+                            role = cached.role,
+                            dob = cached.dob,
+                            email = cached.email,
+                            emailVerified = cached.emailVerified,
+                            accountState = AccountState.entries.find { it.name == cached.accountState }
+                                ?: AccountState.GUEST,
+                        ),
+                        isFromCache = true,
+                    ),
+                )
+            }
+        }
+        return Result.failure(error ?: IllegalStateException("Unknown error"))
     }
 
     override suspend fun changePassword(oldPassword: String, newPassword: String): Result<Unit> = runCatching {
@@ -116,9 +171,11 @@ class AuthRepositoryImpl @Inject constructor(
 
     /** Always clears the local session regardless of whether the server call succeeds -
      * a network hiccup shouldn't be able to strand the user in a logged-in-looking state.
-     * Also drops the persisted refresh token (if fingerprint was enabled) - backend logout
-     * deletes all of the user's tokens, so it would fail on the next cold-start restore
-     * anyway; clearing it here just avoids a dead attempt. */
+     * Also drops the persisted refresh token - backend logout deletes all of the user's
+     * tokens, so it would fail on the next cold-start restore anyway; clearing it here just
+     * avoids a dead attempt. Also clears the offline caches (profile/loan history/Transjakarta
+     * tickets) - a shared/lost device shouldn't keep showing the previous user's data to
+     * whoever opens the app next while offline. */
     override suspend fun logout(): Result<Unit> {
         val result = runCatching {
             apiService.post<Unit>("api/v1/internal/auth/logout")
@@ -126,6 +183,10 @@ class AuthRepositoryImpl @Inject constructor(
         }
         sessionManager.clear()
         secureTokenStore.clear()
+        profileDao.clear()
+        loanHistoryDao.clear()
+        transjakartaTicketDao.clear()
+        referralSummaryDao.clear()
         return result
     }
 

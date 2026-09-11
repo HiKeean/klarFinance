@@ -58,6 +58,7 @@ import com.klarfinance.app.domain.model.LoanHistoryStatus
 import com.klarfinance.app.domain.model.LoanHistoryType
 import com.klarfinance.app.domain.model.LoanInstallment
 import com.klarfinance.app.presentation.components.AppBottomBar
+import com.klarfinance.app.presentation.components.OfflineBanner
 import com.klarfinance.app.presentation.loan.formatRupiah
 
 /**
@@ -134,11 +135,16 @@ fun HistoryScreen(
                     onRetry = viewModel::loadHistory,
                 )
                 uiState.items.isEmpty() -> EmptyState()
-                else -> HistoryList(
-                    items = uiState.items,
-                    onItemClick = { selectedItem = it },
-                    onBayarClick = onBayarClick,
-                )
+                else -> Column(modifier = Modifier.fillMaxSize()) {
+                    if (uiState.isOffline) {
+                        OfflineBanner(modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp))
+                    }
+                    HistoryList(
+                        items = uiState.items,
+                        onItemClick = { selectedItem = it },
+                        onBayarClick = onBayarClick,
+                    )
+                }
             }
         }
     }

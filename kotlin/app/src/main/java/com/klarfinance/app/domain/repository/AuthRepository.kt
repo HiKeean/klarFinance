@@ -2,6 +2,7 @@ package com.klarfinance.app.domain.repository
 
 import com.klarfinance.app.domain.model.AccountProfile
 import com.klarfinance.app.domain.model.AccountState
+import com.klarfinance.app.domain.model.Cached
 import com.klarfinance.app.domain.model.LoginResult
 import com.klarfinance.app.domain.model.RegisterResult
 import okhttp3.MultipartBody
@@ -11,7 +12,10 @@ interface AuthRepository {
     suspend fun verifyOtp(phone: String, otp: String): Result<Unit>
     suspend fun isPhoneRegistered(phone: String): Result<Boolean>
     suspend fun login(identity: String, password: String): Result<LoginResult>
-    suspend fun getProfile(): Result<AccountProfile>
+
+    /** Network-first, falls back to the last cached profile (Room) if the device is offline -
+     * see [Cached.isFromCache]. */
+    suspend fun getProfile(): Result<Cached<AccountProfile>>
     suspend fun changePassword(oldPassword: String, newPassword: String): Result<Unit>
 
     /** Step-up auth generik sebelum konfirmasi transaksi (pinjaman tunai/QRIS) kalau nasabah

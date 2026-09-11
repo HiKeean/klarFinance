@@ -27,7 +27,9 @@ class ReferralViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, loadErrorMessage = null) }
             getReferralSummaryUseCase()
-                .onSuccess { summary -> _uiState.update { it.copy(isLoading = false, summary = summary) } }
+                .onSuccess { cached ->
+                    _uiState.update { it.copy(isLoading = false, summary = cached.value, isOffline = cached.isFromCache) }
+                }
                 .onFailure { throwable ->
                     _uiState.update {
                         it.copy(isLoading = false, loadErrorMessage = throwable.message ?: "Gagal memuat data referral")

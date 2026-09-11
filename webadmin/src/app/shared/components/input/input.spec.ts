@@ -102,9 +102,12 @@ describe('InputComponent', () => {
     });
 
     it('[positive] falls back to a generic message for an unrecognized validator key', () => {
+      // setErrors must come AFTER withControl - binding [formControl] triggers the
+      // directive's own updateValueAndValidity() on first bind, which would otherwise wipe
+      // out a manually-set error since this control has no real validator to reproduce it.
       const control = new FormControl('x');
-      control.setErrors({ customRule: true });
       withControl(control);
+      control.setErrors({ customRule: true });
 
       expect(component.errorMessage).toBe('Nilai tidak valid');
     });

@@ -1,12 +1,17 @@
 package com.klarfinance.app.data.repository
 
 import com.klarfinance.app.core.network.ApiService
+import com.klarfinance.app.core.network.NetworkUnavailableException
 import com.klarfinance.app.data.dto.BankAccountResponseDto
 import com.klarfinance.app.data.dto.LimitSummaryResponseDto
 import com.klarfinance.app.data.dto.LoanHistoryItemResponseDto
 import com.klarfinance.app.data.dto.LoanRequestDto
 import com.klarfinance.app.data.dto.LoanResponseDto
 import com.klarfinance.app.data.dto.RepaymentRequestDto
+import com.klarfinance.app.data.local.CachedInstallment
+import com.klarfinance.app.data.local.LoanHistoryDao
+import com.klarfinance.app.data.local.LoanHistoryItemEntity
+import com.klarfinance.app.domain.model.Cached
 import com.klarfinance.app.domain.model.LimitSummary
 import com.klarfinance.app.domain.model.LoanHistoryItem
 import com.klarfinance.app.domain.model.LoanHistoryStatus
@@ -15,10 +20,15 @@ import com.klarfinance.app.domain.model.LoanInstallment
 import com.klarfinance.app.domain.model.LoanRequestResult
 import com.klarfinance.app.domain.model.SavedBankAccount
 import com.klarfinance.app.domain.repository.LoanRepository
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 class LoanRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
+    private val loanHistoryDao: LoanHistoryDao,
+    private val json: Json,
 ) : LoanRepository {
 
     override suspend fun getLimitSummary(): Result<LimitSummary> = runCatching {
@@ -75,11 +85,29 @@ class LoanRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun getLoanHistory(): Result<List<LoanHistoryItem>> = runCatching {
-        val response = apiService.get<List<LoanHistoryItemResponseDto>>("api/v1/nasabah/loan/history")
-        (response.data ?: emptyList()).mapNotNull { toLoanHistoryItem(it) }
+    override suspend fun getLoanHistory(): Result<Cached<List<LoanHistoryItem>>> {
+        val networkResult = runCatching {
+            val response = apiService.get<List<LoanHistoryItemResponseDto>>("api/v1/nasabah/loan/history")
+            (response.data ?: emptyList()).mapNotNull { toLoanHistoryItem(it) }
+        }
+        networkResult.onSuccess { items ->
+            loanHistoryDao.replaceAll(items.map(::toEntity))
+            return Result.success(Cached(items, isFromCache = false))
+        }
+
+        val error = networkResult.exceptionOrNull()
+        if (error is NetworkUnavailableException) {
+            val cached = loanHistoryDao.getAll()
+            if (cached.isNotEmpty()) {
+                return Result.success(Cached(cached.map(::fromEntity), isFromCache = true))
+            }
+        }
+        return Result.failure(error ?: IllegalStateException("Unknown error"))
     }
 
+    /** Doesn't go offline-first - paying requires connectivity regardless - but writes the
+     * updated item back into the cache so it isn't immediately stale if the device goes
+     * offline right after a successful payment. */
     override suspend fun repay(loanId: Int, amount: Long): Result<LoanHistoryItem> = runCatching {
         val body = RepaymentRequestDto(amount = amount.toDouble())
         val response = apiService.post<LoanHistoryItemResponseDto, RepaymentRequestDto>(
@@ -87,8 +115,49 @@ class LoanRepositoryImpl @Inject constructor(
             body,
         )
         val data = response.data ?: throw IllegalStateException("Unexpected response from server")
-        toLoanHistoryItem(data) ?: throw IllegalStateException("Unexpected response from server")
+        val item = toLoanHistoryItem(data) ?: throw IllegalStateException("Unexpected response from server")
+        loanHistoryDao.upsertOne(toEntity(item))
+        item
     }
+
+    private fun toEntity(item: LoanHistoryItem): LoanHistoryItemEntity = LoanHistoryItemEntity(
+        loanId = item.loanId,
+        type = item.type.name,
+        merchantName = item.merchantName,
+        requestedAmount = item.requestedAmount,
+        totalAmountDue = item.totalAmountDue,
+        tenorMonths = item.tenorMonths,
+        status = item.status.name,
+        paidInstallments = item.paidInstallments,
+        totalInstallments = item.totalInstallments,
+        nextDueDate = item.nextDueDate,
+        nextDueAmount = item.nextDueAmount,
+        createdAt = item.createdAt,
+        installmentsJson = json.encodeToString(
+            item.installments.map {
+                CachedInstallment(it.installmentNumber, it.dueDate, it.amount, it.isPaid, it.paidAt)
+            },
+        ),
+        cachedAtMillis = System.currentTimeMillis(),
+    )
+
+    private fun fromEntity(entity: LoanHistoryItemEntity): LoanHistoryItem = LoanHistoryItem(
+        loanId = entity.loanId,
+        type = LoanHistoryType.fromBackend(entity.type),
+        merchantName = entity.merchantName,
+        requestedAmount = entity.requestedAmount,
+        totalAmountDue = entity.totalAmountDue,
+        tenorMonths = entity.tenorMonths,
+        status = LoanHistoryStatus.fromBackend(entity.status),
+        paidInstallments = entity.paidInstallments,
+        totalInstallments = entity.totalInstallments,
+        nextDueDate = entity.nextDueDate,
+        nextDueAmount = entity.nextDueAmount,
+        createdAt = entity.createdAt,
+        installments = runCatching { json.decodeFromString<List<CachedInstallment>>(entity.installmentsJson) }
+            .getOrDefault(emptyList())
+            .map { LoanInstallment(it.installmentNumber, it.dueDate, it.amount, it.isPaid, it.paidAt) },
+    )
 
     /** Shared dengan getLoanHistory dan repay - keduanya balikin shape LoanHistoryItemResponseDto
      * yang sama persis (lihat LoanController#repay, sengaja balikin baris History yang sudah

@@ -29,7 +29,9 @@ class HistoryViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, loadErrorMessage = null) }
             getLoanHistoryUseCase()
-                .onSuccess { items -> _uiState.update { it.copy(isLoading = false, items = items) } }
+                .onSuccess { cached ->
+                    _uiState.update { it.copy(isLoading = false, items = cached.value, isOffline = cached.isFromCache) }
+                }
                 .onFailure { throwable ->
                     _uiState.update {
                         it.copy(isLoading = false, loadErrorMessage = throwable.message ?: "Gagal memuat riwayat")

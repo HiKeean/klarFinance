@@ -83,6 +83,7 @@ import com.klarfinance.app.core.theme.KlarTeal
 import com.klarfinance.app.core.theme.KlarTealDark
 import com.klarfinance.app.domain.model.AccountProfile
 import com.klarfinance.app.presentation.components.AppBottomBar
+import com.klarfinance.app.presentation.components.OfflineBanner
 import kotlinx.coroutines.launch
 
 /**
@@ -262,6 +263,10 @@ private fun AccountContent(
                     .padding(horizontal = 20.dp),
             ) {
                 Spacer(modifier = Modifier.height(8.dp))
+                if (uiState.isOffline) {
+                    OfflineBanner()
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
                 uiState.profile?.let { profile ->
                     ProfileHeaderCard(profile = profile, onEditClick = onComingSoonClick)
                     Spacer(modifier = Modifier.height(16.dp))
