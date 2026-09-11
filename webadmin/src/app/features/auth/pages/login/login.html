@@ -1,0 +1,19 @@
+<main class="login-page">
+  <section class="login-visual" aria-label="Klar Finance">
+    <div class="brand-mark">K</div><div><span class="brand-name">KlarFinance</span><span class="brand-caption">Web Admin</span></div>
+    <div class="visual-copy"><p class="kicker">Finance made clear</p><h1>Kelola keuangan<br />dengan lebih mudah.</h1><p class="visual-description">Satu ruang kerja untuk memantau dan mengelola operasional Klar Finance.</p></div>
+  </section>
+  <section class="login-panel"><div class="login-card"><div class="mobile-brand"><span class="brand-mark">K</span><span>KlarFinance</span></div><p class="kicker">Selamat datang kembali</p>
+    <h2>Masuk ke akun kamu</h2>
+    <p class="subtitle">Gunakan identity dan password untuk melanjutkan ke dashboard.</p>
+    <form (ngSubmit)="submit()" #loginForm="ngForm">
+      <label for="identity">Identity</label>
+      <input id="identity" name="identity" type="text" [(ngModel)]="identity" placeholder="Identity : 20260101" required autocomplete="username" />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" [(ngModel)]="password" placeholder="Masukkan password" required autocomplete="current-password" />
+
+      @if (errorMessage()) { <p class="error-message" role="alert">{{ errorMessage() }}</p> }<button type="submit" [disabled]="loginForm.invalid || loading()">{{ loading() ? 'Memproses...' : 'Masuk' }}</button>
+    </form>
+  </div><span class="copyright">© 2026 KlarFinance</span></section>
+</main>

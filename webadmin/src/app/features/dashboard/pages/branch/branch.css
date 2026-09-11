@@ -1,0 +1,154 @@
+:host {
+  display: block;
+}
+
+.branch-page {
+  min-height: calc(100vh - 59px);
+  padding: 27px 30px 40px;
+  background: #f5f7ff;
+  color: #263238;
+}
+
+.page-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 0 0 22px;
+}
+
+.page-heading h1 {
+  margin: 0 0 5px;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.page-heading p {
+  margin: 0;
+  color: #68747b;
+  font-size: 10px;
+}
+
+.branch-card {
+  overflow: hidden;
+  border: 1px solid #e7ebf5;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(28 53 80 / 2%);
+}
+
+.table-footer {
+  padding: 10px 16px;
+  border-top: 1px solid #edf0f4;
+  color: #68747b;
+  font-size: 10px;
+}
+
+/* =========================
+   BM CELL
+   ========================= */
+
+.bm-name {
+  display: block;
+  color: #35464d;
+  font-weight: 600;
+}
+
+.bm-identity {
+  display: block;
+  color: #8b979c;
+  font-size: 9px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.value.muted {
+  color: #8b979c;
+  font-size: 11px;
+}
+
+/* =========================
+   ACTIONS
+   ========================= */
+
+.edit-button,
+.delete-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 10px;
+  margin: 0 3px;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font: 700 9px inherit;
+}
+
+.edit-button {
+  color: #fff;
+  background: #087f85;
+}
+.edit-button:hover {
+  background: #076a6f;
+}
+
+.delete-button {
+  color: #c64444;
+  background: #fdecec;
+}
+.delete-button:hover {
+  background: #fbdada;
+}
+
+/* =========================
+   MODAL BODY
+   ========================= */
+
+.modal-description {
+  margin: 0 0 12px;
+  color: #7b8990;
+  font-size: 10px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field label {
+  display: block;
+  color: #53636a;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.modal-error {
+  margin: 10px 0 0;
+  color: #c64444;
+  font-size: 11px;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 900px) {
+  .branch-page {
+    padding: 24px 20px 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .branch-page {
+    padding: 20px 16px 28px;
+  }
+
+  .page-heading {
+    margin-bottom: 16px;
+  }
+
+  .page-heading h1 {
+    font-size: 20px;
+  }
+}

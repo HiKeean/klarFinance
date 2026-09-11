@@ -1,0 +1,52 @@
+<div class="dropdown" [class.is-open]="open" [class.is-disabled]="disabled">
+  <button
+    class="dropdown-trigger"
+    type="button"
+    [disabled]="disabled"
+    [attr.aria-expanded]="open"
+    aria-haspopup="listbox"
+    (click)="toggle()"
+  >
+    <span [class.placeholder]="!selectedOption">
+      {{ selectedOption?.label || placeholder }}
+    </span>
+    <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m7 10 5 5 5-5" />
+    </svg>
+  </button>
+
+  @if (open) {
+    <div class="dropdown-panel" role="listbox" [ngStyle]="panelStyle">
+      @if (search) {
+        <label class="search-wrapper">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6" />
+            <path d="m16 16 4 4" />
+          </svg>
+          <input
+            type="search"
+            placeholder="Search roles..."
+            [(ngModel)]="query"
+            (click)="$event.stopPropagation()"
+            aria-label="Search options"
+          />
+        </label>
+      }
+
+      <div class="options">
+        @for (option of filteredData; track option.value) {
+          <button
+            type="button"
+            role="option"
+            [attr.aria-selected]="option.value === selectedValue"
+            (click)="select(option)"
+          >
+            {{ option.label }}
+          </button>
+        } @empty {
+          <span class="empty-state">No options found</span>
+        }
+      </div>
+    </div>
+  }
+</div>

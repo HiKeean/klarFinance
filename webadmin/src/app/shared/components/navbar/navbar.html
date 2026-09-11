@@ -1,0 +1,19 @@
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <span class="brand-mark">K</span>
+    <div><strong>KlarFinance</strong><small>Web Admin</small></div>
+  </div>
+
+  <nav aria-label="Menu utama">
+    <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="menu-icon">▦</span>Dashboard
+    </a>
+    @for (item of (menuList$ | async) ?? []; track item.url) {
+      <a [routerLink]="item.url" routerLinkActive="active">
+        <span class="menu-icon"><mat-icon>{{item.logo}}</mat-icon><</span>{{ item.name }}
+      </a>
+    }
+  </nav>
+
+  <button class="logout" type="button" (click)="logout()">Keluar</button>
+</aside>

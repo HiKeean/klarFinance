@@ -1,0 +1,67 @@
+<section class="roles-page">
+  <div class="page-heading">
+    <div>
+      <h1>Laporan NPL per Wilayah</h1>
+      <p>Persentase pinjaman menunggak (Overdue) per Branch. Klik wilayah di peta untuk detail.</p>
+    </div>
+  </div>
+
+  <section class="summary-row">
+    <div class="summary-card severity-green">
+      <span class="summary-value">{{ summary().green }}</span>
+      <span class="summary-label">Branch Sehat</span>
+    </div>
+    <div class="summary-card severity-yellow">
+      <span class="summary-value">{{ summary().yellow }}</span>
+      <span class="summary-label">Branch Waspada</span>
+    </div>
+    <div class="summary-card severity-red">
+      <span class="summary-value">{{ summary().red }}</span>
+      <span class="summary-label">Branch Kritis</span>
+    </div>
+  </section>
+
+  <section class="map-card">
+    <div class="map-legend">
+      <span><i class="dot dot-green"></i> Sehat (&lt;2%)</span>
+      <span><i class="dot dot-yellow"></i> Waspada (2-5%)</span>
+      <span><i class="dot dot-red"></i> Kritis (&gt;5%)</span>
+      <span><i class="dot dot-gray"></i> Belum ada data</span>
+    </div>
+    @if (mapError()) {
+      <p class="map-error">{{ mapError() }}</p>
+    }
+    <div class="map-wrap">
+      <div #mapContainer class="map-container"></div>
+      @if (isLoading()) {
+        <div class="map-loading-overlay">
+          <span class="spinner"></span>
+          <span>Memuat data peta...</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="roles-card" aria-label="NPL report per branch">
+    <app-table
+      [columns]="columns"
+      [rows]="sortedBySeverity()"
+      [loading]="isLoading()"
+      [errorMessage]="errorMessage()"
+      loadingMessage="Memuat laporan NPL..."
+      emptyMessage="Belum ada data pinjaman."
+      [trackBy]="trackById"
+    >
+      <ng-template appTableCell="branchName" let-item>
+        <span class="menu-name">{{ item.branchName }}</span>
+      </ng-template>
+      <ng-template appTableCell="nplSeverity" let-item>
+        <span class="severity-badge" [class]="'badge-' + item.nplSeverity.toLowerCase()">
+          {{ severityLabel(item.nplSeverity) }}
+        </span>
+      </ng-template>
+      <ng-template appTableCell="nplPercent" let-item>{{ item.nplPercent }}%</ng-template>
+      <ng-template appTableCell="totalOutstandingPenalty" let-item>{{ formatPenalty(item.totalOutstandingPenalty) }}</ng-template>
+    </app-table>
+  </section>
+</section>

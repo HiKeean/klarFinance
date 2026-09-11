@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+.content-inner {
+  padding: 42px 30px;
+}
+
+.kicker {
+  margin: 0 0 10px;
+  color: #0b999d;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.content-inner h1 {
+  margin: 0;
+  color: #173047;
+  font-size: 31px;
+  letter-spacing: -0.04em;
+}
+
+.welcome {
+  margin-top: 9px;
+  color: #8595a0;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .content-inner {
+    padding: 32px 20px;
+  }
+}

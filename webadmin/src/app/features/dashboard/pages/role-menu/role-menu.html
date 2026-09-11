@@ -1,0 +1,38 @@
+<section class="role-menu-page">
+  <div class="page-heading">
+    <div>
+      <a class="back-link" routerLink="/dashboard/role">&larr; Back to Roles</a>
+      <h1>Menu Access — {{ role()?.role || 'Role' }}</h1>
+      <p>Choose which menus this role can access.</p>
+    </div>
+  </div>
+
+  <section class="role-menu-card" aria-label="Menu access list">
+    <app-table
+      [columns]="columns"
+      [rows]="menus()"
+      [loading]="isLoading()"
+      [errorMessage]="errorMessage()"
+      loadingMessage="Loading menus..."
+      emptyMessage="No menus found."
+      [trackBy]="trackByMenuId"
+    >
+      <ng-template appTableCell="assigned" let-item>
+        <input
+          type="checkbox"
+          [checked]="isAssigned(item.id)"
+          [disabled]="togglingMenuId() !== null"
+          (change)="toggleMenu(item, $event)"
+          [attr.aria-label]="'Toggle access to ' + (item.name || 'menu')"
+        />
+      </ng-template>
+      <ng-template appTableCell="logo" let-item>
+        @if (item.logo) {
+          <span class="menu-icon"><mat-icon>{{ item.logo }}</mat-icon></span>
+        } @else {
+          <span class="no-logo">No Logo</span>
+        }
+      </ng-template>
+    </app-table>
+  </section>
+</section>

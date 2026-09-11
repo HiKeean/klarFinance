@@ -1,0 +1,76 @@
+<section class="roles-page">
+  <div class="page-heading">
+    <div>
+      <h1>Role Management</h1>
+      <p>Manage roles and access levels for KlarFinance users.</p>
+    </div>
+    <button class="new-user-button" type="button" (click)="openNewRole()">
+      <span aria-hidden="true">+</span>
+      New Role
+    </button>
+  </div>
+
+  <section class="roles-card" aria-label="Roles list">
+    <app-table
+      [columns]="columns"
+      [rows]="filteredRoles()"
+      [loading]="isLoading()"
+      [errorMessage]="errorMessage()"
+      loadingMessage="Loading roles..."
+      emptyMessage="No roles found."
+      [trackBy]="trackByRoleId"
+      [rowClass]="rowClass"
+      (rowClick)="openMenuAccess($event)"
+      [search]="true"
+      [searchValue]="searchTerm()"
+      searchPlaceholder="Search roles..."
+      (searchValueChange)="onSearch($event)"
+    >
+      <ng-template appTableCell="role" let-item>
+        @if (item.role) {
+          <span class="role-badge">{{ item.role }}</span>
+        } @else {
+          <span class="empty-role">-</span>
+        }
+      </ng-template>
+      <ng-template appTableCell="actions" let-item>
+        <button class="edit-button" type="button" (click)="$event.stopPropagation(); openEdit(item)" [attr.aria-label]="'Edit ' + (item.role || 'role')">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m16.9 3.6 3.5 3.5-11.8 11.8-4.2.7.7-4.2L16.9 3.6Zm-1.4 1.4L6.4 14.1l-.4 2.5 2.5-.4 9.1-9.1-2.1-2.1Z" /></svg>
+        </button>
+        <button class="delete-button" type="button" (click)="$event.stopPropagation(); deleteRole(item)" [attr.aria-label]="'Delete ' + (item.role || 'role')">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </ng-template>
+    </app-table>
+
+    <footer class="table-footer">
+      Showing {{ filteredRoles().length }} of {{ roles().length }} roles
+    </footer>
+  </section>
+</section>
+
+<app-modal
+  [(ngModel)]="editRoleModalOpen"
+  title="Edit Role"
+  [submitLabel]="isSaving() ? 'Saving...' : 'Save Changes'"
+  [submitDisabled]="isSaving() || !editRoleName().trim()"
+  [disableClose]="isSaving()"
+  (submitted)="saveEdit()"
+>
+  <p class="modal-description">Update the role name.</p>
+  <label for="edit-role-name">Role Name</label>
+  <input id="edit-role-name" name="editRoleName" [ngModel]="editRoleName()" (ngModelChange)="editRoleName.set($event)" required autocomplete="off" />
+</app-modal>
+
+<app-modal
+  [(ngModel)]="createRoleModalOpen"
+  title="Add Role"
+  [submitLabel]="isSaving() ? 'Saving...' : 'Save Changes'"
+  [submitDisabled]="isSaving() || !editRoleName().trim()"
+  [disableClose]="isSaving()"
+  (submitted)="saveNewRole()"
+>
+  <p class="modal-description">Enter the role name.</p>
+  <label for="new-role-name">Role Name</label>
+  <input id="new-role-name" name="newRoleName" [ngModel]="editRoleName()" (ngModelChange)="editRoleName.set($event)" required autocomplete="off" />
+</app-modal>

@@ -1,0 +1,9 @@
+<header class="topbar">
+  <div class="page-title">{{ pageTitle() }}</div>
+  <div class="profile-area">
+    @if (userProfile$ | async; as profile) {
+      <span class="profile-name">{{ profile.name || profile.identity }}</span>
+    }
+    <div class="profile-icon" aria-label="User profile"><span></span></div>
+  </div>
+</header>

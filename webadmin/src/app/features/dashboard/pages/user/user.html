@@ -1,0 +1,165 @@
+<section class="users-page">
+  <div class="page-heading">
+    <div>
+      <h1>Users Management</h1>
+      <p>Manage and monitor all employee accounts and access levels.</p>
+    </div>
+    <button class="new-user-button" type="button" (click)="openRegistration()">
+      <span aria-hidden="true">+</span>
+      New Employee
+    </button>
+  </div>
+
+  <section class="users-card" aria-label="Users list">
+    <app-table
+      [columns]="columns"
+      [rows]="filteredUsers()"
+      [loading]="isLoading()"
+      loadingMessage="Loading users..."
+      emptyMessage="No employees found."
+      [trackBy]="trackByIdentity"
+      [rowClass]="rowClass"
+      [search]="true"
+      [searchValue]="searchTerm()"
+      searchPlaceholder="Search employees..."
+      (searchValueChange)="onSearch($event)"
+    >
+      <div class="role-filter" tableFilters>
+        <app-dropdown
+          [data]="roleFilterOptions"
+          [ngModel]="roleFilter()"
+          (ngModelChange)="onRoleFilterChange($event)"
+          placeholder="All Roles"
+        />
+      </div>
+
+      <ng-template appTableCell="name" let-user>
+        <span class="user-name-text" [class.is-deleted]="user.deletedAt">{{ user.name }}</span>
+        @if (user.deletedAt) {
+          <span class="deleted-badge">Deleted</span>
+        }
+      </ng-template>
+      <ng-template appTableCell="role" let-user>
+        <span class="role-badge" [class]="roleClass(user.role)">{{ user.role || '-' }}</span>
+      </ng-template>
+      <ng-template appTableCell="actions" let-user>
+        <button
+          class="delete-button"
+          type="button"
+          (click)="removeUser(user.identity)"
+          [disabled]="!user.identity || deletingIdentity() === user.identity"
+          [attr.aria-label]="'Delete ' + user.name"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M9 3h6l1 2h4v2H4V5h4l1-2Zm-3 6h12l-1 12H7L6 9Zm4 2H8v8h2v-8Zm4 0h-2v8h2v-8Z"
+            />
+          </svg>
+        </button>
+      </ng-template>
+    </app-table>
+
+    <footer class="table-footer">
+      <span>Showing {{ startEntry }} to {{ endEntry }} of {{ totalElements() }} entries</span>
+      <div class="pagination" aria-label="Pagination">
+        @for (page of visiblePages(); track page) {
+          <button type="button" (click)="goToPage(page)" [class.current]="page === pageIndex()">
+            {{ page + 1 }}
+          </button>
+        }
+        <button type="button" (click)="nextPage()" [disabled]="pageIndex() >= totalPages() - 1">
+          Next
+        </button>
+      </div>
+    </footer>
+  </section>
+</section>
+
+<app-modal
+  [(ngModel)]="registrationModalOpen"
+  title="Register New Employee"
+  size="lg"
+  [submitLabel]="isSaving() ? 'Registering...' : 'Register Employee'"
+  [submitDisabled]="isSaving()"
+  [disableClose]="isSaving()"
+  (submitted)="submitRegistration()"
+>
+  <p class="modal-description">Create an account for KlarFinance portal access.</p>
+
+  <div [formGroup]="employeeForm">
+    <h3>Account Information</h3>
+    <div class="form-grid">
+      <label>
+        Full Name
+        <input formControlName="name" placeholder="Enter employee name" />
+      </label>
+      <div class="form-field">
+        <span class="field-label">Role</span>
+        <app-dropdown formControlName="role" placeholder="Select a role" [search]="true" [data]="roleOptions" />
+      </div>
+      <label>
+        No HP (Phone Number)
+        <input
+          type="tel"
+          inputmode="numeric"
+          autocomplete="tel"
+          maxlength="15"
+          formControlName="noHp"
+          placeholder="e.g. 08123456789"
+          (input)="sanitizePhoneNumber($event)"
+        />
+      </label>
+      <label>
+        Date of Birth
+        <input type="date" formControlName="dob" />
+      </label>
+      <label class="full-width">
+        Temporary Password
+        <input type="password" formControlName="password" placeholder="Generate or type password" />
+      </label>
+    </div>
+
+    <h3>Assignment &amp; Location</h3>
+    <div class="form-grid">
+      <div class="form-field full-width">
+        <span class="field-label">Assigned Branch</span>
+        <app-dropdown formControlName="branchId" placeholder="Select a branch" [search]="true" [data]="branchOptions()" />
+      </div>
+      <div class="form-field">
+        <span class="field-label">Province</span>
+        <app-dropdown formControlName="provinceId" placeholder="Select province" [search]="true" [data]="provinceOptions()" />
+      </div>
+      <div class="form-field">
+        <span class="field-label">Regency / City</span>
+        <app-dropdown formControlName="regencyId" placeholder="Select regency" [search]="true" [data]="regencyOptions()" />
+      </div>
+      <div class="form-field">
+        <span class="field-label">District</span>
+        <app-dropdown formControlName="districtId" placeholder="Select district" [search]="true" [data]="districtOptions()" />
+      </div>
+      <div class="form-field">
+        <span class="field-label">Village</span>
+        <app-dropdown formControlName="villageId" placeholder="Select village" [search]="true" [data]="villageOptions()" />
+      </div>
+      <label class="full-width">
+        Detailed Address
+        <textarea formControlName="address" rows="3" placeholder="Street name, building, floor, etc."></textarea>
+      </label>
+    </div>
+
+    @if (formError()) {
+      <p class="form-error">{{ formError() }}</p>
+    }
+  </div>
+</app-modal>
+
+@if (isSuccessOpen()) {
+  <div class="success-backdrop" role="presentation">
+    <section class="success-modal" role="alertdialog" aria-modal="true" aria-labelledby="success-title">
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <h2 id="success-title">Account sudah<br />teregister</h2>
+      <p>{{ successMessage() }}</p>
+      <button class="success-button" type="button" (click)="closeSuccess()">Tutup</button>
+    </section>
+  </div>
+}

@@ -1,0 +1,108 @@
+<section class="roles-page">
+  <div class="page-heading">
+    <div>
+      <h1>Menu Management</h1>
+      <p>Manage menus and access levels for KlarFinance users.</p>
+    </div>
+    <button class="new-user-button" type="button" (click)="openNewMenu()">
+      <span aria-hidden="true">+</span>
+      New Menu
+    </button>
+  </div>
+
+  <section class="roles-card" aria-label="Roles list">
+    <app-table
+      [columns]="columns"
+      [rows]="filteredMenus()"
+      [loading]="isLoading()"
+      [errorMessage]="errorMessage()"
+      loadingMessage="Loading menus..."
+      emptyMessage="No menus found."
+      [trackBy]="trackByMenuId"
+      [search]="true"
+      [searchValue]="searchTerm()"
+      searchPlaceholder="Search menus..."
+      (searchValueChange)="onSearch($event)"
+    >
+      <ng-template appTableCell="url" let-item>
+        <span class="menu-url">{{ item.url }}</span>
+      </ng-template>
+      <ng-template appTableCell="name" let-item>
+        <span class="menu-name">{{ item.name }}</span>
+      </ng-template>
+      <ng-template appTableCell="createdBy" let-item>
+        <span class="menu-created-by">{{ item.createdBy }}</span>
+      </ng-template>
+      <ng-template appTableCell="createdAt" let-item>
+        <span class="menu-created-at">{{ item.createdAt }}</span>
+      </ng-template>
+      <ng-template appTableCell="logo" let-item>
+        @if (item.logo) {
+          <span class="menu-icon"><mat-icon>{{item.logo}}</mat-icon></span>
+        } @else {
+          <span class="no-logo">No Logo</span>
+        }
+      </ng-template>
+      <ng-template appTableCell="actions" let-item>
+        <button class="edit-button" type="button" (click)="openEdit(item)" [attr.aria-label]="'Edit ' + (item.name || 'menu')">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m16.9 3.6 3.5 3.5-11.8 11.8-4.2.7.7-4.2L16.9 3.6Zm-1.4 1.4L6.4 14.1l-.4 2.5 2.5-.4 9.1-9.1-2.1-2.1Z" /></svg>
+        </button>
+        <!-- <button class="delete-button" type="button" (click)="deleteMenu(item)" [attr.aria-label]="'Delete ' + (item.name || 'menu')">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12Zm3.46-7.12 1.41-1.41L12 12.59l1.12-1.12 1.41 1.41L13.41 14l1.12 1.12-1.41 1.41L12 15.41l-1.12 1.12-1.41-1.41L10.59 14l-1.13-1.12ZM15.5 4l-1-1h-5l-1 1H5v2h14V4h-3.5Z" /></svg>
+        </button> -->
+      </ng-template>
+    </app-table>
+
+    <footer class="table-footer">
+      Showing {{ filteredMenus().length }} of {{ menus().length }} roles
+    </footer>
+  </section>
+</section>
+
+<app-modal
+  [(ngModel)]="editMenuModalOpen"
+  title="Edit Menu"
+  [submitLabel]="isSaving() ? 'Saving...' : 'Save Changes'"
+  [submitDisabled]="isSaving() || !editMenuName().trim() || !editMenuUrl().trim()"
+  [disableClose]="isSaving()"
+  (submitted)="saveEdit()"
+>
+  <p class="modal-description">Update the menu details.</p>
+  <div class="field">
+    <label for="edit-menu-name">Menu Name</label>
+    <input id="edit-menu-name" name="editMenuName" [ngModel]="editMenuName()" (ngModelChange)="editMenuName.set($event)" required autocomplete="off" />
+  </div>
+  <div class="field">
+    <label for="edit-menu-url">URL</label>
+    <input id="edit-menu-url" name="editMenuUrl" [ngModel]="editMenuUrl()" (ngModelChange)="editMenuUrl.set($event)" placeholder="/dashboard/example" required autocomplete="off" />
+  </div>
+  <div class="field">
+    <label for="edit-menu-logo">Logo</label>
+    <input id="edit-menu-logo" name="editMenuLogo" [ngModel]="editMenuLogo()" (ngModelChange)="editMenuLogo.set($event)" placeholder="fact_check" autocomplete="off" />
+    <span class="field-hint">Material icon name — browse at fonts.google.com/icons</span>
+  </div>
+</app-modal>
+
+<app-modal
+  [(ngModel)]="createMenuModalOpen"
+  title="Add Menu"
+  [submitLabel]="isSaving() ? 'Saving...' : 'Save Changes'"
+  [submitDisabled]="isSaving() || !newMenuName().trim() || !newMenuUrl().trim()"
+  [disableClose]="isSaving()"
+  (submitted)="saveNewMenu()"
+>
+  <p class="modal-description">Enter the new menu details.</p>
+  <div class="field">
+    <label for="new-menu-name">Menu Name</label>
+    <input id="new-menu-name" name="newMenuName" [ngModel]="newMenuName()" (ngModelChange)="newMenuName.set($event)" placeholder="e.g. Approval" required autocomplete="off" />
+  </div>
+  <div class="field">
+    <label for="new-menu-url">URL</label>
+    <input id="new-menu-url" name="newMenuUrl" [ngModel]="newMenuUrl()" (ngModelChange)="newMenuUrl.set($event)" placeholder="/dashboard/example" required autocomplete="off" />
+  </div>
+  <div class="field">
+    <label for="new-menu-logo">Logo</label>
+    <input id="new-menu-logo" name="newMenuLogo" [ngModel]="newMenuLogo()" (ngModelChange)="newMenuLogo.set($event)" placeholder="fact_check" autocomplete="off" />
+    <span class="field-hint">Material icon name — browse at fonts.google.com/icons</span>
+  </div>
+</app-modal>

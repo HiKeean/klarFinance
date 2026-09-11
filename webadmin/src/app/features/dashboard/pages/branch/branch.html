@@ -1,0 +1,73 @@
+<section class="branch-page">
+  <div class="page-heading">
+    <div>
+      <h1>Branch</h1>
+      <p>Daftar branch beserta BM (Branch Manager) yang di-assign ke masing-masing.</p>
+    </div>
+  </div>
+
+  <section class="branch-card" aria-label="Branch list">
+    <app-table
+      [columns]="columns"
+      [rows]="branches()"
+      [loading]="isLoading()"
+      [errorMessage]="errorMessage()"
+      loadingMessage="Memuat branch..."
+      emptyMessage="Belum ada branch."
+      [trackBy]="trackByBranchCode"
+    >
+      <ng-template appTableCell="bm" let-branch>
+        @if (branch.bmIdentity) {
+          <span class="bm-name">{{ branch.bmName || branch.bmIdentity }}</span>
+          <span class="bm-identity">{{ branch.bmIdentity }}</span>
+        } @else {
+          <span class="value muted">— Belum ada BM —</span>
+        }
+      </ng-template>
+      <ng-template appTableCell="actions" let-branch>
+        <button class="edit-button" type="button" (click)="openAssign(branch)" [attr.aria-label]="'Assign BM ke ' + branch.name">
+          {{ branch.bmIdentity ? 'Ganti' : 'Assign' }}
+        </button>
+        @if (branch.bmIdentity) {
+          <button class="delete-button" type="button" (click)="unassign(branch)" [attr.aria-label]="'Lepas BM dari ' + branch.name">
+            Lepas
+          </button>
+        }
+      </ng-template>
+    </app-table>
+
+    <footer class="table-footer">
+      Menampilkan {{ branches().length }} branch
+    </footer>
+  </section>
+</section>
+
+<app-modal
+  [(ngModel)]="assignModalOpen"
+  title="Assign BM"
+  [submitLabel]="isSaving() ? 'Menyimpan…' : 'Simpan'"
+  [submitDisabled]="isSaving() || !selectedBmIdentity()"
+  [disableClose]="isSaving()"
+  (submitted)="submitAssign()"
+>
+  <p class="modal-description">
+    Pilih BM yang mau di-assign ke branch <strong>{{ activeBranch()?.name }}</strong>. Kalau BM yang dipilih lagi pegang branch lain, dia otomatis dipindah ke sini.
+  </p>
+
+  <div class="field">
+    <label for="assign-bm">BM</label>
+    <app-dropdown
+      id="assign-bm"
+      placeholder="— Pilih BM —"
+      [search]="true"
+      [data]="bmOptions()"
+      [ngModel]="selectedBmIdentity()"
+      (ngModelChange)="selectedBmIdentity.set($event)"
+      name="assignBm"
+    />
+  </div>
+
+  @if (assignError()) {
+    <p class="modal-error">{{ assignError() }}</p>
+  }
+</app-modal>
