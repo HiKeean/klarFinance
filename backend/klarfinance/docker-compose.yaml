@@ -18,3 +18,8 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - TZ=Asia/Jakarta
+      - FIREBASE_SERVICE_ACCOUNT_PATH=/app/firebase-service-account.json
+    # Written to the server by the deploy step (from secrets.FIREBASE_SERVICE_ACCOUNT_JSON_BASE64),
+    # never committed here - same reasoning as .env above.
+    volumes:
+      - ./firebase-service-account.json:/app/firebase-service-account.json:ro

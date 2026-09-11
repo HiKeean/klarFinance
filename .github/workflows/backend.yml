@@ -134,6 +134,12 @@ jobs:
             EOF
             chmod 600 .env
 
+            # Firebase service account (FCM push notification) - JSON file disimpan base64 di
+            # GitHub Secret karena env var .env gak cocok buat multi-line JSON. Di-mount ke container
+            # lewat docker-compose.yaml volume, path-nya di-set lewat FIREBASE_SERVICE_ACCOUNT_PATH.
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON_BASE64 }}" | base64 -d > firebase-service-account.json
+            chmod 600 firebase-service-account.json
+
             # Only needed while the ghcr.io package is private - skip this login step
             # once you've made ghcr.io/hikeean/klarfinance-backend public.
             if [ -n "${{ secrets.GHCR_PAT }}" ]; then
