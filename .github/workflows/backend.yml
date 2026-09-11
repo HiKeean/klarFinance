@@ -130,6 +130,7 @@ jobs:
             KIRIMI_SECRET=${{ secrets.KIRIMI_SECRET }}
             KIRIMI_DEVICE_ID=${{ secrets.KIRIMI_DEVICE_ID }}
             KIRIMI_ENABLED=${{ secrets.KIRIMI_ENABLED }}
+            CORS_ALLOWED_ORIGINS=${{ secrets.CORS_ALLOWED_ORIGINS }}
             EOF
             chmod 600 .env
 

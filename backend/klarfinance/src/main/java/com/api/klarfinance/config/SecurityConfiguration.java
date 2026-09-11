@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,10 +27,11 @@ public class SecurityConfiguration {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
-    
+
     private final HmacRequestCachingFilter hmacRequestCachingFilter;
     private final HmacSignatureFilter hmacSignatureFilter;
     private final ObjectMapper objectMapper;
+    private final AppConfigProperties appConfigProperties;
 
     @SuppressWarnings("null")
 @Bean
@@ -85,11 +85,10 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
-        // CORS dibuka buat semua origin dulu (dev) - pakai allowedOriginPatterns (bukan
-        // allowedOrigins) karena allowCredentials(true) di bawah gak kompatibel sama
-        // allowedOrigins("*") mentah, Spring bakal throw exception kalau dipaksa.
-        configuration.setAllowedOriginPatterns(List.of("*"));
+
+        // Origin yang di-allow diambil dari app.security.cors-allowed-origins
+        // (application.properties / env var APP_SECURITY_CORS_ALLOWED_ORIGINS).
+        configuration.setAllowedOriginPatterns(appConfigProperties.getSecurity().getCorsAllowedOrigins());
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         
