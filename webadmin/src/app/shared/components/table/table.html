@@ -1,0 +1,58 @@
+@if (search) {
+  <div class="app-table-toolbar">
+    <label class="app-table-search">
+      <span aria-hidden="true">⌕</span>
+      <input
+        type="search"
+        [placeholder]="searchPlaceholder"
+        [value]="searchValue"
+        (input)="onSearchInput($event)"
+        aria-label="Search"
+      />
+    </label>
+    <ng-content select="[tableFilters]"></ng-content>
+  </div>
+}
+<div class="app-table-wrapper">
+  <table class="app-table">
+    <thead>
+      <tr>
+        @for (column of columns; track column.key) {
+          <th [class]="column.headerClass" [style.width]="column.width">{{ column.header }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @if (loading) {
+        <tr>
+          <td class="app-table-message" [attr.colspan]="columns.length">{{ loadingMessage }}</td>
+        </tr>
+      } @else if (errorMessage) {
+        <tr>
+          <td class="app-table-message app-table-error" [attr.colspan]="columns.length">{{ errorMessage }}</td>
+        </tr>
+      } @else if (rows.length === 0) {
+        <tr>
+          <td class="app-table-message" [attr.colspan]="columns.length">{{ emptyMessage }}</td>
+        </tr>
+      } @else {
+        @for (row of rows; track trackBy(row, $index)) {
+          <tr [class]="rowClass(row, $index)" (click)="rowClick.emit(row)">
+            @for (column of columns; track column.key) {
+              <td [class]="column.cellClass">
+                @if (templateFor(column.key); as cellTemplate) {
+                  <ng-container
+                    [ngTemplateOutlet]="cellTemplate.templateRef"
+                    [ngTemplateOutletContext]="{ $implicit: row, row: row }"
+                  ></ng-container>
+                } @else {
+                  {{ cellValue(row, column.key) ?? '-' }}
+                }
+              </td>
+            }
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>

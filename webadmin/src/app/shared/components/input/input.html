@@ -1,0 +1,25 @@
+<div hlmField>
+  @if (label) {
+    <label hlmFieldLabel [for]="inputId">
+      {{ label }}
+      @if (required) {
+        <span class="text-destructive">*</span>
+      }
+    </label>
+  }
+
+  <input
+    hlmInput
+    [id]="inputId"
+    [type]="type"
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [autocomplete]="autocomplete"
+  />
+
+  @if (isInvalid) {
+    <hlm-field-error>{{ errorMessage }}</hlm-field-error>
+  } @else if (hint) {
+    <p hlmFieldDescription>{{ hint }}</p>
+  }
+</div>

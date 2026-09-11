@@ -1,0 +1,12 @@
+<main class="login-page">
+  <section class="login-visual" aria-label="Klar Finance">
+    <div class="brand-mark">K</div><div><span class="brand-name">KlarFinance</span><span class="brand-caption">Web Admin</span></div>
+    <div class="visual-copy"><p class="kicker">Sesi kamu berakhir</p><h1>Masuk lagi<br />dengan aman.</h1><p class="visual-description">Identity kamu masih tersimpan. Masukkan password untuk melanjutkan pekerjaan.</p></div>
+  </section>
+  <section class="login-panel"><div class="login-card"><div class="mobile-brand"><span class="brand-mark">K</span><span>KlarFinance</span></div><p class="kicker">Token expired</p><h2>Konfirmasi password</h2><p class="subtitle">Sesi kamu sudah berakhir. Masukkan password untuk melanjutkan.</p>
+    <form (ngSubmit)="submit()" #reauthForm="ngForm"><label for="identity">Identity</label><input id="identity" name="identity" type="text" [(ngModel)]="identity" readonly autocomplete="username" /><label for="password">Password</label><input id="password" name="password" type="password" [(ngModel)]="password" placeholder="Masukkan password" required autocomplete="current-password" />
+      @if (errorMessage()) { <p class="error-message" role="alert">{{ errorMessage() }}</p> }<button type="submit" [disabled]="reauthForm.invalid || loading()">{{ loading() ? 'Memproses...' : 'Lanjutkan' }}</button>
+    </form>
+    <button class="secondary-button" type="button" (click)="changeAccount()">Change account</button>
+  </div><span class="copyright">© 2026 KlarFinance</span></section>
+</main>

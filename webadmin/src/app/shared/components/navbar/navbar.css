@@ -1,0 +1,18 @@
+:host{display:block}.sidebar{position:relative;display:flex;flex:0 0 225px;flex-direction:column;min-height:100vh;padding:22px 13px;border-right:1px solid #e2eaf0;background:#fff}.sidebar-brand{display:flex;align-items:center;gap:10px;padding:0 10px 31px;color:#087f85}.sidebar-brand .brand-mark{display:grid;place-items:center;width:29px;height:29px;border-radius:7px;color:#fff;background:#0b999d;font-weight:800}.sidebar-brand strong{display:block;font-size:14px}.sidebar-brand small{display:block;margin-top:2px;color:#8b9aa5;font-size:9px}nav a{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:6px;color:#546977;text-decoration:none;font-size:11px;font-weight:700}nav a.active{color:#087f85;background:#e1f3f2}.logout{position:absolute;right:20px;bottom:22px;border:0;color:#93a1aa;background:transparent;cursor:pointer;font:inherit;font-size:11px}@media(max-width:600px){.sidebar{flex-basis:190px}}
+.menu-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.menu-icon mat-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  line-height: 15px;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,72 @@
+:host { display: block; }
+
+.role-menu-page {
+  min-height: calc(100vh - 59px);
+  padding: 27px 30px 40px;
+  background: #f5f7ff;
+  color: #263238;
+}
+
+.page-heading {
+  margin: 0 0 22px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #087f85;
+  font-size: 10px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.page-heading h1 {
+  margin: 0 0 5px;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.page-heading p {
+  margin: 0;
+  color: #68747b;
+  font-size: 10px;
+}
+
+.role-menu-card {
+  overflow: hidden;
+  border: 1px solid #e7ebf5;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(28 53 80 / 2%);
+}
+
+app-table input[type='checkbox'] {
+  width: 15px;
+  height: 15px;
+  accent-color: #087f85;
+  cursor: pointer;
+}
+
+app-table input[type='checkbox']:disabled {
+  cursor: wait;
+  opacity: 0.5;
+}
+
+.menu-icon mat-icon {
+  color: #087f85;
+}
+
+.no-logo {
+  color: #9aa6aa;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .role-menu-page { padding: 24px 16px 32px; }
+}

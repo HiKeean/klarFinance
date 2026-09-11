@@ -1,0 +1,559 @@
+{
+  "version": "6.0",
+  "nxVersion": "23.1.1",
+  "pathMappings": {
+    "@spartan-ng/helm/input": [
+      "./libs/ui/input/src/index.ts"
+    ],
+    "@spartan-ng/helm/utils": [
+      "./libs/ui/utils/src/index.ts"
+    ],
+    "@spartan-ng/helm/combobox": [
+      "./libs/ui/combobox/src/index.ts"
+    ],
+    "@spartan-ng/helm/input-group": [
+      "./libs/ui/input-group/src/index.ts"
+    ],
+    "@spartan-ng/helm/button": [
+      "./libs/ui/button/src/index.ts"
+    ],
+    "@spartan-ng/helm/textarea": [
+      "./libs/ui/textarea/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {},
+    "nonProjectFiles": [
+      {
+        "file": ".editorconfig",
+        "hash": "4165385352547808172"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "8735202651818384803"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "5331566439708925252"
+      },
+      {
+        "file": ".vscode/launch.json",
+        "hash": "17038929134016848735"
+      },
+      {
+        "file": ".vscode/tasks.json",
+        "hash": "5336636969995539451"
+      },
+      {
+        "file": "README.md",
+        "hash": "3020826902555640366"
+      },
+      {
+        "file": "angular.json",
+        "hash": "10112711066784172396"
+      },
+      {
+        "file": "components.json",
+        "hash": "1782399058892246833"
+      },
+      {
+        "file": "firebase.json",
+        "hash": "7931773110186798249"
+      },
+      {
+        "file": "libs/ui/button/src/index.ts",
+        "hash": "5168917203269790378"
+      },
+      {
+        "file": "libs/ui/button/src/lib/hlm-button.token.ts",
+        "hash": "9576183639981922411"
+      },
+      {
+        "file": "libs/ui/button/src/lib/hlm-button.ts",
+        "hash": "3422853681033435804"
+      },
+      {
+        "file": "libs/ui/combobox/src/index.ts",
+        "hash": "11908043624705141777"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-chip-input.ts",
+        "hash": "4071028861581129747"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-chip-remove.ts",
+        "hash": "3317066428193682447"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-chip.ts",
+        "hash": "5000406822562575317"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-chips.ts",
+        "hash": "10322318245856510144"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-content.ts",
+        "hash": "10489350533952833094"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-empty.ts",
+        "hash": "15346515928245848776"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-group.ts",
+        "hash": "9217962756317474941"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-input.ts",
+        "hash": "6364385747259914177"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-item.ts",
+        "hash": "7578751560056011"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-label.ts",
+        "hash": "16560287736315414240"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-list.ts",
+        "hash": "16461308326265455643"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-multiple.ts",
+        "hash": "8380039109008928137"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-placeholder.ts",
+        "hash": "514936810517798235"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-portal.ts",
+        "hash": "14786705401526455211"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-separator.ts",
+        "hash": "7459574200029242255"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-status.ts",
+        "hash": "17199772523059631082"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-trigger.ts",
+        "hash": "14081309619313699120"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-value-template.ts",
+        "hash": "3612973512168506115"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-value.ts",
+        "hash": "11320893210569747641"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox-values.ts",
+        "hash": "7364841355579260342"
+      },
+      {
+        "file": "libs/ui/combobox/src/lib/hlm-combobox.ts",
+        "hash": "5234972242620667666"
+      },
+      {
+        "file": "libs/ui/input-group/src/index.ts",
+        "hash": "2034999366388215664"
+      },
+      {
+        "file": "libs/ui/input-group/src/lib/hlm-input-group-addon.ts",
+        "hash": "2552983825787107532"
+      },
+      {
+        "file": "libs/ui/input-group/src/lib/hlm-input-group-button.ts",
+        "hash": "2454058942028347492"
+      },
+      {
+        "file": "libs/ui/input-group/src/lib/hlm-input-group-input.ts",
+        "hash": "16321073532130555648"
+      },
+      {
+        "file": "libs/ui/input-group/src/lib/hlm-input-group-text.ts",
+        "hash": "3475480718342781202"
+      },
+      {
+        "file": "libs/ui/input-group/src/lib/hlm-input-group-textarea.ts",
+        "hash": "13621805825391258980"
+      },
+      {
+        "file": "libs/ui/input-group/src/lib/hlm-input-group.ts",
+        "hash": "11960990653334737141"
+      },
+      {
+        "file": "libs/ui/input/src/index.ts",
+        "hash": "7356458584027653927"
+      },
+      {
+        "file": "libs/ui/input/src/lib/hlm-input.ts",
+        "hash": "6962747216954766141"
+      },
+      {
+        "file": "libs/ui/textarea/src/index.ts",
+        "hash": "18246224225285192967"
+      },
+      {
+        "file": "libs/ui/textarea/src/lib/hlm-textarea.ts",
+        "hash": "10150202786388269308"
+      },
+      {
+        "file": "libs/ui/utils/src/index.ts",
+        "hash": "12007391678651720588"
+      },
+      {
+        "file": "libs/ui/utils/src/lib/hlm.ts",
+        "hash": "17766057926556533011"
+      },
+      {
+        "file": "libs/ui/utils/src/lib/provide-spartan-hlm.ts",
+        "hash": "18273089395265037022"
+      },
+      {
+        "file": "ngsw-config.json",
+        "hash": "10045640393560913408"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "13884496342528981886"
+      },
+      {
+        "file": "package.json",
+        "hash": "9114717898464031566"
+      },
+      {
+        "file": "public/favicon.ico",
+        "hash": "3988961587069885523"
+      },
+      {
+        "file": "public/icons/icon-192x192.svg",
+        "hash": "14510432601376962789"
+      },
+      {
+        "file": "public/icons/icon-512x512.svg",
+        "hash": "4364317084331709102"
+      },
+      {
+        "file": "public/manifest.webmanifest",
+        "hash": "9705350270908252139"
+      },
+      {
+        "file": "src/app/app.config.server.ts",
+        "hash": "8147531562011437466"
+      },
+      {
+        "file": "src/app/app.config.ts",
+        "hash": "8680683411840626019"
+      },
+      {
+        "file": "src/app/app.css",
+        "hash": "6748308674464177805"
+      },
+      {
+        "file": "src/app/app.html",
+        "hash": "848395303240231261"
+      },
+      {
+        "file": "src/app/app.routes.server.ts",
+        "hash": "7309014621112952987"
+      },
+      {
+        "file": "src/app/app.routes.ts",
+        "hash": "11217299392363680182"
+      },
+      {
+        "file": "src/app/app.spec.ts",
+        "hash": "7208669981262054391"
+      },
+      {
+        "file": "src/app/app.ts",
+        "hash": "6034800275453896857"
+      },
+      {
+        "file": "src/app/core/config/url.ts",
+        "hash": "9631477013467356190"
+      },
+      {
+        "file": "src/app/core/guards/auth.guard.ts",
+        "hash": "13956238591351542216"
+      },
+      {
+        "file": "src/app/core/interceptors/auth.interceptor.ts",
+        "hash": "16793879610848751657"
+      },
+      {
+        "file": "src/app/core/layouts/admin-layout/admin-layout.css",
+        "hash": "3643350158000529506"
+      },
+      {
+        "file": "src/app/core/layouts/admin-layout/admin-layout.html",
+        "hash": "5055056857175746273"
+      },
+      {
+        "file": "src/app/core/layouts/admin-layout/admin-layout.ts",
+        "hash": "3734441761649095704"
+      },
+      {
+        "file": "src/app/core/services/api.service.ts",
+        "hash": "17212734128021208195"
+      },
+      {
+        "file": "src/app/core/services/auth-state.service.ts",
+        "hash": "17471968041858772205"
+      },
+      {
+        "file": "src/app/core/services/dbo/dbo.spec.ts",
+        "hash": "11692558216689061562"
+      },
+      {
+        "file": "src/app/core/services/dbo/dbo.ts",
+        "hash": "9122973978230465882"
+      },
+      {
+        "file": "src/app/features/(landingpage)/index.ts",
+        "hash": "14392920829914029089"
+      },
+      {
+        "file": "src/app/features/(landingpage)/landingpage/landingpage.css",
+        "hash": "11862198354518282266"
+      },
+      {
+        "file": "src/app/features/(landingpage)/landingpage/landingpage.html",
+        "hash": "3622100686294254815"
+      },
+      {
+        "file": "src/app/features/(landingpage)/landingpage/landingpage.spec.ts",
+        "hash": "1282219284547015679"
+      },
+      {
+        "file": "src/app/features/(landingpage)/landingpage/landingpage.ts",
+        "hash": "3720634444105281608"
+      },
+      {
+        "file": "src/app/features/(landingpage)/routes.ts",
+        "hash": "10966333468017224373"
+      },
+      {
+        "file": "src/app/features/auth/index.ts",
+        "hash": "13106803375980564426"
+      },
+      {
+        "file": "src/app/features/auth/models/login-request.ts",
+        "hash": "6971944857732696485"
+      },
+      {
+        "file": "src/app/features/auth/models/login-response.ts",
+        "hash": "2643423250356689014"
+      },
+      {
+        "file": "src/app/features/auth/models/user.ts",
+        "hash": "17195529779529615500"
+      },
+      {
+        "file": "src/app/features/auth/pages/login/login.css",
+        "hash": "11745114867905270132"
+      },
+      {
+        "file": "src/app/features/auth/pages/login/login.html",
+        "hash": "16009214407610974161"
+      },
+      {
+        "file": "src/app/features/auth/pages/login/login.ts",
+        "hash": "16803044673389425616"
+      },
+      {
+        "file": "src/app/features/auth/pages/reauth/reauth.html",
+        "hash": "11283731795674541801"
+      },
+      {
+        "file": "src/app/features/auth/pages/reauth/reauth.ts",
+        "hash": "11228758013676330178"
+      },
+      {
+        "file": "src/app/features/auth/routes.ts",
+        "hash": "11585273234027289526"
+      },
+      {
+        "file": "src/app/features/auth/services/auth-api.service.spec.ts",
+        "hash": "12981309849880959455"
+      },
+      {
+        "file": "src/app/features/auth/services/auth-api.service.ts",
+        "hash": "14378521305969800028"
+      },
+      {
+        "file": "src/app/features/dashboard/index.ts",
+        "hash": "14392920829914029089"
+      },
+      {
+        "file": "src/app/features/dashboard/models/user.model.ts",
+        "hash": "2577068819178354677"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/dashboard/dashboard.css",
+        "hash": "1298447932973352419"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/dashboard/dashboard.html",
+        "hash": "1298700325380800669"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/dashboard/dashboard.ts",
+        "hash": "7468276457722757110"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/registration/registration.css",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/registration/registration.html",
+        "hash": "11612646316008952149"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/registration/registration.spec.ts",
+        "hash": "8359289385663357875"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/registration/registration.ts",
+        "hash": "4122615532668331991"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/user/user-registration.actions.ts",
+        "hash": "5997939282854529911"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/user/user-registration.reducer.ts",
+        "hash": "2993424334678306031"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/user/user-registration.selectors.ts",
+        "hash": "4347983349379236205"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/user/user.css",
+        "hash": "2349422882633569571"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/user/user.html",
+        "hash": "16286478096872130043"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/user/user.spec.ts",
+        "hash": "9699770112775514423"
+      },
+      {
+        "file": "src/app/features/dashboard/pages/user/user.ts",
+        "hash": "13658780170861346790"
+      },
+      {
+        "file": "src/app/features/dashboard/routes.ts",
+        "hash": "13082715914147672186"
+      },
+      {
+        "file": "src/app/features/dashboard/services/user-services.spec.ts",
+        "hash": "10705190518631861645"
+      },
+      {
+        "file": "src/app/features/dashboard/services/user-services.ts",
+        "hash": "13997580153484164307"
+      },
+      {
+        "file": "src/app/firebase.providers.ts",
+        "hash": "14589103575453774946"
+      },
+      {
+        "file": "src/app/shared/components/header/header.css",
+        "hash": "9799166028893916070"
+      },
+      {
+        "file": "src/app/shared/components/header/header.html",
+        "hash": "633184794926740366"
+      },
+      {
+        "file": "src/app/shared/components/header/header.ts",
+        "hash": "6211469276391459302"
+      },
+      {
+        "file": "src/app/shared/components/location-select/location-select.html",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/shared/components/location-select/location-select.ts",
+        "hash": "14379459932173505485"
+      },
+      {
+        "file": "src/app/shared/components/navbar/navbar.css",
+        "hash": "14870515066826813884"
+      },
+      {
+        "file": "src/app/shared/components/navbar/navbar.html",
+        "hash": "2661284762658189801"
+      },
+      {
+        "file": "src/app/shared/components/navbar/navbar.ts",
+        "hash": "17951214946628396864"
+      },
+      {
+        "file": "src/app/shared/models/api-response.ts",
+        "hash": "4562619509649874176"
+      },
+      {
+        "file": "src/app/shared/models/dbo-response.ts",
+        "hash": "2269190796417972087"
+      },
+      {
+        "file": "src/custom-theme.scss",
+        "hash": "12761322291656201228"
+      },
+      {
+        "file": "src/environments/environment.development.ts",
+        "hash": "15917744018403144545"
+      },
+      {
+        "file": "src/environments/environment.ts",
+        "hash": "7965161310687321377"
+      },
+      {
+        "file": "src/index.html",
+        "hash": "1856779118455539581"
+      },
+      {
+        "file": "src/main.server.ts",
+        "hash": "9658782035824911806"
+      },
+      {
+        "file": "src/main.ts",
+        "hash": "15944248449879998907"
+      },
+      {
+        "file": "src/server.ts",
+        "hash": "16942704749203196804"
+      },
+      {
+        "file": "src/styles.css",
+        "hash": "1996760572254892665"
+      },
+      {
+        "file": "tsconfig.app.json",
+        "hash": "16734488135833165813"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "17585856383949357610"
+      },
+      {
+        "file": "tsconfig.spec.json",
+        "hash": "15785744800117888015"
+      }
+    ]
+  },
+  "externalNodesHash": "15290726938731094595"
+}

@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  api-auth:
+    platform: linux/amd64
+    # Built & pushed by .github/workflows/backend.yml (GHCR). This exact file is what
+    # the deploy step scp's to the server, so keep the image path in sync with the
+    # workflow's IMAGE env var.
+    image: ghcr.io/hikeean/klarfinance-backend:latest
+    container_name: api-auth-app
+    ports:
+      - "1579:8080"
+    restart: unless-stopped
+    # Real secrets (DB, JWT, etc.) live only in the server's own klarfinance/.env,
+    # never committed here.
+    env_file:
+      - .env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - TZ=Asia/Jakarta

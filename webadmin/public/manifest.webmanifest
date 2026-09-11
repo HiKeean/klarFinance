@@ -1,0 +1,25 @@
+{
+  "name": "Klar Finance Webadmin",
+  "short_name": "Klar Admin",
+  "description": "Webadmin PWA untuk Klar Finance dengan integrasi Firebase.",
+  "theme_color": "#07111f",
+  "background_color": "#07111f",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

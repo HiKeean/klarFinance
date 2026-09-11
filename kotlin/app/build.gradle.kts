@@ -84,10 +84,28 @@ android {
         buildConfigField("String", "CLIENT_TYPE", "\"${envProp("CLIENT_TYPE", "ANDROID")}\"")
     }
 
+    // Release signing is optional locally (unsigned release builds still work for testing).
+    // CI provides RELEASE_KEYSTORE_* via a generated kotlin/.env so this reuses the same
+    // envProp() mechanism as BASE_URL/API_KEY above instead of a separate secrets path.
+    val releaseKeystorePath = envProp("RELEASE_KEYSTORE_PATH", "")
+    signingConfigs {
+        if (releaseKeystorePath.isNotBlank()) {
+            create("release") {
+                storeFile = file(releaseKeystorePath)
+                storePassword = envProp("RELEASE_KEYSTORE_PASSWORD", "")
+                keyAlias = envProp("RELEASE_KEY_ALIAS", "")
+                keyPassword = envProp("RELEASE_KEY_PASSWORD", "")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            if (releaseKeystorePath.isNotBlank()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
@@ -179,6 +197,9 @@ dependencies {
     implementation(libs.play.services.location)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

@@ -1,0 +1,22 @@
+<hlm-dialog [state]="state" (stateChanged)="onStateChanged($event)">
+  <ng-template hlmDialogPortal>
+    <hlm-dialog-content [showCloseButton]="!disableClose" [attr.data-modal-size]="size">
+      <hlm-dialog-header>
+        <h3 hlmDialogTitle>{{ title }}</h3>
+      </hlm-dialog-header>
+
+      <div class="app-modal-body">
+        <ng-content />
+      </div>
+
+      <hlm-dialog-footer>
+        <button hlmBtn variant="outline" type="button" [disabled]="disableClose" (click)="onCancelClick()">
+          {{ cancelLabel }}
+        </button>
+        <button hlmBtn type="button" [disabled]="submitDisabled" (click)="onSubmitClick()">
+          {{ submitLabel }}
+        </button>
+      </hlm-dialog-footer>
+    </hlm-dialog-content>
+  </ng-template>
+</hlm-dialog>

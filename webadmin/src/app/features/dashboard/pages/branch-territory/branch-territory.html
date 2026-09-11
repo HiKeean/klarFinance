@@ -1,0 +1,104 @@
+<section class="roles-page">
+  <div class="page-heading">
+    <div>
+      <h1>Branch Territory</h1>
+      <p>Atur wilayah (regency) yang jadi tanggung jawab tiap Branch/BM.</p>
+    </div>
+    <button class="new-user-button" type="button" (click)="openAssign()">
+      <span aria-hidden="true">+</span>
+      Assign Territory
+    </button>
+  </div>
+
+  @if (gaps().length) {
+    <section class="gaps-banner">
+      <button type="button" class="gaps-toggle" (click)="toggleGaps()">
+        ⚠ {{ gaps().length }} regency di Pulau Jawa belum ada branch-nya {{ showGaps() ? '▲' : '▼' }}
+      </button>
+      @if (showGaps()) {
+        <ul class="gaps-list">
+          @for (gap of gaps(); track gap.regencyId) {
+            <li>{{ gap.regencyName }} — {{ gap.provinceName }}</li>
+          }
+        </ul>
+      }
+    </section>
+  }
+
+  <section class="roles-card" aria-label="Branch territory list">
+    <app-table
+      [columns]="columns"
+      [rows]="territories()"
+      [loading]="isLoading()"
+      [errorMessage]="errorMessage()"
+      loadingMessage="Memuat territory..."
+      emptyMessage="Belum ada branch territory yang di-assign."
+      [trackBy]="trackById"
+    >
+      <ng-template appTableCell="regencyName" let-item>
+        <span class="menu-name">{{ item.regencyName }}</span>
+      </ng-template>
+      <ng-template appTableCell="actions" let-item>
+        <button class="edit-button" type="button" (click)="remove(item)" [attr.aria-label]="'Hapus ' + item.regencyName">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12Zm3.46-7.12 1.41-1.41L12 12.59l1.12-1.12 1.41 1.41L13.41 14l1.12 1.12-1.41 1.41L12 15.41l-1.12 1.12-1.41-1.41L10.59 14l-1.13-1.12ZM15.5 4l-1-1h-5l-1 1H5v2h14V4h-3.5Z" /></svg>
+        </button>
+      </ng-template>
+    </app-table>
+
+    <footer class="table-footer">
+      Menampilkan {{ territories().length }} territory
+    </footer>
+  </section>
+</section>
+
+<app-modal
+  [(ngModel)]="assignModalOpen"
+  title="Assign Territory"
+  [submitLabel]="isSaving() ? 'Menyimpan…' : 'Assign'"
+  [submitDisabled]="!canSubmitAssign()"
+  [disableClose]="isSaving()"
+  (submitted)="submitAssign()"
+>
+  <p class="modal-description">
+    Pilih Branch dan wilayahnya. Jawa (termasuk Jakarta): pilih Regency satu-satu. Luar Jawa: pilih Provinsi, semua regency-nya otomatis ke-assign ke branch yang sama.
+  </p>
+
+  <div class="field">
+    <label for="assign-branch">Branch</label>
+    <select id="assign-branch" name="assignBranch" [ngModel]="selectedBranchId()" (ngModelChange)="selectedBranchId.set($event)">
+      <option [ngValue]="null">— Pilih Branch —</option>
+      @for (branch of branches(); track branch.id) {
+        <option [ngValue]="branch.id">{{ branch.name }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="assign-province">Provinsi</label>
+    <select id="assign-province" name="assignProvince" [ngModel]="selectedProvinceId()" (ngModelChange)="onProvinceChange($event)">
+      <option [ngValue]="null">— Pilih Provinsi —</option>
+      @for (province of provinces(); track province.id) {
+        <option [ngValue]="province.id">{{ province.name }}</option>
+      }
+    </select>
+  </div>
+
+  @if (isJavaProvince()) {
+    <div class="field">
+      <label for="assign-regency">Regency</label>
+      <select id="assign-regency" name="assignRegency" [ngModel]="selectedRegencyId()" (ngModelChange)="selectedRegencyId.set($event)">
+        <option [ngValue]="null">— Pilih Regency —</option>
+        @for (regency of regencies(); track regency.id) {
+          <option [ngValue]="regency.id">{{ regency.name }}</option>
+        }
+      </select>
+      <span class="field-hint">{{ isJakarta() ? 'Jakarta: maks 2 branch per regency.' : 'Maks 1 branch per regency.' }}</span>
+    </div>
+  } @else if (selectedProvinceId()) {
+    <p class="field-hint province-hint">Semua regency di provinsi ini bakal otomatis ke-assign ke branch yang dipilih.</p>
+  }
+
+  @if (assignError()) {
+    <p class="modal-error">{{ assignError() }}</p>
+  }
+</app-modal>

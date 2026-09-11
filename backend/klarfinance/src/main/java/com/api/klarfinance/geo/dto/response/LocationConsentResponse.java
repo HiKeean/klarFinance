@@ -1,0 +1,10 @@
+package com.api.klarfinance.geo.dto.response;
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class LocationConsentResponse {
+    private boolean consentGiven;
+}

@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec-verify",
+    "types": ["jasmine"]
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "src/app/core/interceptors/error.interceptor.spec.ts",
+    "src/app/features/dashboard/pages/user/user-registration.reducer.spec.ts",
+    "src/app/features/dashboard/services/branch-services.spec.ts",
+    "src/app/features/dashboard/services/npl-report-services.spec.ts",
+    "src/app/features/dashboard/services/password-reset-request-services.spec.ts",
+    "src/app/shared/components/dropdown/dropdown.spec.ts",
+    "src/app/shared/components/input/input.spec.ts",
+    "src/app/shared/components/modal/modal.spec.ts",
+    "src/app/shared/components/table/table.spec.ts",
+    "src/app/shared/components/location-select/location-select.spec.ts",
+    "src/app/features/dashboard/pages/branch/branch.spec.ts",
+    "src/app/features/dashboard/pages/password-reset-requests/password-reset-requests.spec.ts",
+    "libs/ui/utils/src/lib/hlm.spec.ts"
+  ]
+}

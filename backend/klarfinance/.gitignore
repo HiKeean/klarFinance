@@ -1,0 +1,6 @@
+firebase-service-account.json
+.env.dev
+.env
+target/
+.idea/
+*.log
