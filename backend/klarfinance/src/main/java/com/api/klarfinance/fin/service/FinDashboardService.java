@@ -3,15 +3,21 @@ package com.api.klarfinance.fin.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import com.api.klarfinance.auth.model.CustomerDetails;
+import com.api.klarfinance.auth.repository.CustomerDetailsRepository;
 import com.api.klarfinance.fin.InstallmentStatus;
 import com.api.klarfinance.fin.LoanStatusBucket;
 import com.api.klarfinance.fin.NplSeverity;
+import com.api.klarfinance.fin.dto.response.BranchLoanDetailResponse;
 import com.api.klarfinance.fin.dto.response.BranchLoanSummary;
 import com.api.klarfinance.fin.dto.response.BranchNplSummary;
 import com.api.klarfinance.fin.model.Installment;
 import com.api.klarfinance.fin.model.Loan;
 import com.api.klarfinance.fin.repository.InstallmentRepository;
 import com.api.klarfinance.fin.repository.LoanRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -36,10 +42,62 @@ import java.util.stream.Collectors;
 public class FinDashboardService {
     private final LoanRepository loanRepository;
     private final InstallmentRepository installmentRepository;
+    private final CustomerDetailsRepository customerDetailsRepository;
 
     public BranchLoanSummary getBranchSummary(Long branchId) {
         List<Loan> loans = loanRepository.findByLimit_Branch_Id(branchId);
         return summarize(loans);
+    }
+
+    /** Drill-down NPL Report per branch (webadmin) - tabel per-nasabah, searchable + paginated
+     * (lihat NplReportService#getBranchLoanPage). Status/daysOverdue dihitung dengan logic yang
+     * SAMA dengan summarize() (next unpaid installment terdekat), tapi per-baris bukan agregat. */
+    public Page<BranchLoanDetailResponse> getBranchLoanDetails(Long branchId, String search, Pageable pageable) {
+        Page<Loan> loanPage = loanRepository.findByBranchIdAndNasabahNameContaining(branchId, search, pageable);
+        List<Loan> loans = loanPage.getContent();
+        if (loans.isEmpty()) {
+            return new PageImpl<>(List.of(), pageable, loanPage.getTotalElements());
+        }
+
+        List<Integer> loanIds = loans.stream().map(Loan::getId).toList();
+        Map<Integer, List<Installment>> installmentsByLoan = installmentRepository
+                .findByLoan_IdInOrderByDueDateAsc(loanIds).stream()
+                .collect(Collectors.groupingBy(i -> i.getLoan().getId()));
+
+        List<Integer> userIds = loans.stream().map(l -> l.getLimit().getUser().getId()).distinct().toList();
+        Map<Integer, CustomerDetails> customerByUserId = customerDetailsRepository.findByUserIdIn(userIds).stream()
+                .collect(Collectors.toMap(cd -> cd.getUser().getId(), cd -> cd, (a, b) -> a));
+
+        LocalDateTime now = LocalDateTime.now();
+        List<BranchLoanDetailResponse> content = loans.stream()
+                .map(loan -> {
+                    Optional<Installment> nextUnpaid = installmentsByLoan.getOrDefault(loan.getId(), List.of()).stream()
+                            .filter(i -> InstallmentStatus.UNPAID.equals(i.getStatus()))
+                            .min(Comparator.comparing(Installment::getDueDate));
+
+                    String status;
+                    long daysOverdue = 0;
+                    if (nextUnpaid.isPresent()) {
+                        status = resolveBucket(nextUnpaid.get().getDueDate(), now);
+                        if (LoanStatusBucket.OVERDUE.equals(status)) {
+                            daysOverdue = ChronoUnit.DAYS.between(nextUnpaid.get().getDueDate().toLocalDate(), now.toLocalDate());
+                        }
+                    } else {
+                        status = "Lunas"; // tidak ada installment UNPAID tersisa
+                    }
+
+                    CustomerDetails customer = customerByUserId.get(loan.getLimit().getUser().getId());
+                    return BranchLoanDetailResponse.builder()
+                            .loanId(loan.getId())
+                            .nasabahName(customer != null ? customer.getName() : "-")
+                            .loanAmount(loan.getLoanDetails().getRequestedAmount())
+                            .status(status)
+                            .daysOverdue(daysOverdue)
+                            .build();
+                })
+                .toList();
+
+        return new PageImpl<>(content, pageable, loanPage.getTotalElements());
     }
 
     /** Buat NPL report semua branch (webadmin) - satu query buat semua Loan + satu query buat

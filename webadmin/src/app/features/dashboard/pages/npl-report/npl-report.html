@@ -51,6 +51,8 @@
       loadingMessage="Memuat laporan NPL..."
       emptyMessage="Belum ada data pinjaman."
       [trackBy]="trackById"
+      [rowClass]="rowClass"
+      (rowClick)="openBranchDetail($event)"
     >
       <ng-template appTableCell="branchName" let-item>
         <span class="menu-name">{{ item.branchName }}</span>

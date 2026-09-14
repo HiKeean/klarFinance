@@ -33,12 +33,15 @@
         <package android:name="com.pinjamango" />
         <package android:name="id.maucash.app" />
         <package android:name="com.cmcm.uangme" />
+        <package android:name="com.yinshan.program.banda" />
         <package android:name="com.bca" />
+        <package android:name="com.bca.mybca.omni.android" />
         <package android:name="id.co.bri.brimo" />
         <package android:name="id.bmri.livin" />
         <package android:name="src.com.bni" />
         <package android:name="com.btpn.dc" />
         <package android:name="net.myinfosys.PermataMobileX" />
+        <package android:name="com.gojek.gopay" />
     </queries>
 
     <application

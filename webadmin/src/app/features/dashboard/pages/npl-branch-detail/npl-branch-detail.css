@@ -1,0 +1,132 @@
+:host {
+  display: block;
+}
+
+.branch-detail-page {
+  min-height: calc(100vh - 59px);
+  padding: 27px 30px 40px;
+  background: #f5f7ff;
+  color: #263238;
+}
+
+.page-heading {
+  margin: 0 0 22px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #087f85;
+  font-size: 10px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.page-heading h1 {
+  margin: 0 0 5px;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.page-heading p {
+  margin: 0;
+  color: #68747b;
+  font-size: 10px;
+}
+
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #e7ebf5;
+}
+
+.summary-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: #087f85;
+}
+
+.summary-label {
+  font-size: 11px;
+  color: #68747b;
+}
+
+.branch-detail-card {
+  overflow: hidden;
+  border: 1px solid #e7ebf5;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(28 53 80 / 2%);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.status-badge.badge-current { color: #1f9d55; background: #e3f6ea; }
+.status-badge.badge-overdue { color: #c64444; background: #fbe8e8; }
+.status-badge.badge-lunas { color: #52606a; background: #e9eef1; }
+
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px;
+  color: #68747b;
+  font-size: 10px;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination button {
+  min-width: 24px;
+  height: 23px;
+  padding: 0 7px;
+  border: 1px solid #e4e9ef;
+  border-radius: 3px;
+  color: #526069;
+  background: #fff;
+  cursor: pointer;
+  font: 10px inherit;
+}
+
+.pagination button.current {
+  border-color: #087f85;
+  color: #fff;
+  background: #087f85;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (max-width: 700px) {
+  .branch-detail-page { padding: 24px 16px 32px; }
+  .table-footer { align-items: flex-start; flex-direction: column; }
+}

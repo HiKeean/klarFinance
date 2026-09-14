@@ -1,5 +1,7 @@
 package com.api.klarfinance.fin.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +14,27 @@ import java.util.Optional;
 
 public interface LoanRepository extends JpaRepository<Loan, Integer> {
     List<Loan> findByLimit_Branch_Id(Long branchId);
+
+    /** Drill-down NPL Report per branch (webadmin) - search by nasabah name lewat CustomerDetails,
+     * yang TIDAK punya relasi JPA langsung ke User (cuma FK user_id di kolom DB) makanya di-join
+     * pakai ON eksplisit, bukan lewat path relasi biasa. JOIN FETCH lim/user/loanDetails biar gak
+     * N+1 pas dipetakan ke BranchLoanDetailResponse (lihat FinDashboardService#getBranchLoanDetails). */
+    @Query(value = "SELECT l FROM Loan l " +
+            "JOIN FETCH l.limit lim " +
+            "JOIN FETCH lim.user u " +
+            "JOIN FETCH l.loanDetails " +
+            "LEFT JOIN com.api.klarfinance.auth.model.CustomerDetails cd ON cd.user.id = u.id " +
+            "WHERE lim.branch.id = :branchId " +
+            "AND (:search IS NULL OR :search = '' OR LOWER(cd.name) LIKE LOWER(CONCAT('%', :search, '%')))",
+            countQuery = "SELECT COUNT(l) FROM Loan l " +
+            "JOIN l.limit lim " +
+            "JOIN lim.user u " +
+            "LEFT JOIN com.api.klarfinance.auth.model.CustomerDetails cd ON cd.user.id = u.id " +
+            "WHERE lim.branch.id = :branchId " +
+            "AND (:search IS NULL OR :search = '' OR LOWER(cd.name) LIKE LOWER(CONCAT('%', :search, '%')))")
+    Page<Loan> findByBranchIdAndNasabahNameContaining(@Param("branchId") Long branchId,
+                                                        @Param("search") String search,
+                                                        Pageable pageable);
 
     @Query("SELECT l FROM Loan l " +
             "JOIN FETCH l.limit lim " +

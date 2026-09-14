@@ -35,15 +35,18 @@ object InstalledAppsScanner {
         "com.pinjamango" to "PinjamanGo",
         "id.maucash.app" to "Maucash",
         "com.cmcm.uangme" to "UangMe",
+        "com.yinshan.program.banda" to "AdaPundi",
     )
 
     private val BANK_PACKAGES = mapOf(
         "com.bca" to "BCA Mobile",
+        "com.bca.mybca.omni.android" to "myBCA",
         "id.co.bri.brimo" to "BRImo",
         "id.bmri.livin" to "Livin by Mandiri",
         "src.com.bni" to "BNI Mobile Banking",
         "com.btpn.dc" to "Jenius",
         "net.myinfosys.PermataMobileX" to "PermataMobile",
+        "com.gojek.gopay" to "GoPay",
     )
 
     data class ScanResult(val pinjolApps: List<String>, val bankApps: List<String>)

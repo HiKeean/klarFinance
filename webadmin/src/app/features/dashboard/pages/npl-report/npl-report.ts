@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnDestroy, ViewChild, afterNextRender, computed, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import type { Feature, FeatureCollection } from 'geojson';
 import * as L from 'leaflet';
 import { TableComponent } from '../../../../shared/components/table/table';
@@ -33,6 +34,7 @@ function formatRupiah(amount: number): string {
 })
 export class NplReportPage implements OnDestroy {
   private readonly nplReportServices = inject(NplReportServices);
+  private readonly router = inject(Router);
 
   @ViewChild('mapContainer') private mapContainer?: ElementRef<HTMLDivElement>;
 
@@ -69,6 +71,12 @@ export class NplReportPage implements OnDestroy {
   ];
 
   readonly trackById = (row: NplReportItem) => row.branchId;
+
+  readonly rowClass = () => 'row-clickable';
+
+  openBranchDetail(item: NplReportItem): void {
+    this.router.navigate(['/dashboard/npl-report', item.branchId]);
+  }
 
   constructor() {
     afterNextRender(() => {

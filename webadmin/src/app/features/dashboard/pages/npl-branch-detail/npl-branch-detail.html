@@ -1,0 +1,58 @@
+<section class="branch-detail-page">
+  <div class="page-heading">
+    <div>
+      <a class="back-link" routerLink="/dashboard/npl-report">&larr; Back to NPL Report</a>
+      <h1>{{ branchName() || 'Branch' }}</h1>
+      <p>Daftar pinjaman nasabah dan status keterlambatan di branch ini.</p>
+    </div>
+  </div>
+
+  <section class="summary-row">
+    <div class="summary-card">
+      <span class="summary-value">{{ formatAmount(totalAssets()) }}</span>
+      <span class="summary-label">Total Asset yang Dikelola</span>
+    </div>
+    <div class="summary-card">
+      <span class="summary-value">{{ activeBorrowers() }}</span>
+      <span class="summary-label">Jumlah Peminjam</span>
+    </div>
+  </section>
+
+  <section class="branch-detail-card" aria-label="Daftar pinjaman nasabah">
+    <app-table
+      [columns]="columns"
+      [rows]="loans()"
+      [loading]="isLoading()"
+      [errorMessage]="errorMessage()"
+      loadingMessage="Memuat data pinjaman..."
+      emptyMessage="Tidak ada pinjaman ditemukan."
+      [trackBy]="trackByLoanId"
+      [search]="true"
+      [searchValue]="searchTerm()"
+      searchPlaceholder="Cari nama nasabah..."
+      (searchValueChange)="onSearch($event)"
+    >
+      <ng-template appTableCell="loanAmount" let-item>{{ formatAmount(item.loanAmount) }}</ng-template>
+      <ng-template appTableCell="status" let-item>
+        <span class="status-badge" [class]="statusClass(item.status)">{{ statusLabel(item.status) }}</span>
+      </ng-template>
+      <ng-template appTableCell="daysOverdue" let-item>
+        {{ item.status === 'Overdue' ? (item.daysOverdue + ' hari') : '-' }}
+      </ng-template>
+    </app-table>
+
+    <footer class="table-footer">
+      <span>Showing {{ startEntry }} to {{ endEntry }} of {{ totalElements() }} entries</span>
+      <div class="pagination" aria-label="Pagination">
+        @for (page of visiblePages(); track page) {
+          <button type="button" (click)="goToPage(page)" [class.current]="page === pageIndex()">
+            {{ page + 1 }}
+          </button>
+        }
+        <button type="button" (click)="nextPage()" [disabled]="pageIndex() >= totalPages() - 1">
+          Next
+        </button>
+      </div>
+    </footer>
+  </section>
+</section>

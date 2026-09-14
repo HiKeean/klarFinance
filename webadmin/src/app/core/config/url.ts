@@ -52,6 +52,7 @@ export const SUPERADMIN_URL = {
     assignProvinceTerritory: `${BASE_SUPERADMIN}dbo/branch-territory/province`,
     deleteBranchTerritory: (id: number) => `${BASE_SUPERADMIN}dbo/branch-territory/${id}`,
     nplReport: `${BASE_SUPERADMIN}dbo/npl-report`,
+    nplReportBranchLoans: (branchId: number) => `${BASE_SUPERADMIN}dbo/npl-report/${branchId}/loans`,
   },
 };
 

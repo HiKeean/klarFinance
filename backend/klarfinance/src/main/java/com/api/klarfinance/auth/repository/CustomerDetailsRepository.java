@@ -13,6 +13,8 @@ import java.util.Optional;
 public interface CustomerDetailsRepository extends JpaRepository<CustomerDetails, Integer> {
     Optional<CustomerDetails> findByUserId(Integer userId);
 
+    List<CustomerDetails> findByUserIdIn(List<Integer> userIds);
+
     Optional<CustomerDetails> findByReferralCode(String referralCode);
 
     @Query("SELECT c FROM CustomerDetails c " +

@@ -32,7 +32,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -80,10 +79,6 @@ fun CameraCaptureScreen(
     }
     LaunchedEffect(Unit) {
         if (!hasCameraPermission) permissionLauncher.launch(Manifest.permission.CAMERA)
-    }
-
-    val galleryLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        uri?.let(onCaptured)
     }
 
     var imageCapture by remember { mutableStateOf<ImageCapture?>(null) }
@@ -178,7 +173,6 @@ fun CameraCaptureScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             CaptureBottomBar(
-                onGalleryClick = { galleryLauncher.launch("image/*") },
                 onShutterClick = ::capturePhoto,
                 shutterEnabled = hasCameraPermission && imageCapture != null,
             )
@@ -255,7 +249,6 @@ private fun PermissionRationale(onGrantClick: () -> Unit) {
 
 @Composable
 private fun CaptureBottomBar(
-    onGalleryClick: () -> Unit,
     onShutterClick: () -> Unit,
     shutterEnabled: Boolean,
 ) {
@@ -264,15 +257,6 @@ private fun CaptureBottomBar(
             .fillMaxWidth()
             .padding(horizontal = 24.dp, vertical = 32.dp),
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.align(Alignment.CenterStart).clickable(onClick = onGalleryClick),
-        ) {
-            Icon(Icons.Default.PhotoLibrary, contentDescription = "Gallery", tint = Color.White)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "Gallery", style = MaterialTheme.typography.bodyMedium, color = Color.White)
-        }
-
         Box(
             modifier = Modifier
                 .align(Alignment.Center)

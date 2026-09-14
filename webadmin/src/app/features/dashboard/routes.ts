@@ -41,6 +41,10 @@ export const dashboardRoutes: Routes = [
         loadComponent: () => import('./pages/npl-report/npl-report').then((m) => m.NplReportPage)
       },
       {
+        path: 'npl-report/:branchId',
+        loadComponent: () => import('./pages/npl-branch-detail/npl-branch-detail').then((m) => m.NplBranchDetailPage)
+      },
+      {
         path: 'password-reset-requests',
         loadComponent: () => import('./pages/password-reset-requests/password-reset-requests').then((m) => m.PasswordResetRequestsPage)
       },
