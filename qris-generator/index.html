@@ -130,7 +130,7 @@
       <details>
         <summary>Pengaturan lanjutan</summary>
         <label for="backendUrl">Backend URL</label>
-        <input type="text" id="backendUrl" placeholder="http://localhost:8080" />
+        <input type="text" id="backendUrl" placeholder="https://api.klarfinance.hizkialb.xyz" />
       </details>
 
       <button type="submit" id="submitButton">Generate QRIS</button>
@@ -149,7 +149,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
     const BACKEND_URL_KEY = 'klarfinance_qris_backend_url';
-    const DEFAULT_BACKEND_URL = 'http://localhost:8080';
+    const DEFAULT_BACKEND_URL = 'https://api.klarfinance.hizkialb.xyz';
 
     const backendUrlInput = document.getElementById('backendUrl');
     backendUrlInput.value = localStorage.getItem(BACKEND_URL_KEY) || DEFAULT_BACKEND_URL;

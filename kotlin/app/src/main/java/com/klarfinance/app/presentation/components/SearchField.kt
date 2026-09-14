@@ -1,5 +1,6 @@
 package com.klarfinance.app.presentation.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
@@ -33,13 +34,16 @@ fun SearchField(
     modifier: Modifier = Modifier,
     placeholder: String = "Cari...",
 ) {
+    val shape = RoundedCornerShape(14.dp)
     TextField(
         value = query,
         onValueChange = onQueryChange,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .border(width = 1.dp, color = MaterialTheme.colorScheme.outline, shape = shape),
         placeholder = { Text(placeholder) },
         singleLine = true,
-        shape = RoundedCornerShape(14.dp),
+        shape = shape,
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
         trailingIcon = {
             if (query.isNotEmpty()) {

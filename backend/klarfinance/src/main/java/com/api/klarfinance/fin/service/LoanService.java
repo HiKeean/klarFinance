@@ -217,14 +217,18 @@ public class LoanService {
         LocalDateTime now = LocalDateTime.now();
         Installment nextUnpaid = unpaid.get(0);
         boolean isDue = !now.isBefore(nextUnpaid.getDueDate());
-        BigDecimal minimumAmount = isDue ? nextUnpaid.getAmount() : BigDecimal.ZERO;
+        // Rounded to whole Rupiah - the Android client only ever sends whole-Rupiah amounts (see
+        // LoanInstallment.amount: Long), so a legacy installment still carrying sub-Rupiah cents
+        // from before the scale-0 rounding fix (LoanInterestPolicy) could never satisfy an exact
+        // BigDecimal comparison against its raw stored amount.
+        BigDecimal minimumAmount = isDue ? nextUnpaid.getAmount().setScale(0, RoundingMode.HALF_UP) : BigDecimal.ZERO;
         if (request.getAmount().compareTo(minimumAmount) < 0) {
             throw new IllegalArgumentException(
                     "Cicilan sudah jatuh tempo - minimum pembayaran Rp " + minimumAmount.toPlainString());
         }
 
         BigDecimal totalRemaining = unpaid.stream().map(Installment::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
-        if (request.getAmount().compareTo(totalRemaining) > 0) {
+        if (request.getAmount().compareTo(totalRemaining.setScale(0, RoundingMode.HALF_UP)) > 0) {
             throw new IllegalArgumentException("Nominal melebihi total sisa tagihan Rp " + totalRemaining.toPlainString());
         }
 
@@ -233,15 +237,24 @@ public class LoanService {
             if (pool.signum() <= 0) {
                 break;
             }
+            // Compare against the rounded due amount, not the raw stored value: same reasoning as
+            // minimumAmount above. Bug report 2026-09-14 - cicilan ke-3 dari 12 tetap UNPAID
+            // walau nominalnya sudah tampil Rp 0, karena pool (whole Rupiah dari client) sedikit
+            // di bawah installment.getAmount() yang masih menyimpan sisa sen. applied dihitung
+            // dari due.min(pool) supaya Repayment yang dicatat tidak overstate nominal yang
+            // benar-benar dibayar nasabah, sekaligus tetap melunasi cicilan begitu bagian yang
+            // client-visible sudah tertutup.
+            BigDecimal due = installment.getAmount();
+            BigDecimal dueRounded = due.setScale(0, RoundingMode.HALF_UP);
             BigDecimal applied;
-            if (pool.compareTo(installment.getAmount()) >= 0) {
-                applied = installment.getAmount();
+            if (pool.compareTo(dueRounded) >= 0) {
+                applied = due.min(pool);
                 installment.setAmount(BigDecimal.ZERO);
                 installment.setStatus(InstallmentStatus.PAID);
                 installment.setPaidAt(now);
             } else {
                 applied = pool;
-                installment.setAmount(installment.getAmount().subtract(pool));
+                installment.setAmount(due.subtract(pool));
             }
             pool = pool.subtract(applied);
             installmentRepository.save(installment);
@@ -255,7 +268,26 @@ public class LoanService {
         }
 
         List<Installment> refreshed = installmentRepository.findByLoan_IdInOrderByDueDateAsc(List.of(loanId));
+        // Bug report 2026-09-14 - "Available Loan" di Home tidak pernah naik lagi setelah nasabah
+        // melunasi pinjaman, karena repay() sebelumnya cuma menyentuh Installment/Repayment, tidak
+        // pernah mengembalikan usedLimit/availableLimit di ActiveLimit yang dinaikkan sekali waktu
+        // Loan ini dicairkan (lihat applyLimitUsage/createLoan). Dikembalikan HANYA begitu loan
+        // ini fully paid off (bukan proporsional per cicilan) - data model ini tidak menyimpan
+        // pemisahan pokok/bunga per cicilan, jadi restorasi granular per pembayaran parsial tidak
+        // bisa dihitung akurat.
+        boolean fullyPaidOff = refreshed.stream().allMatch(i -> InstallmentStatus.PAID.equals(i.getStatus()));
+        if (fullyPaidOff) {
+            restoreLimitOnPayoff(loan);
+        }
         return toHistoryItem(loan, refreshed, now);
+    }
+
+    private void restoreLimitOnPayoff(Loan loan) {
+        ActiveLimit activeLimit = loan.getLimit();
+        BigDecimal principal = loan.getLoanDetails().getRequestedAmount();
+        activeLimit.setUsedLimit(activeLimit.getUsedLimit().subtract(principal).max(BigDecimal.ZERO));
+        activeLimit.setAvailableLimit(activeLimit.getAvailableLimit().add(principal).min(activeLimit.getTotalLimit()));
+        activeLimitRepository.save(activeLimit);
     }
 
     @Transactional
@@ -475,7 +507,7 @@ public class LoanService {
     }
 
     private BigDecimal ticketInterest(BigDecimal amount, BigDecimal monthlyRate) {
-        return amount.multiply(monthlyRate).divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP);
+        return amount.multiply(monthlyRate).divide(BigDecimal.valueOf(100), 0, RoundingMode.HALF_UP);
     }
 
     private void applyLimitUsage(ActiveLimit activeLimit, BigDecimal amount) {
@@ -501,9 +533,16 @@ public class LoanService {
     private LoanCreationResult createLoan(ActiveLimit activeLimit, User nasabah, BigDecimal amount,
                                            int tenorMonths, Drawdown drawdown, BigDecimal adminFee) {
         BigDecimal monthlyRate = LoanInterestPolicy.monthlyRatePercent(tenorMonths);
+        // Scale 0 (whole Rupiah), not 2 - Rupiah has no sub-unit in practice, and the Android
+        // client models every amount as a whole Long (see LoanInstallment.amount). Fractional
+        // cents leaking into Installment.amount (e.g. Rp 833333.33) used to get truncated to
+        // Rp 833333 by the client when paying, leaving a sub-Rupiah remainder that displayed as
+        // "Rp 0" but stayed UNPAID forever (bug report 2026-09-14). See repay()'s
+        // rounding-tolerant full-payment check below for how legacy rows already affected by
+        // this self-heal on their next payment.
         BigDecimal interestFee = amount
                 .multiply(monthlyRate)
-                .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_UP)
+                .divide(BigDecimal.valueOf(100), 0, RoundingMode.HALF_UP)
                 .multiply(BigDecimal.valueOf(tenorMonths));
         BigDecimal totalAmountDue = amount.add(interestFee);
 
@@ -534,7 +573,7 @@ public class LoanService {
                 .tenor(tenorMonths)
                 .build());
 
-        BigDecimal installmentAmount = totalAmountDue.divide(BigDecimal.valueOf(tenorMonths), 2, RoundingMode.HALF_UP);
+        BigDecimal installmentAmount = totalAmountDue.divide(BigDecimal.valueOf(tenorMonths), 0, RoundingMode.HALF_UP);
         generateInstallments(loan, totalAmountDue, installmentAmount, tenorMonths);
 
         activeLimit.setUsedLimit(activeLimit.getUsedLimit().add(amount));

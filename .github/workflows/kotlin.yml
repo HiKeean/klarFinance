@@ -70,6 +70,10 @@ jobs:
           CLIENT_TYPE=${CLIENT_TYPE}
           EOF
 
+      # signingValue() in build.gradle.kts reads REAL OS env vars (providers.environmentVariable),
+      # NOT the kotlin/.env file (that's only for envProp()/BASE_URL etc.) - so these must go
+      # through $GITHUB_ENV to survive into the next step, and the path var must be named
+      # ANDROID_KEYSTORE_PATH (not RELEASE_KEYSTORE_PATH) to match signingValue("storeFile", ...).
       - name: Decode release keystore
         if: ${{ secrets.RELEASE_KEYSTORE_BASE64 != '' }}
         env:
@@ -80,11 +84,11 @@ jobs:
         run: |
           echo "$RELEASE_KEYSTORE_BASE64" | base64 -d > release.jks
           {
-            echo "RELEASE_KEYSTORE_PATH=$(pwd)/release.jks"
+            echo "ANDROID_KEYSTORE_PATH=$(pwd)/release.jks"
             echo "RELEASE_KEYSTORE_PASSWORD=${RELEASE_KEYSTORE_PASSWORD}"
             echo "RELEASE_KEY_ALIAS=${RELEASE_KEY_ALIAS}"
             echo "RELEASE_KEY_PASSWORD=${RELEASE_KEY_PASSWORD}"
-          } >> .env
+          } >> "$GITHUB_ENV"
 
       - name: Build AAB + APK
         run: ./gradlew bundleRelease assembleRelease --stacktrace

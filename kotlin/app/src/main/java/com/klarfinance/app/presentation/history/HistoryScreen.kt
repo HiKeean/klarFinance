@@ -24,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.DirectionsBus
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.QrCode2
 import androidx.compose.material.icons.filled.RadioButtonUnchecked
@@ -46,6 +47,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -72,7 +74,7 @@ import com.klarfinance.app.presentation.loan.formatRupiah
 fun HistoryScreen(
     onHomeClick: () -> Unit,
     onAccountClick: () -> Unit,
-    onBayarClick: (LoanHistoryItem) -> Unit,
+    onLoansClick: () -> Unit,
     viewModel: HistoryViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -108,9 +110,10 @@ fun HistoryScreen(
             // Raw Text (bukan TopAppBar asli) butuh statusBarsPadding() manual - edge-to-edge
             // aktif di MainActivity, pola sama dengan AccountScreen/OtpVerificationScreen.
             Text(
-                text = "Riwayat",
+                text = "History",
                 style = MaterialTheme.typography.titleLarge,
                 color = KlarTeal,
+                textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .statusBarsPadding()
@@ -126,6 +129,7 @@ fun HistoryScreen(
                 onHomeClick = onHomeClick,
                 onAccountClick = onAccountClick,
                 onLockedTabClick = {},
+                onLoansClick = onLoansClick,
             )
         },
     ) { padding ->
@@ -159,10 +163,13 @@ fun HistoryScreen(
                             )
                         }
                     } else {
+                        // Riwayat sekarang murni read-only (bener-bener history transaksi,
+                        // konfirmasi user 2026-09-14) - gak ada tombol Bayar di sini lagi,
+                        // itu sekarang cuma ada di BillsScreen (onBayarClick = null di
+                        // HistoryList/HistoryItemCard artinya tombolnya gak dirender).
                         HistoryList(
                             items = filteredItems,
                             onItemClick = { selectedItem = it },
-                            onBayarClick = onBayarClick,
                         )
                     }
                 }
@@ -171,20 +178,31 @@ fun HistoryScreen(
     }
 }
 
-/** Sama teks yang ditampilkan di baris History (lihat HistoryItemCard) - dipakai buat filter
- * search di sini juga, biar konsisten sama apa yang user LIHAT di layar. */
-private fun LoanHistoryItem.historyDisplayTitle(): String =
-    if (type == LoanHistoryType.QRIS_PAYMENT) "Bayar QRIS${merchantName?.let { " - $it" } ?: ""}" else "Pinjaman Tunai"
+/** Satu-satunya tempat title per [LoanHistoryType] ditentukan - dipakai [HistoryItemCard],
+ * [InstallmentScheduleDialog], DAN filter search (biar konsisten sama apa yang user LIHAT di
+ * layar, gak ada logic title kepisah-pisah lagi kayak sebelumnya). */
+fun LoanHistoryItem.historyDisplayTitle(): String = when (type) {
+    LoanHistoryType.QRIS_PAYMENT -> "QRIS${merchantName?.let { " - $it" } ?: ""}"
+    LoanHistoryType.TRANSJAKARTA_BILL -> "Transjakarta"
+    LoanHistoryType.LOAN -> "Pinjaman Tunai"
+}
+
+/** Icon bubble per [LoanHistoryType], sama alasan reuse dengan [historyDisplayTitle]. */
+fun LoanHistoryItem.historyDisplayIcon(): ImageVector = when (type) {
+    LoanHistoryType.QRIS_PAYMENT -> Icons.Default.QrCode2
+    LoanHistoryType.TRANSJAKARTA_BILL -> Icons.Default.DirectionsBus
+    LoanHistoryType.LOAN -> Icons.Default.AccountBalance
+}
 
 @Composable
-private fun LoadingState() {
+fun LoadingState() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator(color = KlarTeal)
     }
 }
 
 @Composable
-private fun ErrorState(message: String, onRetry: () -> Unit) {
+fun ErrorState(message: String, onRetry: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -199,7 +217,7 @@ private fun ErrorState(message: String, onRetry: () -> Unit) {
 }
 
 @Composable
-private fun EmptyState() {
+fun EmptyState(message: String = "Belum ada riwayat pinjaman atau pembayaran.", icon: ImageVector = Icons.Default.History) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -208,25 +226,28 @@ private fun EmptyState() {
         verticalArrangement = Arrangement.Center,
     ) {
         Icon(
-            imageVector = Icons.Default.History,
+            imageVector = icon,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.size(48.dp),
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "Belum ada riwayat pinjaman atau pembayaran.",
+            text = message,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
 }
 
+/** Reusable list of history cards - dipakai [HistoryScreen] (semua item, read-only, [onBayarClick]
+ * null) DAN [com.klarfinance.app.presentation.bills.BillsScreen] (cuma item belum lunas, dengan
+ * [onBayarClick]). Non-private supaya bisa diimpor dari package `bills`. */
 @Composable
-private fun HistoryList(
+fun HistoryList(
     items: List<LoanHistoryItem>,
     onItemClick: (LoanHistoryItem) -> Unit,
-    onBayarClick: (LoanHistoryItem) -> Unit,
+    onBayarClick: ((LoanHistoryItem) -> Unit)? = null,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -234,13 +255,17 @@ private fun HistoryList(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         items(items, key = { it.loanId }) { item ->
-            HistoryItemCard(item, onScheduleClick = { onItemClick(item) }, onBayarClick = { onBayarClick(item) })
+            HistoryItemCard(
+                item,
+                onScheduleClick = { onItemClick(item) },
+                onBayarClick = onBayarClick?.let { callback -> { callback(item) } },
+            )
         }
     }
 }
 
 @Composable
-private fun HistoryItemCard(item: LoanHistoryItem, onScheduleClick: () -> Unit, onBayarClick: () -> Unit) {
+fun HistoryItemCard(item: LoanHistoryItem, onScheduleClick: () -> Unit, onBayarClick: (() -> Unit)? = null) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -257,7 +282,7 @@ private fun HistoryItemCard(item: LoanHistoryItem, onScheduleClick: () -> Unit, 
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
-                    imageVector = if (item.type == LoanHistoryType.QRIS_PAYMENT) Icons.Default.QrCode2 else Icons.Default.AccountBalance,
+                    imageVector = item.historyDisplayIcon(),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
@@ -265,11 +290,7 @@ private fun HistoryItemCard(item: LoanHistoryItem, onScheduleClick: () -> Unit, 
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = if (item.type == LoanHistoryType.QRIS_PAYMENT) {
-                        "Bayar QRIS${item.merchantName?.let { " - $it" } ?: ""}"
-                    } else {
-                        "Pinjaman Tunai"
-                    },
+                    text = item.historyDisplayTitle(),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
@@ -327,7 +348,7 @@ private fun HistoryItemCard(item: LoanHistoryItem, onScheduleClick: () -> Unit, 
                 color = KlarTeal,
                 modifier = Modifier.clickable(onClick = onScheduleClick),
             )
-            if (item.status != LoanHistoryStatus.PAID_OFF) {
+            if (onBayarClick != null && item.status != LoanHistoryStatus.PAID_OFF) {
                 Button(
                     onClick = onBayarClick,
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 6.dp),
@@ -341,7 +362,7 @@ private fun HistoryItemCard(item: LoanHistoryItem, onScheduleClick: () -> Unit, 
 }
 
 @Composable
-private fun StatusBadge(status: LoanHistoryStatus) {
+fun StatusBadge(status: LoanHistoryStatus) {
     val (label, containerColor, contentColor) = when (status) {
         LoanHistoryStatus.ACTIVE -> Triple("Berjalan", MaterialTheme.colorScheme.primaryContainer, MaterialTheme.colorScheme.onPrimaryContainer)
         LoanHistoryStatus.OVERDUE -> Triple("Terlambat", MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.onErrorContainer)
@@ -364,7 +385,7 @@ private fun StatusBadge(status: LoanHistoryStatus) {
  * presentational, tidak ada network call sendiri.
  */
 @Composable
-private fun InstallmentScheduleDialog(item: LoanHistoryItem, onDismiss: () -> Unit) {
+fun InstallmentScheduleDialog(item: LoanHistoryItem, onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss) {
         Column(
             modifier = Modifier
@@ -380,11 +401,7 @@ private fun InstallmentScheduleDialog(item: LoanHistoryItem, onDismiss: () -> Un
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = if (item.type == LoanHistoryType.QRIS_PAYMENT) {
-                            "Bayar QRIS${item.merchantName?.let { " - $it" } ?: ""}"
-                        } else {
-                            "Pinjaman Tunai"
-                        },
+                        text = item.historyDisplayTitle(),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onBackground,
                     )

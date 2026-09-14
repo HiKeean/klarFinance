@@ -1,6 +1,7 @@
 package com.klarfinance.app.core.navigation
 
 import com.klarfinance.app.domain.model.AccountState
+import com.klarfinance.app.domain.model.FeatureCategoryKey
 
 sealed class Screen(val route: String) {
     data object Splash : Screen("splash")
@@ -12,12 +13,16 @@ sealed class Screen(val route: String) {
     data object Account : Screen("account")
     data object Referral : Screen("referral")
 
-    /** "More" quick action dari Home - katalog lengkap semua fitur (bukan cuma versi ringkas
-     * di ExploreFeaturesCard), dengan search. Selalu diakses dalam keadaan non-GUEST (gated di
-     * Home), jadi accountState di sini cuma pernah PENDING_APPLICATION atau ACTIVE. */
-    data object AllFeatures : Screen("all-features?accountState={accountState}") {
-        const val ARG_ACCOUNT_STATE = "accountState"
-        fun createRoute(accountState: AccountState) = "all-features?accountState=${accountState.name}"
+    /** Katalog lengkap semua fitur (bukan cuma versi ringkas di ExploreFeaturesCard), dengan
+     * search - sekarang juga jadi tujuan tab bottom-nav "Loans" (bukan cuma quick action "More"
+     * lagi). accountState di-resolve sendiri di dalam screen ([AllFeaturesViewModel]), BUKAN nav
+     * arg - terlalu banyak entry point sekarang (More, section arrow, tab Loans dari 4 screen
+     * beda) buat semuanya ngethread accountState dengan benar. [ARG_SCROLL_TO] opsional - dipakai
+     * section arrow di Home buat auto-scroll ke section yang sama begitu layar ini kebuka. */
+    data object AllFeatures : Screen("all-features?scrollTo={scrollTo}") {
+        const val ARG_SCROLL_TO = "scrollTo"
+        fun createRoute(scrollTo: FeatureCategoryKey? = null) =
+            "all-features" + (scrollTo?.let { "?scrollTo=${it.name}" } ?: "")
     }
 
     /** Nested graph root - History list dan Payment berbagi satu HistoryViewModel (mirror
@@ -25,6 +30,13 @@ sealed class Screen(val route: String) {
      * sudah kebawa dari GET /loan/history. */
     data object HistoryGraph : Screen("history")
     data object History : Screen("history/list")
+
+    /** "Bills" quick action di Home - list tagihan yang BELUM lunas doang (loan/QRIS manapun),
+     * beda dari [History] yang nampilin SEMUA (lunas+belum) secara read-only. Satu graph yang
+     * sama dengan History/Payment (berbagi HistoryViewModel), tapi bisa dituju langsung tanpa
+     * lewat History dulu. */
+    data object Bills : Screen("history/bills")
+
     data object Payment : Screen("history/payment/{loanId}") {
         const val ARG_LOAN_ID = "loanId"
         fun createRoute(loanId: Int) = "history/payment/$loanId"

@@ -1,5 +1,6 @@
 package com.klarfinance.app.presentation.allfeatures
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,11 +15,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.CallSplit
 import androidx.compose.material.icons.filled.AddCard
 import androidx.compose.material.icons.filled.Bolt
@@ -43,7 +45,6 @@ import androidx.compose.material.icons.filled.WaterDrop
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -51,6 +52,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -60,23 +62,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.klarfinance.app.core.theme.KlarTeal
 import com.klarfinance.app.domain.model.AccountState
+import com.klarfinance.app.domain.model.FeatureCategoryKey
+import com.klarfinance.app.presentation.components.AppBottomBar
 import com.klarfinance.app.presentation.components.SearchField
 import kotlinx.coroutines.launch
 
 private data class CatalogFeature(val label: String, val icon: ImageVector)
-private data class CatalogCategory(val title: String, val features: List<CatalogFeature>)
+private data class CatalogCategory(val key: FeatureCategoryKey, val title: String, val features: List<CatalogFeature>)
 
 // Data KHUSUS halaman ini (bukan reuse featureCategories punya HomeScreen) - konfirmasi user:
 // katalog lengkap boleh punya lebih banyak item per kategori daripada versi ringkas di
 // ExploreFeaturesCard (Home), termasuk kategori "Transfer & terima" yang sudah dihapus dari
 // Home tapi tetap muncul di sini. Semua item selain Transjakarta masih placeholder/belum ada
-// halaman real (sama seperti ExploreFeaturesCard).
+// halaman real (sama seperti ExploreFeaturesCard). [key] dipakai buat deep-link+auto-scroll dari
+// panah section Home (lihat [FeatureCategoryKey]), BUKAN untuk cocokin title string.
 private val allFeatureCategories = listOf(
     CatalogCategory(
+        key = FeatureCategoryKey.TRANSFER,
         title = "Transfer & terima",
         features = listOf(
             CatalogFeature("Transfer gratis", Icons.Default.Send),
@@ -86,6 +95,7 @@ private val allFeatureCategories = listOf(
         ),
     ),
     CatalogCategory(
+        key = FeatureCategoryKey.PEMBAYARAN,
         title = "Pembayaran",
         features = listOf(
             CatalogFeature("Tagihan saya", Icons.Default.ReceiptLong),
@@ -99,6 +109,7 @@ private val allFeatureCategories = listOf(
         ),
     ),
     CatalogCategory(
+        key = FeatureCategoryKey.PROMO,
         title = "Promo",
         features = listOf(
             CatalogFeature("Voucher saya", Icons.Default.ConfirmationNumber),
@@ -109,6 +120,7 @@ private val allFeatureCategories = listOf(
         ),
     ),
     CatalogCategory(
+        key = FeatureCategoryKey.GAMES_HIBURAN,
         title = "Games & hiburan",
         features = listOf(
             CatalogFeature("Ruby Zone", Icons.Default.Diamond),
@@ -120,24 +132,32 @@ private val allFeatureCategories = listOf(
 )
 
 /**
- * "Semua fitur" - katalog penuh dibuka dari quick action "More" di Home. Selalu diakses dalam
- * keadaan non-GUEST (gated di HomeScreen sebelum navigate ke sini), jadi [accountState] di sini
- * cuma pernah [AccountState.PENDING_APPLICATION] atau [AccountState.ACTIVE] - GUEST tidak perlu
- * ditangani.
+ * "Semua fitur" - katalog penuh. Tujuan tab bottom-nav "Loans" (2026-09-14, sebelumnya cuma
+ * quick action "More" di Home) DAN section-arrow di Home's ExploreFeaturesCard (auto-scroll ke
+ * section terkait via [scrollToCategory]). accountState di-resolve sendiri lewat
+ * [AllFeaturesViewModel] (bukan nav arg) - banyak entry point sekarang, gak realistis semuanya
+ * ngethread accountState dengan benar.
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun AllFeaturesScreen(
-    accountState: AccountState,
-    onBackClick: () -> Unit,
+    onHomeClick: () -> Unit,
+    onAccountClick: () -> Unit,
+    onHistoryClick: () -> Unit,
     onTransjakartaClick: () -> Unit,
+    scrollToCategory: FeatureCategoryKey? = null,
+    viewModel: AllFeaturesViewModel = hiltViewModel(),
 ) {
+    val accountState by viewModel.accountState.collectAsStateWithLifecycle()
     var searchQuery by remember { mutableStateOf("") }
     var showPendingDialog by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
+    val sectionRequesters = remember { allFeatureCategories.associate { it.key to BringIntoViewRequester() } }
 
     // Cuma 2 cabang (bukan 3 kayak HomeScreen.onLockedFeatureClick) - GUEST gak pernah sampai
-    // ke screen ini.
+    // ke screen ini (semua entry point sudah gate di GUEST -> Login sebelum navigate kesini).
     val onLockedFeatureClick: () -> Unit = {
         if (accountState == AccountState.PENDING_APPLICATION) {
             showPendingDialog = true
@@ -149,6 +169,10 @@ fun AllFeaturesScreen(
     // Transjakarta satu-satunya item yang sudah punya halaman real (sama seperti HomeScreen).
     val onTransjakartaTap: () -> Unit = {
         if (accountState == AccountState.ACTIVE) onTransjakartaClick() else onLockedFeatureClick()
+    }
+
+    LaunchedEffect(scrollToCategory) {
+        scrollToCategory?.let { key -> sectionRequesters[key]?.bringIntoView() }
     }
 
     if (showPendingDialog) {
@@ -174,29 +198,37 @@ fun AllFeaturesScreen(
         containerColor = MaterialTheme.colorScheme.background,
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
+            // Sama pola dengan HistoryScreen/AccountScreen - screen tab utama, bukan modal, jadi
+            // gak ada panah back lagi (diganti bottom nav, tab Home yang jadi jalan keluarnya).
+            Text(
+                text = "Loans",
+                style = MaterialTheme.typography.titleLarge,
+                color = KlarTeal,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .statusBarsPadding()
-                    .padding(horizontal = 4.dp, vertical = 4.dp),
-            ) {
-                IconButton(onClick = onBackClick) {
-                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                }
-                Text(
-                    text = "Semua fitur",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = KlarTeal,
-                )
-            }
+                    .padding(horizontal = 20.dp, vertical = 16.dp),
+            )
+        },
+        bottomBar = {
+            AppBottomBar(
+                hasAccount = true,
+                activeTab = "Loans",
+                onLoginRequested = {},
+                onHomeClick = onHomeClick,
+                onAccountClick = onAccountClick,
+                onLockedTabClick = {},
+                onHistoryClick = onHistoryClick,
+            )
         },
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
                 .padding(horizontal = 20.dp),
         ) {
             Spacer(modifier = Modifier.height(8.dp))
@@ -218,17 +250,25 @@ fun AllFeaturesScreen(
 
             visibleCategories.forEachIndexed { index, category ->
                 if (index > 0) Spacer(modifier = Modifier.height(24.dp))
-                Text(
-                    text = category.title,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onBackground,
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                FeatureGrid(
-                    features = category.features,
-                    onClick = onLockedFeatureClick,
-                    onTransjakartaClick = onTransjakartaTap,
-                )
+                // sectionRequesters selalu punya entry buat setiap key di sini - dibangun dari
+                // allFeatureCategories yang sama (visibleCategories cuma filter search-nya,
+                // key-nya gak pernah hilang), jadi aman non-null-assert daripada nge-remember
+                // fallback di dalam loop (violates Compose call-site stability).
+                Column(
+                    modifier = Modifier.bringIntoViewRequester(sectionRequesters.getValue(category.key)),
+                ) {
+                    Text(
+                        text = category.title,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    FeatureGrid(
+                        features = category.features,
+                        onClick = onLockedFeatureClick,
+                        onTransjakartaClick = onTransjakartaTap,
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(24.dp))
         }

@@ -21,6 +21,19 @@ val envProperties = Properties().apply {
     }
 }
 
+// properties dari java.util
+val keystoreProperties = Properties().apply {
+    val file = rootProject.file("keystore.properties")
+    if (file.exists()) file.inputStream().use { load(it) }
+}
+
+fun signingValue(propertyKey: String, envKey: String): String? =
+    keystoreProperties.getProperty(propertyKey)
+        ?: providers.environmentVariable(envKey).orNull
+
+val releaseStoreFile = signingValue("storeFile", "ANDROID_KEYSTORE_PATH")
+val hasReleaseSigning = releaseStoreFile != null
+
 fun envProp(key: String, default: String): String = envProperties.getProperty(key) ?: default
 
 val baseUrlHost: String = try {
@@ -87,23 +100,24 @@ android {
     // Release signing is optional locally (unsigned release builds still work for testing).
     // CI provides RELEASE_KEYSTORE_* via a generated kotlin/.env so this reuses the same
     // envProp() mechanism as BASE_URL/API_KEY above instead of a separate secrets path.
-    val releaseKeystorePath = envProp("RELEASE_KEYSTORE_PATH", "")
+
     signingConfigs {
-        if (releaseKeystorePath.isNotBlank()) {
+        if (hasReleaseSigning) {
             create("release") {
-                storeFile = file(releaseKeystorePath)
-                storePassword = envProp("RELEASE_KEYSTORE_PASSWORD", "")
-                keyAlias = envProp("RELEASE_KEY_ALIAS", "")
-                keyPassword = envProp("RELEASE_KEY_PASSWORD", "")
+                storeFile = file(releaseStoreFile!!)
+                storePassword = signingValue("storePassword", "RELEASE_KEYSTORE_PASSWORD" )
+                keyAlias = signingValue("keyAlias", "RELEASE_KEY_ALIAS")
+                keyPassword = signingValue("keyPassword", "RELEASE_KEY_PASSWORD")
             }
         }
     }
+
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            if (releaseKeystorePath.isNotBlank()) {
+            if (releaseStoreFile != null && hasReleaseSigning && releaseStoreFile.isNotBlank()) {
                 signingConfig = signingConfigs.getByName("release")
             }
         }

@@ -71,6 +71,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.klarfinance.app.core.theme.KlarTeal
 import com.klarfinance.app.domain.model.AccountState
+import com.klarfinance.app.domain.model.FeatureCategoryKey
 import com.klarfinance.app.domain.model.LimitSummary
 import com.klarfinance.app.presentation.components.AppBottomBar
 import kotlinx.coroutines.launch
@@ -94,10 +95,12 @@ fun HomeScreen(
     onLoginRequested: () -> Unit,
     onAccountClick: () -> Unit,
     onHistoryClick: () -> Unit = {},
+    onBillsClick: () -> Unit = {},
     onRequestLoanClick: () -> Unit = {},
     onPayClick: () -> Unit = {},
     onTransjakartaClick: () -> Unit = {},
     onMoreClick: () -> Unit = {},
+    onSectionMoreClick: (FeatureCategoryKey) -> Unit = {},
     accountState: AccountState = AccountState.GUEST,
     limitSummary: LimitSummary? = null,
 ) {
@@ -133,11 +136,11 @@ fun HomeScreen(
         if (accountState != AccountState.ACTIVE) onLockedFeatureClick() else onTransjakartaClick()
     }
 
-    // "Bills" -> History, same gate as the bottom-nav History tab (AppBottomBar): GUEST -> Login,
-    // PENDING_APPLICATION and ACTIVE both get in directly (History itself doesn't depend on
-    // approval status, unlike most locked tiles).
+    // "Bills" -> BillsScreen (tagihan belum lunas + tombol Bayar - History sendiri sekarang
+    // read-only, lihat HistoryScreen). Sama gate seperti History: GUEST -> Login,
+    // PENDING_APPLICATION dan ACTIVE dua-duanya masuk langsung (gak depend status approval).
     val onBillsTap: () -> Unit = {
-        if (accountState == AccountState.GUEST) onLoginRequested() else onHistoryClick()
+        if (accountState == AccountState.GUEST) onLoginRequested() else onBillsClick()
     }
 
     // "More" -> AllFeaturesScreen (full catalog + search). Same non-GUEST gate as Bills/History -
@@ -145,6 +148,12 @@ fun HomeScreen(
     // internally (see AllFeaturesScreen), this gate is only about reaching the catalog at all.
     val onMoreTap: () -> Unit = {
         if (accountState == AccountState.GUEST) onLoginRequested() else onMoreClick()
+    }
+
+    // Panah section header di ExploreFeaturesCard -> AllFeaturesScreen, auto-scroll ke section
+    // yang sama. Sama gate seperti "More"/"Bills" (GUEST -> Login).
+    val onSectionMoreTap: (FeatureCategoryKey) -> Unit = { key ->
+        if (accountState == AccountState.GUEST) onLoginRequested() else onSectionMoreClick(key)
     }
 
     // Account info + change password work regardless of loan-approval status - unlike
@@ -179,6 +188,7 @@ fun HomeScreen(
                 onAccountClick = onAccountClick,
                 onLockedTabClick = onLockedFeatureClick,
                 onHistoryClick = onHistoryClick,
+                onLoansClick = onMoreTap,
             )
         },
     ) { padding ->
@@ -228,6 +238,7 @@ fun HomeScreen(
                 accountState = accountState,
                 onClick = onLockedFeatureClick,
                 onTransjakartaClick = onTransjakartaTap,
+                onSectionMoreClick = onSectionMoreTap,
             )
             Spacer(modifier = Modifier.height(20.dp))
         }
@@ -675,13 +686,17 @@ private fun PromoCard(promo: Promo, onClick: () -> Unit) {
 }
 
 private data class ExploreFeature(val label: String, val icon: ImageVector, val badge: String? = null)
-private data class FeatureCategory(val title: String, val features: List<ExploreFeature>)
+private data class FeatureCategory(val key: FeatureCategoryKey, val title: String, val features: List<ExploreFeature>)
 
 // Only the first category (PEMBAYARAN) is shown while GUEST/PENDING_APPLICATION, as a
 // teaser - the rest unlock once accountState is ACTIVE. None of these route anywhere real
-// yet except Transjakarta (see onTransjakartaClick in HomeScreen).
+// yet except Transjakarta (see onTransjakartaClick in HomeScreen). [key] links each section's
+// header arrow to the matching section on AllFeaturesScreen (see FeatureCategoryKey) - matched
+// by this stable key, NOT by title string (AllFeaturesScreen's own catalog uses different
+// casing/wording for its titles).
 private val featureCategories = listOf(
     FeatureCategory(
+        key = FeatureCategoryKey.PEMBAYARAN,
         title = "PEMBAYARAN",
         features = listOf(
             ExploreFeature("Tagihan saya", Icons.Default.ReceiptLong),
@@ -691,6 +706,7 @@ private val featureCategories = listOf(
         ),
     ),
     FeatureCategory(
+        key = FeatureCategoryKey.PROMO,
         title = "PROMO",
         features = listOf(
             ExploreFeature("Voucher saya", Icons.Default.ConfirmationNumber),
@@ -700,6 +716,7 @@ private val featureCategories = listOf(
         ),
     ),
     FeatureCategory(
+        key = FeatureCategoryKey.GAMES_HIBURAN,
         title = "GAMES & HIBURAN",
         features = listOf(
             ExploreFeature("Ruby Zone", Icons.Default.Diamond),
@@ -711,7 +728,12 @@ private val featureCategories = listOf(
 )
 
 @Composable
-private fun ExploreFeaturesCard(accountState: AccountState, onClick: () -> Unit, onTransjakartaClick: () -> Unit) {
+private fun ExploreFeaturesCard(
+    accountState: AccountState,
+    onClick: () -> Unit,
+    onTransjakartaClick: () -> Unit,
+    onSectionMoreClick: (FeatureCategoryKey) -> Unit,
+) {
     // GUEST gets a teaser (1 category); PENDING_APPLICATION and ACTIVE both see all 4 - the
     // tiles themselves are already styled/locked the same way regardless of state, tapping
     // one just routes to a different response (Login / "still under review" dialog / "coming
@@ -732,7 +754,10 @@ private fun ExploreFeaturesCard(accountState: AccountState, onClick: () -> Unit,
         )
         visibleCategories.forEachIndexed { index, category ->
             Spacer(modifier = Modifier.height(if (index == 0) 16.dp else 24.dp))
-            SectionHeader(title = category.title, onClick = onClick)
+            // Panah section header -> "Semua fitur", auto-scroll ke section yang sama
+            // (konfirmasi user 2026-09-14) - beda dari tap item di dalamnya yang masih locked-tap
+            // biasa (onClick).
+            SectionHeader(title = category.title, onClick = { onSectionMoreClick(category.key) })
             Spacer(modifier = Modifier.height(16.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 category.features.forEach { feature ->

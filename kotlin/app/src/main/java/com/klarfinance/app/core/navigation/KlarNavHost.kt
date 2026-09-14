@@ -17,8 +17,10 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.klarfinance.app.domain.model.AccountState
+import com.klarfinance.app.domain.model.FeatureCategoryKey
 import com.klarfinance.app.presentation.account.AccountScreen
 import com.klarfinance.app.presentation.allfeatures.AllFeaturesScreen
+import com.klarfinance.app.presentation.bills.BillsScreen
 import com.klarfinance.app.presentation.history.HistoryScreen
 import com.klarfinance.app.presentation.history.HistoryViewModel
 import com.klarfinance.app.presentation.history.PaymentScreen
@@ -77,10 +79,12 @@ fun KlarNavHost(navController: NavHostController = rememberNavController()) {
                 onLoginRequested = { navController.navigate(Screen.Login.route) },
                 onAccountClick = { navController.navigate(Screen.Account.route) },
                 onHistoryClick = { navController.navigate(Screen.HistoryGraph.route) },
+                onBillsClick = { navController.navigate(Screen.Bills.route) },
                 onRequestLoanClick = { navController.navigate(Screen.RequestLoanGraph.route) },
                 onPayClick = { navController.navigate(Screen.QrisScan.route) },
                 onTransjakartaClick = { navController.navigate(Screen.TransjakartaGraph.route) },
-                onMoreClick = { navController.navigate(Screen.AllFeatures.createRoute(accountState)) },
+                onMoreClick = { navController.navigate(Screen.AllFeatures.route) },
+                onSectionMoreClick = { key -> navController.navigate(Screen.AllFeatures.createRoute(scrollTo = key)) },
                 accountState = accountState,
                 limitSummary = limitSummary,
             )
@@ -89,20 +93,29 @@ fun KlarNavHost(navController: NavHostController = rememberNavController()) {
         composable(
             route = Screen.AllFeatures.route,
             arguments = listOf(
-                navArgument(Screen.AllFeatures.ARG_ACCOUNT_STATE) {
+                navArgument(Screen.AllFeatures.ARG_SCROLL_TO) {
                     type = NavType.StringType
-                    defaultValue = AccountState.PENDING_APPLICATION.name
+                    nullable = true
+                    defaultValue = null
                 },
             ),
         ) { backStackEntry ->
-            val accountState = AccountState.valueOf(
-                backStackEntry.arguments?.getString(Screen.AllFeatures.ARG_ACCOUNT_STATE)
-                    ?: AccountState.PENDING_APPLICATION.name,
-            )
+            val scrollTo = backStackEntry.arguments?.getString(Screen.AllFeatures.ARG_SCROLL_TO)
+                ?.let { runCatching { FeatureCategoryKey.valueOf(it) }.getOrNull() }
             AllFeaturesScreen(
-                accountState = accountState,
-                onBackClick = { navController.popBackStack() },
+                onHomeClick = { navController.popBackStack(Screen.Home.route, inclusive = false) },
+                onAccountClick = {
+                    navController.navigate(Screen.Account.route) {
+                        popUpTo(Screen.Home.route) { inclusive = false }
+                    }
+                },
+                onHistoryClick = {
+                    navController.navigate(Screen.HistoryGraph.route) {
+                        popUpTo(Screen.Home.route) { inclusive = false }
+                    }
+                },
                 onTransjakartaClick = { navController.navigate(Screen.TransjakartaGraph.route) },
+                scrollToCategory = scrollTo,
             )
         }
 
@@ -145,6 +158,11 @@ fun KlarNavHost(navController: NavHostController = rememberNavController()) {
                 onReferralClick = { navController.navigate(Screen.Referral.route) },
                 onHistoryClick = {
                     navController.navigate(Screen.HistoryGraph.route) {
+                        popUpTo(Screen.Home.route) { inclusive = false }
+                    }
+                },
+                onLoansClick = {
+                    navController.navigate(Screen.AllFeatures.route) {
                         popUpTo(Screen.Home.route) { inclusive = false }
                     }
                 },
@@ -293,9 +311,9 @@ private fun NavBackStackEntry.registerViewModel(navController: NavHostController
     return hiltViewModel(parentEntry)
 }
 
-/** History (jadwal cicilan) dan Payment (halaman Bayar) berbagi satu [HistoryViewModel] - sama
- * pola dengan [requestLoanGraph] - supaya Payment gak perlu network call baru buat data cicilan
- * yang sudah kebawa dari GET /loan/history saat History dimuat. */
+/** History (read-only), Bills (tagihan belum lunas), dan Payment (halaman Bayar) berbagi satu
+ * [HistoryViewModel] - sama pola dengan [requestLoanGraph] - supaya Bills/Payment gak perlu
+ * network call baru buat data cicilan yang sudah kebawa dari GET /loan/history. */
 private fun NavGraphBuilder.historyGraph(navController: NavHostController) {
     navigation(startDestination = Screen.History.route, route = Screen.HistoryGraph.route) {
         composable(Screen.History.route) { backStackEntry ->
@@ -310,6 +328,19 @@ private fun NavGraphBuilder.historyGraph(navController: NavHostController) {
                         popUpTo(Screen.Home.route) { inclusive = false }
                     }
                 },
+                onLoansClick = {
+                    navController.navigate(Screen.AllFeatures.route) {
+                        popUpTo(Screen.Home.route) { inclusive = false }
+                    }
+                },
+                viewModel = viewModel,
+            )
+        }
+
+        composable(Screen.Bills.route) { backStackEntry ->
+            val viewModel = backStackEntry.historyViewModel(navController)
+            BillsScreen(
+                onBackClick = { navController.popBackStack() },
                 onBayarClick = { item -> navController.navigate(Screen.Payment.createRoute(item.loanId)) },
                 viewModel = viewModel,
             )

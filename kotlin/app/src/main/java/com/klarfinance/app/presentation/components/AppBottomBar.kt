@@ -34,10 +34,11 @@ private val bottomNavItems = listOf(
 
 /**
  * Shared bottom nav, used by [com.klarfinance.app.presentation.home.HomeScreen],
- * [com.klarfinance.app.presentation.history.HistoryScreen] and
- * [com.klarfinance.app.presentation.account.AccountScreen] - each screen is its own nav
- * destination (not tabs nested under one Scaffold), so this is rendered independently by
- * all three with [activeTab] telling it which one is "selected" (tinted primary, disabled -
+ * [com.klarfinance.app.presentation.history.HistoryScreen],
+ * [com.klarfinance.app.presentation.account.AccountScreen], and
+ * [com.klarfinance.app.presentation.allfeatures.AllFeaturesScreen] ("Loans" tab) - each screen is
+ * its own nav destination (not tabs nested under one Scaffold), so this is rendered independently
+ * by all four with [activeTab] telling it which one is "selected" (tinted primary, disabled -
  * tapping the tab you're already on is a no-op).
  */
 @Composable
@@ -48,10 +49,11 @@ fun AppBottomBar(
     onHomeClick: () -> Unit,
     onAccountClick: () -> Unit,
     onLockedTabClick: () -> Unit,
-    // Default ke onLockedTabClick - History belum py halaman real waktu Home/Account pertama
+    // Default ke onLockedTabClick - History/Loans belum py halaman real waktu Home/Account pertama
     // ditulis (falls back ke dialog/snackbar generic), sekarang genuinely dipakai buat navigasi
-    // ke HistoryScreen di kedua call site itu.
+    // ke HistoryScreen/AllFeaturesScreen di call site yang sudah punya konteks buat itu.
     onHistoryClick: () -> Unit = onLockedTabClick,
+    onLoansClick: () -> Unit = onLockedTabClick,
 ) {
     Row(
         modifier = Modifier
@@ -68,6 +70,7 @@ fun AppBottomBar(
                 !hasAccount -> onLoginRequested
                 item.label == "Account" -> onAccountClick
                 item.label == "History" -> onHistoryClick
+                item.label == "Loans" -> onLoansClick
                 else -> onLockedTabClick
             }
 

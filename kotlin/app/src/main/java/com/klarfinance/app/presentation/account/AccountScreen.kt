@@ -98,6 +98,7 @@ fun AccountScreen(
     onHomeClick: () -> Unit,
     onReferralClick: () -> Unit,
     onHistoryClick: () -> Unit,
+    onLoansClick: () -> Unit,
     onLoggedOut: () -> Unit,
     viewModel: AccountViewModel = hiltViewModel(),
 ) {
@@ -166,6 +167,7 @@ fun AccountScreen(
         onHomeClick = onHomeClick,
         onReferralClick = onReferralClick,
         onHistoryClick = onHistoryClick,
+        onLoansClick = onLoansClick,
         onRetryClick = viewModel::loadProfile,
         onToggleSecurityChecklist = viewModel::onToggleSecurityChecklist,
         onEnableFingerprintClick = { activity?.let(viewModel::onEnableFingerprintClick) },
@@ -187,6 +189,7 @@ private fun AccountContent(
     onHomeClick: () -> Unit,
     onReferralClick: () -> Unit,
     onHistoryClick: () -> Unit,
+    onLoansClick: () -> Unit,
     onRetryClick: () -> Unit,
     onToggleSecurityChecklist: () -> Unit,
     onEnableFingerprintClick: () -> Unit,
@@ -228,6 +231,7 @@ private fun AccountContent(
                 onAccountClick = {},
                 onLockedTabClick = onComingSoonClick,
                 onHistoryClick = onHistoryClick,
+                onLoansClick = onLoansClick,
             )
         },
     ) { padding ->
