@@ -10,10 +10,11 @@ import android.content.pm.PackageManager
  * ditambahkan, field `pinjolApps`/`bankApps` di request manapun SELALU kosong - app Kotlin ini
  * tidak pernah benar-benar men-scan apapun.
  *
- * PENTING - package name di [PINJOL_PACKAGES]/[BANK_PACKAGES] adalah BEST-EFFORT dari
- * pengetahuan training, BELUM DIVERIFIKASI ke Play Store asli (sesi ini tidak punya akses
- * internet). Sebelum rilis produksi, verifikasi ulang tiap nama package terhadap APK/listing
- * Play Store yang sebenarnya - beberapa kemungkinan sudah berubah atau tidak akurat.
+ * Package name di [PINJOL_PACKAGES]/[BANK_PACKAGES] sudah diverifikasi terhadap listing Play
+ * Store (2026-09-14) - 12 dari 17 entri sebelumnya salah tebak (mis. Kredivo aslinya
+ * com.finaccel.android, bukan com.kredivo.app), yang bikin scan selalu melaporkan "tidak
+ * terinstall" meski aplikasinya ada. Kalau ada laporan false-negative lagi, curigai dulu
+ * apakah developer app tsb rebrand/ganti package name di Play Store.
  *
  * Pakai `<queries>` di AndroidManifest.xml (bukan `QUERY_ALL_PACKAGES`) - permission itu kena
  * scrutiny lebih ketat di Play Store review untuk app kategori fintech konsumen biasa (App
@@ -23,26 +24,26 @@ import android.content.pm.PackageManager
 object InstalledAppsScanner {
 
     private val PINJOL_PACKAGES = mapOf(
-        "com.kredivo.app" to "Kredivo",
-        "com.akulaku.app" to "Akulaku",
-        "com.adakami.id" to "AdaKami",
-        "com.kredit.pintar" to "Kredit Pintar",
+        "com.finaccel.android" to "Kredivo",
+        "io.silvrr.installment" to "Akulaku",
+        "com.adakami.dana.kredit.pinjaman" to "AdaKami",
+        "com.kreditpintar" to "Kredit Pintar",
         "com.julofinance.juloapp" to "JULO",
-        "cash.easy.id" to "Easycash",
+        "com.fintopia.idnEasycash.google" to "Easycash",
         "com.indodana.app" to "Indodana",
-        "com.rupiahcepat.app" to "RupiahCepat",
-        "com.pinjamango.app" to "PinjamanGo",
-        "com.maucash.app" to "Maucash",
-        "id.uangme.app" to "UangMe",
+        "com.loan.cash.credit.easy.kilat.cepat.pinjam.uang.dana.rupiah" to "RupiahCepat",
+        "com.pinjamango" to "PinjamanGo",
+        "id.maucash.app" to "Maucash",
+        "com.cmcm.uangme" to "UangMe",
     )
 
     private val BANK_PACKAGES = mapOf(
-        "com.bca.mobile" to "BCA Mobile",
+        "com.bca" to "BCA Mobile",
         "id.co.bri.brimo" to "BRImo",
-        "id.co.bankmandiri.livin" to "Livin by Mandiri",
+        "id.bmri.livin" to "Livin by Mandiri",
         "src.com.bni" to "BNI Mobile Banking",
         "com.btpn.dc" to "Jenius",
-        "com.bankpermata.mobile" to "PermataMobile",
+        "net.myinfosys.PermataMobileX" to "PermataMobile",
     )
 
     data class ScanResult(val pinjolApps: List<String>, val bankApps: List<String>)

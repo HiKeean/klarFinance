@@ -19,26 +19,26 @@
     <!-- Device app scoring (lihat core/scan/InstalledAppsScanner.kt) - Android 11+ (API 30+)
          menyembunyikan hasil getPackageInfo untuk package lain kecuali dideklarasikan di sini
          (atau lewat QUERY_ALL_PACKAGES, yang sengaja dihindari - kena scrutiny lebih ketat di
-         Play Store review). Daftar package BEST-EFFORT, belum diverifikasi ke Play Store asli -
-         lihat komentar di InstalledAppsScanner.kt. -->
+         Play Store review). Daftar package sudah diverifikasi ke Play Store (2026-09-14) - harus
+         tetap sinkron 1:1 dengan PINJOL_PACKAGES/BANK_PACKAGES di InstalledAppsScanner.kt. -->
     <queries>
-        <package android:name="com.kredivo.app" />
-        <package android:name="com.akulaku.app" />
-        <package android:name="com.adakami.id" />
-        <package android:name="com.kredit.pintar" />
+        <package android:name="com.finaccel.android" />
+        <package android:name="io.silvrr.installment" />
+        <package android:name="com.adakami.dana.kredit.pinjaman" />
+        <package android:name="com.kreditpintar" />
         <package android:name="com.julofinance.juloapp" />
-        <package android:name="cash.easy.id" />
+        <package android:name="com.fintopia.idnEasycash.google" />
         <package android:name="com.indodana.app" />
-        <package android:name="com.rupiahcepat.app" />
-        <package android:name="com.pinjamango.app" />
-        <package android:name="com.maucash.app" />
-        <package android:name="id.uangme.app" />
-        <package android:name="com.bca.mobile" />
+        <package android:name="com.loan.cash.credit.easy.kilat.cepat.pinjam.uang.dana.rupiah" />
+        <package android:name="com.pinjamango" />
+        <package android:name="id.maucash.app" />
+        <package android:name="com.cmcm.uangme" />
+        <package android:name="com.bca" />
         <package android:name="id.co.bri.brimo" />
-        <package android:name="id.co.bankmandiri.livin" />
+        <package android:name="id.bmri.livin" />
         <package android:name="src.com.bni" />
         <package android:name="com.btpn.dc" />
-        <package android:name="com.bankpermata.mobile" />
+        <package android:name="net.myinfosys.PermataMobileX" />
     </queries>
 
     <application
