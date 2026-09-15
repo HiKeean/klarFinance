@@ -227,9 +227,9 @@ public class LoanService {
                     "Cicilan sudah jatuh tempo - minimum pembayaran Rp " + minimumAmount.toPlainString());
         }
 
-        BigDecimal totalRemaining = unpaid.stream().map(Installment::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
-        if (request.getAmount().compareTo(totalRemaining.setScale(0, RoundingMode.HALF_UP)) > 0) {
-            throw new IllegalArgumentException("Nominal melebihi total sisa tagihan Rp " + totalRemaining.toPlainString());
+        BigDecimal totalRemainingBefore = unpaid.stream().map(Installment::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+        if (request.getAmount().compareTo(totalRemainingBefore.setScale(0, RoundingMode.HALF_UP)) > 0) {
+            throw new IllegalArgumentException("Nominal melebihi total sisa tagihan Rp " + totalRemainingBefore.toPlainString());
         }
 
         BigDecimal pool = request.getAmount();
@@ -267,26 +267,38 @@ public class LoanService {
                     .build());
         }
 
+        // Bug report 2026-09-15 - "Available Loan" di Home cuma naik balik begitu loan FULLY paid
+        // off, padahal usedLimit di ActiveLimit cuma nge-track principal (applyLimitUsage motong
+        // `amount`/requestedAmount saat dicairkan, BUKAN totalAmountDue yang sudah termasuk
+        // bunga) - jadi proporsi principal yang baru lunas HARUSNYA balik tiap kali bayar, gak
+        // perlu nunggu cicilan terakhir. Dihitung dari outstanding principal SEBELUM vs SESUDAH
+        // pembayaran ini (bukan akumulasi increment ter-rounding tiap repay()) supaya round-off
+        // gak menumpuk - begitu totalRemainingAfter == 0 (fully paid off), hasilnya otomatis
+        // persis requestedAmount penuh yang dikembalikan.
+        BigDecimal totalRemainingAfter = unpaid.stream().map(Installment::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
+        restoreLimitForPrincipalPaid(loan, totalRemainingBefore, totalRemainingAfter);
+
         List<Installment> refreshed = installmentRepository.findByLoan_IdInOrderByDueDateAsc(List.of(loanId));
-        // Bug report 2026-09-14 - "Available Loan" di Home tidak pernah naik lagi setelah nasabah
-        // melunasi pinjaman, karena repay() sebelumnya cuma menyentuh Installment/Repayment, tidak
-        // pernah mengembalikan usedLimit/availableLimit di ActiveLimit yang dinaikkan sekali waktu
-        // Loan ini dicairkan (lihat applyLimitUsage/createLoan). Dikembalikan HANYA begitu loan
-        // ini fully paid off (bukan proporsional per cicilan) - data model ini tidak menyimpan
-        // pemisahan pokok/bunga per cicilan, jadi restorasi granular per pembayaran parsial tidak
-        // bisa dihitung akurat.
-        boolean fullyPaidOff = refreshed.stream().allMatch(i -> InstallmentStatus.PAID.equals(i.getStatus()));
-        if (fullyPaidOff) {
-            restoreLimitOnPayoff(loan);
-        }
         return toHistoryItem(loan, refreshed, now);
     }
 
-    private void restoreLimitOnPayoff(Loan loan) {
+    private void restoreLimitForPrincipalPaid(Loan loan, BigDecimal totalRemainingBefore, BigDecimal totalRemainingAfter) {
+        BigDecimal totalAmountDue = loan.getLoanDetails().getTotalAmountDue();
+        if (totalAmountDue == null || totalAmountDue.signum() <= 0) {
+            return;
+        }
+        BigDecimal requestedAmount = loan.getLoanDetails().getRequestedAmount();
+        BigDecimal principalBefore = requestedAmount.multiply(totalRemainingBefore)
+                .divide(totalAmountDue, 2, RoundingMode.HALF_UP);
+        BigDecimal principalAfter = totalRemainingAfter.signum() <= 0 ? BigDecimal.ZERO
+                : requestedAmount.multiply(totalRemainingAfter).divide(totalAmountDue, 2, RoundingMode.HALF_UP);
+        BigDecimal principalRestored = principalBefore.subtract(principalAfter);
+        if (principalRestored.signum() <= 0) {
+            return;
+        }
         ActiveLimit activeLimit = loan.getLimit();
-        BigDecimal principal = loan.getLoanDetails().getRequestedAmount();
-        activeLimit.setUsedLimit(activeLimit.getUsedLimit().subtract(principal).max(BigDecimal.ZERO));
-        activeLimit.setAvailableLimit(activeLimit.getAvailableLimit().add(principal).min(activeLimit.getTotalLimit()));
+        activeLimit.setUsedLimit(activeLimit.getUsedLimit().subtract(principalRestored).max(BigDecimal.ZERO));
+        activeLimit.setAvailableLimit(activeLimit.getAvailableLimit().add(principalRestored).min(activeLimit.getTotalLimit()));
         activeLimitRepository.save(activeLimit);
     }
 
