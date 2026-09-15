@@ -84,16 +84,24 @@ export class DashboardPage {
     return severity ? `npl-badge npl-${severity.toLowerCase()}` : 'npl-badge';
   }
 
+  // Set once a fetch fails so the effect below doesn't retry in an infinite loop - without this,
+  // resetting `loading` back to false on error (with `summary` still null) re-satisfies the
+  // effect's own guard and it immediately refetches forever on any persistent failure.
+  private readonly loadFailed = signal(false);
+
   constructor() {
     effect(() => {
-      if (!this.isBm() || this.summary() !== null || this.loading()) return;
+      if (!this.isBm() || this.summary() !== null || this.loading() || this.loadFailed()) return;
       this.loading.set(true);
       this.dashboardApi.getSummary().subscribe({
         next: (data) => {
           this.summary.set(data);
           this.loading.set(false);
         },
-        error: () => this.loading.set(false)
+        error: () => {
+          this.loadFailed.set(true);
+          this.loading.set(false);
+        }
       });
     });
   }

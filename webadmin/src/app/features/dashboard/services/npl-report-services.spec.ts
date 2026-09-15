@@ -51,4 +51,34 @@ describe('NplReportServices', () => {
       });
     });
   });
+
+  describe('getBranchLoans', () => {
+    it('[positive] calls the branch-loans endpoint with page/size params, without a search param', () => {
+      api.get.and.returnValue(of({ success: true, statusCode: 200, message: 'OK', data: {} as any }));
+
+      service.getBranchLoans(7, 0, 10).subscribe();
+
+      expect(api.get).toHaveBeenCalledWith(SUPERADMIN_URL.dbo.nplReportBranchLoans(7), { page: 0, size: 10 });
+    });
+
+    it('[positive] includes the search param when provided', () => {
+      api.get.and.returnValue(of({ success: true, statusCode: 200, message: 'OK', data: {} as any }));
+
+      service.getBranchLoans(7, 1, 10, 'budi').subscribe();
+
+      expect(api.get).toHaveBeenCalledWith(SUPERADMIN_URL.dbo.nplReportBranchLoans(7), { page: 1, size: 10, search: 'budi' });
+    });
+
+    it('[negative] propagates a transport error', (done) => {
+      api.get.and.returnValue(throwError(() => new Error('timeout')));
+
+      service.getBranchLoans(7, 0, 10).subscribe({
+        next: () => fail('expected an error'),
+        error: (err: Error) => {
+          expect(err.message).toBe('timeout');
+          done();
+        }
+      });
+    });
+  });
 });
