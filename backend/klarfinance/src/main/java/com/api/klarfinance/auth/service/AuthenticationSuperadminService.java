@@ -99,7 +99,9 @@ public class AuthenticationSuperadminService {
 
     /** Assign/ganti Branch buat satu staff internal (dipakai halaman Branch webadmin buat pasang
      * BM) - branchId null = unassign. Cuma valid buat user yang punya DetailUserInternal; nasabah
-     * (CustomerDetails) gak punya konsep branch sama sekali. */
+     * (CustomerDetails) gak punya konsep branch sama sekali. Kalau staff ini masih attached ke
+     * branch lain, assign ke branch baru ditolak - harus di-unassign (branchId=null) dulu baru
+     * bisa dipilih jadi BM/staff di branch tersebut. */
     @Transactional
     public void assignBranch(String identity, Long branchId) {
         User user = findUser(identity);
@@ -108,6 +110,11 @@ public class AuthenticationSuperadminService {
         if (branchId == null) {
             detail.setBranch(null);
         } else {
+            Branch currentBranch = detail.getBranch();
+            if (currentBranch != null && !currentBranch.getId().equals(branchId)) {
+                throw new IllegalStateException("User ini masih bertugas di branch \"" + currentBranch.getName()
+                        + "\" - unassign dulu dari branch tersebut sebelum di-assign ke branch baru");
+            }
             Branch branch = branchRepository.findById(branchId)
                     .orElseThrow(() -> new IllegalArgumentException("Branch not found"));
             detail.setBranch(branch);

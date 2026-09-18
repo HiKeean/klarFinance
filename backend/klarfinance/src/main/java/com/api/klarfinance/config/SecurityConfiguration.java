@@ -59,6 +59,7 @@ public class SecurityConfiguration {
                         // directly (for example, "SUPERADMIN"), without Spring's
                         // automatic ROLE_ prefix.
                         .requestMatchers("/api/v1/admin/**").hasAuthority("SUPERADMIN")
+                        .requestMatchers("api/v1/nasabah/**").hasAnyAuthority("NASABAH")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exception -> exception

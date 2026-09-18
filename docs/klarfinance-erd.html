@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>klarFinance Data Model</title>
+<meta name="description" content="One combined entity-relationship diagram covering all 31 tables across all 8 backend schemas, drawn directly from the live JPA entity classes." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+  :root{
+    --bg:#F5F7FA;
+    --surface:#FFFFFF;
+    --surface-2:#EEF1F6;
+    --border:#DCE1E9;
+    --text:#1A2028;
+    --text-dim:#5B6472;
+    --accent:#2F6D64;
+    --accent-soft:#E4EFEC;
+
+    --c-auth:#6C63B5;      --c-auth-soft:#EDECF8;
+    --c-dbo:#B8862E;       --c-dbo-soft:#F7EFDD;
+    --c-los:#B14C74;       --c-los-soft:#F8E7EE;
+    --c-fin:#2F6D64;       --c-fin-soft:#E4EFEC;
+    --c-qris:#C2703D;      --c-qris-soft:#F7E9DD;
+    --c-referral:#8C4FA0;  --c-referral-soft:#F1E4F4;
+    --c-tj:#A8443B;        --c-tj-soft:#F6E3E1;
+    --c-geo:#3E8FA6;       --c-geo-soft:#E2F0F4;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#10141B; --surface:#161C25; --surface-2:#1C2330; --border:#2A3341;
+      --text:#E7EBF2; --text-dim:#8D97A8; --accent:#5FB6A7; --accent-soft:#1B2B29;
+      --c-auth:#9C94DE; --c-auth-soft:#232244;
+      --c-dbo:#E2AC57; --c-dbo-soft:#332510;
+      --c-los:#E381A2; --c-los-soft:#3A1E28;
+      --c-fin:#5FB6A7; --c-fin-soft:#152522;
+      --c-qris:#E59B68; --c-qris-soft:#33220f;
+      --c-referral:#C089CF; --c-referral-soft:#2c1e32;
+      --c-tj:#DB8076; --c-tj-soft:#331f1c;
+      --c-geo:#72BED4; --c-geo-soft:#132a30;
+    }
+  }
+
+  *{box-sizing:border-box;}
+  html,body{background:var(--bg);}
+  body{
+    margin:0; color:var(--text); background:var(--bg);
+    font-family:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+    padding-inline:20px;
+    line-height:1.55;
+  }
+  .wrap{max-width:1120px;margin:0 auto;}
+
+  code, .mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;}
+
+  header.hero{padding-block:36px 20px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--accent); font-weight:600; margin:0 0 10px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,40px); margin:0 0 12px; letter-spacing:-0.01em;
+    text-wrap:balance; font-weight:800;
+  }
+  .lede{color:var(--text-dim); font-size:16px; max-width:75ch; margin:0 0 6px;}
+  .lede + .lede{margin-top:10px;}
+
+  .legend{
+    display:flex; flex-wrap:wrap; gap:10px 22px; font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px; color:var(--text-dim); background:var(--surface-2);
+    border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin:18px 0 24px;
+  }
+  .legend b{color:var(--text); font-weight:600;}
+
+  .diagram-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    padding:16px; overflow-x:auto; margin-bottom:10px;
+  }
+  .diagram-card pre.mermaid{margin:0;}
+  figcaption{font-size:12.5px; color:var(--text-dim); margin:0 0 32px;}
+
+  .db-usage{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin-bottom:40px;
+  }
+  .db-usage .card{
+    border:1px solid var(--border); border-radius:12px; overflow:hidden; background:var(--surface);
+  }
+  .db-usage .card-head{
+    padding:10px 14px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:700; letter-spacing:.02em;
+  }
+  .db-usage dl{margin:0; padding:12px 14px 14px;}
+  .db-usage dt{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600; color:var(--text); margin-top:11px;
+  }
+  .db-usage dt:first-child{margin-top:0;}
+  .db-usage dd{margin:3px 0 0; font-size:13.5px; color:var(--text-dim);}
+
+  h2.section-title{font-size:19px; margin:0 0 4px; font-weight:700;}
+  .section-sub{color:var(--text-dim); font-size:13.5px; margin:0 0 18px;}
+
+  .notes-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:40px;
+  }
+  .note{
+    border-radius:10px; padding:14px 16px; font-size:14px; border:1px solid var(--border);
+  }
+  .note .badge{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600;
+    padding:2px 8px; border-radius:6px; margin-bottom:8px; letter-spacing:.02em;
+  }
+  .note b{color:var(--text);}
+  @media (max-width:720px){ .notes-grid{grid-template-columns:1fr;} }
+
+  footer{
+    border-top:1px solid var(--border); margin-top:8px; padding-block:24px 40px;
+    color:var(--text-dim); font-size:13px;
+  }
+  footer code{background:var(--surface-2); padding:1px 6px; border-radius:5px;}
+
+  @media (max-width:520px){
+    h1{font-size:26px;}
+    .diagram-card{padding:10px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Backend schema reference — single diagram</p>
+    <h1>klarFinance Data Model</h1>
+    <p class="lede">All 31 tables across all 8 backend schemas (<code class="mono">auth</code>, <code class="mono">dbo</code>, <code class="mono">los</code>, <code class="mono">fin</code>, <code class="mono">qris</code>, <code class="mono">referral</code>, <code class="mono">transjakarta</code>, <code class="mono">geo</code>) in one combined entity-relationship diagram — drawn directly from the live <code class="mono">@Entity</code> classes, not from documentation.</p>
+    <p class="lede">Diagram is wide — scroll horizontally inside its frame, or zoom out, to see it in full on one screen.</p>
+  </header>
+
+  <div class="legend">
+    <span><b>||</b> = exactly one</span>
+    <span><b>|o</b> = zero or one</span>
+    <span><b>o{</b> = zero or many</span>
+    <span><b>|{</b> = one or many</span>
+    <span>mark sits next to the entity it describes — e.g. <b>Loan ||--o{ Installment</b> reads "one Loan has zero-or-many Installments"</span>
+  </div>
+
+  <figure>
+    <div class="diagram-card">
+<pre class="mermaid">
+erDiagram
+    %% ===== auth =====
+    User {
+        int id PK
+        string identity UK
+        string password
+        int role_id FK
+        datetime deletedAt "soft delete"
+    }
+    Role {
+        int id PK
+        string name
+    }
+    Menu {
+        int id PK
+        string name
+        string url
+        string logo
+    }
+    RoleMenu {
+        int id PK
+        int role_id FK
+        int menu_id FK
+        int assigned_by FK
+    }
+    CustomerDetails {
+        int id PK
+        int user_id FK
+        string nik
+        string referralCode UK
+        int village_id FK
+    }
+    DetailUserInternal {
+        int id PK
+        int user_id FK
+        int village_id FK
+        int branch_id FK
+        string noHp
+    }
+    PasswordResetRequest {
+        int id PK
+        int user_id FK
+        string status
+        int decided_by FK
+    }
+    Token {
+        int id PK
+        string token UK
+        string tokenType
+        int user_id FK
+    }
+
+    %% ===== dbo =====
+    Province {
+        bigint id PK
+        string name
+    }
+    Regency {
+        bigint id PK
+        bigint province_id FK
+        string name
+    }
+    District {
+        bigint id PK
+        bigint regency_id FK
+        string name
+    }
+    Village {
+        bigint id PK
+        bigint district_id FK
+        string name
+    }
+    Branch {
+        bigint id PK "sequence, starts at 1000"
+        bigint village_id FK
+        string name
+        boolean isActive
+    }
+    BranchTerritory {
+        bigint id PK
+        bigint branch_id FK
+        bigint regency_id FK
+    }
+    ApiParameter {
+        int id PK
+        string apiKey
+        string clientType
+    }
+    ParamGlobal {
+        int id PK
+        string key
+        string value
+    }
+
+    %% ===== los =====
+    Vida {
+        int id PK
+        int user_id FK
+        string kycStatus
+        string incomeVerificationStatus
+    }
+    PefindoInquiry {
+        int id PK
+        string score
+        int colStatus
+        int colHistoryYearsAgo
+    }
+    LimitApplication {
+        int id PK
+        string applicationCode UK
+        int user_id FK
+        int bm_id FK
+        int locked_bm_id FK
+        int pefindo_id FK
+        string status
+        decimal engineSuggestionLimit
+        decimal checkerPurposeLimit
+        decimal finalApprovedLimit
+    }
+    ApplicationLog {
+        int id PK
+        int application_id FK
+        int internal_user_id FK
+        string action
+    }
+    ActiveLimit {
+        int id PK
+        int user_id FK
+        bigint branch_id FK
+        decimal totalLimit
+        decimal usedLimit
+        decimal availableLimit
+        boolean isActive
+    }
+
+    %% ===== fin =====
+    Drawdown {
+        int id PK
+        decimal drawdownAmount
+        string channel "BANK_TRANSFER | QRIS"
+        int merchant_id FK
+        string status
+    }
+    LoanDetails {
+        int id PK
+        decimal requestedAmount
+        decimal totalAmountDue
+        decimal interestPercent
+        decimal referralDiscount
+    }
+    Loan {
+        int id PK
+        int limit_id FK
+        int drawdown_id FK
+        int loan_details_id FK
+        int tenor
+        string billingCycle "TRANSJAKARTA only, YYYY-MM"
+    }
+    Installment {
+        int id PK
+        int loan_id FK
+        int installmentNumber
+        decimal amount
+        decimal penalty
+        string status
+        datetime dueDate
+    }
+    Repayment {
+        int id PK
+        int installment_id FK
+        decimal paymentAmount
+        string paymentMethod
+        string status
+    }
+    SavedBankAccount {
+        int id PK
+        int user_id FK
+        string bankCode
+        string bankAccountNumber
+    }
+    LoanReviewRequest {
+        int id PK
+        int user_id FK
+        int active_limit_id FK
+        decimal requestedAmount
+        decimal utilizationPercent
+        string status
+        int locked_bm_id FK
+        int bm_id FK
+    }
+
+    %% ===== qris =====
+    Merchant {
+        int id PK
+        string name
+        string merchantCode UK
+    }
+    QrisTransaction {
+        int id PK
+        int merchant_id FK
+        int user_id FK
+        string token UK
+        string status "PENDING | CONFIRMED | EXPIRED"
+        decimal amount
+        int loan_id FK
+        datetime expiresAt
+    }
+
+    %% ===== referral =====
+    ReferralInvite {
+        int id PK
+        int referrer_user_id FK
+        int invitee_user_id FK "unique"
+        string codeUsed
+        datetime qualifiedAt
+    }
+    ReferralReward {
+        int id PK
+        int referrer_user_id FK
+        int referral_invite_id FK
+        decimal discountAmount
+        string status "AVAILABLE | APPLIED"
+        int applied_loan_id FK
+    }
+
+    %% ===== transjakarta =====
+    TransjakartaTicket {
+        int id PK
+        string ticketCode UK
+        int user_id FK
+        int loan_id FK
+        decimal amount
+        boolean used
+        datetime purchasedAt
+    }
+
+    %% ===== geo =====
+    LocationConsent {
+        int id PK
+        int user_id FK "unique"
+        boolean consentGiven
+        datetime consentAt
+        datetime revokedAt
+    }
+    LocationPing {
+        int id PK
+        int user_id FK
+        double latitude
+        double longitude
+        datetime capturedAt
+    }
+
+    %% ===== relationships: auth =====
+    Role ||--o{ User : "assigned to"
+    User ||--o| CustomerDetails : "profile (nasabah)"
+    User ||--o| DetailUserInternal : "profile (staff)"
+    User ||--o{ PasswordResetRequest : requests
+    User ||--o{ PasswordResetRequest : "decides (staff)"
+    User ||--o{ Token : issues
+    Role ||--o{ RoleMenu : grants
+    Menu ||--o{ RoleMenu : "granted via"
+    User ||--o{ RoleMenu : assigns
+
+    %% ===== relationships: dbo =====
+    Province ||--o{ Regency : contains
+    Regency ||--o{ District : contains
+    District ||--o{ Village : contains
+    Village ||--o{ Branch : "located in"
+    Branch ||--o{ BranchTerritory : "responsible for"
+    Regency ||--o{ BranchTerritory : "covered by"
+    Village ||--o{ CustomerDetails : "resides in"
+    Village ||--o{ DetailUserInternal : "resides in"
+    Branch ||--o{ DetailUserInternal : "employed at"
+
+    %% ===== relationships: los =====
+    User ||--o{ Vida : "KYC snapshots"
+    User ||--o{ LimitApplication : applies
+    User ||--o{ LimitApplication : "decides as BM"
+    User |o--o{ LimitApplication : "locks as BM"
+    PefindoInquiry |o--o{ LimitApplication : scores
+    LimitApplication ||--o{ ApplicationLog : "audit trail"
+    User ||--o{ ApplicationLog : "acted by"
+    User ||--o| ActiveLimit : owns
+    Branch |o--o{ ActiveLimit : "approved at"
+
+    %% ===== relationships: fin =====
+    ActiveLimit ||--o{ Loan : "drawn against"
+    Drawdown ||--|| Loan : funds
+    LoanDetails ||--|| Loan : "breaks down interest for"
+    Loan ||--o{ Installment : scheduled
+    Installment ||--o{ Repayment : "paid via"
+    User ||--o{ SavedBankAccount : "saved accounts"
+    User ||--o{ LoanReviewRequest : "requests (>30% utilization)"
+    ActiveLimit ||--o{ LoanReviewRequest : "snapshot of"
+    User |o--o{ LoanReviewRequest : "locks/decides as BM"
+    Merchant |o--o{ Drawdown : "QRIS destination"
+
+    %% ===== relationships: qris =====
+    Merchant ||--o{ QrisTransaction : receives
+    User ||--o{ QrisTransaction : pays
+    Loan |o--o{ QrisTransaction : "confirmed into"
+
+    %% ===== relationships: referral =====
+    User ||--o{ ReferralInvite : "refers (as referrer)"
+    User ||--o| ReferralInvite : "was invited (as invitee)"
+    ReferralInvite ||--o| ReferralReward : "qualifies into"
+    User ||--o{ ReferralReward : "earns (as referrer)"
+    Loan |o--o{ ReferralReward : "discount applied to"
+
+    %% ===== relationships: transjakarta =====
+    User ||--o{ TransjakartaTicket : buys
+    Loan ||--o{ TransjakartaTicket : "monthly bill for"
+
+    %% ===== relationships: geo =====
+    User ||--o| LocationConsent : "opts in"
+    User ||--o{ LocationPing : submits
+</pre>
+    </div>
+    <figcaption>31 entities, 8 schemas, ~45 relationships — every foreign key in the codebase, one diagram.</figcaption>
+  </figure>
+
+  <h2 class="section-title">Kegunaan tiap tabel</h2>
+  <p class="section-sub">Fungsi dari masing-masing 31 tabel di atas, dikelompokkan per schema.</p>
+  <div class="db-usage">
+    <div class="card">
+      <div class="card-head" style="background:var(--c-auth-soft); color:var(--c-auth)">auth — identitas, RBAC &amp; sesi login</div>
+      <dl>
+        <dt>User</dt><dd>Akun login utama (nasabah maupun staff internal) — menyimpan identity, password, role, dan status soft-delete.</dd>
+        <dt>Role</dt><dd>Daftar peran (NASABAH, CHECKER, BM, SUPERADMIN, dst) yang menentukan hak akses.</dd>
+        <dt>Menu</dt><dd>Daftar menu/halaman yang tersedia lewat sistem RBAC dinamis.</dd>
+        <dt>RoleMenu</dt><dd>Tabel penghubung — menentukan menu mana yang boleh diakses oleh role mana.</dd>
+        <dt>CustomerDetails</dt><dd>Profil lengkap nasabah: NIK, alamat, foto KTP/KYC, dan kode referral miliknya.</dd>
+        <dt>DetailUserInternal</dt><dd>Profil staff internal (Checker/BM/Admin) — cabang tempat kerja dan no HP.</dd>
+        <dt>PasswordResetRequest</dt><dd>Antrean permintaan reset password staff yang perlu di-approve Superadmin.</dd>
+        <dt>Token</dt><dd>Token JWT (access &amp; refresh) yang sedang aktif per user.</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <div class="card-head" style="background:var(--c-dbo-soft); color:var(--c-dbo)">dbo — data referensi &amp; wilayah cabang</div>
+      <dl>
+        <dt>Province / Regency / District / Village</dt><dd>Hierarki wilayah administratif Indonesia (provinsi → kab/kota → kecamatan → desa), dipakai untuk alamat nasabah dan lokasi cabang.</dd>
+        <dt>Branch</dt><dd>Data cabang klarFinance — tempat kerja BM.</dd>
+        <dt>BranchTerritory</dt><dd>Wilayah (kab/kota) yang jadi tanggung jawab tiap cabang — dasar filter antrean approval BM.</dd>
+        <dt>ApiParameter</dt><dd>API key per jenis client (Android/Angular) untuk validasi HMAC signature.</dd>
+        <dt>ParamGlobal</dt><dd>Parameter konfigurasi umum aplikasi (key-value).</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <div class="card-head" style="background:var(--c-los-soft); color:var(--c-los)">los — scoring kredit &amp; approval plafond</div>
+      <dl>
+        <dt>Vida</dt><dd>Hasil mock pengecekan KYC (verifikasi KTP/wajah dan penghasilan).</dd>
+        <dt>PefindoInquiry</dt><dd>Hasil mock pengecekan skor kredit/BI Checking (KOL).</dd>
+        <dt>LimitApplication</dt><dd>Pengajuan plafond nasabah — status dan jejak keputusan Checker → BM.</dd>
+        <dt>ApplicationLog</dt><dd>Riwayat/audit trail setiap tindakan pada satu pengajuan plafond.</dd>
+        <dt>ActiveLimit</dt><dd>Plafond yang sudah aktif/disetujui — total limit, terpakai, dan tersedia.</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <div class="card-head" style="background:var(--c-fin-soft); color:var(--c-fin)">fin — pinjaman, cicilan &amp; pembayaran</div>
+      <dl>
+        <dt>Drawdown</dt><dd>Catatan pencairan dana — lewat transfer bank atau QRIS.</dd>
+        <dt>LoanDetails</dt><dd>Rincian perhitungan bunga dan biaya dari satu pinjaman.</dd>
+        <dt>Loan</dt><dd>Pinjaman yang sedang berjalan — hasil pengajuan tunai, QRIS, atau tiket Transjakarta.</dd>
+        <dt>Installment</dt><dd>Cicilan bulanan per pinjaman beserta status bayarnya.</dd>
+        <dt>Repayment</dt><dd>Catatan tiap pembayaran cicilan yang masuk.</dd>
+        <dt>SavedBankAccount</dt><dd>Rekening tujuan pencairan yang tersimpan otomatis dari transaksi sebelumnya.</dd>
+        <dt>LoanReviewRequest</dt><dd>Pengajuan tunai yang membuat utilisasi plafond &gt;30% — ditahan untuk direview ulang BM.</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <div class="card-head" style="background:var(--c-qris-soft); color:var(--c-qris)">qris — pembayaran paylater (mockup)</div>
+      <dl>
+        <dt>Merchant</dt><dd>Data toko yang men-generate QR untuk menerima pembayaran QRIS.</dd>
+        <dt>QrisTransaction</dt><dd>Sesi transaksi QRIS dari scan sampai konfirmasi bayar.</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <div class="card-head" style="background:var(--c-referral-soft); color:var(--c-referral)">referral — program "Ajak Teman"</div>
+      <dl>
+        <dt>ReferralInvite</dt><dd>Catatan siapa mengundang siapa lewat kode referral.</dd>
+        <dt>ReferralReward</dt><dd>Reward Rp100rb yang didapat referrer, siap dipakai otomatis ke pinjaman berikutnya.</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <div class="card-head" style="background:var(--c-tj-soft); color:var(--c-tj)">transjakarta — tiket bus</div>
+      <dl>
+        <dt>TransjakartaTicket</dt><dd>Tiket bus yang dibeli nasabah — ditagih secara kolektif tiap bulan lewat satu Loan.</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <div class="card-head" style="background:var(--c-geo-soft); color:var(--c-geo)">geo — konsen &amp; pelacakan lokasi</div>
+      <dl>
+        <dt>LocationConsent</dt><dd>Status persetujuan nasabah untuk pelacakan lokasi.</dd>
+        <dt>LocationPing</dt><dd>Titik lokasi GPS yang dikirim berkala dari HP nasabah selama consent aktif.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <h2 class="section-title">Notes that don't fit in the boxes</h2>
+  <p class="section-sub">Things the diagram implies but doesn't say outright.</p>
+  <div class="notes-grid">
+    <div class="note" style="background:var(--c-auth-soft)">
+      <span class="badge" style="background:var(--surface); color:var(--c-auth)">auth</span><br>
+      <b>CustomerDetails.user_id</b> and <b>DetailUserInternal.user_id</b> have no DB unique constraint — the 1:1 shown is convention (one profile per user), not enforced. <code class="mono">Token</code> holds both access and refresh tokens, not sessions.
+    </div>
+    <div class="note" style="background:var(--c-dbo-soft)">
+      <span class="badge" style="background:var(--surface); color:var(--c-dbo)">dbo</span><br>
+      <code class="mono">Branch.id</code> is a real DB <code class="mono">SEQUENCE</code> starting at 1000 (gap left for the pre-existing Head Office branch). One regency = max 1 <code class="mono">Branch</code>, except DKI Jakarta (max 2) — enforced in app code, not a DB constraint.
+    </div>
+    <div class="note" style="background:var(--c-los-soft)">
+      <span class="badge" style="background:var(--surface); color:var(--c-los)">los</span><br>
+      Two lock mechanisms, not one. <b>BM's lock is the columns shown</b> (permanent, no TTL). <b>Checker's lock lives entirely in Redis</b> (2-hour TTL, event-driven expiry) — <code class="mono">LimitApplication</code> has no column for it at all. <code class="mono">Vida</code>/<code class="mono">PefindoInquiry</code> are mock engines, not real integrations.
+    </div>
+    <div class="note" style="background:var(--c-fin-soft)">
+      <span class="badge" style="background:var(--surface); color:var(--c-fin)">fin</span><br>
+      <code class="mono">Loan</code> has <b>no status column</b> — active vs. paid-off is derived from whether any <code class="mono">Installment</code> is still <code class="mono">UNPAID</code>. Interest is flat-per-month by tenor (officially confirmed rates), not a placeholder.
+    </div>
+    <div class="note" style="background:var(--c-qris-soft)">
+      <span class="badge" style="background:var(--surface); color:var(--c-qris)">qris</span><br>
+      Mockup only — QR payload is just <code class="mono">merchantCode</code>, no EMVCo/BI network. Quota is <code class="mono">min(30% × plafond, Rp1,000,000)</code>, cumulative, and independent from the unrelated ">30%" rule in <code class="mono">fin.LoanReviewRequest</code>.
+    </div>
+    <div class="note" style="background:var(--c-referral-soft)">
+      <span class="badge" style="background:var(--surface); color:var(--c-referral)">referral</span><br>
+      <code class="mono">invitee_user_id</code> is genuinely DB-unique. Reward (flat Rp100,000) goes to the <b>referrer</b>, not the invitee, and only fires once the invitee's own loan hits Rp1,000,000 — registration alone doesn't qualify.
+    </div>
+    <div class="note" style="background:var(--c-tj-soft)">
+      <span class="badge" style="background:var(--surface); color:var(--c-tj)">transjakarta</span><br>
+      The only place N children roll into 1 parent <code class="mono">Loan</code> by design — every ticket bought in a calendar month bills to one monthly Loan, due the 25th of the <i>next</i> month (every other Loan type uses rolling +30 days).
+    </div>
+    <div class="note" style="background:var(--c-geo-soft)">
+      <span class="badge" style="background:var(--surface); color:var(--c-geo)">geo</span><br>
+      <code class="mono">LocationConsent.user_id</code> is genuinely DB-unique and gates ping ingestion. Not shown: a read-only service clusters <code class="mono">LocationPing</code> rows into an inferred home/daytime location for Checker/BM/Superadmin — nothing inferred is persisted.
+    </div>
+  </div>
+
+  <footer>
+    Generated by reading every <code>@Entity</code> class under <code>backend/klarfinance/src/main/java/com/api/klarfinance/</code> directly — 31 tables across 8 schemas, cross-checked against the live source. Table/column names are the actual Java field names and <code>@Column</code> overrides in the codebase.
+  </footer>
+</div>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+</script>
+</body>
+</html>
