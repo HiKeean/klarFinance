@@ -41,7 +41,7 @@ public class AuthenticationInternalService {
     private final UserRepository userRepository;
     private final DetailUserInternalRepository detailRepository;
     private final RoleRepository roleRepository;
-    private final RoleMenuRepository roleMenuRepository;
+    private final RoleMenuCacheService roleMenuCacheService;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -85,9 +85,7 @@ public class AuthenticationInternalService {
         String access = jwtService.generateToken(user), refresh = jwtService.generateRefreshToken(user);
         saveToken(user, access, TokenType.ACCESS); saveToken(user, refresh, TokenType.REFRESH);
         DetailUserInternal detail = detailRepository.findByUserId(user.getId()).orElse(null);
-        List<LoginResponse.MenuResponse> menus = roleMenuRepository.findByRoleId(user.getRole().getId()).stream()
-                .map(RoleMenu::getMenu).filter(java.util.Objects::nonNull)
-                .map(m -> LoginResponse.MenuResponse.builder().url(m.getUrl()).name(m.getName()).logo(m.getLogo()).build()).toList();
+        List<LoginResponse.MenuResponse> menus = roleMenuCacheService.getMenusByRole(user.getRole().getId());
         String accountStatus = AppConstant.ROLE_NASABAH.equalsIgnoreCase(user.getRole().getName())
                 ? (activeLimitRepository.findByUserIdAndIsActiveTrue(user.getId()).isPresent() ? "ACTIVE" : "PENDING_APPLICATION")
                 : null;

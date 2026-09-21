@@ -1,0 +1,2685 @@
+{
+  "info": {
+    "_postman_id": "40915c4b-8c33-4e23-896c-f2c52b0c740a",
+    "name": "klarFinance Backend API",
+    "description": "Koleksi Postman untuk seluruh REST endpoint backend klarFinance (Spring Boot, server.port=8080, tanpa context-path).\n\nBase path digabung dari 3 sumber:\n1. WebConfig#configurePathMatch menambahkan prefix otomatis berdasarkan anotasi kelas controller:\n   - @NasabahAnnotation -> /api/v1/nasabah/**\n   - @InternalAnnotation -> /api/v1/internal/**\n   - @AdminAnnotation -> /api/v1/admin/**\n   - plain @RestController (tanpa 3 anotasi di atas, dalam package com.api.klarfinance) -> /api/v1/**\n2. Nilai @RequestMapping di level class.\n3. Nilai mapping (@GetMapping/@PostMapping/dst) di level method.\n\nAuth: JWT Bearer (Authorization header) untuk endpoint yang butuh login, dikonfigurasi di SecurityConfiguration (/api/v1/admin/** butuh authority SUPERADMIN, /api/v1/nasabah/** butuh authority NASABAH, sisanya default anyRequest().authenticated() kecuali yang di-permitAll eksplisit). Selain JWT, sebagian besar endpoint (kecuali yang di-exempt di HmacSignatureFilter) juga wajib mengirim header X-Signature/X-Timestamp/X-Client-Type yang dihitung otomatis oleh pre-request script collection ini.\n\nSet variable collection `secretKey` (= application.security.jwt.secret-key dari server) dan `apiKey` (= api_key milik client_type terkait, tabel dbo.dbh_api_param) sebelum memakai koleksi ini.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// ============================================================================",
+          "// Collection-level pre-request script - HMAC signature (lihat",
+          "// config/HmacSignatureFilter.java + config/HmacService.java pada backend).",
+          "//",
+          "// Algoritma server:",
+          "//   stringToSign = HTTP_METHOD + requestURI (path saja, tanpa query) + timestamp",
+          "//                  + rawRequestBody (string JSON persis, \"\" kalau tidak ada body)",
+          "//                  + apiKey (diambil dari DB berdasarkan header X-Client-Type)",
+          "//   signature     = Base64( HMAC-SHA256(stringToSign, key = secretKey) )",
+          "//   secretKey     = application.security.jwt.secret-key (JWT secret, dipakai juga",
+          "//                   sebagai HMAC key - BUKAN apiKey).",
+          "//",
+          "// Endpoint yang dikecualikan dari pengecekan HMAC (lihat HmacSignatureFilter):",
+          "//   /api/v1/nasabah/auth/**, /api/v1/internal/auth/**, /api/v1/auth/**,",
+          "//   /swagger-ui/**, /v3/api-docs/**, /api/v1/ws/**, /api/v1/qris/merchants",
+          "// Untuk path-path itu, script ini TIDAK menambahkan X-Signature/X-Timestamp/",
+          "// X-Client-Type. Header Authorization (Bearer) tetap otomatis terpasang lewat",
+          "// collection-level auth kalau endpoint memang butuh (mis. logout, profile).",
+          "// ============================================================================",
+          "",
+          "(function () {",
+          "    var exemptPrefixes = [",
+          "        \"/api/v1/nasabah/auth\",",
+          "        \"/api/v1/internal/auth\",",
+          "        \"/api/v1/auth\",",
+          "        \"/swagger-ui\",",
+          "        \"/v3/api-docs\",",
+          "        \"/api/v1/ws\",",
+          "        \"/api/v1/qris/merchants\"",
+          "    ];",
+          "",
+          "    var path = pm.request.url.getPath({ unresolved: false });",
+          "    if (path.indexOf(\"/\") !== 0) {",
+          "        path = \"/\" + path;",
+          "    }",
+          "",
+          "    var isExempt = exemptPrefixes.some(function (prefix) {",
+          "        return path.indexOf(prefix) === 0;",
+          "    });",
+          "",
+          "    if (isExempt) {",
+          "        return;",
+          "    }",
+          "",
+          "    var method = pm.request.method;",
+          "    var timestamp = Date.now().toString();",
+          "    var rawBody = (pm.request.body && pm.request.body.raw) ? pm.request.body.raw : \"\";",
+          "    var apiKey = pm.collectionVariables.get(\"apiKey\") || \"\";",
+          "    var secretKey = pm.collectionVariables.get(\"secretKey\") || \"\";",
+          "    var clientType = pm.collectionVariables.get(\"clientType\") || \"WEB\";",
+          "",
+          "    var stringToSign = method + path + timestamp + rawBody + apiKey;",
+          "    var signature = CryptoJS.HmacSHA256(stringToSign, secretKey).toString(CryptoJS.enc.Base64);",
+          "",
+          "    pm.request.headers.upsert({ key: \"X-Timestamp\", value: timestamp });",
+          "    pm.request.headers.upsert({ key: \"X-Signature\", value: signature });",
+          "    pm.request.headers.upsert({ key: \"X-Client-Type\", value: clientType });",
+          "})();"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "refreshToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "apiKey",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "secretKey",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "clientType",
+      "value": "WEB",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth - Nasabah",
+      "description": "AuthController (auth/controller/AuthController.java), plain @RestController -> prefix /api/v1/auth. Semua endpoint di sini public (permitAll) & HMAC-exempt karena dipakai sebelum nasabah punya JWT.",
+      "item": [
+        {
+          "name": "Request OTP",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/request-otp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "request-otp"
+              ]
+            },
+            "description": "Kirim OTP ke nomor HP nasabah untuk mulai proses registrasi/login. Public, tanpa auth (permitAll, HMAC-exempt).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"081234567890\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/verify-otp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "verify-otp"
+              ]
+            },
+            "description": "Verifikasi kode OTP yang dikirim ke nomor HP nasabah. Public, tanpa auth (permitAll, HMAC-exempt).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"081234567890\",\n  \"otp\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check Phone Registered",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/check-phone?phone=081234567890",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "check-phone"
+              ],
+              "query": [
+                {
+                  "key": "phone",
+                  "value": "081234567890",
+                  "description": "Nomor HP yang dicek"
+                }
+              ]
+            },
+            "description": "Cek apakah nomor HP sudah terdaftar sebagai nasabah. Public, tanpa auth (permitAll, HMAC-exempt).",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register Nasabah",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Registrasi akun nasabah baru (multipart/form-data) setelah OTP terverifikasi, termasuk upload foto KTP & KYC. Public, tanpa auth (permitAll, HMAC-exempt).",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "phone",
+                  "value": "081234567890",
+                  "type": "text"
+                },
+                {
+                  "key": "nik",
+                  "value": "3171012345670001",
+                  "type": "text"
+                },
+                {
+                  "key": "npwp",
+                  "value": "09.123.456.7-891.000",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "Budi Santoso",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "budi.santoso@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "Jl. Merdeka No. 10",
+                  "type": "text"
+                },
+                {
+                  "key": "address2",
+                  "value": "RT 01/RW 02",
+                  "type": "text"
+                },
+                {
+                  "key": "dob",
+                  "value": "1995-05-20",
+                  "type": "text"
+                },
+                {
+                  "key": "villageId",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "Password123!",
+                  "type": "text"
+                },
+                {
+                  "key": "referralCode",
+                  "value": "REF12345",
+                  "type": "text"
+                },
+                {
+                  "key": "claimedIncome",
+                  "value": "5000000",
+                  "type": "text"
+                },
+                {
+                  "key": "pinjolApps",
+                  "value": "com.example.pinjolA",
+                  "type": "text"
+                },
+                {
+                  "key": "bankApps",
+                  "value": "com.bca.mobile",
+                  "type": "text"
+                },
+                {
+                  "key": "fotoKtp",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "fotoKyc",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Request Password Reset (Nasabah/Staff pre-login)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/password-reset-requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "password-reset-requests"
+              ]
+            },
+            "description": "Ajukan permintaan reset password (masuk antrean PENDING untuk disetujui Superadmin). Public, tanpa auth (permitAll, HMAC-exempt).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identity\": \"081234567890\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth - Internal Staff",
+      "description": "AuthenticationInternalController (auth/controller/AuthenticationInternalController.java), @InternalAnnotation -> prefix /api/v1/internal/auth. Seluruh prefix /api/v1/internal/auth HMAC-exempt; login/register/refresh juga permitAll (tanpa JWT), sisanya butuh Bearer token.",
+      "item": [
+        {
+          "name": "Staff Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Login staff internal (Checker/BM/dst) pakai identity + password. Public, tanpa auth (permitAll, HMAC-exempt karena prefix /api/v1/internal/auth).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identity\": \"checker01\",\n  \"password\": \"Password123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Staff Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Registrasi akun staff internal baru. permitAll di SecurityConfiguration (HMAC-exempt), meski secara bisnis biasanya dipakai lewat alur admin.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dob\": \"1990-01-01\",\n  \"name\": \"Budi Checker\",\n  \"noHp\": \"081234567890\",\n  \"branchId\": 1,\n  \"villageId\": 1,\n  \"password\": \"Password123!\",\n  \"role\": \"CHECKER\",\n  \"address\": \"Jl. Sudirman No. 1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/auth/refresh",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "auth",
+                "refresh"
+              ]
+            },
+            "description": "Refresh access token pakai refresh token yang masih valid. Public/tanpa Authorization header (permitAll, HMAC-exempt); refresh token itu sendiri jadi kredensial.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/auth/logout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "auth",
+                "logout"
+              ]
+            },
+            "description": "Logout staff, revoke access & refresh token yang sedang dipakai. Butuh Authorization: Bearer token."
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password (Staff)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/auth/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "auth",
+                "change-password"
+              ]
+            },
+            "description": "Ganti password staff yang sedang login. Butuh Authorization: Bearer token.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"OldPass123!\",\n  \"newPassword\": \"NewPass123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Password (Step-up Auth)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/auth/verify-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "auth",
+                "verify-password"
+              ]
+            },
+            "description": "Verifikasi ulang password sebelum konfirmasi transaksi sensitif (dipakai kalau fingerprint belum aktif). Butuh Authorization: Bearer token.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"Password123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update FCM Token",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/auth/fcm-token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "auth",
+                "fcm-token"
+              ]
+            },
+            "description": "Registrasi/update FCM token untuk push notification approve/reject (khusus nasabah, no-op untuk staff). Butuh Authorization: Bearer token.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fcmToken\": \"fcm_sample_token_abcdef123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile (Staff)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/auth/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "auth",
+                "profile"
+              ]
+            },
+            "description": "Ambil data profil staff yang sedang login. Butuh Authorization: Bearer token."
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Profile (Staff)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/auth/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "auth",
+                "profile"
+              ]
+            },
+            "description": "Update data profil staff yang sedang login. Butuh Authorization: Bearer token.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dob\": \"1990-01-01\",\n  \"name\": \"Budi Checker\",\n  \"noHp\": \"081234567890\",\n  \"branchId\": 1,\n  \"villageId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth - Superadmin",
+      "description": "AuthenticationSuperadminController (auth/controller/AuthenticationSuperadminController.java), @AdminAnnotation -> prefix /api/v1/admin/auth. Semua endpoint butuh role SUPERADMIN (hasAuthority) DAN tetap butuh header HMAC (prefix ini TIDAK masuk daftar exempt HmacSignatureFilter, beda dari /api/v1/internal/auth).",
+      "item": [
+        {
+          "name": "Get All Staff (Superadmin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/users?page=0&size=10&search=budi&role=CHECKER&branchId=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "description": "Nomor halaman, mulai dari 0"
+                },
+                {
+                  "key": "size",
+                  "value": "10",
+                  "description": "Jumlah data per halaman"
+                },
+                {
+                  "key": "search",
+                  "value": "budi",
+                  "description": "Cari berdasarkan nama/identity"
+                },
+                {
+                  "key": "role",
+                  "value": "CHECKER",
+                  "description": "Filter berdasarkan role"
+                },
+                {
+                  "key": "branchId",
+                  "value": "1",
+                  "description": "Filter berdasarkan branch"
+                }
+              ]
+            },
+            "description": "Ambil daftar user staff internal dengan paginasi & filter. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Role",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/roles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "roles"
+              ]
+            },
+            "description": "Ambil semua role yang ada di sistem. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Menu",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/menus?name=Dashboard&url=/dashboard",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "menus"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Dashboard",
+                  "description": "Filter nama menu"
+                },
+                {
+                  "key": "url",
+                  "value": "/dashboard",
+                  "description": "Filter url menu"
+                }
+              ]
+            },
+            "description": "Ambil semua menu webadmin, bisa difilter nama/url. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Role-Menu",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/role-menus?menuName=Dashboard&menuUrl=/dashboard&role=CHECKER",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "role-menus"
+              ],
+              "query": [
+                {
+                  "key": "menuName",
+                  "value": "Dashboard",
+                  "description": "Filter nama menu"
+                },
+                {
+                  "key": "menuUrl",
+                  "value": "/dashboard",
+                  "description": "Filter url menu"
+                },
+                {
+                  "key": "role",
+                  "value": "CHECKER",
+                  "description": "Filter role"
+                }
+              ]
+            },
+            "description": "Ambil mapping role ke menu (hak akses menu per role). Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Branch ke Staff",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/users/:identity/branch",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "users",
+                ":identity",
+                "branch"
+              ],
+              "variable": [
+                {
+                  "key": "identity",
+                  "value": "checker01",
+                  "description": "Identity/username staff"
+                }
+              ]
+            },
+            "description": "Assign atau lepas (branchId null) Branch untuk satu user staff internal. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branchId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Staff",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/?identity=checker01",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth"
+              ],
+              "query": [
+                {
+                  "key": "identity",
+                  "value": "checker01",
+                  "description": "Identity staff yang dihapus"
+                }
+              ]
+            },
+            "description": "Hapus akun staff berdasarkan identity. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Identity (Superadmin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/identity",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "identity"
+              ]
+            },
+            "description": "Ambil identity (username) superadmin yang sedang login. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Register Staff (via Superadmin)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Registrasi akun staff internal baru oleh superadmin. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dob\": \"1990-01-01\",\n  \"name\": \"Budi Checker\",\n  \"noHp\": \"081234567890\",\n  \"branchId\": 1,\n  \"villageId\": 1,\n  \"password\": \"Password123!\",\n  \"role\": \"CHECKER\",\n  \"address\": \"Jl. Sudirman No. 1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Menu",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/menu",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "menu"
+              ]
+            },
+            "description": "Tambah menu baru untuk webadmin. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dashboard\",\n  \"url\": \"/dashboard\",\n  \"logo\": \"dashboard-icon\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Role-Menu",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/role-menu",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "role-menu"
+              ]
+            },
+            "description": "Assign satu menu ke satu role. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"CHECKER\",\n  \"menu\": \"Dashboard\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/role",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "role"
+              ]
+            },
+            "description": "Tambah role baru. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"CHECKER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Role",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/roles/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "roles",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID role"
+                }
+              ]
+            },
+            "description": "Update nama role berdasarkan id. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"SENIOR_CHECKER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Role",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/roles/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "roles",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID role"
+                }
+              ]
+            },
+            "description": "Hapus role berdasarkan id. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Menu",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/menus/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "menus",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID menu"
+                }
+              ]
+            },
+            "description": "Update menu berdasarkan id. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dashboard\",\n  \"url\": \"/dashboard\",\n  \"logo\": \"dashboard-icon\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Menu",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/menus/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "menus",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID menu"
+                }
+              ]
+            },
+            "description": "Hapus menu berdasarkan id. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Role-Menu",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/role-menus/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "role-menus",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID role-menu"
+                }
+              ]
+            },
+            "description": "Update mapping role-menu berdasarkan id. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"CHECKER\",\n  \"menu\": \"Dashboard\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Role-Menu",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/role-menus/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "role-menus",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID role-menu"
+                }
+              ]
+            },
+            "description": "Hapus mapping role-menu berdasarkan id. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "List Password Reset Requests",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/password-reset-requests?status=PENDING",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "password-reset-requests"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PENDING",
+                  "description": "PENDING/APPROVED/REJECTED"
+                }
+              ]
+            },
+            "description": "Ambil antrean permintaan reset password (default status PENDING). Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Decide Password Reset Request",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/auth/password-reset-requests/:id/decision",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "auth",
+                "password-reset-requests",
+                ":id",
+                "decision"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID permintaan reset password"
+                }
+              ]
+            },
+            "description": "Setujui atau tolak permintaan reset password staff. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"APPROVE\",\n  \"reason\": \"Identitas terverifikasi\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Superadmin Auth",
+      "description": "SuperAdminAuthController (admin/auth/controller/SuperAdminAuthController.java). CATATAN: class ini kosong (tidak ada field/method sama sekali), belum ada endpoint yang diimplementasikan - kemungkinan stub/placeholder yang belum dikerjakan. Dibedakan dari folder 'Auth - Superadmin' di atas (AuthenticationSuperadminController) yang justru berisi seluruh CRUD staff/role/menu/role-menu/password-reset-decision.",
+      "item": []
+    },
+    {
+      "name": "User",
+      "description": "UserController (user/UserController.java), plain @RestController -> prefix /api/v1/users. Endpoint generik ganti password, terpisah dari /api/v1/internal/auth/change-password.",
+      "item": [
+        {
+          "name": "Change Password (Generic User)",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            },
+            "description": "Ganti password user yang sedang login (endpoint generik, terpisah dari /internal/auth/change-password). Butuh Authorization: Bearer token (anyRequest().authenticated()).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currentPassword\": \"OldPass123!\",\n  \"newPassword\": \"NewPass123!\",\n  \"confirmationPassword\": \"NewPass123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "LOS - Application",
+      "description": "LosController (los/controller/LosController.java), @InternalAnnotation -> prefix /api/v1/internal/los. Dashboard ringkasan LOS & fitur checker break.",
+      "item": [
+        {
+          "name": "Dashboard Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/los/dashboard-summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "los",
+                "dashboard-summary"
+              ]
+            },
+            "description": "Ambil ringkasan dashboard LOS (jumlah antrean, dsb) untuk staff yang sedang login. Butuh Authorization: Bearer token."
+          },
+          "response": []
+        },
+        {
+          "name": "Checker Break",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/los/checker/break",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "los",
+                "checker",
+                "break"
+              ]
+            },
+            "description": "Catat Checker mengambil jeda/istirahat (dikeluarkan sementara dari antrean auto-assign). Butuh Authorization: Bearer token."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "LOS - Approval",
+      "description": "LosApprovalController (los/controller/LosApprovalController.java), @InternalAnnotation -> prefix /api/v1/internal/los/limit-applications. Antrean & keputusan Checker/BM atas pengajuan limit (LOS).",
+      "item": [
+        {
+          "name": "Get Approval Queue",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/los/limit-applications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "los",
+                "limit-applications"
+              ]
+            },
+            "description": "Ambil antrean pengajuan limit yang perlu direview (Checker/BM) sesuai role user yang login. Butuh Authorization: Bearer token."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Limit Application Detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/los/limit-applications/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "los",
+                "limit-applications",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID limit application"
+                }
+              ]
+            },
+            "description": "Ambil detail satu pengajuan limit (data KTP, KYC, dsb). Butuh Authorization: Bearer token."
+          },
+          "response": []
+        },
+        {
+          "name": "Get KTP/KYC Picture",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/los/limit-applications/:id/picture/:type",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "los",
+                "limit-applications",
+                ":id",
+                "picture",
+                ":type"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID limit application"
+                },
+                {
+                  "key": "type",
+                  "value": "ktp",
+                  "description": "\"ktp\" atau \"kyc\""
+                }
+              ]
+            },
+            "description": "Ambil foto KTP atau selfie KYC nasabah secara mentah (binary), dipakai sebagai src <img>. Butuh Authorization: Bearer token."
+          },
+          "response": []
+        },
+        {
+          "name": "Search Limit Applications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/los/limit-applications/search?q=budi",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "los",
+                "limit-applications",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "budi",
+                  "description": "Keyword pencarian"
+                }
+              ]
+            },
+            "description": "Cari pengajuan limit berdasarkan keyword (nama/NIK/dsb). Butuh Authorization: Bearer token."
+          },
+          "response": []
+        },
+        {
+          "name": "Checker Decision",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/los/limit-applications/:id/checker-decision",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "los",
+                "limit-applications",
+                ":id",
+                "checker-decision"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID limit application"
+                }
+              ]
+            },
+            "description": "Keputusan Checker atas pengajuan limit (APPROVE isi purposeLimit, atau REJECT isi reason). Butuh Authorization: Bearer token.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"APPROVE\",\n  \"purposeLimit\": 4000000,\n  \"reason\": \"Sesuai hasil analisa\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "BM Decision",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/los/limit-applications/:id/bm-decision",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "los",
+                "limit-applications",
+                ":id",
+                "bm-decision"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID limit application"
+                }
+              ]
+            },
+            "description": "Keputusan final BM atas pengajuan limit (APPROVE isi finalLimit, atau REJECT isi reason). Butuh Authorization: Bearer token.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"APPROVE\",\n  \"finalLimit\": 5000000,\n  \"reason\": \"Disetujui sesuai plafond\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Loan (Pinjaman)",
+      "description": "LoanController (fin/controller/LoanController.java), @NasabahAnnotation -> prefix /api/v1/nasabah/loan. Pengajuan pinjaman, limit, riwayat, dan pembayaran oleh nasabah.",
+      "item": [
+        {
+          "name": "Get My Limit Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/loan/limit",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "loan",
+                "limit"
+              ]
+            },
+            "description": "Ambil ringkasan plafond/limit pinjaman nasabah yang sedang login. Butuh role NASABAH."
+          },
+          "response": []
+        },
+        {
+          "name": "Request Loan",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/loan",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "loan"
+              ]
+            },
+            "description": "Ajukan pinjaman/tarik tunai baru. Pengajuan >30% dari plafond otomatis masuk antrean review BM. Butuh role NASABAH.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 500000,\n  \"tenorMonths\": 3,\n  \"bankAccountNumber\": \"1234567890\",\n  \"bankCode\": \"BCA\",\n  \"pinjolApps\": [\n    \"com.example.pinjolA\"\n  ],\n  \"bankApps\": [\n    \"com.bca.mobile\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Bank Accounts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/loan/bank-accounts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "loan",
+                "bank-accounts"
+              ]
+            },
+            "description": "Ambil daftar rekening tujuan pencairan yang pernah dipakai nasabah. Butuh role NASABAH."
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Loan History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/loan/history",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "loan",
+                "history"
+              ]
+            },
+            "description": "Ambil riwayat semua Loan nasabah (tarik tunai maupun bayar QRIS), terbaru duluan. Butuh role NASABAH."
+          },
+          "response": []
+        },
+        {
+          "name": "Repay Loan",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/loan/:loanId/repayment",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "loan",
+                ":loanId",
+                "repayment"
+              ],
+              "variable": [
+                {
+                  "key": "loanId",
+                  "value": "1",
+                  "description": "ID pinjaman (loan)"
+                }
+              ]
+            },
+            "description": "Bayar/cicil pinjaman aktif. Butuh role NASABAH.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 250000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Loan Review (BM)",
+      "description": "LoanReviewController (fin/controller/LoanReviewController.java), @InternalAnnotation -> prefix /api/v1/internal/fin/loan-reviews. Review BM khusus pengajuan pinjaman >30% dari plafond (item yang sama juga muncul di GET /api/v1/internal/los/limit-applications).",
+      "item": [
+        {
+          "name": "Get Loan Review Detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/fin/loan-reviews/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "fin",
+                "loan-reviews",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID loan review"
+                }
+              ]
+            },
+            "description": "Ambil detail pengajuan pinjaman >30% plafond yang perlu direview BM. Butuh Authorization: Bearer token."
+          },
+          "response": []
+        },
+        {
+          "name": "BM Decision on Loan Review",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/fin/loan-reviews/:id/bm-decision",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "fin",
+                "loan-reviews",
+                ":id",
+                "bm-decision"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID loan review"
+                }
+              ]
+            },
+            "description": "Keputusan BM atas pengajuan pinjaman (APPROVE persis sesuai amount yang diminta, atau REJECT). Butuh Authorization: Bearer token.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"APPROVE\",\n  \"reason\": \"Sesuai kebijakan risiko\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "QRIS - Merchant",
+      "description": "QrisMerchantController (qris/controller/QrisMerchantController.java), plain @RestController -> prefix /api/v1/qris/merchants. SENGAJA public tanpa login & tanpa HMAC (halaman generator QRIS mockup).",
+      "item": [
+        {
+          "name": "Generate Merchant QRIS",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/qris/merchants",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "qris",
+                "merchants"
+              ]
+            },
+            "description": "Generate QRIS statis untuk merchant baru (halaman generator mockup). Public, tanpa auth & tanpa HMAC signature.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Toko Sejahtera\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "QRIS - Transaction",
+      "description": "QrisTransactionController (qris/controller/QrisTransactionController.java), @NasabahAnnotation -> prefix /api/v1/nasabah/qris/transactions. Scan & konfirmasi pembayaran QRIS pakai limit pinjaman nasabah.",
+      "item": [
+        {
+          "name": "Scan QRIS",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/qris/transactions/scan",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "qris",
+                "transactions",
+                "scan"
+              ]
+            },
+            "description": "Scan kode QRIS merchant untuk memulai transaksi pembayaran. Butuh role NASABAH.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantCode\": \"MCH12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm QRIS Payment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/qris/transactions/:token/confirm",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "qris",
+                "transactions",
+                ":token",
+                "confirm"
+              ],
+              "variable": [
+                {
+                  "key": "token",
+                  "value": "TRX-ABC123",
+                  "description": "Token transaksi hasil scan"
+                }
+              ]
+            },
+            "description": "Konfirmasi & eksekusi pembayaran QRIS setelah scan, memotong limit pinjaman nasabah. Butuh role NASABAH.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 50000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "TransJakarta",
+      "description": "TransjakartaTicketController (transjakarta/controller/TransjakartaTicketController.java), @NasabahAnnotation -> prefix /api/v1/nasabah/transjakarta/tickets.",
+      "item": [
+        {
+          "name": "Purchase Tickets",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/transjakarta/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "transjakarta",
+                "tickets"
+              ]
+            },
+            "description": "Beli tiket TransJakarta menggunakan limit pinjaman nasabah. Butuh role NASABAH.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qty\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Tickets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/transjakarta/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "transjakarta",
+                "tickets"
+              ]
+            },
+            "description": "Ambil daftar tiket TransJakarta milik nasabah yang sedang login. Butuh role NASABAH."
+          },
+          "response": []
+        },
+        {
+          "name": "Toggle Ticket Used",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/transjakarta/tickets/:ticketCode/toggle-used",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "transjakarta",
+                "tickets",
+                ":ticketCode",
+                "toggle-used"
+              ],
+              "variable": [
+                {
+                  "key": "ticketCode",
+                  "value": "TJK-0001",
+                  "description": "Kode unik tiket"
+                }
+              ]
+            },
+            "description": "Tandai tiket sudah/belum dipakai (toggle status used) berdasarkan kode tiket. Butuh role NASABAH."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Referral",
+      "description": "ReferralController (referral/controller/ReferralController.java), @NasabahAnnotation -> prefix /api/v1/nasabah/referral.",
+      "item": [
+        {
+          "name": "Get Referral Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/referral/summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "referral",
+                "summary"
+              ]
+            },
+            "description": "Ambil ringkasan program referral nasabah (kode referral milik sendiri, jumlah undangan, dsb). Butuh role NASABAH."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "NPL Report",
+      "description": "NplReportController (dbo/controller/NplReportController.java), @AdminAnnotation -> prefix /api/v1/admin/dbo/npl-report. Butuh role SUPERADMIN.",
+      "item": [
+        {
+          "name": "Get NPL Report",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/dbo/npl-report",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "dbo",
+                "npl-report"
+              ]
+            },
+            "description": "Ambil laporan Non-Performing Loan (NPL) per branch. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Branch Loan Detail (Drill-down)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/dbo/npl-report/:branchId/loans?page=0&size=10&search=budi",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "dbo",
+                "npl-report",
+                ":branchId",
+                "loans"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "description": "Nomor halaman, mulai dari 0"
+                },
+                {
+                  "key": "size",
+                  "value": "10",
+                  "description": "Jumlah data per halaman"
+                },
+                {
+                  "key": "search",
+                  "value": "budi",
+                  "description": "Cari berdasarkan nama nasabah"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "branchId",
+                  "value": "1",
+                  "description": "ID branch"
+                }
+              ]
+            },
+            "description": "Drill-down tabel pinjaman nasabah pada satu branch, searchable & paginated. Butuh role SUPERADMIN."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Branch",
+      "description": "BranchController (dbo/controller/BranchController.java), @AdminAnnotation -> prefix /api/v1/admin/branch. Butuh role SUPERADMIN.",
+      "item": [
+        {
+          "name": "Get All Branch",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/branch?page=0&size=10&name=Jakarta&villageId=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "branch"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "description": "Nomor halaman, mulai dari 0"
+                },
+                {
+                  "key": "size",
+                  "value": "10",
+                  "description": "Jumlah data per halaman"
+                },
+                {
+                  "key": "name",
+                  "value": "Jakarta",
+                  "description": "Filter nama branch"
+                },
+                {
+                  "key": "villageId",
+                  "value": "1",
+                  "description": "Filter berdasarkan village"
+                }
+              ]
+            },
+            "description": "Ambil daftar branch dengan paginasi & filter nama/village. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Insert Branch",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/branch",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "branch"
+              ]
+            },
+            "description": "Tambah branch baru. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cabang Jakarta Pusat\",\n  \"address\": \"Jl. Sudirman No. 1\",\n  \"villageId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Branch Territory",
+      "description": "BranchTerritoryController (dbo/controller/BranchTerritoryController.java), @AdminAnnotation -> prefix /api/v1/admin/dbo/branch-territory. Butuh role SUPERADMIN.",
+      "item": [
+        {
+          "name": "List Branch Territory",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/dbo/branch-territory?branchId=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "dbo",
+                "branch-territory"
+              ],
+              "query": [
+                {
+                  "key": "branchId",
+                  "value": "1",
+                  "description": "Filter berdasarkan branch (opsional)"
+                }
+              ]
+            },
+            "description": "Ambil daftar wilayah cakupan (territory) branch, opsional difilter per branch. Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Coverage Gaps",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/dbo/branch-territory/gaps",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "dbo",
+                "branch-territory",
+                "gaps"
+              ]
+            },
+            "description": "Ambil daftar regency yang belum tercakup oleh branch manapun (coverage gap). Butuh role SUPERADMIN."
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Regency Territory",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/dbo/branch-territory/regency",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "dbo",
+                "branch-territory",
+                "regency"
+              ]
+            },
+            "description": "Assign satu regency (kabupaten/kota) sebagai wilayah cakupan sebuah branch. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branchId\": 1,\n  \"regencyId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Assign Province Territory",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/dbo/branch-territory/province",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "dbo",
+                "branch-territory",
+                "province"
+              ]
+            },
+            "description": "Assign seluruh regency dalam satu province sebagai wilayah cakupan sebuah branch. Butuh role SUPERADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"branchId\": 1,\n  \"provinceId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unassign Branch Territory",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/admin/dbo/branch-territory/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "dbo",
+                "branch-territory",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "ID branch territory"
+                }
+              ]
+            },
+            "description": "Hapus satu assignment wilayah cakupan branch berdasarkan id. Butuh role SUPERADMIN."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Location (Reference Data)",
+      "description": "LocationController (dbo/controller/LocationController.java), plain @RestController dengan @RequestMapping(\"dbo\") -> prefix /api/v1/dbo. Endpoint /location/provinces|regencies|districts|villages permitAll (data referensi publik untuk alur registrasi nasabah pre-login), tapi GET /api/v1/dbo/branch di controller yang sama TIDAK permitAll (perlu JWT valid). Semua endpoint di folder ini tetap butuh header HMAC karena prefix /api/v1/dbo tidak ada di daftar exempt HmacSignatureFilter.",
+      "item": [
+        {
+          "name": "Get All Provinces",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dbo/location/provinces?search=Jawa",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dbo",
+                "location",
+                "provinces"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Jawa",
+                  "description": "Filter nama provinsi"
+                }
+              ]
+            },
+            "description": "Ambil daftar provinsi (data referensi). Public/tanpa JWT (permitAll), TAPI tetap butuh header HMAC (X-Signature/X-Timestamp/X-Client-Type) karena path ini tidak masuk daftar exempt HmacSignatureFilter.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Regencies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dbo/location/regencies?provinceId=1&name=Bandung",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dbo",
+                "location",
+                "regencies"
+              ],
+              "query": [
+                {
+                  "key": "provinceId",
+                  "value": "1",
+                  "description": "ID provinsi"
+                },
+                {
+                  "key": "name",
+                  "value": "Bandung",
+                  "description": "Filter nama regency"
+                }
+              ]
+            },
+            "description": "Ambil daftar kabupaten/kota berdasarkan provinceId. Public/tanpa JWT (permitAll), tetap butuh header HMAC.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Districts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dbo/location/districts?regenciesId=1&name=Coblong",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dbo",
+                "location",
+                "districts"
+              ],
+              "query": [
+                {
+                  "key": "regenciesId",
+                  "value": "1",
+                  "description": "ID kabupaten/kota"
+                },
+                {
+                  "key": "name",
+                  "value": "Coblong",
+                  "description": "Filter nama district"
+                }
+              ]
+            },
+            "description": "Ambil daftar kecamatan berdasarkan regenciesId. Public/tanpa JWT (permitAll), tetap butuh header HMAC.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Villages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dbo/location/villages?districtsId=1&name=Dago",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dbo",
+                "location",
+                "villages"
+              ],
+              "query": [
+                {
+                  "key": "districtsId",
+                  "value": "1",
+                  "description": "ID kecamatan"
+                },
+                {
+                  "key": "name",
+                  "value": "Dago",
+                  "description": "Filter nama village"
+                }
+              ]
+            },
+            "description": "Ambil daftar kelurahan/desa berdasarkan districtsId. Public/tanpa JWT (permitAll), tetap butuh header HMAC.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Branch (via Location path)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/dbo/branch?page=0&size=10&name=Jakarta&villageId=1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "dbo",
+                "branch"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0",
+                  "description": "Nomor halaman, mulai dari 0"
+                },
+                {
+                  "key": "size",
+                  "value": "10",
+                  "description": "Jumlah data per halaman"
+                },
+                {
+                  "key": "name",
+                  "value": "Jakarta",
+                  "description": "Filter nama branch"
+                },
+                {
+                  "key": "villageId",
+                  "value": "1",
+                  "description": "Filter berdasarkan village"
+                }
+              ]
+            },
+            "description": "Duplikat GET /api/v1/admin/branch tapi lewat prefix /api/v1/dbo (LocationController), TIDAK permitAll (perlu JWT valid, role bebas) dan tetap butuh header HMAC."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Location Tracking",
+      "description": "LocationTrackingController (geo/controller/LocationTrackingController.java), @NasabahAnnotation -> prefix /api/v1/nasabah/location. Consent & pengiriman titik lokasi (ping) dari device nasabah.",
+      "item": [
+        {
+          "name": "Get Consent",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/location/consent",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "location",
+                "consent"
+              ]
+            },
+            "description": "Ambil status consent tracking lokasi nasabah yang sedang login. Butuh role NASABAH."
+          },
+          "response": []
+        },
+        {
+          "name": "Set Consent",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/location/consent",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "location",
+                "consent"
+              ]
+            },
+            "description": "Ubah status consent tracking lokasi (opt-in/opt-out). Butuh role NASABAH.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"consent\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Submit Location Ping",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/location/pings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "location",
+                "pings"
+              ]
+            },
+            "description": "Kirim satu titik lokasi (ping) hasil tracking device nasabah. Butuh role NASABAH.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"latitude\": -6.2,\n  \"longitude\": 106.816666,\n  \"accuracyMeters\": 15.5,\n  \"capturedAt\": \"2026-09-21T10:30:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Log Location Failure",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/nasabah/location/failure-log",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nasabah",
+                "location",
+                "failure-log"
+              ]
+            },
+            "description": "Catat kegagalan pengambilan lokasi di device (mis. GPS permission ditolak). Butuh role NASABAH.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"GPS permission denied\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Routine",
+      "description": "RoutineController (geo/controller/RoutineController.java), @InternalAnnotation -> prefix /api/v1/internal/geo/routine. Sisi baca (read-only) untuk Checker/BM/Superadmin dari fitur location-routine.",
+      "item": [
+        {
+          "name": "Get Routine Summary",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/internal/geo/routine/:userId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "internal",
+                "geo",
+                "routine",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "1",
+                  "description": "ID user (nasabah)"
+                }
+              ]
+            },
+            "description": "Ambil ringkasan rutinitas lokasi (hasil inferensi) seorang nasabah berdasarkan userId, dilihat Checker/BM/Superadmin. Butuh Authorization: Bearer token."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

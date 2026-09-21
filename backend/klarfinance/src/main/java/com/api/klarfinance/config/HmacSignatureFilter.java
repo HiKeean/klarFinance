@@ -1,7 +1,6 @@
 package com.api.klarfinance.config;
 
-import com.api.klarfinance.auth.repository.ApiParameterRepository;
-import com.api.klarfinance.dbo.model.ApiParameter;
+import com.api.klarfinance.auth.service.ApiParameterService;
 import com.api.klarfinance.global.ApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -18,7 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -27,7 +25,7 @@ public class HmacSignatureFilter extends OncePerRequestFilter {
 
     private final HmacService hmacService;
     private final ObjectMapper objectMapper;
-    private final ApiParameterRepository apiParameterRepository;
+    private final ApiParameterService apiParameterService;
 
     @Override
     protected void doFilterInternal(
@@ -69,13 +67,12 @@ public class HmacSignatureFilter extends OncePerRequestFilter {
             return;
         }
 
-        Optional<ApiParameter> apiParameterOpt = apiParameterRepository.findByClientType(clientType);
-        if (apiParameterOpt.isEmpty()) {
+        String apiKey = apiParameterService.getApiKey(clientType);
+        if (apiKey == null) {
             log.error("API Key cannot be found for client type: {}", clientType);
             sendErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED, "Invalid Client Type or API Key cannot be found");
             return;
         }
-        String apiKey = apiParameterOpt.get().getApiKey();
 
         long currentMilli = Instant.now().toEpochMilli();
         long clientTime;

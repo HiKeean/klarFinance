@@ -2,6 +2,7 @@ package com.api.klarfinance.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import jakarta.transaction.Transactional;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import com.api.klarfinance.auth.dto.response.GetAllRoleMenu;
 import com.api.klarfinance.auth.dto.response.GetAllSuperadminResponse;
 import com.api.klarfinance.auth.model.*;
 import com.api.klarfinance.auth.repository.*;
+import com.api.klarfinance.config.CacheConfig;
 import com.api.klarfinance.config.JwtService;
 import com.api.klarfinance.dbo.model.Branch;
 import com.api.klarfinance.dbo.repository.BranchRepository;
@@ -140,6 +142,7 @@ public class AuthenticationSuperadminService {
         menuRepository.save(menu);
     }
 
+    @CacheEvict(value = CacheConfig.ROLE_MENUS, allEntries = true)
     @Transactional
     public void addRoleMenu(AddRoleMenuRequest request, String identity) {
         User user = userRepository.findByIdentity(identity).orElseThrow(()->new RuntimeException("User not found"));
@@ -167,6 +170,7 @@ public class AuthenticationSuperadminService {
         roleRepository.save(role);
     }
 
+    @CacheEvict(value = CacheConfig.ROLE_MENUS, allEntries = true)
     @Transactional
     public void deleteRole(Integer roleId) {
         Role role = roleRepository.findById(roleId)
@@ -175,6 +179,7 @@ public class AuthenticationSuperadminService {
         roleRepository.delete(role);
     }
 
+    @CacheEvict(value = CacheConfig.ROLE_MENUS, allEntries = true)
     @Transactional
     public void editMenu(Integer menuId, MenuRequest request, String identity) {
         User user = findUser(identity);
@@ -189,6 +194,7 @@ public class AuthenticationSuperadminService {
         menuRepository.save(menu);
     }
 
+    @CacheEvict(value = CacheConfig.ROLE_MENUS, allEntries = true)
     @Transactional
     public void deleteMenu(Integer menuId) {
         Menu menu = menuRepository.findById(menuId)
@@ -197,6 +203,7 @@ public class AuthenticationSuperadminService {
         menuRepository.delete(menu);
     }
 
+    @CacheEvict(value = CacheConfig.ROLE_MENUS, allEntries = true)
     @Transactional
     public void editRoleMenu(Integer roleMenuId, AddRoleMenuRequest request, String identity) {
         User user = findUser(identity);
@@ -212,6 +219,7 @@ public class AuthenticationSuperadminService {
         roleMenuRepository.save(roleMenu);
     }
 
+    @CacheEvict(value = CacheConfig.ROLE_MENUS, allEntries = true)
     @Transactional
     public void deleteRoleMenu(Integer roleMenuId) {
         RoleMenu roleMenu = roleMenuRepository.findById(roleMenuId)
