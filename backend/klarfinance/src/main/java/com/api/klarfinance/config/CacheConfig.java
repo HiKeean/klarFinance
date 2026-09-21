@@ -22,16 +22,6 @@ import java.net.URI;
 import java.time.Duration;
 import java.util.Map;
 
-/**
- * Backs Spring's @Cacheable with the SECOND Redis instance (Upstash, same one as
- * LocationFailureLogRedisConfig), NOT the main app.redis.* one that holds OTP/session/Checker-assignment state.
- *
- * The connection factory is deliberately NOT exposed as a bean: a second RedisConnectionFactory bean
- * would be ambiguous for the auto-configured StringRedisTemplate that the OTP/session code relies on.
- * It is created inside cacheManager() and closed in destroy().
- *
- * Value serialization/TTL/key prefix come from the shared RedisCacheConfiguration bean in RedisConfig.
- */
 @Slf4j
 @Configuration
 public class CacheConfig implements CachingConfigurer, DisposableBean {
@@ -43,7 +33,6 @@ public class CacheConfig implements CachingConfigurer, DisposableBean {
     public static final String API_KEYS = "api-keys";
     public static final String ROLE_MENUS = "role-menus";
 
-    /** Short so a slow/unreachable cache never stalls a request (the HMAC filter reads the cache on every call). */
     private static final Duration COMMAND_TIMEOUT = Duration.ofSeconds(2);
 
     private LettuceConnectionFactory cacheConnectionFactory;
@@ -51,7 +40,6 @@ public class CacheConfig implements CachingConfigurer, DisposableBean {
     @Bean
     public CacheManager cacheManager(@Value("${app.cache.redis-url}") String redisUrl,
                                      RedisCacheConfiguration defaults) {
-        // rediss://user:password@host:port (same URL format as app.location-failure-log.redis-url)
         URI uri = URI.create(redisUrl);
         RedisStandaloneConfiguration standalone = new RedisStandaloneConfiguration(uri.getHost(), uri.getPort() == -1 ? 6379 : uri.getPort());
         if (uri.getUserInfo() != null) {
@@ -68,7 +56,6 @@ public class CacheConfig implements CachingConfigurer, DisposableBean {
             client.useSsl();
         }
 
-        // Connects lazily on first use, so an unreachable cache Redis can't break app startup.
         cacheConnectionFactory = new LettuceConnectionFactory(standalone, client.build());
         cacheConnectionFactory.afterPropertiesSet();
 
@@ -79,11 +66,8 @@ public class CacheConfig implements CachingConfigurer, DisposableBean {
                 DISTRICTS, defaults.entryTtl(oneDay),
                 VILLAGES, defaults.entryTtl(oneDay),
                 API_KEYS, defaults.entryTtl(Duration.ofMinutes(10))
-                // ROLE_MENUS uses the default TTL; it's also evicted explicitly on every RBAC change.
         );
 
-        // SCAN (not KEYS) for allEntries eviction; transactionAware() defers put/evict until the surrounding
-        // @Transactional commits, so a rollback can't leave the cache out of sync with the DB.
         RedisCacheWriter writer = RedisCacheWriter.nonLockingRedisCacheWriter(cacheConnectionFactory, BatchStrategies.scan(100));
         return RedisCacheManager.builder(writer)
                 .cacheDefaults(defaults)
@@ -92,10 +76,6 @@ public class CacheConfig implements CachingConfigurer, DisposableBean {
                 .build();
     }
 
-    /**
-     * Cache is an optimization, never a dependency: if the cache Redis errors or times out, log and fall
-     * through to the real method (i.e. the DB) instead of failing the request.
-     */
     @Override
     public CacheErrorHandler errorHandler() {
         return new CacheErrorHandler() {

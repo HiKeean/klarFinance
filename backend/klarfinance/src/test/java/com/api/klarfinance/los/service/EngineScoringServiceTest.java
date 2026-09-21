@@ -15,7 +15,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,9 +54,9 @@ class EngineScoringServiceTest {
     void runScoring_vidaUnclear_retakePhotoDoesNotGenerateApplicationCodeOrAssignChecker() {
         User user = user();
         CustomerDetails details = CustomerDetails.builder().user(user).build();
-        when(mockVidaService.check(details, BigDecimal.TEN)).thenReturn(new VidaResult(VidaResult.UNCLEAR, false, null));
+        when(mockVidaService.check(details)).thenReturn(new VidaResult(VidaResult.UNCLEAR, false, null));
 
-        EngineScoringResult result = service.runScoring(user, details, BigDecimal.TEN, null, null);
+        EngineScoringResult result = service.runScoring(user, details, null, null);
 
         assertThat(result.status()).isEqualTo(EngineStatus.RETAKE_PHOTO);
         verify(applicationCodeGenerator, never()).generate();
@@ -69,9 +68,9 @@ class EngineScoringServiceTest {
     void runScoring_vidaRejected_autoRejectedNeverReachesChecker() {
         User user = user();
         CustomerDetails details = CustomerDetails.builder().user(user).build();
-        when(mockVidaService.check(any(), any())).thenReturn(new VidaResult(VidaResult.REJECTED, false, null));
+        when(mockVidaService.check(any())).thenReturn(new VidaResult(VidaResult.REJECTED, false, null));
 
-        EngineScoringResult result = service.runScoring(user, details, BigDecimal.TEN, null, null);
+        EngineScoringResult result = service.runScoring(user, details, null, null);
 
         assertThat(result.status()).isEqualTo(EngineStatus.REJECTED);
         verify(checkerAssignmentService, never()).assignNewApplication(any());
@@ -81,12 +80,12 @@ class EngineScoringServiceTest {
     void runScoring_vidaApproved_generatesApplicationCodeAndAssignsChecker() {
         User user = user();
         CustomerDetails details = CustomerDetails.builder().user(user).build();
-        when(mockVidaService.check(any(), any())).thenReturn(new VidaResult(VidaResult.APPROVED, true, "5000000"));
+        when(mockVidaService.check(any())).thenReturn(new VidaResult(VidaResult.APPROVED, true, "5000000"));
         PefindoInquiry inquiry = PefindoInquiry.builder().colStatus(1).score("742").build();
         when(mockPefindoService.check()).thenReturn(new PefindoResult(inquiry));
         when(applicationCodeGenerator.generate()).thenReturn("2609100" + "1");
 
-        EngineScoringResult result = service.runScoring(user, details, BigDecimal.TEN,
+        EngineScoringResult result = service.runScoring(user, details,
                 List.of("Kredivo"), List.of("BCA"));
 
         assertThat(result.status()).isEqualTo(EngineStatus.PENDING_CHECKER);
@@ -99,6 +98,8 @@ class EngineScoringServiceTest {
         assertThat(saved.getDetectedPinjolApps()).isEqualTo("Kredivo");
         assertThat(saved.getDetectedBankApps()).isEqualTo("BCA");
         assertThat(saved.getEngineScore()).isEqualTo(742);
+        // income comes from Vida's verified figure, not from the client
+        assertThat(saved.getIncomeAmount()).isEqualByComparingTo("5000000");
 
         verify(checkerAssignmentService).assignNewApplication(saved);
         verify(applicationLogRepository).save(any(ApplicationLog.class));
@@ -108,9 +109,9 @@ class EngineScoringServiceTest {
     void runScoring_nullAppLists_joinedAsNull() {
         User user = user();
         CustomerDetails details = CustomerDetails.builder().user(user).build();
-        when(mockVidaService.check(any(), any())).thenReturn(new VidaResult(VidaResult.UNCLEAR, false, null));
+        when(mockVidaService.check(any())).thenReturn(new VidaResult(VidaResult.UNCLEAR, false, null));
 
-        service.runScoring(user, details, BigDecimal.TEN, null, null);
+        service.runScoring(user, details, null, null);
 
         ArgumentCaptor<LimitApplication> captor = ArgumentCaptor.forClass(LimitApplication.class);
         verify(limitApplicationRepository).save(captor.capture());

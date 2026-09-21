@@ -128,7 +128,7 @@ public class AuthService {
         redisTemplate.delete(verifiedKey);
 
         EngineScoringResult scoringResult = engineScoringService.runScoring(
-                user, details, request.getClaimedIncome(), request.getPinjolApps(), request.getBankApps());
+                user, details, request.getPinjolApps(), request.getBankApps());
 
         log.info("Customer registered and scored: phone={}, status={}", normalizedPhone, scoringResult.status());
 

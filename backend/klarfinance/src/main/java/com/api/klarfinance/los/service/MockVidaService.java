@@ -20,7 +20,7 @@ public class MockVidaService {
 
     private final VidaRepository vidaRepository;
 
-    public VidaResult check(CustomerDetails details, BigDecimal claimedIncome) {
+    public VidaResult check(CustomerDetails details) {
         int roll = RANDOM.nextInt(100);
         String status;
         if (roll < 10) {
@@ -33,7 +33,7 @@ public class MockVidaService {
 
         boolean employed = status.equals(VidaResult.APPROVED) && RANDOM.nextInt(100) < 85;
         String verifiedIncome = status.equals(VidaResult.APPROVED)
-                ? verifyIncome(claimedIncome)
+                ? mockVerifiedIncome()
                 : null;
         Integer faceScore = status.equals(VidaResult.UNCLEAR) ? 30 + RANDOM.nextInt(20) : 70 + RANDOM.nextInt(30);
 
@@ -54,9 +54,9 @@ public class MockVidaService {
         return new VidaResult(status, employed, verifiedIncome);
     }
 
-    private String verifyIncome(BigDecimal claimedIncome) {
-        BigDecimal base = claimedIncome == null ? BigDecimal.valueOf(4_000_000) : claimedIncome;
-        double variance = 0.8 + RANDOM.nextDouble() * 0.4;
-        return base.multiply(BigDecimal.valueOf(variance)).setScale(0, java.math.RoundingMode.HALF_UP).toPlainString();
+    /** Income comes only from Vida (never from the client): random Rp3jt-Rp15jt, rounded to Rp100rb. */
+    private String mockVerifiedIncome() {
+        long hundredThousands = 30 + RANDOM.nextInt(121);
+        return BigDecimal.valueOf(hundredThousands * 100_000L).toPlainString();
     }
 }

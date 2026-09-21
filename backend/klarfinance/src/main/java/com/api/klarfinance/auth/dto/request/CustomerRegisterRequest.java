@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,7 +32,6 @@ public class CustomerRegisterRequest {
     /** Kode referral punya orang lain, opsional - lihat ReferralService.onCustomerRegistered. */
     private String referralCode;
 
-    private BigDecimal claimedIncome;
     private List<String> pinjolApps;
     private List<String> bankApps;
 

@@ -297,11 +297,6 @@
                   "type": "text"
                 },
                 {
-                  "key": "claimedIncome",
-                  "value": "5000000",
-                  "type": "text"
-                },
-                {
                   "key": "pinjolApps",
                   "value": "com.example.pinjolA",
                   "type": "text"
