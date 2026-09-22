@@ -1,59 +1,66 @@
-# CheckerBm
+# checker-bm
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.6.
+Web dashboard untuk **Checker** dan **BM (Branch Manager)** — antarmuka internal untuk
+verifikasi pengajuan (KYC review) dan persetujuan limit/pinjaman nasabah KlarFinance.
 
-## Development server
+## Tech Stack
 
-To start a local development server, run:
+- **Angular 22** (standalone components), SSR-ready (`serve:ssr:checker-bm`)
+- **Angular CDK**
+- REST + JWT ke [KlarFinance API](../backend/klarfinance/README.md)
+- WebSocket (WSS) untuk realtime assignment/status checker
+
+## Peran dalam sistem
+
+Salah satu dari tiga klien yang bicara ke satu backend Spring Boot yang sama (lihat
+[backend README](../backend/klarfinance/README.md)):
+
+- **Auth**: JWT access + refresh token, disimpan lewat `core/interceptors`.
+- **Realtime**: koneksi WebSocket ke `{baseUrl}/ws` (lihat `checker-realtime.service.ts`) untuk
+  status assignment checker — satu pengajuan cuma dipegang satu checker dalam satu waktu
+  (lock 2 jam, event-driven di backend).
+- **Fitur utama**: `features/auth`, `features/dashboard`, `features/inquiry` (cek/verifikasi
+  pengajuan), `features/approval` (approval BM).
+
+## Getting Started
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Buka `http://localhost:4200/`.
 
-## Code scaffolding
+### Konfigurasi backend
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Base URL API diatur di `src/environments/environment.ts` / `environment.development.ts`
+(`environment.api.baseUrl`). Untuk dev lokal, arahkan ke instance backend lokal
+(`http://localhost:8080/api/v1`); default production mengarah ke
+`https://api.klarfinance.hizkialb.xyz/api/v1`.
 
-```bash
-ng generate component component-name
+## Struktur
+
+```
+src/app/
+  core/         # config, guards, interceptors, layouts, services (termasuk realtime WS)
+  features/
+    auth/       # login
+    dashboard/
+    inquiry/    # verifikasi pengajuan (checker)
+    approval/   # approval limit (BM)
+  shared/       # components & models bersama
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Scripts
 
-```bash
-ng generate --help
-```
+| Command | Fungsi |
+|---|---|
+| `ng serve` | dev server, hot reload |
+| `ng build` | build production ke `dist/` |
+| `ng test` | unit test (Vitest) |
+| `npm run serve:ssr:checker-bm` | jalankan build SSR (`dist/checker-bm/server/server.mjs`) |
 
-## Building
+## Deploy
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+`.github/workflows/frontend.yml` — build lewat Vercel CLI, deploy preview otomatis tiap PR,
+production tiap push ke `main`.

@@ -51,8 +51,6 @@ public class EngineScoringService {
 
         EngineDecision decision;
         if (!vidaResult.isApproved()) {
-            // UNCLEAR -> RETAKE_PHOTO, REJECTED -> EngineStatus.REJECTED (lihat EngineScoringDomain) -
-            // keduanya hard stop, gak lewat Pefindo karena identitasnya sendiri belum lolos.
             decision = engineScoringDomain.decide(vidaResult, null, 0);
         } else {
             PefindoResult pefindoResult = mockPefindoService.check();
