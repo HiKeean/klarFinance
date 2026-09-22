@@ -1,11 +1,9 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { LoginUseCase } from '../../../application/login.use-case';
 import { PasswordResetApiService } from '../../../infrastructure/password-reset-api.service';
-
-const FAILED_ATTEMPTS_BEFORE_RESET_OFFER = 3;
 
 @Component({
   selector: 'app-login',
@@ -22,11 +20,6 @@ export class LoginPage {
   protected readonly loading = signal(false);
   protected readonly errorMessage = signal('');
 
-  /** Reset ke 0 begitu identity diganti (kasus umum: user salah password buat akun A, lalu
-   * ganti pikiran mau coba akun B - gak seharusnya kebawa hitungan lama). */
-  protected readonly failedAttempts = signal(0);
-  protected readonly showResetOffer = computed(() => this.failedAttempts() >= FAILED_ATTEMPTS_BEFORE_RESET_OFFER);
-
   protected readonly showResetForm = signal(false);
   protected resetIdentity = '';
   protected readonly resetSubmitting = signal(false);
@@ -42,7 +35,6 @@ export class LoginPage {
     } catch (err: any) {
       const errorMsg = err.message || 'Identity atau password salah. Coba lagi.';
       this.errorMessage.set(errorMsg);
-      this.failedAttempts.update((count) => count + 1);
     } finally {
       this.loading.set(false);
     }
@@ -50,7 +42,6 @@ export class LoginPage {
 
   protected onIdentityChange(value: string) {
     this.identity = value;
-    this.failedAttempts.set(0);
     this.showResetForm.set(false);
   }
 
@@ -74,7 +65,6 @@ export class LoginPage {
       this.resetSuccessMessage.set(
         'Permintaan reset password terkirim. Admin akan memproses dan mengirimkan password baru lewat WhatsApp.'
       );
-      this.failedAttempts.set(0);
     } catch (err: any) {
       this.resetErrorMessage.set(err.message || 'Gagal mengirim permintaan reset password. Coba lagi.');
     } finally {

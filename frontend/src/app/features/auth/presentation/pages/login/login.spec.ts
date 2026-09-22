@@ -37,11 +37,10 @@ describe('LoginPage', () => {
     expect((page as any).loading()).toBe(false);
   });
 
-  it('[negative] submit failure sets errorMessage and increments failedAttempts', async () => {
+  it('[negative] submit failure sets errorMessage', async () => {
     loginUseCase.execute.mockReturnValue(throwError(() => new Error('Identity atau password salah.')));
     await (page as any).submit();
     expect((page as any).errorMessage()).toBe('Identity atau password salah.');
-    expect((page as any).failedAttempts()).toBe(1);
     expect((page as any).loading()).toBe(false);
   });
 
@@ -51,23 +50,13 @@ describe('LoginPage', () => {
     expect((page as any).errorMessage()).toBe('Identity atau password salah. Coba lagi.');
   });
 
-  it('[positive] showResetOffer flips true after 3 failed attempts', async () => {
-    loginUseCase.execute.mockReturnValue(throwError(() => new Error('salah')));
-    await (page as any).submit();
-    await (page as any).submit();
-    expect((page as any).showResetOffer()).toBe(false);
-    await (page as any).submit();
-    expect((page as any).showResetOffer()).toBe(true);
-  });
-
-  it('[positive] onIdentityChange resets failedAttempts and closes the reset form', async () => {
+  it('[positive] onIdentityChange closes the reset form', async () => {
     loginUseCase.execute.mockReturnValue(throwError(() => new Error('salah')));
     await (page as any).submit();
     (page as any).showResetForm.set(true);
 
     (page as any).onIdentityChange('newuser');
     expect((page as any).identity).toBe('newuser');
-    expect((page as any).failedAttempts()).toBe(0);
     expect((page as any).showResetForm()).toBe(false);
   });
 
@@ -84,14 +73,12 @@ describe('LoginPage', () => {
     expect((page as any).showResetForm()).toBe(false);
   });
 
-  it('[positive] submitResetRequest success sets resetSuccessMessage and resets failedAttempts', async () => {
+  it('[positive] submitResetRequest success sets resetSuccessMessage', async () => {
     passwordResetApi.submit.mockReturnValue(of(undefined));
-    (page as any).failedAttempts.set(3);
     (page as any).resetIdentity = 'user1';
     await (page as any).submitResetRequest();
     expect(passwordResetApi.submit).toHaveBeenCalledWith('user1');
     expect((page as any).resetSuccessMessage()).toContain('Permintaan reset password terkirim');
-    expect((page as any).failedAttempts()).toBe(0);
     expect((page as any).resetSubmitting()).toBe(false);
   });
 

@@ -14,7 +14,7 @@
       <input id="password" name="password" type="password" [(ngModel)]="password" placeholder="Masukkan password" required autocomplete="current-password" />
 
       @if (errorMessage()) { <p class="error-message" role="alert">{{ errorMessage() }}</p> }<button type="submit" [disabled]="loginForm.invalid || loading()">{{ loading() ? 'Memproses...' : 'Masuk' }}</button>
-      @if (showResetOffer() && !showResetForm()) {
+      @if (!showResetForm()) {
         <button type="button" class="secondary-button" (click)="openResetForm()">Lupa Password?</button>
       }
     </form>
