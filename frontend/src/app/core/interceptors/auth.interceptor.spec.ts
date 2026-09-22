@@ -46,6 +46,15 @@ describe('authInterceptor', () => {
     expect(authState.getAccessToken).not.toHaveBeenCalled();
   });
 
+  it('[positive] bypasses auth entirely for the password reset request endpoint', async () => {
+    const result$ = firstValueFrom(http.post('/auth/password-reset-requests', {}));
+    const req = httpMock.expectOne('/auth/password-reset-requests');
+    expect(req.request.headers.has('Authorization')).toBe(false);
+    req.flush({ ok: true });
+    await result$;
+    expect(authState.getAccessToken).not.toHaveBeenCalled();
+  });
+
   it('[positive] attaches a Bearer token when the session is valid', async () => {
     authState.getAccessToken.mockResolvedValue('abc123');
     authState.isSessionValid.mockResolvedValue(true);

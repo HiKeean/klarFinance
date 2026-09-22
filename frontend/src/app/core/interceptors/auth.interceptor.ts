@@ -8,7 +8,7 @@ import { AuthStateService } from '../services/auth-state.service';
 export const authInterceptor: HttpInterceptorFn = (request, next) => {
   const authState = inject(AuthStateService);
   const router = inject(Router);
-  if (request.url.includes('/auth/login')) return next(request);
+  if (request.url.includes('/auth/login') || request.url.includes('/auth/password-reset-requests')) return next(request);
   return from(authState.getAccessToken()).pipe(
     switchMap(async (token) => {
       if (!token || !(await authState.isSessionValid())) {
