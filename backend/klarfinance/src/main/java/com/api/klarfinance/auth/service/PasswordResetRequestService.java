@@ -16,7 +16,6 @@ import com.api.klarfinance.auth.repository.PasswordResetRequestRepository;
 import com.api.klarfinance.auth.repository.UserRepository;
 
 import java.security.Principal;
-import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
@@ -25,17 +24,15 @@ import java.util.Locale;
  * Alur "Lupa Password" - dipicu dari tombol reset password di halaman login (frontend
  * Checker&BM, muncul setelah 3x salah password, lihat project knowledge
  * "password-reset-request"). Nasabah/staff submit identity -> masuk antrean PENDING di webadmin
- * -> Superadmin approve/reject. Approve = generate password baru random, jadi password akun yang
- * baru, dikirim via WhatsApp (KirimiWhatsappService) - user login pakai password baru itu.
+ * -> Superadmin approve/reject. Approve = password akun di-set ke password default (RESET_PASSWORD),
+ * dikirim via WhatsApp (KirimiWhatsappService) - user login pakai password itu.
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PasswordResetRequestService {
 
-    private static final String PASSWORD_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789"; // no 0/O/1/l/I - avoid look-alikes
-    private static final int PASSWORD_LENGTH = 10;
-    private static final SecureRandom RANDOM = new SecureRandom();
+    private static final String RESET_PASSWORD = "Test123!";
 
     private final PasswordResetRequestRepository passwordResetRequestRepository;
     private final UserRepository userRepository;
@@ -103,7 +100,7 @@ public class PasswordResetRequestService {
             throw new IllegalStateException("Nomor HP staff kosong - tidak bisa kirim WhatsApp");
         }
 
-        String newPassword = generateRandomPassword();
+        String newPassword = RESET_PASSWORD;
         targetUser.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(targetUser);
 
@@ -134,13 +131,5 @@ public class PasswordResetRequestService {
                 .decidedBy(request.getDecidedBy() != null ? request.getDecidedBy().getIdentity() : null)
                 .reason(request.getReason())
                 .build();
-    }
-
-    private String generateRandomPassword() {
-        StringBuilder sb = new StringBuilder(PASSWORD_LENGTH);
-        for (int i = 0; i < PASSWORD_LENGTH; i++) {
-            sb.append(PASSWORD_CHARS.charAt(RANDOM.nextInt(PASSWORD_CHARS.length())));
-        }
-        return sb.toString();
     }
 }
