@@ -144,6 +144,25 @@ class CheckerAssignmentServiceTest {
     }
 
     @Test
+    void handleOfferExpiry_reofferedToSameCheckerWhenHeIsTheOnlyOneOnline() {
+        when(redis.opsForValue()).thenReturn(valueOperations);
+        when(valueOperations.get("los:checker:owner:5")).thenReturn("checker1");
+        when(redis.hasKey("los:checker:lock:5")).thenReturn(false);
+        LimitApplication pending = LimitApplication.builder().id(5).status(EngineStatus.PENDING_CHECKER).build();
+        when(limitApplicationRepository.findById(5)).thenReturn(Optional.of(pending));
+        when(redis.opsForSet()).thenReturn(setOperations);
+        when(setOperations.members("los:checker:online")).thenReturn(Set.of("checker1"));
+        when(setOperations.isMember("los:checker:online", "checker1")).thenReturn(true);
+        when(redis.hasKey("los:checker:current:checker1")).thenReturn(false);
+        when(simpUserRegistry.getUser(anyString())).thenReturn(mock(SimpUser.class));
+
+        service.handleOfferExpiry(5);
+
+        verify(valueOperations).set(eq("los:checker:current:checker1"), eq("5"));
+        verify(valueOperations).set(eq("los:checker:owner:5"), eq("checker1"));
+    }
+
+    @Test
     void startReviewIfNeeded_setsLockOnlyOnce() {
         when(redis.opsForValue()).thenReturn(valueOperations);
         when(valueOperations.setIfAbsent("los:checker:lock:5", "checker1", CheckerAssignmentService.LOCK_TTL))

@@ -176,6 +176,11 @@ public class CheckerAssignmentService {
                 if (isAvailable(identity)) available.add(identity);
             }
         }
+        if (available.isEmpty() && excludeIdentity != null && isAvailable(excludeIdentity)) {
+            // Cuma dia satu-satunya checker online: lempar balik ke dia, daripada aplikasi nyangkut
+            // unassigned (gak ada trigger yang nawarin ulang ke checker yang lagi online & free).
+            available.add(excludeIdentity);
+        }
         if (available.isEmpty()) {
             log.info("Gak ada Checker available buat aplikasi {}, tetap di antrean unassigned", application.getId());
             return;
