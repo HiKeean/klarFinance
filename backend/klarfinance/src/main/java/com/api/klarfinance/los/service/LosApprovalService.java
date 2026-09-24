@@ -255,6 +255,8 @@ public class LosApprovalService {
                 .pinjolAppsCount(pinjolCount)
                 .judolAppsCount(0)
                 .bankingAppsCount(bankCount)
+                .pinjolApps(splitApps(application.getDetectedPinjolApps()))
+                .bankApps(splitApps(application.getDetectedBankApps()))
                 .engineScore(application.getEngineScore())
                 .engineRiskCategory(application.getEngineRiskCategory())
                 .engineRecommendation(application.getEngineRecommendation())
@@ -383,6 +385,11 @@ public class LosApprovalService {
     private int countApps(String joined) {
         if (!StringUtils.hasText(joined)) return 0;
         return joined.split(",").length;
+    }
+
+    private List<String> splitApps(String joined) {
+        if (!StringUtils.hasText(joined)) return List.of();
+        return List.of(joined.split(","));
     }
 
     private String pefindoRiskLabel(Integer colStatus) {

@@ -139,6 +139,16 @@
               <span class="stat-label">Banking Apps</span>
             </div>
           </div>
+          <div class="detail-list compact">
+            <div>
+              <span class="label">Aplikasi Pinjol Terdeteksi</span>
+              <span class="value">{{ d.pinjolAppsCount }} aplikasi{{ d.pinjolApps.length ? ': ' + d.pinjolApps.join(', ') : '' }}</span>
+            </div>
+            <div>
+              <span class="label">Aplikasi Bank Terdeteksi</span>
+              <span class="value">{{ d.bankingAppsCount }} aplikasi{{ d.bankApps.length ? ': ' + d.bankApps.join(', ') : '' }}</span>
+            </div>
+          </div>
         </section>
 
         @if (canDecideStatus()) {

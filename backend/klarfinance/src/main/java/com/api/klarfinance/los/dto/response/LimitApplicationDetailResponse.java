@@ -44,6 +44,8 @@ public class LimitApplicationDetailResponse {
     private Integer pinjolAppsCount;
     private Integer judolAppsCount;
     private Integer bankingAppsCount;
+    private List<String> pinjolApps;
+    private List<String> bankApps;
 
     // Engine Scoring
     private Integer engineScore;

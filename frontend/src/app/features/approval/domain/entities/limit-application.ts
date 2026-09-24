@@ -125,6 +125,8 @@ export interface LimitApplicationDetail {
   pinjolAppsCount: number;
   judolAppsCount: number;
   bankingAppsCount: number;
+  pinjolApps: string[];
+  bankApps: string[];
   engineScore: number | null;
   engineRiskCategory: string | null;
   engineRecommendation: string | null;
