@@ -109,7 +109,8 @@ public class KirimiWhatsappService {
         }
         String normalizedPhone = normalizePhone(phone);
 
-        String message = "OTP : " + otp;
+        String message = "Kode verifikasi KlarFinance kamu: " + otp + "\n"
+                + "Berlaku 5 menit. Jangan bagikan kode ini ke siapa pun, termasuk pihak yang mengaku dari KlarFinance.";
 
         if (Boolean.FALSE.equals(kirimi.getEnabled())) {
             log.info("[KIRIMI DISABLED] OTP buat {} gak dikirim beneran -> {}", normalizedPhone, otp);

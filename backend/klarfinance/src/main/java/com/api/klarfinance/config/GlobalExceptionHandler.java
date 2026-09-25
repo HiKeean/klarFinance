@@ -12,6 +12,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.api.klarfinance.global.ApiResponse;
+import com.api.klarfinance.global.TooManyRequestsException;
 
 import java.util.Map;
 
@@ -24,6 +25,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(OptimisticLockingFailureException.class)
     public ResponseEntity<ApiResponse<Object>> optimisticLockingFailure(OptimisticLockingFailureException e){
         return build(HttpStatus.CONFLICT, "Pembayaran sedang diproses di request lain, silakan coba lagi");
+    }
+
+    @ExceptionHandler(TooManyRequestsException.class)
+    public ResponseEntity<ApiResponse<Object>> tooManyRequests(TooManyRequestsException e){
+        return build(HttpStatus.TOO_MANY_REQUESTS, e.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)

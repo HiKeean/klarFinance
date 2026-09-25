@@ -39,6 +39,15 @@
       <ng-template appTableCell="daysOverdue" let-item>
         {{ item.status === 'Overdue' ? (item.daysOverdue + ' hari') : '-' }}
       </ng-template>
+      <ng-template appTableCell="actions" let-item>
+        @if (item.status !== 'Lunas') {
+          <button class="call-button" type="button" [disabled]="callingLoanId() !== null" (click)="call(item)">
+            {{ callingLoanId() === item.loanId ? 'Memanggil...' : 'Call' }}
+          </button>
+        } @else {
+          <span class="no-action">—</span>
+        }
+      </ng-template>
     </app-table>
 
     <footer class="table-footer">

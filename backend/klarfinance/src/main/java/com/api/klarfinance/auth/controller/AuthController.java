@@ -1,5 +1,6 @@
 package com.api.klarfinance.auth.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.klarfinance.auth.dto.request.CustomerRegisterRequest;
 import com.api.klarfinance.auth.dto.request.PasswordResetRequestDto;
 import com.api.klarfinance.auth.dto.request.RequestOtpRequest;
+import com.api.klarfinance.auth.dto.request.VerifyFirebasePhoneRequest;
 import com.api.klarfinance.auth.dto.request.VerifyOtpRequest;
 import com.api.klarfinance.auth.dto.response.CustomerRegisterResponse;
 import com.api.klarfinance.auth.service.AuthService;
 import com.api.klarfinance.auth.service.PasswordResetRequestService;
 import com.api.klarfinance.global.ApiResponse;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -30,9 +34,27 @@ public class AuthController {
     private final PasswordResetRequestService passwordResetRequestService;
 
     @PostMapping("/request-otp")
-    public ResponseEntity<ApiResponse<Object>> requestOtp(@Valid @RequestBody RequestOtpRequest request) {
-        authService.requestOtp(request.getPhone());
-        return ResponseEntity.ok(ApiResponse.success("OTP sent successfully", null));
+    public ResponseEntity<ApiResponse<Object>> requestOtp(@Valid @RequestBody RequestOtpRequest request,
+                                                          HttpServletRequest httpRequest) {
+        String channel = authService.requestOtp(request.getPhone(), clientIp(httpRequest));
+        return ResponseEntity.ok(ApiResponse.success("OTP sent successfully", Map.of("channel", channel)));
+    }
+
+    @PostMapping("/verify-firebase-phone")
+    public ResponseEntity<ApiResponse<Object>> verifyFirebasePhone(@Valid @RequestBody VerifyFirebasePhoneRequest request) {
+        authService.verifyFirebasePhone(request.getPhone(), request.getIdToken());
+        return ResponseEntity.ok(ApiResponse.success("Phone verified successfully", null));
+    }
+
+    /** Backend di belakang openresty/nginx yang menambahkan IP klien di akhir X-Forwarded-For
+     * ($proxy_add_x_forwarded_for) - ambil entri terakhir, entri awal bisa dipalsukan klien. */
+    private String clientIp(HttpServletRequest request) {
+        String forwarded = request.getHeader("X-Forwarded-For");
+        if (forwarded != null && !forwarded.isBlank()) {
+            String[] parts = forwarded.split(",");
+            return parts[parts.length - 1].trim();
+        }
+        return request.getRemoteAddr();
     }
 
     @PostMapping("/verify-otp")

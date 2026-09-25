@@ -43,7 +43,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/nasabah/auth/login", "/api/v1/nasabah/auth/register",
                                 "/api/v1/internal/auth/login", "/api/v1/internal/auth/register",
                                 "/api/v1/internal/auth/refresh").permitAll()
-                        .requestMatchers("/api/v1/auth/request-otp", "/api/v1/auth/verify-otp", "/api/v1/auth/register",
+                        .requestMatchers("/api/v1/auth/request-otp", "/api/v1/auth/verify-otp", "/api/v1/auth/verify-firebase-phone", "/api/v1/auth/register",
                                 "/api/v1/auth/check-phone", "/api/v1/auth/password-reset-requests").permitAll()
                         // Public reference data (province/regency/district/village) - needed by the
                         // nasabah register flow before the user has a JWT (pre-account, post-OTP).

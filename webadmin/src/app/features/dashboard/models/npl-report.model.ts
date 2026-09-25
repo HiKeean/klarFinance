@@ -36,3 +36,12 @@ export interface BranchLoanPageResponse {
   activeBorrowers: number;
   loans: BranchLoanPage;
 }
+
+/** Hasil tombol Call (demo deskcall) - lihat backend DeskcallCallService. */
+export interface StartCallResponse {
+  callId: string;
+  loanId: number;
+  customerName: string;
+  ringTimeoutSeconds: number;
+  pushSent: boolean;
+}

@@ -1,6 +1,7 @@
 package com.api.klarfinance.global;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.AndroidConfig;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.Map;
 
@@ -56,6 +58,36 @@ public class PushNotificationService {
             FirebaseMessaging.getInstance().send(message);
         } catch (FirebaseMessagingException e) {
             log.warn("Gagal kirim push notification (kemungkinan token stale/uninstalled): {}", e.getMessage());
+        }
+    }
+
+    /**
+     * Data-only message, priority HIGH - dipakai buat panggilan masuk deskcall. Beda dari send():
+     * tanpa blok notification{}, jadi onMessageReceived di app SELALU dipanggil (juga saat app di
+     * background/ditutup) dan app sendiri yang menampilkan layar panggilan. TTL = batas dering,
+     * lewat dari itu FCM membuang pesannya (panggilan basi tidak boleh berdering).
+     *
+     * @return true kalau FCM menerima pesannya (bukan jaminan sampai ke device)
+     */
+    public boolean sendData(String fcmToken, Map<String, String> data, Duration ttl) {
+        if (!StringUtils.hasText(fcmToken) || FirebaseApp.getApps().isEmpty()) {
+            log.info("Skip data push - FCM token kosong atau Firebase belum ke-init (lihat FirebaseConfig)");
+            return false;
+        }
+        Message message = Message.builder()
+                .setToken(fcmToken)
+                .putAllData(data)
+                .setAndroidConfig(AndroidConfig.builder()
+                        .setPriority(AndroidConfig.Priority.HIGH)
+                        .setTtl(ttl.toMillis())
+                        .build())
+                .build();
+        try {
+            FirebaseMessaging.getInstance().send(message);
+            return true;
+        } catch (FirebaseMessagingException e) {
+            log.warn("Gagal kirim data push (kemungkinan token stale/uninstalled): {}", e.getMessage());
+            return false;
         }
     }
 }

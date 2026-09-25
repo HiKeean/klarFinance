@@ -19,6 +19,7 @@ import com.api.klarfinance.dbo.model.Village;
 import com.api.klarfinance.dbo.repository.VillageRepository;
 import com.api.klarfinance.global.AppConstant;
 import com.api.klarfinance.global.PictureService;
+import com.api.klarfinance.global.TooManyRequestsException;
 import com.api.klarfinance.los.service.EngineScoringResult;
 import com.api.klarfinance.los.service.EngineScoringService;
 import com.api.klarfinance.referral.service.ReferralService;
@@ -34,10 +35,19 @@ public class AuthService {
 
     private static final Duration OTP_TTL = Duration.ofMinutes(5);
     private static final Duration OTP_VERIFIED_TTL = Duration.ofMinutes(15);
+    // Batas kirim OTP per nomor - spam request-otp ke banyak nomor/berulang adalah pola yang paling
+    // cepat bikin nomor WhatsApp Kirimi kena banned.
+    private static final Duration OTP_COOLDOWN = Duration.ofSeconds(60);
+    private static final Duration OTP_COUNT_WINDOW = Duration.ofHours(1);
+    private static final long OTP_MAX_PER_WINDOW = 5;
+    // Per IP lebih longgar dari per nomor - banyak nasabah di belakang CGNAT operator seluler berbagi IP.
+    private static final long OTP_MAX_PER_IP_PER_WINDOW = 30;
+    private static final long OTP_MAX_VERIFY_ATTEMPTS = 5;
     private static final SecureRandom RANDOM = new SecureRandom();
 
     private final StringRedisTemplate redisTemplate;
     private final KirimiWhatsappService kirimiWhatsappService;
+    private final FirebasePhoneTokenVerifier firebasePhoneTokenVerifier;
     private final UserRepository userRepository;
     private final CustomerDetailsRepository customerDetailsRepository;
     private final RoleRepository roleRepository;
@@ -47,14 +57,36 @@ public class AuthService {
     private final EngineScoringService engineScoringService;
     private final ReferralService referralService;
 
-    public void requestOtp(String phone) {
+    /** @return channel OTP: {@link AppConstant#OTP_CHANNEL_WHATSAPP}, atau
+     * {@link AppConstant#OTP_CHANNEL_FIREBASE_SMS} kalau kirim WhatsApp gagal (mis. nomor Kirimi kena banned). */
+    public String requestOtp(String phone, String clientIp) {
         String normalizedPhone = normalizePhone(phone);
+        enforceIpRateLimit(clientIp);
+        enforceOtpRateLimit(normalizedPhone);
         String otp = generateOtp();
 
         redisTemplate.opsForValue().set(otpKey(normalizedPhone), otp, OTP_TTL);
-        kirimiWhatsappService.sendOtpMessage(normalizedPhone, otp);
+        redisTemplate.delete(otpAttemptKey(normalizedPhone));
+        try {
+            kirimiWhatsappService.sendOtpMessage(normalizedPhone, otp);
+        } catch (IllegalStateException e) {
+            redisTemplate.delete(otpKey(normalizedPhone));
+            log.warn("OTP WhatsApp gagal untuk {}, fallback ke Firebase SMS", normalizedPhone);
+            return AppConstant.OTP_CHANNEL_FIREBASE_SMS;
+        }
 
         log.info("OTP generated and sent for phone {}", normalizedPhone);
+        return AppConstant.OTP_CHANNEL_WHATSAPP;
+    }
+
+    public void verifyFirebasePhone(String phone, String idToken) {
+        String normalizedPhone = normalizePhone(phone);
+        String tokenPhone = firebasePhoneTokenVerifier.verifyAndGetPhone(idToken).replaceAll("[^0-9]", "");
+        if (!normalizedPhone.equals(tokenPhone)) {
+            throw new IllegalArgumentException("Nomor HP tidak sesuai dengan nomor yang diverifikasi via SMS");
+        }
+        markOtpVerified(normalizedPhone);
+        log.info("Phone verified via Firebase SMS: {}", normalizedPhone);
     }
 
     public void verifyOtp(String phone, String otp) {
@@ -66,12 +98,28 @@ public class AuthService {
             throw new IllegalArgumentException("OTP has expired or was not requested");
         }
         if (!storedOtp.equals(otp)) {
+            String attemptKey = otpAttemptKey(normalizedPhone);
+            Long attempts = redisTemplate.opsForValue().increment(attemptKey);
+            if (attempts != null && attempts == 1) {
+                redisTemplate.expire(attemptKey, OTP_TTL);
+            }
+            if (attempts != null && attempts >= OTP_MAX_VERIFY_ATTEMPTS) {
+                // OTP dibuang biar 6 digit gak bisa di-brute-force selama masa berlaku 5 menit.
+                redisTemplate.delete(key);
+                redisTemplate.delete(attemptKey);
+                throw new IllegalArgumentException("Terlalu banyak percobaan salah, silakan minta OTP baru");
+            }
             throw new IllegalArgumentException("Invalid OTP");
         }
 
         redisTemplate.delete(key);
-        redisTemplate.opsForValue().set(otpVerifiedKey(normalizedPhone), "1", OTP_VERIFIED_TTL);
+        redisTemplate.delete(otpAttemptKey(normalizedPhone));
+        markOtpVerified(normalizedPhone);
         log.info("OTP verified successfully for phone {}", normalizedPhone);
+    }
+
+    private void markOtpVerified(String normalizedPhone) {
+        redisTemplate.opsForValue().set(otpVerifiedKey(normalizedPhone), "1", OTP_VERIFIED_TTL);
     }
 
     public boolean isRegistered(String phone) {
@@ -162,12 +210,49 @@ public class AuthService {
         }
     }
 
+    private void enforceIpRateLimit(String clientIp) {
+        if (clientIp == null || clientIp.isBlank()) {
+            return;
+        }
+        String countKey = AppConstant.OTP_IP_COUNT_KEY_PREFIX + clientIp;
+        Long count = redisTemplate.opsForValue().increment(countKey);
+        if (count != null && count == 1) {
+            redisTemplate.expire(countKey, OTP_COUNT_WINDOW);
+        }
+        if (count != null && count > OTP_MAX_PER_IP_PER_WINDOW) {
+            throw new TooManyRequestsException("Terlalu banyak permintaan OTP, coba lagi dalam 1 jam");
+        }
+    }
+
+    private void enforceOtpRateLimit(String phone) {
+        String cooldownKey = AppConstant.OTP_COOLDOWN_KEY_PREFIX + phone;
+        Boolean cooldownSet = redisTemplate.opsForValue().setIfAbsent(cooldownKey, "1", OTP_COOLDOWN);
+        if (!Boolean.TRUE.equals(cooldownSet)) {
+            Long ttl = redisTemplate.getExpire(cooldownKey);
+            long wait = ttl == null || ttl < 1 ? OTP_COOLDOWN.toSeconds() : ttl;
+            throw new TooManyRequestsException("Tunggu " + wait + " detik sebelum minta OTP lagi");
+        }
+
+        String countKey = AppConstant.OTP_HOURLY_COUNT_KEY_PREFIX + phone;
+        Long count = redisTemplate.opsForValue().increment(countKey);
+        if (count != null && count == 1) {
+            redisTemplate.expire(countKey, OTP_COUNT_WINDOW);
+        }
+        if (count != null && count > OTP_MAX_PER_WINDOW) {
+            throw new TooManyRequestsException("Terlalu banyak permintaan OTP, coba lagi dalam 1 jam");
+        }
+    }
+
     private String generateOtp() {
         return String.format("%06d", RANDOM.nextInt(1_000_000));
     }
 
     private String otpKey(String phone) {
         return AppConstant.OTP_KEY_PREFIX + phone;
+    }
+
+    private String otpAttemptKey(String phone) {
+        return AppConstant.OTP_ATTEMPT_KEY_PREFIX + phone;
     }
 
     private String otpVerifiedKey(String phone) {

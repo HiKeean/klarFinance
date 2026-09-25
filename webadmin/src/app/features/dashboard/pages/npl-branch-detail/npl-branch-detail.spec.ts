@@ -28,7 +28,7 @@ describe('NplBranchDetailPage', () => {
   let nplReportServices: jasmine.SpyObj<NplReportServices>;
 
   function setup(branchId = '7'): void {
-    nplReportServices = jasmine.createSpyObj<NplReportServices>('NplReportServices', ['getReport', 'getBranchLoans']);
+    nplReportServices = jasmine.createSpyObj<NplReportServices>('NplReportServices', ['getReport', 'getBranchLoans', 'startCall']);
     nplReportServices.getBranchLoans.and.returnValue(of({ success: true, statusCode: 200, message: 'OK', data: sampleResponse }));
 
     TestBed.configureTestingModule({
@@ -278,6 +278,44 @@ describe('NplBranchDetailPage', () => {
       expect(component.statusClass('Overdue')).toBe('badge-overdue');
       expect(component.statusClass('Lunas')).toBe('badge-lunas');
       expect(component.statusClass('Current')).toBe('badge-current');
+    });
+  });
+
+  describe('call button (demo deskcall)', () => {
+    beforeEach(() => fixture.detectChanges());
+
+    it('[positive] starts a call for the loan after confirmation and reports ringing', () => {
+      spyOn(window, 'confirm').and.returnValue(true);
+      const alertSpy = spyOn(window, 'alert');
+      nplReportServices.startCall.and.returnValue(of({
+        success: true, statusCode: 200, message: 'OK',
+        data: { callId: 'c-1', loanId: 1, customerName: 'Budi', ringTimeoutSeconds: 45, pushSent: true }
+      }));
+
+      component.call(sampleLoan);
+
+      expect(nplReportServices.startCall).toHaveBeenCalledWith(1);
+      expect(alertSpy).toHaveBeenCalledWith(jasmine.stringContaining('sedang berdering'));
+      expect(component.callingLoanId()).toBeNull();
+    });
+
+    it('[negative] does nothing when the confirmation is cancelled', () => {
+      spyOn(window, 'confirm').and.returnValue(false);
+
+      component.call(sampleLoan);
+
+      expect(nplReportServices.startCall).not.toHaveBeenCalled();
+    });
+
+    it('[negative] shows the backend message when the call is rejected', () => {
+      spyOn(window, 'confirm').and.returnValue(true);
+      const alertSpy = spyOn(window, 'alert');
+      nplReportServices.startCall.and.returnValue(throwError(() => new Error('FCM token kosong')));
+
+      component.call(sampleLoan);
+
+      expect(alertSpy).toHaveBeenCalledWith('FCM token kosong');
+      expect(component.callingLoanId()).toBeNull();
     });
   });
 });

@@ -39,12 +39,14 @@ export class NplBranchDetailPage implements OnInit {
   readonly isLoading = signal(false);
   readonly errorMessage = signal('');
   readonly searchTerm = signal('');
+  readonly callingLoanId = signal<number | null>(null);
 
   readonly columns: TableColumn<BranchLoanDetailItem>[] = [
-    { key: 'nasabahName', header: 'Nasabah', width: '35%' },
-    { key: 'loanAmount', header: 'Nominal Pinjaman', width: '25%' },
-    { key: 'status', header: 'Status', width: '20%' },
-    { key: 'daysOverdue', header: 'Overdue', width: '20%' },
+    { key: 'nasabahName', header: 'Nasabah', width: '30%' },
+    { key: 'loanAmount', header: 'Nominal Pinjaman', width: '22%' },
+    { key: 'status', header: 'Status', width: '16%' },
+    { key: 'daysOverdue', header: 'Overdue', width: '16%' },
+    { key: 'actions', header: 'Aksi', width: '16%' },
   ];
 
   readonly trackByLoanId = (row: BranchLoanDetailItem) => row.loanId;
@@ -95,6 +97,29 @@ export class NplBranchDetailPage implements OnInit {
       error: () => {
         this.errorMessage.set('Gagal memuat data pinjaman branch.');
         this.isLoading.set(false);
+      },
+    });
+  }
+
+  /** Demo deskcall: AI agent menelepon nasabah lewat app KlarFinance (push FCM -> layar panggilan masuk). */
+  call(item: BranchLoanDetailItem): void {
+    if (!confirm(`Telepon ${item.nasabahName} lewat app KlarFinance? AI agent akan menagih cicilan pinjaman ini.`)) return;
+    this.callingLoanId.set(item.loanId);
+    this.nplReportServices.startCall(item.loanId).subscribe({
+      next: (response) => {
+        this.callingLoanId.set(null);
+        if (!response.success || !response.data) {
+          alert(response.message || 'Gagal memulai panggilan.');
+          return;
+        }
+        alert(response.data.pushSent
+          ? `HP ${response.data.customerName} sedang berdering (maks ${response.data.ringTimeoutSeconds} detik).`
+          : `Panggilan dibuat, tapi notifikasi ke HP ${response.data.customerName} gagal dikirim. Pastikan nasabah sudah login di app.`);
+      },
+      error: (err: unknown) => {
+        this.callingLoanId.set(null);
+        // errorInterceptor sudah mengubah HttpErrorResponse jadi Error berisi pesan backend
+        alert((err instanceof Error && err.message) || 'Gagal memulai panggilan.');
       },
     });
   }

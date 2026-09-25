@@ -87,6 +87,23 @@
 .status-badge.badge-overdue { color: #c64444; background: #fbe8e8; }
 .status-badge.badge-lunas { color: #52606a; background: #e9eef1; }
 
+.call-button {
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  background: #087f85;
+  cursor: pointer;
+  font: 700 10px inherit;
+}
+
+.call-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.no-action { color: #8b979c; }
+
 .table-footer {
   display: flex;
   align-items: center;

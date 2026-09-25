@@ -54,6 +54,9 @@ export const SUPERADMIN_URL = {
     nplReport: `${BASE_SUPERADMIN}dbo/npl-report`,
     nplReportBranchLoans: (branchId: number) => `${BASE_SUPERADMIN}dbo/npl-report/${branchId}/loans`,
   },
+  deskcall: {
+    startCall: (loanId: number) => `${BASE_SUPERADMIN}deskcall/loans/${loanId}/calls`,
+  },
 };
 
 

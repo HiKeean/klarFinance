@@ -11,6 +11,7 @@ import com.api.klarfinance.fin.NplSeverity;
 import com.api.klarfinance.fin.dto.response.BranchLoanDetailResponse;
 import com.api.klarfinance.fin.dto.response.BranchLoanSummary;
 import com.api.klarfinance.fin.dto.response.BranchNplSummary;
+import com.api.klarfinance.fin.dto.response.LoanCollectionContext;
 import com.api.klarfinance.fin.model.Installment;
 import com.api.klarfinance.fin.model.Loan;
 import com.api.klarfinance.fin.repository.InstallmentRepository;
@@ -18,6 +19,7 @@ import com.api.klarfinance.fin.repository.LoanRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -98,6 +100,40 @@ public class FinDashboardService {
                 .toList();
 
         return new PageImpl<>(content, pageable, loanPage.getTotalElements());
+    }
+
+    /** Tombol Call di drill-down NPL Report (demo deskcall): tagihan = cicilan UNPAID terdekat
+     * (logic sama dengan getBranchLoanDetails), denda dihitung on-the-fly lewat LoanInterestPolicy. */
+    @Transactional(readOnly = true)
+    public LoanCollectionContext getCollectionContext(Integer loanId) {
+        Loan loan = loanRepository.findById(loanId)
+                .orElseThrow(() -> new IllegalArgumentException("Loan not found: " + loanId));
+        Installment nextUnpaid = installmentRepository.findByLoan_IdInOrderByDueDateAsc(List.of(loanId)).stream()
+                .filter(i -> InstallmentStatus.UNPAID.equals(i.getStatus()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Pinjaman ini sudah lunas, tidak ada tagihan untuk ditagih"));
+
+        Integer userId = loan.getLimit().getUser().getId();
+        CustomerDetails customer = customerDetailsRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Data nasabah tidak ditemukan untuk loan " + loanId));
+
+        LocalDateTime now = LocalDateTime.now();
+        long daysOverdue = LoanStatusBucket.OVERDUE.equals(resolveBucket(nextUnpaid.getDueDate(), now))
+                ? ChronoUnit.DAYS.between(nextUnpaid.getDueDate().toLocalDate(), now.toLocalDate())
+                : 0;
+
+        return LoanCollectionContext.builder()
+                .loanId(loan.getId())
+                .userId(userId)
+                .customerName(customer.getName())
+                .birthDate(customer.getDob())
+                .address(customer.getAddress())
+                .fcmToken(customer.getFcmToken())
+                .installmentAmount(nextUnpaid.getAmount())
+                .penaltyAmount(LoanInterestPolicy.calculateLatePenalty(nextUnpaid.getAmount(), daysOverdue))
+                .dueDate(nextUnpaid.getDueDate().toLocalDate())
+                .daysOverdue(daysOverdue)
+                .build();
     }
 
     /** Buat NPL report semua branch (webadmin) - satu query buat semua Loan + satu query buat

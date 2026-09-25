@@ -14,6 +14,7 @@ public class AppConfigProperties {
     private Security security;
     private Redis redis;
     private Kirimi kirimi;
+    private Deskcall deskcall;
 
     @Data
     public static class Security{
@@ -49,4 +50,16 @@ public class AppConfigProperties {
         private Boolean enabled = true;
     }
 
+    /** deskcall (service voice agent penagihan terpisah) - dipanggil server-to-server dari tombol
+     * Call di NPL Report webadmin (demo). Lihat deskcall/DeskcallClient. */
+    @Data
+    public static class Deskcall {
+        private String baseUrl = "http://localhost:8990";
+        private String apiKey;
+        private String aiName = "Babi";
+        private String companyName = "KlarFinance";
+        /** false = pembuka demo tanpa "asisten digital"; deskcall menolaknya kecuali server deskcall
+         * diset DESKCALL_ALLOW_DEMO_OPENING=true. Default true (AI mengaku asisten digital). */
+        private Boolean discloseAi = true;
+    }
 }
